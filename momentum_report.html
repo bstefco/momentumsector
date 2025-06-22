@@ -10,57 +10,214 @@
         .container { max-width: 800px; margin: 40px auto; background: white; padding: 30px; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
         h1, h2, h3 { color: #111; }
         h1 { text-align: center; border-bottom: 2px solid #eee; padding-bottom: 20px; margin-bottom: 20px; }
-        h2 { border-bottom: 1px solid #eee; padding-bottom: 10px; margin-top: 40px; }
+        h2, h3 { border-bottom: 1px solid #eee; padding-bottom: 10px; margin-top: 40px; }
         .timestamp { text-align: center; color: #666; font-size: 0.9em; margin-bottom: 30px; }
+        .summary { background: #f8f9fa; padding: 20px; border-radius: 5px; margin: 20px 0; border: 1px solid #eee;}
         table { width: 100%; border-collapse: collapse; margin: 20px 0; }
         th, td { padding: 12px 15px; text-align: left; border-bottom: 1px solid #ddd; }
         th { background-color: #f8f9fa; font-weight: 600; }
         tr:hover { background-color: #f1f1f1; }
-        .winner-ticker { font-weight: bold; }
+        .positive { color: #28a745; font-weight: bold; }
+        .negative { color: #dc3545; font-weight: bold; }
         .checklist { list-style-type: none; padding-left: 0; }
         .checklist li { background: #f9f9f9; margin-bottom: 10px; padding: 15px; border-radius: 5px; border-left: 4px solid #007bff; }
         .checklist li strong { color: #0056b3; }
-        .note { font-style: italic; color: #555; margin-top: 15px; font-size: 0.9em; }
         footer { text-align: center; margin-top: 40px; padding-top: 20px; border-top: 2px solid #eee; font-size: 0.8em; color: #777; }
     </style>
 </head>
 <body>
     <div class='container'>
         <h1>📈 Sector Momentum Report</h1>
-        <div class='timestamp'>Generated on 2025-06-22 12:11 UTC</div>
+        <div class='timestamp'>Generated on 2025-06-22 12:16 UTC</div>
 
-        <h2>1 | Top 3 Winners for the Coming Month</h2>
-        <table>
-            <tr><th>Rank</th><th>Ticker</th><th>Sector Label</th><th>Momentum Score</th></tr>
-            <tr><td>1</td><td class='winner-ticker'>EWJ</td><td>Japan</td><td>7.0 %</td></tr>
-            <tr><td>2</td><td class='winner-ticker'>FXI</td><td>China Large Cap</td><td>6.8 %</td></tr>
-            <tr><td>3</td><td class='winner-ticker'>IXG</td><td>Global Financials</td><td>6.2 %</td></tr>
-        </table>
-        <p class='note'>Bond sleeve 12-m return (AGG): <strong>0.92 %</strong><br>Any sector whose 12-m return ≤ bond sleeve was excluded automatically.</p>
+        <div class='summary'>
+            <h3>📊 Summary</h3>
+            <p><strong>Total ETFs analyzed:</strong> 20</p>
+            <p><strong>Top performers:</strong> 14 ETFs with positive momentum</p>
+        </div>
 
-        <h2>2 | Trading Checklist (IBKR)</h2>
+        <h2>Trading Checklist (IBKR)</h2>
         <ol class='checklist'>
             <li><strong>Log in</strong> to IBKR → <em>Portfolio</em> tab.</li>
-            <li><strong>Exit</strong> any ETF <strong>not in the table above</strong>: right-click → <em>Close Position</em> → <em>Market</em> order → <em>Submit</em>.</li>
-            <li><strong>Enter</strong> each winner so positions are equal-weighted: Target size ≈ <strong>€10,000</strong> each.</li>
+            <li><strong>Exit</strong> any ETF <strong>not in the Top-3 Winners list</strong>.</li>
+            <li><strong>Enter</strong> each of the Top-3 winners so positions are equal-weighted (e.g., Target size ≈ <strong>€10,000</strong> each).</li>
             <li><strong>Confirm fills</strong> in <em>Trades</em> panel.</li>
         </ol>
 
-        <h2>3 | Tracking & Records</h2>
-         <ul class='checklist'>
-             <li><strong>Yahoo Finance</strong>: Adjust share counts in the Momentum portfolio.</li>
-             <li><strong>CSV Archive</strong>: Download today's <code>momentum_scores.csv</code> artefact for your records. It is attached to the notification email.</li>
-         </ul>
-
-        <h2>4 | Next Key Dates</h2>
+        <h2>Next Key Dates</h2>
         <ul class='checklist'>
-            <li><strong>2025-07-14</strong>: Next scheduled automated screen & email.</li>
+            <li><strong>2025-07-14</strong>: Next scheduled automated screen.</li>
             <li><strong>Mid-month check</strong>: If a holding drops > 12%, consider swapping it into AGG.</li>
         </ul>
 
-        <footer>
+        <h3>🏆 Top 5 Momentum Winners</h3>
+        <table>
+            <tr><th>Rank</th><th>Ticker</th><th>Momentum Score</th><th>12-Month Return</th></tr>
+
+            <tr>
+                <td>1</td>
+                <td><strong>EWJ</strong></td>
+                <td class='positive'>7.04%</td>
+                <td class='positive'>8.50%</td>
+            </tr>
+    
+            <tr>
+                <td>2</td>
+                <td><strong>FXI</strong></td>
+                <td class='positive'>6.84%</td>
+                <td class='positive'>13.95%</td>
+            </tr>
+    
+            <tr>
+                <td>3</td>
+                <td><strong>IXG</strong></td>
+                <td class='positive'>6.17%</td>
+                <td class='positive'>13.46%</td>
+            </tr>
+    
+            <tr>
+                <td>4</td>
+                <td><strong>XLI</strong></td>
+                <td class='positive'>4.99%</td>
+                <td class='positive'>4.68%</td>
+            </tr>
+    
+            <tr>
+                <td>5</td>
+                <td><strong>IXP</strong></td>
+                <td class='positive'>4.15%</td>
+                <td class='positive'>10.71%</td>
+            </tr>
+    
+        </table>
+        
+        <h3>📋 Complete Results</h3>
+        <table>
+            <tr><th>Ticker</th><th>Momentum Score</th><th>12-Month Return</th></tr>
+
+            <tr>
+                <td><strong>EWJ</strong></td>
+                <td class='positive'>7.04%</td>
+                <td class='positive'>8.50%</td>
+            </tr>
+    
+            <tr>
+                <td><strong>FXI</strong></td>
+                <td class='positive'>6.84%</td>
+                <td class='positive'>13.95%</td>
+            </tr>
+    
+            <tr>
+                <td><strong>IXG</strong></td>
+                <td class='positive'>6.17%</td>
+                <td class='positive'>13.46%</td>
+            </tr>
+    
+            <tr>
+                <td><strong>XLI</strong></td>
+                <td class='positive'>4.99%</td>
+                <td class='positive'>4.68%</td>
+            </tr>
+    
+            <tr>
+                <td><strong>IXP</strong></td>
+                <td class='positive'>4.15%</td>
+                <td class='positive'>10.71%</td>
+            </tr>
+    
+            <tr>
+                <td><strong>XLU</strong></td>
+                <td class='positive'>3.44%</td>
+                <td class='positive'>3.82%</td>
+            </tr>
+    
+            <tr>
+                <td><strong>KWEB</strong></td>
+                <td class='positive'>2.98%</td>
+                <td class='positive'>6.62%</td>
+            </tr>
+    
+            <tr>
+                <td><strong>XLK</strong></td>
+                <td class='positive'>2.20%</td>
+                <td class='negative'>-2.46%</td>
+            </tr>
+    
+            <tr>
+                <td><strong>XLC</strong></td>
+                <td class='positive'>2.12%</td>
+                <td class='positive'>9.16%</td>
+            </tr>
+    
+            <tr>
+                <td><strong>IXN</strong></td>
+                <td class='positive'>2.03%</td>
+                <td class='negative'>-1.63%</td>
+            </tr>
+    
+            <tr>
+                <td><strong>XLF</strong></td>
+                <td class='positive'>1.66%</td>
+                <td class='positive'>7.51%</td>
+            </tr>
+    
+            <tr>
+                <td><strong>XLP</strong></td>
+                <td class='positive'>1.41%</td>
+                <td class='positive'>2.79%</td>
+            </tr>
+    
+            <tr>
+                <td><strong>XLB</strong></td>
+                <td class='positive'>0.33%</td>
+                <td class='negative'>-8.04%</td>
+            </tr>
+    
+            <tr>
+                <td><strong>AGG</strong></td>
+                <td class='positive'>0.12%</td>
+                <td class='positive'>0.92%</td>
+            </tr>
+    
+            <tr>
+                <td><strong>XLRE</strong></td>
+                <td class='negative'>-0.45%</td>
+                <td class='negative'>-5.64%</td>
+            </tr>
+    
+            <tr>
+                <td><strong>XLY</strong></td>
+                <td class='negative'>-0.99%</td>
+                <td class='positive'>5.69%</td>
+            </tr>
+    
+            <tr>
+                <td><strong>IXC</strong></td>
+                <td class='negative'>-1.79%</td>
+                <td class='negative'>-3.47%</td>
+            </tr>
+    
+            <tr>
+                <td><strong>XLE</strong></td>
+                <td class='negative'>-3.79%</td>
+                <td class='negative'>-5.14%</td>
+            </tr>
+    
+            <tr>
+                <td><strong>IXJ</strong></td>
+                <td class='negative'>-3.90%</td>
+                <td class='negative'>-10.16%</td>
+            </tr>
+    
+            <tr>
+                <td><strong>XLV</strong></td>
+                <td class='negative'>-6.06%</td>
+                <td class='negative'>-11.43%</td>
+            </tr>
+    
+        </table>
+         <footer>
             <p><em>Reminder: the model is mechanical; avoid discretionary overrides unless liquidity becomes an issue.</em></p>
-            <p>Good luck!</p>
         </footer>
     </div>
 </body>
