@@ -149,7 +149,7 @@ jobs:
           to: boris.stefanik@me.com
           from: boris.stefanik@me.com
           content_type: text/html
-          secure: true
+          secure: false
           body: |
             <h2>📈 Sector Momentum Report</h2>
             <p>Your monthly sector momentum analysis is ready!</p>
