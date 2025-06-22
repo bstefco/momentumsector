@@ -30,6 +30,22 @@ python3 refresh_data.py
 open index.html
 ```
 
+### Option 3: GitHub Pages (Public URL)
+The dashboard is also available at: `https://bstefco.github.io/momentumsector/`
+
+**To update GitHub Pages with latest data:**
+```bash
+# Update local data
+python3 refresh_data.py
+
+# Update GitHub Pages files
+python3 update_github_pages.py
+
+# Commit and push
+git add docs/ && git commit -m "Update GitHub Pages"
+git push origin main
+```
+
 ## Historical Tracking
 
 The dashboard now includes a **"Top 5 Changes vs Previous Month"** section that shows:
