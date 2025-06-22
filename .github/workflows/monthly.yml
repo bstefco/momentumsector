@@ -52,6 +52,18 @@ jobs:
             momentum_scores.csv
             momentum_scores.json
 
+      - name: Copy JSON into docs folder
+        run: |
+          mkdir -p docs
+          cp momentum_scores.json docs/
+
+      - name: Commit updated JSON to Pages path
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "Auto-update momentum_scores.json"
+          branch: main
+          file_pattern: docs/momentum_scores.json
+
       - name: Generate and send email report
         env:
           EMAIL_PASSWORD: ${{ secrets.Email }}
