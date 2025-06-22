@@ -6,6 +6,9 @@ on:
     - cron: '0 18 14 * *'
   workflow_dispatch:      # lets me trigger it manually
 
+permissions:
+  contents: write
+
 jobs:
   momentum:
     runs-on: ubuntu-latest
@@ -13,6 +16,8 @@ jobs:
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -121,7 +126,7 @@ jobs:
           git config --local user.name "GitHub Action"
           git add momentum_scores.csv momentum_report.html
           git commit -m "Update momentum results - $(date +'%Y-%m-%d')" || exit 0
-          git push
+          git push origin main
 
       - name: Upload results
         uses: actions/upload-artifact@v4
