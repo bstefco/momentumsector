@@ -1,34 +1,22 @@
 {
   "run_date": "2025-06-22",
   "bond_ticker": "AGG",
-<<<<<<< HEAD
-  "bond_return": "0.00",
-=======
   "bond_return": "0.92",
->>>>>>> a5f01de6501f83a6181b6fcd4c2028a9344cfc1d
   "target_eur": "1,650",
   "next_rebalance_date": "2025-07-14",
   "winners": [
     {
       "rank": 1,
-<<<<<<< HEAD
       "ticker": "EXV1.DE",
       "country": "EU",
       "segment": "Banks",
       "momentum": "80.3"
-=======
-      "ticker": "EWJ",
-      "country": "JP",
-      "segment": "Broad Market",
-      "momentum": "7.0"
->>>>>>> a5f01de6501f83a6181b6fcd4c2028a9344cfc1d
     },
     {
       "rank": 2,
       "ticker": "FXI",
       "country": "CN",
       "segment": "Large Cap",
-<<<<<<< HEAD
       "momentum": "56.5"
     },
     {
@@ -37,41 +25,22 @@
       "country": "EU",
       "segment": "Energy",
       "momentum": "39.6"
-=======
-      "momentum": "6.8"
-    },
-    {
-      "rank": 3,
-      "ticker": "IXG",
-      "country": "Global",
-      "segment": "Financials",
-      "momentum": "6.2"
->>>>>>> a5f01de6501f83a6181b6fcd4c2028a9344cfc1d
     }
   ],
   "allEtfs": [
     {
       "rank": 1,
-<<<<<<< HEAD
       "ticker": "EXV1.DE",
       "country": "EU",
       "segment": "Banks",
       "ret12": "45.9",
       "momentum": "80.3"
-=======
-      "ticker": "EWJ",
-      "country": "JP",
-      "segment": "Broad Market",
-      "ret12": "8.5",
-      "momentum": "7.0"
->>>>>>> a5f01de6501f83a6181b6fcd4c2028a9344cfc1d
     },
     {
       "rank": 2,
       "ticker": "FXI",
       "country": "CN",
       "segment": "Large Cap",
-<<<<<<< HEAD
       "ret12": "40.7",
       "momentum": "56.5"
     },
@@ -173,25 +142,30 @@
     },
     {
       "rank": 15,
-      "ticker": "EXV9.DE",
-      "country": "EU",
-      "segment": "Real Estate",
-      "ret12": "8.9",
-      "momentum": "2.7"
-=======
+      "ticker": "EWJ",
+      "country": "JP",
+      "segment": "Broad Market",
+      "ret12": "8.5",
+      "momentum": "7.0"
+    },
+    {
+      "rank": 16,
+      "ticker": "FXI",
+      "country": "CN",
+      "segment": "Large Cap",
       "ret12": "13.9",
       "momentum": "6.8"
     },
     {
-      "rank": 3,
+      "rank": 17,
       "ticker": "IXG",
-      "country": "Global",
-      "segment": "Financials",
+      "country": "N/A",
+      "segment": "N/A",
       "ret12": "13.5",
       "momentum": "6.2"
     },
     {
-      "rank": 4,
+      "rank": 18,
       "ticker": "XLI",
       "country": "US",
       "segment": "Industrials",
@@ -199,15 +173,15 @@
       "momentum": "5.0"
     },
     {
-      "rank": 5,
+      "rank": 19,
       "ticker": "IXP",
-      "country": "Global",
-      "segment": "Telecom",
+      "country": "N/A",
+      "segment": "N/A",
       "ret12": "10.7",
       "momentum": "4.1"
     },
     {
-      "rank": 6,
+      "rank": 20,
       "ticker": "XLU",
       "country": "US",
       "segment": "Utilities",
@@ -215,7 +189,7 @@
       "momentum": "3.4"
     },
     {
-      "rank": 7,
+      "rank": 21,
       "ticker": "KWEB",
       "country": "CN",
       "segment": "Internet",
@@ -223,7 +197,15 @@
       "momentum": "3.0"
     },
     {
-      "rank": 8,
+      "rank": 22,
+      "ticker": "EXV9.DE",
+      "country": "EU",
+      "segment": "Real Estate",
+      "ret12": "8.9",
+      "momentum": "2.7"
+    },
+    {
+      "rank": 23,
       "ticker": "XLK",
       "country": "US",
       "segment": "Technology",
@@ -231,7 +213,7 @@
       "momentum": "2.2"
     },
     {
-      "rank": 9,
+      "rank": 24,
       "ticker": "XLC",
       "country": "US",
       "segment": "Communication",
@@ -239,15 +221,15 @@
       "momentum": "2.1"
     },
     {
-      "rank": 10,
+      "rank": 25,
       "ticker": "IXN",
-      "country": "Global",
-      "segment": "Technology",
+      "country": "N/A",
+      "segment": "N/A",
       "ret12": "-1.6",
       "momentum": "2.0"
     },
     {
-      "rank": 11,
+      "rank": 26,
       "ticker": "XLF",
       "country": "US",
       "segment": "Financials",
@@ -255,7 +237,7 @@
       "momentum": "1.7"
     },
     {
-      "rank": 12,
+      "rank": 27,
       "ticker": "XLP",
       "country": "US",
       "segment": "Cons. Staples",
@@ -263,7 +245,7 @@
       "momentum": "1.4"
     },
     {
-      "rank": 13,
+      "rank": 28,
       "ticker": "XLB",
       "country": "US",
       "segment": "Materials",
@@ -271,7 +253,7 @@
       "momentum": "0.3"
     },
     {
-      "rank": 14,
+      "rank": 29,
       "ticker": "AGG",
       "country": "US",
       "segment": "Aggregate Bond",
@@ -279,7 +261,7 @@
       "momentum": "0.1"
     },
     {
-      "rank": 15,
+      "rank": 30,
       "ticker": "XLRE",
       "country": "US",
       "segment": "Real Estate",
@@ -287,7 +269,7 @@
       "momentum": "-0.4"
     },
     {
-      "rank": 16,
+      "rank": 31,
       "ticker": "XLY",
       "country": "US",
       "segment": "Cons. Discretionary",
@@ -295,15 +277,15 @@
       "momentum": "-1.0"
     },
     {
-      "rank": 17,
+      "rank": 32,
       "ticker": "IXC",
-      "country": "Global",
-      "segment": "Energy",
+      "country": "N/A",
+      "segment": "N/A",
       "ret12": "-3.5",
       "momentum": "-1.8"
     },
     {
-      "rank": 18,
+      "rank": 33,
       "ticker": "XLE",
       "country": "US",
       "segment": "Energy",
@@ -311,21 +293,20 @@
       "momentum": "-3.8"
     },
     {
-      "rank": 19,
+      "rank": 34,
       "ticker": "IXJ",
-      "country": "Global",
-      "segment": "Healthcare",
+      "country": "N/A",
+      "segment": "N/A",
       "ret12": "-10.2",
       "momentum": "-3.9"
     },
     {
-      "rank": 20,
+      "rank": 35,
       "ticker": "XLV",
       "country": "US",
       "segment": "Health Care",
       "ret12": "-11.4",
       "momentum": "-6.1"
->>>>>>> a5f01de6501f83a6181b6fcd4c2028a9344cfc1d
     }
   ]
 }
