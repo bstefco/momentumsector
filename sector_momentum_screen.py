@@ -55,10 +55,10 @@ UNIVERSE: Dict[str, str] = {
     "JPJP.L": "MSCI Japan Broad",
     
     # ---------- Bond asset for risk-off indicator ----------
-    "AGG": "US Aggregate Bond"
+    "SUAG.L": "EU Aggregate Bond"   # iShares EUR Agg Bond UCITS
 }
 
-BOND_TICKER: str = "AGG" 
+BOND_TICKER: str = "SUAG.L"
 
 # ------------------------------------------------ #
 # Helper functions                                 #
