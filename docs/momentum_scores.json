@@ -6,23 +6,23 @@
   },
   {
     "Ticker":"EXV1.DE",
-    "MomentumScore":0.3423230985,
-    "Return12m":0.4810343231
+    "MomentumScore":0.3423230987,
+    "Return12m":0.4810344714
   },
   {
     "Ticker":"EXV2.DE",
-    "MomentumScore":0.2030776885,
-    "Return12m":0.3611040607
+    "MomentumScore":0.2030776542,
+    "Return12m":0.3611039235
   },
   {
     "Ticker":"EXV3.DE",
-    "MomentumScore":0.0146671081,
+    "MomentumScore":0.0146670806,
     "Return12m":-0.0669242762
   },
   {
     "Ticker":"EXV4.DE",
-    "MomentumScore":-0.0850810497,
-    "Return12m":-0.1077806365
+    "MomentumScore":-0.0850810616,
+    "Return12m":-0.1077807502
   },
   {
     "Ticker":"EXV5.DE",
@@ -46,8 +46,8 @@
   },
   {
     "Ticker":"EXV9.DE",
-    "MomentumScore":0.0422681596,
-    "Return12m":0.1084740855
+    "MomentumScore":0.0422681349,
+    "Return12m":0.1084739867
   },
   {
     "Ticker":"JPJP.L",
@@ -61,8 +61,8 @@
   },
   {
     "Ticker":"SUAG.L",
-    "MomentumScore":-0.0403963843,
-    "Return12m":-0.0181254217
+    "MomentumScore":-0.0403964114,
+    "Return12m":-0.0181255298
   },
   {
     "Ticker":"XCTE.L",
@@ -76,8 +76,8 @@
   },
   {
     "Ticker":"XLC",
-    "MomentumScore":0.108922129,
-    "Return12m":0.2059156045
+    "MomentumScore":0.1089221829,
+    "Return12m":0.2059157145
   },
   {
     "Ticker":"XLE",
@@ -91,7 +91,7 @@
   },
   {
     "Ticker":"XLI",
-    "MomentumScore":0.0919051253,
+    "MomentumScore":0.0919051128,
     "Return12m":0.1644148665
   },
   {
@@ -106,8 +106,8 @@
   },
   {
     "Ticker":"XLRE",
-    "MomentumScore":-0.0056329349,
-    "Return12m":0.1012055899
+    "MomentumScore":-0.0056329065,
+    "Return12m":0.1012057034
   },
   {
     "Ticker":"XLU",
@@ -116,13 +116,13 @@
   },
   {
     "Ticker":"XLV",
-    "MomentumScore":-0.0974403811,
-    "Return12m":-0.0845336547
+    "MomentumScore":-0.0974403568,
+    "Return12m":-0.0845335575
   },
   {
     "Ticker":"XLY",
-    "MomentumScore":0.0706258606,
-    "Return12m":0.1888641147
+    "MomentumScore":0.0706258861,
+    "Return12m":0.1888642166
   },
   {
     "Ticker":"SUAG.L",
