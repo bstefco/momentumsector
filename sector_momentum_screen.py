@@ -14,138 +14,106 @@ Dependencies:  pandas  numpy  yfinance
 
 from __future__ import annotations
 import pandas as pd
-import numpy as np
 import yfinance as yf
-from datetime import datetime, timedelta
-from pathlib import Path
+from datetime import datetime
+from typing import Dict, List, Tuple
 
 # ------------------------------------------------ #
 # USER CONFIGURATION                               #
 # ------------------------------------------------ #
 
-UNIVERSE = {
-    # — U.S. SPDR sector ETFs —
-    "XLK": "US Technology",
-    "XLE": "US Energy",
-    "XLF": "US Financials",
-    "XLV": "US Health Care",
-    "XLI": "US Industrials",
-    "XLP": "US Cons. Staples",
-    "XLY": "US Cons. Discretionary",
-    "XLU": "US Utilities",
-    "XLB": "US Materials",
-    "XLRE": "US Real Estate",
-    "XLC": "US Communication",
-
-    # — Global sector ETFs (more reliable) —
-    "IXN": "Global Technology",
-    "IXG": "Global Financials",
-    "IXJ": "Global Healthcare",
-    "IXI": "Global Industrials",
-    "IXP": "Global Telecom",
-    "IXC": "Global Energy",
-    "IXM": "Global Materials",
-
-    # — Asia proxies —
-    "KWEB": "China Internet",
-    "FXI": "China Large Cap",
-    "EWJ": "Japan",
+UNIVERSE: Dict[str, str] = {
+    # US Sectors (SPDR)
+    "XLK": "US Technology", "XLE": "US Energy", "XLF": "US Financials",
+    "XLV": "US Health Care", "XLI": "US Industrials", "XLP": "US Cons. Staples",
+    "XLY": "US Cons. Discretionary", "XLU": "US Utilities", "XLB": "US Materials",
+    "XLRE": "US Real Estate", "XLC": "US Communication",
+    # EU Sectors (iShares)
+    "EXV3.DE": "EU Technology", "EXV1.DE": "EU Banks", "EXV4.DE": "EU Health Care",
+    "EXV7.DE": "EU Industrials", "EXV6.DE": "EU Consumer Staples", "CDIS.L": "EU Consumer Discretionary",
+    "EXV5.DE": "EU Utilities", "EXV8.DE": "EU Materials", "EXV2.DE": "EU Energy",
+    "EXV9.DE": "EU Real Estate",
+    # Other Markets
+    "KWEB": "China Internet", "FXI": "China Large Cap", "EWJ": "Japan",
+    # Bond asset for risk-off indicator
+    "AGG": "US Aggregate Bond"
 }
 
-BOND_TICKER   = "AGG"            # US Aggregate Bond (more reliable)
-TOP_N         = 3                # how many winners to own
-LOOKBACK_DAYS = 400              # price history pulled
+BOND_TICKER: str = "AGG"            # US Aggregate Bond (more reliable)
 
 # ------------------------------------------------ #
 # Helper functions                                 #
 # ------------------------------------------------ #
 
-def download_prices(tickers: list[str],
-                    start: datetime,
-                    end  : datetime) -> pd.DataFrame:
-    """Get adjusted-close prices."""
-    data = yf.download(tickers, start=start, end=end,
-                       auto_adjust=True, progress=False)
-    return data["Close"].dropna(how="all")
+def get_price_data(tickers: List[str], period: str = '2y') -> pd.DataFrame:
+    """Download historical price data for a list of tickers."""
+    try:
+        data = yf.download(tickers, period=period, auto_adjust=True)['Close']
+        if isinstance(data, pd.Series):
+            data = data.to_frame(name=tickers[0])
+        return data.ffill()
+    except Exception as e:
+        print(f"Error downloading price data: {e}")
+        return pd.DataFrame()
 
-def momentum_scores(prices: pd.DataFrame,
-                    today : pd.Timestamp) -> tuple[pd.Series, pd.Series]:
-    """Return (avg-momentum-score, 12-m return) for every ticker."""
-    # Offsets: 1,3,6,9,12 months back (~22 trading days per month)
-    steps = [26, 78, 130, 182, 234]          # in calendar days
-    gap   = steps[0]                         # one-month skip
-
-    returns = []
-    for d in steps[:-1]:                     # first 4 look-backs
-        past = today - pd.Timedelta(days=d)
-        gapd = today - pd.Timedelta(days=gap)
-        
-        # Find the closest available dates
-        past_idx = prices.index[prices.index <= past][-1] if len(prices.index[prices.index <= past]) > 0 else None
-        gapd_idx = prices.index[prices.index <= gapd][-1] if len(prices.index[prices.index <= gapd]) > 0 else None
-        
-        if past_idx is not None and gapd_idx is not None:
-            returns.append(prices.loc[gapd_idx] / prices.loc[past_idx] - 1)
-
-    if not returns:
-        # Fallback: use simple returns if date calculations fail
-        avg_mom = pd.Series(0.0, index=prices.columns)
-        ret12 = pd.Series(0.0, index=prices.columns)
-        return avg_mom, ret12
-
-    avg_mom = pd.concat(returns, axis=1).mean(axis=1)
-
-    # 12-month return
-    past_12m = today - pd.Timedelta(days=steps[-1])
-    past_12m_idx = prices.index[prices.index <= past_12m][-1] if len(prices.index[prices.index <= past_12m]) > 0 else None
-    gapd_idx = prices.index[prices.index <= gapd][-1] if len(prices.index[prices.index <= gapd]) > 0 else None
+def calculate_momentum(prices: pd.DataFrame) -> Tuple[pd.Series, pd.Series]:
+    """Calculate momentum and 12-month returns."""
+    returns_1m = prices.pct_change(periods=21)
+    returns_3m = prices.pct_change(periods=63)
+    returns_6m = prices.pct_change(periods=126)
+    returns_12m = prices.pct_change(periods=252)
     
-    if past_12m_idx is not None and gapd_idx is not None:
-        ret12 = prices.loc[gapd_idx] / prices.loc[past_12m_idx] - 1
+    momentum = (returns_1m + returns_3m + returns_6m + returns_12m).iloc[-1]
+    return12m = returns_12m.iloc[-1]
+    
+    return momentum.dropna(), return12m.dropna()
+
+def momentum_screen() -> pd.DataFrame:
+    """Perform the momentum screen and return ranked results."""
+    tickers = list(UNIVERSE.keys())
+    prices = get_price_data(tickers)
+    
+    if prices.empty or len(prices) < 260:
+        print("Not enough price data to perform screen.")
+        return pd.DataFrame(columns=['Ticker', 'MomentumScore', 'Return12m'])
+
+    momentum, return12m = calculate_momentum(prices)
+    
+    results = pd.DataFrame({'MomentumScore': momentum, 'Return12m': return12m}).reset_index()
+    results.rename(columns={'index': 'Ticker'}, inplace=True)
+    
+    bond_return_12m_series = results[results['Ticker'] == BOND_TICKER]['Return12m']
+    if bond_return_12m_series.empty:
+        print(f"Could not find 12m return for bond ticker {BOND_TICKER}.")
+        bond_return_12m = 0.0
     else:
-        ret12 = pd.Series(0.0, index=prices.columns)
-    
-    return avg_mom, ret12
+        bond_return_12m = bond_return_12m_series.iloc[0]
 
-# ------------------------------------------------ #
-# Main                                             #
-# ------------------------------------------------ #
+    results = results[results['Return12m'] > bond_return_12m]
+    results = results[results['Ticker'] != BOND_TICKER]
+
+    return results.sort_values(by='MomentumScore', ascending=False)
 
 def main() -> None:
-    end   = datetime.today()
-    start = end - timedelta(days=LOOKBACK_DAYS)
+    """Main function to run the screen and save results."""
+    today = datetime.today()
+    print(f"Running momentum screen for {today.date()}...")
+    
+    ranked_results = momentum_screen()
+    
+    if ranked_results.empty:
+        print("No assets passed the screen. No results to save.")
+        pd.DataFrame(columns=['Ticker', 'MomentumScore', 'Return12m']).to_csv('momentum_scores.csv', index=False)
+        return
 
-    tickers = list(UNIVERSE.keys()) + [BOND_TICKER]
-    prices  = download_prices(tickers, start, end)
-    today   = prices.index[-1]               # last available date
+    print("\n🏆 Top 3 Momentum Winners:")
+    for i, row in ranked_results.head(3).iterrows():
+        ticker: str = row['Ticker']
+        score: float = row['MomentumScore']
+        print(f"{i+1}. {UNIVERSE.get(ticker, ticker)} ({ticker}): {score:.4f}")
 
-    mom, ret12 = momentum_scores(prices, today)
-    bond_12m   = ret12[BOND_TICKER]
-
-    survivors  = mom[mom.index != BOND_TICKER]
-    survivors  = survivors[survivors > bond_12m]
-
-    winners = survivors.sort_values(ascending=False).head(TOP_N)
-
-    # ---------- Output ---------- #
-    print("-" * 42)
-    print(f"Run date: {today.date()}")
-    print(f"Bond 12-m return ({BOND_TICKER}): {bond_12m*100:5.2f} %")
-    print(f"Top-{TOP_N} winners:")
-    for i, (tic, score) in enumerate(winners.items(), 1):
-        label = UNIVERSE.get(tic, "n/a")
-        print(f"  {i:<2} {tic:<8} | {score*100:5.1f} %  ({label})")
-    if len(winners) < TOP_N:
-        missing = TOP_N - len(winners)
-        print(f"→ Only {len(winners)} ETF(s) passed; "
-              f"allocate {missing} slot(s) to {BOND_TICKER}.")
-    print("-" * 42)
-
-    # Save CSV snapshot
-    pd.DataFrame({
-        "MomentumScore": mom,
-        "Return12m": ret12
-    }).to_csv("momentum_scores.csv", float_format="%.6f")
+    ranked_results.to_csv('momentum_scores.csv', index=False)
+    print("\n💾 Full results saved to momentum_scores.csv")
 
 if __name__ == "__main__":
     main()
