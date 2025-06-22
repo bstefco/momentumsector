@@ -141,7 +141,6 @@ jobs:
           path: momentum_scores.csv
 
       - name: Generate email from template
-        id: generate_email
         run: python3 generate_email.py
 
       - name: Send email with report
@@ -151,12 +150,12 @@ jobs:
           server_port: 587
           username: boris.stefanik@me.com
           password: ${{ secrets.Email }}
-          subject: ${{ steps.generate_email.outputs.subject }}
+          subject: file://email_subject.txt
           to: boris.stefanik@me.com
           from: boris.stefanik@me.com
           content_type: text/html
           secure: false
-          body: ${{ steps.generate_email.outputs.body }}
+          body: file://email_body.html
           attachments: momentum_scores.csv
 
       - name: Create notification issue
