@@ -37,83 +37,108 @@ jobs:
         run: |
           python -c "
           import pandas as pd
-          from datetime import datetime
-          
-          # Read the CSV
+          from datetime import datetime, timedelta
+
+          # --- Load and process data ---
           df = pd.read_csv('momentum_scores.csv')
+          df = df.dropna(subset=['MomentumScore', 'Return12m'])
+          df[['MomentumScore', 'Return12m']] = df[['MomentumScore', 'Return12m']].apply(pd.to_numeric, errors='coerce')
+          bond_ticker = 'AGG'
+          bond_return_series = df[df['Ticker'] == bond_ticker]['Return12m']
+          bond_return = bond_return_series.iloc[0] * 100 if not bond_return_series.empty else 0
+          winners = df[df['Ticker'] != bond_ticker].nlargest(3, 'MomentumScore')
           
-          # Create HTML report
+          # This dictionary should be kept in sync with sector_momentum_screen.py
+          UNIVERSE = {
+              'XLK': 'US Technology', 'XLE': 'US Energy', 'XLF': 'US Financials', 'XLV': 'US Health Care', 
+              'XLI': 'US Industrials', 'XLP': 'US Cons. Staples', 'XLY': 'US Cons. Discretionary', 
+              'XLU': 'US Utilities', 'XLB': 'US Materials', 'XLRE': 'US Real Estate', 'XLC': 'US Communication', 
+              'IXN': 'Global Technology', 'IXG': 'Global Financials', 'IXJ': 'Global Healthcare', 
+              'IXI': 'Global Industrials', 'IXP': 'Global Telecom', 'IXC': 'Global Energy', 
+              'IXM': 'Global Materials', 'KWEB': 'China Internet', 'FXI': 'China Large Cap', 'EWJ': 'Japan', 'AGG': 'US Aggregate Bond'
+          }
+
+          # --- Prepare content ---
+          today = datetime.now()
+          next_rebalance_date = (today.replace(day=1) + timedelta(days=32)).replace(day=14)
+          
+          winner1_ticker = winners.iloc[0]['Ticker'] if len(winners) > 0 else 'N/A'
+          winner1_label = UNIVERSE.get(winner1_ticker, 'N/A')
+          winner1_score = f\"{winners.iloc[0]['MomentumScore']*100:.1f}\" if len(winners) > 0 else 'N/A'
+          
+          winner2_ticker = winners.iloc[1]['Ticker'] if len(winners) > 1 else 'N/A'
+          winner2_label = UNIVERSE.get(winner2_ticker, 'N/A')
+          winner2_score = f\"{winners.iloc[1]['MomentumScore']*100:.1f}\" if len(winners) > 1 else 'N/A'
+
+          winner3_ticker = winners.iloc[2]['Ticker'] if len(winners) > 2 else 'N/A'
+          winner3_label = UNIVERSE.get(winner3_ticker, 'N/A')
+          winner3_score = f\"{winners.iloc[2]['MomentumScore']*100:.1f}\" if len(winners) > 2 else 'N/A'
+
+          # --- Build HTML ---
           html_content = f'''
           <!DOCTYPE html>
-          <html>
+          <html lang=\"en\">
           <head>
-              <title>Sector Momentum Report - {datetime.now().strftime('%Y-%m-%d')}</title>
+              <meta charset=\"UTF-8\">
+              <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">
+              <title>Sector Momentum Report - {today.strftime('%Y-%m-%d')}</title>
               <style>
-                  body {{ font-family: Arial, sans-serif; margin: 40px; background-color: #f5f5f5; }}
-                  .container {{ max-width: 800px; margin: 0 auto; background: white; padding: 30px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }}
-                  h1 {{ color: #333; text-align: center; }}
-                  .summary {{ background: #f8f9fa; padding: 20px; border-radius: 5px; margin: 20px 0; }}
+                  body {{ font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; margin: 0; padding: 0; background-color: #f5f5f5; color: #333; }}
+                  .container {{ max-width: 800px; margin: 40px auto; background: white; padding: 30px; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }}
+                  h1, h2, h3 {{ color: #111; }}
+                  h1 {{ text-align: center; border-bottom: 2px solid #eee; padding-bottom: 20px; margin-bottom: 20px; }}
+                  h2 {{ border-bottom: 1px solid #eee; padding-bottom: 10px; margin-top: 40px; }}
+                  .timestamp {{ text-align: center; color: #666; font-size: 0.9em; margin-bottom: 30px; }}
                   table {{ width: 100%; border-collapse: collapse; margin: 20px 0; }}
-                  th, td {{ padding: 12px; text-align: left; border-bottom: 1px solid #ddd; }}
-                  th {{ background-color: #007bff; color: white; }}
-                  tr:nth-child(even) {{ background-color: #f2f2f2; }}
-                  .positive {{ color: green; font-weight: bold; }}
-                  .negative {{ color: red; font-weight: bold; }}
-                  .timestamp {{ text-align: center; color: #666; font-size: 0.9em; }}
+                  th, td {{ padding: 12px 15px; text-align: left; border-bottom: 1px solid #ddd; }}
+                  th {{ background-color: #f8f9fa; font-weight: 600; }}
+                  tr:hover {{ background-color: #f1f1f1; }}
+                  .winner-ticker {{ font-weight: bold; }}
+                  .checklist {{ list-style-type: none; padding-left: 0; }}
+                  .checklist li {{ background: #f9f9f9; margin-bottom: 10px; padding: 15px; border-radius: 5px; border-left: 4px solid #007bff; }}
+                  .checklist li strong {{ color: #0056b3; }}
+                  .note {{ font-style: italic; color: #555; margin-top: 15px; font-size: 0.9em; }}
+                  footer {{ text-align: center; margin-top: 40px; padding-top: 20px; border-top: 2px solid #eee; font-size: 0.8em; color: #777; }}
               </style>
           </head>
           <body>
               <div class='container'>
                   <h1>📈 Sector Momentum Report</h1>
-                  <div class='timestamp'>Generated on {datetime.now().strftime('%Y-%m-%d %H:%M UTC')}</div>
-                  
-                  <div class='summary'>
-                      <h3>📊 Summary</h3>
-                      <p><strong>Total ETFs analyzed:</strong> {len(df)}</p>
-                      <p><strong>Top performers:</strong> {len(df[df['MomentumScore'] > 0])} ETFs with positive momentum</p>
-                  </div>
-                  
-                  <h3>🏆 Top 5 Momentum Winners</h3>
+                  <div class='timestamp'>Generated on {today.strftime('%Y-%m-%d %H:%M UTC')}</div>
+
+                  <h2>1 | Top 3 Winners for the Coming Month</h2>
                   <table>
-                      <tr><th>Rank</th><th>Ticker</th><th>Momentum Score</th><th>12-Month Return</th></tr>
-          '''
-          
-          # Add top 5 winners
-          top_5 = df.nlargest(5, 'MomentumScore')
-          for i, (_, row) in enumerate(top_5.iterrows(), 1):
-              mom_class = 'positive' if row['MomentumScore'] > 0 else 'negative'
-              ret_class = 'positive' if row['Return12m'] > 0 else 'negative'
-              html_content += f'''
-                      <tr>
-                          <td>{i}</td>
-                          <td><strong>{row['Ticker']}</strong></td>
-                          <td class='{mom_class}'>{row['MomentumScore']*100:.2f}%</td>
-                          <td class='{ret_class}'>{row['Return12m']*100:.2f}%</td>
-                      </tr>
-          '''
-          
-          html_content += '''
+                      <tr><th>Rank</th><th>Ticker</th><th>Sector Label</th><th>Momentum Score</th></tr>
+                      <tr><td>1</td><td class='winner-ticker'>{winner1_ticker}</td><td>{winner1_label}</td><td>{winner1_score} %</td></tr>
+                      <tr><td>2</td><td class='winner-ticker'>{winner2_ticker}</td><td>{winner2_label}</td><td>{winner2_score} %</td></tr>
+                      <tr><td>3</td><td class='winner-ticker'>{winner3_ticker}</td><td>{winner3_label}</td><td>{winner3_score} %</td></tr>
                   </table>
-                  
-                  <h3>📋 Complete Results</h3>
-                  <table>
-                      <tr><th>Ticker</th><th>Momentum Score</th><th>12-Month Return</th></tr>
-          '''
-          
-          # Add all results
-          for _, row in df.iterrows():
-              mom_class = 'positive' if row['MomentumScore'] > 0 else 'negative'
-              ret_class = 'positive' if row['Return12m'] > 0 else 'negative'
-              html_content += f'''
-                      <tr>
-                          <td><strong>{row['Ticker']}</strong></td>
-                          <td class='{mom_class}'>{row['MomentumScore']*100:.2f}%</td>
-                          <td class='{ret_class}'>{row['Return12m']*100:.2f}%</td>
-                      </tr>
-          '''
-          
-          html_content += '''
-                  </table>
+                  <p class='note'>Bond sleeve 12-m return ({bond_ticker}): <strong>{bond_return:.2f} %</strong><br>Any sector whose 12-m return ≤ bond sleeve was excluded automatically.</p>
+
+                  <h2>2 | Trading Checklist (IBKR)</h2>
+                  <ol class='checklist'>
+                      <li><strong>Log in</strong> to IBKR → <em>Portfolio</em> tab.</li>
+                      <li><strong>Exit</strong> any ETF <strong>not in the table above</strong>: right-click → <em>Close Position</em> → <em>Market</em> order → <em>Submit</em>.</li>
+                      <li><strong>Enter</strong> each winner so positions are equal-weighted: Target size ≈ <strong>€10,000</strong> each.</li>
+                      <li><strong>Confirm fills</strong> in <em>Trades</em> panel.</li>
+                  </ol>
+
+                  <h2>3 | Tracking & Records</h2>
+                   <ul class='checklist'>
+                       <li><strong>Yahoo Finance</strong>: Adjust share counts in the "Momentum" portfolio.</li>
+                       <li><strong>CSV Archive</strong>: Download today's <code>momentum_scores.csv</code> artefact for your records. It is attached to the notification email.</li>
+                   </ul>
+
+                  <h2>4 | Next Key Dates</h2>
+                  <ul class='checklist'>
+                      <li><strong>{next_rebalance_date.strftime('%Y-%m-%d')}</strong>: Next scheduled automated screen & email.</li>
+                      <li><strong>Mid-month check</strong>: If a holding drops > 12%, consider swapping it into {bond_ticker}.</li>
+                  </ul>
+
+                  <footer>
+                      <p><em>Reminder: the model is mechanical; avoid discretionary overrides unless liquidity becomes an issue.</em></p>
+                      <p>Good luck!</p>
+                  </footer>
               </div>
           </body>
           </html>
@@ -122,7 +147,6 @@ jobs:
           with open('momentum_report.html', 'w') as f:
               f.write(html_content)
           
-          # Also create index.html for GitHub Pages
           with open('index.html', 'w') as f:
               f.write(html_content)
           "
