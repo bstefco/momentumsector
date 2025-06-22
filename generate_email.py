@@ -2,6 +2,10 @@ import os
 import pandas as pd
 from datetime import datetime, timedelta
 from markdown import markdown
+import smtplib, ssl
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
+from email.mime.application import MIMEApplication
 
 # This dictionary should be kept in sync with sector_momentum_screen.py
 UNIVERSE = {
@@ -87,10 +91,42 @@ body_html = f"""
 </html>
 """
 
-# Save to files for the workflow
-with open('email_subject.txt', 'w') as f:
-    f.write(subject)
-with open('email_body.html', 'w') as f:
-    f.write(body_html)
+# --- Email Sending Logic ---
+sender_email = "boris.stefanik@me.com"
+receiver_email = "boris.stefanik@me.com"
+password = os.environ.get("EMAIL_PASSWORD")
 
-print("Email content generated from template and saved to files.") 
+if not password:
+    print("Error: EMAIL_PASSWORD environment variable not set.")
+    exit(1)
+
+# Create the email message object
+message = MIMEMultipart("alternative")
+message["Subject"] = subject
+message["From"] = sender_email
+message["To"] = receiver_email
+
+# Attach the HTML body
+message.attach(MIMEText(body_html, "html"))
+
+# Attach the CSV file
+try:
+    with open("momentum_scores.csv", "rb") as f:
+        attachment = MIMEApplication(f.read(), _subtype="csv")
+    attachment.add_header('Content-Disposition', 'attachment', filename='momentum_scores.csv')
+    message.attach(attachment)
+    print("Attached momentum_scores.csv to the email.")
+except FileNotFoundError:
+    print("Warning: momentum_scores.csv not found, not sending as attachment.")
+
+# Send the email
+context = ssl.create_default_context()
+try:
+    with smtplib.SMTP("smtp.mail.me.com", 587) as server:
+        server.starttls(context=context)  # Secure the connection
+        server.login(sender_email, password)
+        server.sendmail(sender_email, receiver_email, message.as_string())
+    print("Email sent successfully!")
+except Exception as e:
+    print(f"Error sending email: {e}")
+    exit(1) 

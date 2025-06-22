@@ -140,23 +140,10 @@ jobs:
           name: momentum_scores
           path: momentum_scores.csv
 
-      - name: Generate email from template
+      - name: Generate and send email report
+        env:
+          EMAIL_PASSWORD: ${{ secrets.Email }}
         run: python3 generate_email.py
-
-      - name: Send email with report
-        uses: dawidd6/action-send-mail@v3
-        with:
-          server_address: smtp.mail.me.com
-          server_port: 587
-          username: boris.stefanik@me.com
-          password: ${{ secrets.Email }}
-          subject: file://email_subject.txt
-          to: boris.stefanik@me.com
-          from: boris.stefanik@me.com
-          content_type: text/html
-          secure: false
-          body: file://email_body.html
-          attachments: momentum_scores.csv
 
       - name: Create notification issue
         if: failure()
