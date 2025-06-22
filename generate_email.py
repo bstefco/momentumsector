@@ -29,7 +29,6 @@ body_html = f"""
     <p>Hi Boris,</p>
     <p>Your monthly sector-momentum report is ready.</p>
     <p><strong><a href="{REPORT_URL}">View the full, interactive report online.</a></strong></p>
-    <p>The <code>momentum_scores.csv</code> file is attached for your records.</p>
     <br>
     <p>— Your Momentum Bot 🚀</p>
 </body>
@@ -41,16 +40,6 @@ message["Subject"] = subject
 message["From"] = SENDER_EMAIL
 message["To"] = RECEIVER_EMAIL
 message.attach(MIMEText(body_html, "html"))
-
-# --- Attach CSV ---
-try:
-    with open("momentum_scores.csv", "rb") as f:
-        attachment = MIMEApplication(f.read(), _subtype="csv")
-    attachment.add_header('Content-Disposition', 'attachment', filename='momentum_scores.csv')
-    message.attach(attachment)
-    print("Attached momentum_scores.csv to the email.")
-except FileNotFoundError:
-    print("Warning: momentum_scores.csv not found, not sending as attachment.")
 
 # --- Send the Email ---
 context = ssl.create_default_context()
