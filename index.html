@@ -1,67 +1,134 @@
-
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sector Momentum Report - 2025-06-22</title>
-    <style>
-        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; margin: 0; padding: 0; background-color: #f5f5f5; color: #333; }
-        .container { max-width: 800px; margin: 40px auto; background: white; padding: 30px; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
-        h1, h2, h3 { color: #111; }
-        h1 { text-align: center; border-bottom: 2px solid #eee; padding-bottom: 20px; margin-bottom: 20px; }
-        h2 { border-bottom: 1px solid #eee; padding-bottom: 10px; margin-top: 40px; }
-        .timestamp { text-align: center; color: #666; font-size: 0.9em; margin-bottom: 30px; }
-        table { width: 100%; border-collapse: collapse; margin: 20px 0; }
-        th, td { padding: 12px 15px; text-align: left; border-bottom: 1px solid #ddd; }
-        th { background-color: #f8f9fa; font-weight: 600; }
-        tr:hover { background-color: #f1f1f1; }
-        .winner-ticker { font-weight: bold; }
-        .checklist { list-style-type: none; padding-left: 0; }
-        .checklist li { background: #f9f9f9; margin-bottom: 10px; padding: 15px; border-radius: 5px; border-left: 4px solid #007bff; }
-        .checklist li strong { color: #0056b3; }
-        .note { font-style: italic; color: #555; margin-top: 15px; font-size: 0.9em; }
-        footer { text-align: center; margin-top: 40px; padding-top: 20px; border-top: 2px solid #eee; font-size: 0.8em; color: #777; }
-    </style>
-</head>
-<body>
-    <div class='container'>
-        <h1>📈 Sector Momentum Report</h1>
-        <div class='timestamp'>Generated on 2025-06-22 12:11 UTC</div>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sector-Momentum Rebalance Dashboard</title>
+    <!-- Tailwind CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body class="bg-slate-100 text-slate-800 font-sans leading-relaxed min-h-screen">
+    <!-- Header -->
+    <header class="bg-white shadow p-6 mb-6">
+      <h1 class="text-2xl font-bold">Sector-Momentum Rebalance</h1>
+      <p class="text-sm mt-1">Run date: <span id="run-date" class="font-mono"></span></p>
+    </header>
 
-        <h2>1 | Top 3 Winners for the Coming Month</h2>
-        <table>
-            <tr><th>Rank</th><th>Ticker</th><th>Sector Label</th><th>Momentum Score</th></tr>
-            <tr><td>1</td><td class='winner-ticker'>EWJ</td><td>Japan</td><td>7.0 %</td></tr>
-            <tr><td>2</td><td class='winner-ticker'>FXI</td><td>China Large Cap</td><td>6.8 %</td></tr>
-            <tr><td>3</td><td class='winner-ticker'>IXG</td><td>Global Financials</td><td>6.2 %</td></tr>
-        </table>
-        <p class='note'>Bond sleeve 12-m return (AGG): <strong>0.92 %</strong><br>Any sector whose 12-m return ≤ bond sleeve was excluded automatically.</p>
+    <main class="max-w-5xl mx-auto p-4 space-y-10">
+      <!-- Winners table -->
+      <section>
+        <h2 class="text-xl font-semibold mb-4">Top-3 Winners</h2>
+        <div class="overflow-x-auto">
+          <table class="min-w-full bg-white rounded-xl shadow">
+            <thead class="bg-slate-200 text-sm">
+              <tr>
+                <th class="py-2 px-4 text-left">Rank</th>
+                <th class="py-2 px-4 text-left">Ticker</th>
+                <th class="py-2 px-4 text-left">Country</th>
+                <th class="py-2 px-4 text-left">Segment</th>
+                <th class="py-2 px-4 text-right">Momentum</th>
+              </tr>
+            </thead>
+            <tbody id="winners-body" class="text-sm">
+              <!-- rows inserted by JS -->
+            </tbody>
+          </table>
+        </div>
+        <p class="mt-2 text-xs italic">Bond sleeve 12-m return (<span id="bond-ticker"></span>): <span id="bond-return"></span></p>
+      </section>
 
-        <h2>2 | Trading Checklist (IBKR)</h2>
-        <ol class='checklist'>
-            <li><strong>Log in</strong> to IBKR → <em>Portfolio</em> tab.</li>
-            <li><strong>Exit</strong> any ETF <strong>not in the table above</strong>: right-click → <em>Close Position</em> → <em>Market</em> order → <em>Submit</em>.</li>
-            <li><strong>Enter</strong> each winner so positions are equal-weighted: Target size ≈ <strong>€10,000</strong> each.</li>
-            <li><strong>Confirm fills</strong> in <em>Trades</em> panel.</li>
+      <!-- Collapsible full ranking panel -->
+      <section>
+        <details class="bg-white rounded-xl shadow p-4">
+          <summary class="cursor-pointer text-lg font-medium select-none">Full ETF Ranking (click to expand)</summary>
+          <div class="overflow-x-auto mt-4">
+            <table class="min-w-full text-sm">
+              <thead class="bg-slate-200">
+                <tr>
+                  <th class="py-2 px-3 text-left">Rank</th>
+                  <th class="py-2 px-3 text-left">Ticker</th>
+                  <th class="py-2 px-3 text-left">Country</th>
+                  <th class="py-2 px-3 text-left">Segment</th>
+                  <th class="py-2 px-3 text-right">12-m Return</th>
+                  <th class="py-2 px-3 text-right">Momentum Score</th>
+                </tr>
+              </thead>
+              <tbody id="all-etfs-body"></tbody>
+            </table>
+          </div>
+        </details>
+      </section>
+
+      <!-- Trading checklist -->
+      <section>
+        <h2 class="text-xl font-semibold mb-4">Trading Checklist (IBKR desktop)</h2>
+        <ol class="list-decimal list-inside space-y-2 text-sm md:text-base">
+          <li>Log in to IBKR → <strong>Portfolio</strong> tab.</li>
+          <li>Exit any ETF <strong>not</strong> in the winners table.</li>
+          <li>Enter each winner so positions are equal-weighted (~<span id="target-eur"></span> each).</li>
+          <li>Confirm fills in <em>Trades</em> panel.</li>
+          <li>Sweep leftover cash &gt; €50 into Flex USD or leave idle.</li>
         </ol>
+      </section>
 
-        <h2>3 | Tracking & Records</h2>
-         <ul class='checklist'>
-             <li><strong>Yahoo Finance</strong>: Adjust share counts in the Momentum portfolio.</li>
-             <li><strong>CSV Archive</strong>: Download today's <code>momentum_scores.csv</code> artefact for your records. It is attached to the notification email.</li>
-         </ul>
-
-        <h2>4 | Next Key Dates</h2>
-        <ul class='checklist'>
-            <li><strong>2025-07-14</strong>: Next scheduled automated screen & email.</li>
-            <li><strong>Mid-month check</strong>: If a holding drops > 12%, consider swapping it into AGG.</li>
+      <!-- Next dates -->
+      <section>
+        <h2 class="text-xl font-semibold mb-4">Next Key Dates</h2>
+        <ul class="list-disc list-inside text-sm md:text-base space-y-1">
+          <li>Next automated screen: <span id="next-date"></span></li>
+          <li>Mid-month manual check: move any holding that drops &gt;12 % into <span id="bond-ticker-next"></span>.</li>
         </ul>
+      </section>
+    </main>
 
-        <footer>
-            <p><em>Reminder: the model is mechanical; avoid discretionary overrides unless liquidity becomes an issue.</em></p>
-            <p>Good luck!</p>
-        </footer>
-    </div>
-</body>
+    <!-- JS injection -->
+    <script>
+      fetch('data.json')
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('Network response was not ok');
+          }
+          return response.json();
+        })
+        .then(data => {
+          document.getElementById("run-date").textContent      = data.run_date;
+          document.getElementById("bond-ticker").textContent   = data.bond_ticker;
+          document.getElementById("bond-ticker-next").textContent = data.bond_ticker;
+          document.getElementById("bond-return").textContent   = data.bond_return + "%";
+          document.getElementById("target-eur").textContent    = "€" + data.target_eur;
+          document.getElementById("next-date").textContent     = data.next_rebalance_date;
+
+          const winnersTbody = document.getElementById("winners-body");
+          winnersTbody.innerHTML = ''; 
+          data.winners.forEach(w => {
+            const tr = document.createElement("tr");
+            tr.innerHTML = `
+              <td class="py-2 px-4">${w.rank}</td>
+              <td class="py-2 px-4 font-mono">${w.ticker}</td>
+              <td class="py-2 px-4">${w.country}</td>
+              <td class="py-2 px-4">${w.segment}</td>
+              <td class="py-2 px-4 text-right">${w.momentum}%</td>`;
+            winnersTbody.appendChild(tr);
+          });
+
+          const fullBody = document.getElementById("all-etfs-body");
+          fullBody.innerHTML = '';
+          data.allEtfs.forEach(e => {
+            const tr = document.createElement("tr");
+            tr.innerHTML = `
+              <td class="py-1 px-3">${e.rank}</td>
+              <td class="py-1 px-3 font-mono">${e.ticker}</td>
+              <td class="py-1 px-3">${e.country}</td>
+              <td class="py-1 px-3">${e.segment}</td>
+              <td class="py-1 px-3 text-right">${e.ret12}%</td>
+              <td class="py-1 px-3 text-right">${e.momentum}%</td>`;
+            fullBody.appendChild(tr);
+          });
+        })
+        .catch(error => {
+          console.error('Error fetching data:', error);
+          document.body.innerHTML = `<div class="text-center p-10"><h1>Error</h1><p>Could not load momentum data. Please try again later.</p><p class="text-sm text-slate-500 font-mono mt-4">${error}</p></div>`;
+        });
+    </script>
+  </body>
 </html>
