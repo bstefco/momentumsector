@@ -23,23 +23,42 @@ from typing import Dict, List, Tuple
 # ------------------------------------------------ #
 
 UNIVERSE: Dict[str, str] = {
-    # US Sectors (SPDR)
-    "XLK": "US Technology", "XLE": "US Energy", "XLF": "US Financials",
-    "XLV": "US Health Care", "XLI": "US Industrials", "XLP": "US Cons. Staples",
-    "XLY": "US Cons. Discretionary", "XLU": "US Utilities", "XLB": "US Materials",
-    "XLRE": "US Real Estate", "XLC": "US Communication",
-    # EU Sectors (iShares)
-    "EXV3.DE": "EU Technology", "EXV1.DE": "EU Banks", "EXV4.DE": "EU Health Care",
-    "EXV7.DE": "EU Industrials", "EXV6.DE": "EU Consumer Staples", "CDIS.L": "EU Consumer Discretionary",
-    "EXV5.DE": "EU Utilities", "EXV8.DE": "EU Materials", "EXV2.DE": "EU Energy",
+    # ---------- U.S. SPDR sector ETFs ----------
+    "XLK":  "US Technology",
+    "XLE":  "US Energy",
+    "XLF":  "US Financials",
+    "XLV":  "US Health Care",
+    "XLI":  "US Industrials",
+    "XLP":  "US Consumer Staples",
+    "XLY":  "US Consumer Discretionary",
+    "XLU":  "US Utilities",
+    "XLB":  "US Materials",
+    "XLRE": "US Real Estate",
+    "XLC":  "US Communication Services",
+
+    # ---------- Europe STOXX-600 sector UCITS (Xetra unless noted) ----------
+    "EXV3.DE": "EU Technology",
+    "EXV1.DE": "EU Banks",
+    "EXV4.DE": "EU Health Care",
+    "EXV7.DE": "EU Industrials",
+    "EXV6.DE": "EU Consumer Staples",
+    "CDIS.L":  "EU Consumer Discretionary",   # SPDR MSCI Europe Cons-Disc (London)
+    "EXV5.DE": "EU Utilities",
+    "EXV8.DE": "EU Materials",
+    "EXV2.DE": "EU Energy",
     "EXV9.DE": "EU Real Estate",
-    # Other Markets
-    "KWEB": "China Internet", "FXI": "China Large Cap", "EWJ": "Japan",
-    # Bond asset for risk-off indicator
+    "EXV0.DE": "EU Communication Services",  # note the zero
+
+    # ---------- Asia proxies ----------
+    "XCTE.L": "China Technology",
+    "KWEB":   "China Internet",
+    "JPJP.L": "MSCI Japan Broad",
+    
+    # ---------- Bond asset for risk-off indicator ----------
     "AGG": "US Aggregate Bond"
 }
 
-BOND_TICKER: str = "AGG"            # US Aggregate Bond (more reliable)
+BOND_TICKER: str = "AGG" 
 
 # ------------------------------------------------ #
 # Helper functions                                 #
