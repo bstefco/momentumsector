@@ -134,5 +134,8 @@ def main() -> None:
     ranked_results.to_csv('momentum_scores.csv', index=False)
     print("\n💾 Full results saved to momentum_scores.csv")
 
+    # also export JSON for the dashboard
+    ranked_results.to_json("momentum_scores.json", orient="records", indent=2)
+
 if __name__ == "__main__":
     main()

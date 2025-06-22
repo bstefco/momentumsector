@@ -48,7 +48,9 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: momentum_scores
-          path: momentum_scores.csv
+          path: |
+            momentum_scores.csv
+            momentum_scores.json
 
       - name: Generate and send email report
         env:
