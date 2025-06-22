@@ -100,6 +100,9 @@ if not password:
     print("Error: EMAIL_PASSWORD environment variable not set.")
     exit(1)
 
+# Strip whitespace from password to avoid issues with newlines in secrets
+password = password.strip()
+
 # Create the email message object
 message = MIMEMultipart("alternative")
 message["Subject"] = subject
