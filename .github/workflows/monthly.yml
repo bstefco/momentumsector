@@ -118,13 +118,17 @@ jobs:
           
           with open('momentum_report.html', 'w') as f:
               f.write(html_content)
+          
+          # Also create index.html for GitHub Pages
+          with open('index.html', 'w') as f:
+              f.write(html_content)
           "
 
       - name: Commit and push results
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
-          git add momentum_scores.csv momentum_report.html
+          git add momentum_scores.csv momentum_report.html index.html
           git commit -m "Update momentum results - $(date +'%Y-%m-%d')" || exit 0
           git push origin main
 
@@ -132,4 +136,23 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: momentum_scores
-          path: momentum_scores.csv 
+          path: momentum_scores.csv
+
+      - name: Send email with report
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.mail.me.com
+          server_port: 587
+          username: boris.stefanik@me.com
+          password: ${{ secrets.Email }}
+          subject: "📈 Monthly Sector Momentum Report"
+          to: boris.stefanik@me.com
+          from: boris.stefanik@me.com
+          content_type: text/html
+          body: |
+            <h2>📈 Sector Momentum Report</h2>
+            <p>Your monthly sector momentum analysis is ready!</p>
+            <p><strong>View online:</strong> <a href="https://bstefco.github.io/momentumsector/">https://bstefco.github.io/momentumsector/</a></p>
+            <p>The report shows the top-performing sector ETFs based on momentum analysis.</p>
+            <p>Generated on: $(date +'%Y-%m-%d %H:%M UTC')</p>
+          attachments: momentum_report.html 
