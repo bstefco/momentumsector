@@ -25,6 +25,104 @@ jobs:
       - name: Run momentum screen
         run: python sector_momentum_screen.py
 
+      - name: Generate HTML report
+        run: |
+          python -c "
+          import pandas as pd
+          from datetime import datetime
+          
+          # Read the CSV
+          df = pd.read_csv('momentum_scores.csv')
+          
+          # Create HTML report
+          html_content = f'''
+          <!DOCTYPE html>
+          <html>
+          <head>
+              <title>Sector Momentum Report - {datetime.now().strftime('%Y-%m-%d')}</title>
+              <style>
+                  body {{ font-family: Arial, sans-serif; margin: 40px; background-color: #f5f5f5; }}
+                  .container {{ max-width: 800px; margin: 0 auto; background: white; padding: 30px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }}
+                  h1 {{ color: #333; text-align: center; }}
+                  .summary {{ background: #f8f9fa; padding: 20px; border-radius: 5px; margin: 20px 0; }}
+                  table {{ width: 100%; border-collapse: collapse; margin: 20px 0; }}
+                  th, td {{ padding: 12px; text-align: left; border-bottom: 1px solid #ddd; }}
+                  th {{ background-color: #007bff; color: white; }}
+                  tr:nth-child(even) {{ background-color: #f2f2f2; }}
+                  .positive {{ color: green; font-weight: bold; }}
+                  .negative {{ color: red; font-weight: bold; }}
+                  .timestamp {{ text-align: center; color: #666; font-size: 0.9em; }}
+              </style>
+          </head>
+          <body>
+              <div class='container'>
+                  <h1>📈 Sector Momentum Report</h1>
+                  <div class='timestamp'>Generated on {datetime.now().strftime('%Y-%m-%d %H:%M UTC')}</div>
+                  
+                  <div class='summary'>
+                      <h3>📊 Summary</h3>
+                      <p><strong>Total ETFs analyzed:</strong> {len(df)}</p>
+                      <p><strong>Top performers:</strong> {len(df[df['MomentumScore'] > 0])} ETFs with positive momentum</p>
+                  </div>
+                  
+                  <h3>🏆 Top 5 Momentum Winners</h3>
+                  <table>
+                      <tr><th>Rank</th><th>Ticker</th><th>Momentum Score</th><th>12-Month Return</th></tr>
+          '''
+          
+          # Add top 5 winners
+          top_5 = df.nlargest(5, 'MomentumScore')
+          for i, (_, row) in enumerate(top_5.iterrows(), 1):
+              mom_class = 'positive' if row['MomentumScore'] > 0 else 'negative'
+              ret_class = 'positive' if row['Return12m'] > 0 else 'negative'
+              html_content += f'''
+                      <tr>
+                          <td>{i}</td>
+                          <td><strong>{row['Ticker']}</strong></td>
+                          <td class='{mom_class}'>{row['MomentumScore']*100:.2f}%</td>
+                          <td class='{ret_class}'>{row['Return12m']*100:.2f}%</td>
+                      </tr>
+          '''
+          
+          html_content += '''
+                  </table>
+                  
+                  <h3>📋 Complete Results</h3>
+                  <table>
+                      <tr><th>Ticker</th><th>Momentum Score</th><th>12-Month Return</th></tr>
+          '''
+          
+          # Add all results
+          for _, row in df.iterrows():
+              mom_class = 'positive' if row['MomentumScore'] > 0 else 'negative'
+              ret_class = 'positive' if row['Return12m'] > 0 else 'negative'
+              html_content += f'''
+                      <tr>
+                          <td><strong>{row['Ticker']}</strong></td>
+                          <td class='{mom_class}'>{row['MomentumScore']*100:.2f}%</td>
+                          <td class='{ret_class}'>{row['Return12m']*100:.2f}%</td>
+                      </tr>
+          '''
+          
+          html_content += '''
+                  </table>
+              </div>
+          </body>
+          </html>
+          '''
+          
+          with open('momentum_report.html', 'w') as f:
+              f.write(html_content)
+          "
+
+      - name: Commit and push results
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add momentum_scores.csv momentum_report.html
+          git commit -m "Update momentum results - $(date +'%Y-%m-%d')" || exit 0
+          git push
+
       - name: Upload results
         uses: actions/upload-artifact@v4
         with:
