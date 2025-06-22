@@ -1,6 +1,7 @@
 import pandas as pd
 import json
 from datetime import datetime, timedelta
+from historical_data import update_historical_data, format_changes_for_dashboard
 
 # This dictionary provides the country and segment for each ticker.
 UNIVERSE_DETAILS = {
@@ -27,12 +28,16 @@ UNIVERSE_DETAILS = {
     "EXV8.DE": {"country": "EU", "segment": "Materials"},
     "EXV2.DE": {"country": "EU", "segment": "Energy"},
     "EXV9.DE": {"country": "EU", "segment": "Real Estate"},
+    "EXV0.DE": {"country": "EU", "segment": "Communication Services"},
     # Country Specific
     "KWEB": {"country": "CN", "segment": "Internet"},
     "FXI": {"country": "CN", "segment": "Large Cap"},
     "EWJ": {"country": "JP", "segment": "Broad Market"},
+    "XCTE.L": {"country": "CN", "segment": "Technology"},
+    "JPJP.L": {"country": "JP", "segment": "Broad Market"},
     # Bonds
     "AGG": {"country": "US", "segment": "Aggregate Bond"},
+    "SUAG.L": {"country": "EU", "segment": "Bonds"},
     # Default
     "DEFAULT": {"country": "N/A", "segment": "N/A"}
 }
@@ -53,12 +58,12 @@ except FileNotFoundError:
     exit(1)
 
 # Configuration
-bond_ticker = 'AGG'
+bond_ticker = 'SUAG.L'
 target_eur = "1,650" 
 
 # Get bond data
-bond_return_series = df[df['Ticker'] == bond_ticker]['Return12m']
-bond_return = bond_return_series.iloc[0] if not bond_return_series.empty else 0.0
+bond_data = df[df['Ticker'] == bond_ticker]
+bond_return = bond_data['Return12m'].iloc[0] if not bond_data.empty else 0.0
 
 # Get winners (top 3 non-bond)
 winners_df = df[df['Ticker'] != bond_ticker].head(3).reset_index(drop=True)
@@ -73,9 +78,10 @@ for i, row in winners_df.iterrows():
         "momentum": f"{row['MomentumScore']:.1f}"
     })
 
-# Get all ETFs list
+# Get all ETFs list (excluding bonds)
+all_etfs_df = df[df['Ticker'] != bond_ticker].reset_index(drop=True)
 all_etfs_list = []
-for i, row in df.iterrows():
+for i, row in all_etfs_df.iterrows():
     details = get_details(row['Ticker'])
     all_etfs_list.append({
         "rank": i + 1,
@@ -85,6 +91,21 @@ for i, row in df.iterrows():
         "ret12": f"{row['Return12m']:.1f}",
         "momentum": f"{row['MomentumScore']:.1f}"
     })
+
+# Get historical comparison data for top 5
+try:
+    # Convert DataFrame to list of dictionaries for historical analysis
+    momentum_data = df.to_dict('records')
+    historical_comparison = update_historical_data(momentum_data)
+    formatted_changes = format_changes_for_dashboard(historical_comparison)
+except Exception as e:
+    print(f"Warning: Could not generate historical comparison: {e}")
+    formatted_changes = {
+        'current_month': datetime.now().strftime('%Y-%m'),
+        'previous_month': (datetime.now() - timedelta(days=30)).strftime('%Y-%m'),
+        'changes': [],
+        'summary': {'new_entries': 0, 'exits': 0, 'rank_changes': 0}
+    }
 
 # Dates
 today = datetime.now()
@@ -98,7 +119,8 @@ output_data = {
     "target_eur": target_eur,
     "next_rebalance_date": next_rebalance_date.strftime('%Y-%m-%d'),
     "winners": winners_list,
-    "allEtfs": all_etfs_list
+    "allEtfs": all_etfs_list,
+    "historical_changes": formatted_changes
 }
 
 # Write to file

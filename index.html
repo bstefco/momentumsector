@@ -3,6 +3,9 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
     <title>Sector-Momentum Rebalance Dashboard</title>
     <!-- Tailwind CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -12,6 +15,7 @@
     <header class="bg-white shadow p-6 mb-6">
       <h1 class="text-2xl font-bold">Sector-Momentum Rebalance</h1>
       <p class="text-sm mt-1">Run date: <span id="run-date" class="font-mono"></span></p>
+      <p class="text-xs mt-1 text-gray-600">Last updated: <span id="last-updated" class="font-mono"></span></p>
     </header>
 
     <main class="max-w-5xl mx-auto p-4 space-y-10">
@@ -35,6 +39,29 @@
           </table>
         </div>
         <p class="mt-2 text-xs italic">Bond sleeve 12-m return (<span id="bond-ticker"></span>): <span id="bond-return"></span></p>
+      </section>
+
+      <!-- Historical Changes Section -->
+      <section>
+        <h2 class="text-xl font-semibold mb-4">Top 5 Changes vs Previous Month</h2>
+        <div class="bg-white rounded-xl shadow p-4">
+          <div class="flex items-center justify-between mb-4">
+            <p class="text-sm text-gray-600">
+              <span id="current-month"></span> vs <span id="previous-month"></span>
+            </p>
+            <div class="text-xs text-gray-500">
+              <span id="changes-summary"></span>
+            </div>
+          </div>
+          
+          <div id="changes-container" class="space-y-2">
+            <!-- Changes will be inserted here by JS -->
+          </div>
+          
+          <div id="no-changes-message" class="text-center text-gray-500 py-4 hidden">
+            No changes to display (first run or no previous data available)
+          </div>
+        </div>
       </section>
 
       <!-- Collapsible full ranking panel -->
@@ -83,69 +110,125 @@
 
     <!-- JS injection -->
     <script>
-      /* helper: map ticker → country & sector */
-      const meta = {
-        "EXV3.DE": ["EU","Technology"],  "EXV1.DE": ["EU","Banks"],
-        "EXV4.DE": ["EU","Health Care"], "EXV7.DE": ["EU","Industrials"],
-        "EXV6.DE": ["EU","Cons. Staples"], "CDIS.L": ["EU","Cons. Disc."],
-        "EXV5.DE": ["EU","Utilities"],   "EXV8.DE": ["EU","Materials"],
-        "EXV2.DE": ["EU","Energy"],      "EXV9.DE": ["EU","Real Estate"],
-        "EXV0.DE": ["EU","Comm. Svcs"],
-        "XLK": ["US","Technology"], "XLE": ["US","Energy"],
-        "XLF": ["US","Financials"], "XLV": ["US","Health Care"],
-        "XLI": ["US","Industrials"], "XLP": ["US","Cons. Staples"],
-        "XLY": ["US","Cons. Disc."], "XLU": ["US","Utilities"],
-        "XLB": ["US","Materials"], "XLRE": ["US","Real Estate"],
-        "XLC": ["US","Comm. Svcs"],
-        "XCTE.L": ["CN","Technology"], "KWEB":["CN","Internet"],
-        "JPJP.L": ["JP","Broad Market"]
-      };
-
-      fetch("momentum_scores.json")
-        .then(r => r.json())
-        .then(rows => {
-          // sort by MomentumScore desc
-          rows.sort((a,b) => b.MomentumScore - a.MomentumScore);
-
+      // Set last updated timestamp
+      document.getElementById("last-updated").textContent = new Date().toLocaleString();
+      
+      // Create cache-busting URL with multiple parameters
+      const timestamp = Date.now();
+      const random = Math.random();
+      const cacheBuster = `?t=${timestamp}&r=${random}&v=1`;
+      
+      fetch("data.json" + cacheBuster, {
+        method: 'GET',
+        headers: {
+          'Cache-Control': 'no-cache, no-store, must-revalidate',
+          'Pragma': 'no-cache',
+          'Expires': '0'
+        }
+      })
+        .then(r => {
+          if (!r.ok) {
+            throw new Error(`HTTP error! status: ${r.status}`);
+          }
+          return r.json();
+        })
+        .then(data => {
+          console.log(`✅ Data loaded successfully at ${new Date().toLocaleString()}`);
+          console.log(`📊 Loaded ${data.allEtfs ? data.allEtfs.length : 0} tickers`);
+          
           // === header placeholders ===
-          document.getElementById("run-date").textContent =
-              new Date().toISOString().slice(0,10);
-          const bond = rows.find(r => r.Ticker === "SUAG.L");
-          document.getElementById("bond-ticker").textContent = "SUAG.L";
-          document.getElementById("bond-return").textContent =
-              (bond.Return12m*100).toFixed(1) + "%";
+          document.getElementById("run-date").textContent = data.run_date;
+          document.getElementById("bond-ticker").textContent = data.bond_ticker;
+          document.getElementById("bond-return").textContent = data.bond_return + "%";
+          document.getElementById("target-eur").textContent = data.target_eur;
+          document.getElementById("next-date").textContent = data.next_rebalance_date;
+          document.getElementById("bond-ticker-next").textContent = data.bond_ticker;
 
           // === winners table ===
-          const winners = rows.slice(0,3);
           const winTbody = document.getElementById("winners-body");
-          winners.forEach((w,i) => {
-            const [ctry,seg] = meta[w.Ticker]||["-","-"];
+          winTbody.innerHTML = ''; // Clear existing content
+          data.winners.forEach((w) => {
             winTbody.insertAdjacentHTML("beforeend",`
               <tr>
-                <td class="py-2 px-4">${i+1}</td>
-                <td class="py-2 px-4 font-mono">${w.Ticker}</td>
-                <td class="py-2 px-4">${ctry}</td>
-                <td class="py-2 px-4">${seg}</td>
-                <td class="py-2 px-4 text-right">${(w.MomentumScore*100).toFixed(1)}%</td>
+                <td class="py-2 px-4">${w.rank}</td>
+                <td class="py-2 px-4 font-mono">${w.ticker}</td>
+                <td class="py-2 px-4">${w.country}</td>
+                <td class="py-2 px-4">${w.segment}</td>
+                <td class="py-2 px-4 text-right">${w.momentum}%</td>
               </tr>`);
           });
+
+          // === historical changes section ===
+          if (data.historical_changes) {
+            const changes = data.historical_changes;
+            
+            // Update month labels
+            document.getElementById("current-month").textContent = changes.current_month;
+            document.getElementById("previous-month").textContent = changes.previous_month;
+            
+            // Update summary
+            const summary = changes.summary;
+            document.getElementById("changes-summary").textContent = 
+              `${summary.new_entries} new, ${summary.exits} exited, ${summary.rank_changes} rank changes`;
+            
+            // Display changes
+            const changesContainer = document.getElementById("changes-container");
+            const noChangesMessage = document.getElementById("no-changes-message");
+            
+            if (changes.changes && changes.changes.length > 0) {
+              changesContainer.innerHTML = ''; // Clear existing content
+              changes.changes.forEach((change) => {
+                let bgColor = 'bg-gray-50';
+                let borderColor = 'border-gray-200';
+                
+                if (change.type === 'new') {
+                  bgColor = 'bg-green-50';
+                  borderColor = 'border-green-200';
+                } else if (change.type === 'exit') {
+                  bgColor = 'bg-red-50';
+                  borderColor = 'border-red-200';
+                } else if (change.type === 'change') {
+                  bgColor = change.rank_change > 0 ? 'bg-blue-50' : 'bg-yellow-50';
+                  borderColor = change.rank_change > 0 ? 'border-blue-200' : 'border-yellow-200';
+                }
+                
+                changesContainer.insertAdjacentHTML("beforeend",`
+                  <div class="p-3 rounded-lg border ${bgColor} ${borderColor}">
+                    <div class="flex items-center justify-between">
+                      <div class="flex items-center space-x-3">
+                        <span class="font-mono text-sm font-medium">${change.ticker}</span>
+                        <span class="text-sm text-gray-600">${change.description}</span>
+                      </div>
+                      ${change.momentum ? `<span class="text-sm font-medium">${change.momentum}</span>` : ''}
+                    </div>
+                  </div>`);
+              });
+              noChangesMessage.classList.add('hidden');
+            } else {
+              changesContainer.innerHTML = '';
+              noChangesMessage.classList.remove('hidden');
+            }
+          }
 
           // === full ranking table ===
           const fullBody = document.getElementById("all-etfs-body");
-          rows.forEach((r,i) => {
-            const [ctry,seg] = meta[r.Ticker]||["-","-"];
+          fullBody.innerHTML = ''; // Clear existing content
+          data.allEtfs.forEach((r) => {
             fullBody.insertAdjacentHTML("beforeend",`
               <tr>
-                <td class="py-1 px-3">${i+1}</td>
-                <td class="py-1 px-3 font-mono">${r.Ticker}</td>
-                <td class="py-1 px-3">${ctry}</td>
-                <td class="py-1 px-3">${seg}</td>
-                <td class="py-1 px-3 text-right">${(r.Return12m*100).toFixed(1)}%</td>
-                <td class="py-1 px-3 text-right">${(r.MomentumScore*100).toFixed(1)}%</td>
+                <td class="py-1 px-3">${r.rank}</td>
+                <td class="py-1 px-3 font-mono">${r.ticker}</td>
+                <td class="py-1 px-3">${r.country}</td>
+                <td class="py-1 px-3">${r.segment}</td>
+                <td class="py-1 px-3 text-right">${r.ret12}%</td>
+                <td class="py-1 px-3 text-right">${r.momentum}%</td>
               </tr>`);
           });
         })
-        .catch(err => console.error("⚠️ JSON load failed:",err));
+        .catch(err => {
+          console.error("⚠️ JSON load failed:", err);
+          document.body.innerHTML = '<div class="p-8 text-center"><h1 class="text-2xl text-red-600 mb-4">Data Loading Error</h1><p class="text-gray-600">Unable to load momentum data. Please check if data.json exists and is valid.</p><p class="text-sm mt-2">Error: ' + err.message + '</p></div>';
+        });
     </script>
   </body>
 </html>

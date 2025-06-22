@@ -47,7 +47,7 @@ UNIVERSE: Dict[str, str] = {
     "EXV8.DE": "EU Materials",
     "EXV2.DE": "EU Energy",
     "EXV9.DE": "EU Real Estate",
-    "EXV0.DE": "EU Communication Services",  # note the zero
+    # "EXV0.DE": "EU Communication Services",  # Delisted - no data available
 
     # ---------- Asia proxies ----------
     "XCTE.L": "China Technology",
@@ -75,17 +75,41 @@ def get_price_data(tickers: List[str], period: str = '2y') -> pd.DataFrame:
         print(f"Error downloading price data: {e}")
         return pd.DataFrame()
 
-def calculate_momentum(prices: pd.DataFrame) -> Tuple[pd.Series, pd.Series]:
-    """Calculate momentum and 12-month returns."""
-    returns_1m = prices.pct_change(periods=21)
-    returns_3m = prices.pct_change(periods=63)
-    returns_6m = prices.pct_change(periods=126)
-    returns_12m = prices.pct_change(periods=252)
+def momentum_scores(prices: pd.DataFrame,
+                    today : pd.Timestamp) -> tuple[pd.Series, pd.Series]:
+    """
+    Return (avg-momentum-score, 12-m return) for every ticker.
+    Uses *trading-day* shifts so weekend / holiday gaps do not inflate ratios.
+    """
+    # Trading-day offsets ≈ 1, 3, 6, 9, 12 months
+    bd_offsets = [22, 66, 132, 198, 264]   # 22 ≈ 1 month
     
-    momentum = (returns_1m + returns_3m + returns_6m + returns_12m).iloc[-1]
-    return12m = returns_12m.iloc[-1]
+    # Use pandas shift which respects the index (trading days)
+    # The index should already be business days from yfinance data
+    ref = prices.shift(bd_offsets[0])      # t-1 month (skip most-recent month)
+
+    # Calculate momentum for each ticker individually
+    tickers = prices.columns
+    momentum_scores = {}
+    return12m_scores = {}
     
-    return momentum.dropna(), return12m.dropna()
+    for ticker in tickers:
+        # Calculate momentum parts for each lookback period
+        parts = []
+        for bd in bd_offsets[1:]:              # 3,6,9,12 m
+            past = prices[ticker].shift(bd)
+            part = ref[ticker] / past - 1
+            parts.append(part)
+        
+        # Average across lookback periods
+        avg_momentum = pd.concat(parts, axis=1).mean(axis=1)
+        ret12 = ref[ticker] / prices[ticker].shift(bd_offsets[-1]) - 1
+        
+        # Get latest values
+        momentum_scores[ticker] = avg_momentum.iloc[-1]
+        return12m_scores[ticker] = ret12.iloc[-1]
+    
+    return pd.Series(momentum_scores), pd.Series(return12m_scores)
 
 def momentum_screen() -> Tuple[pd.DataFrame, pd.DataFrame]:
     """
@@ -99,9 +123,11 @@ def momentum_screen() -> Tuple[pd.DataFrame, pd.DataFrame]:
         print("Not enough price data to perform screen.")
         return pd.DataFrame(columns=['Ticker', 'MomentumScore', 'Return12m']), pd.DataFrame()
 
-    momentum, return12m = calculate_momentum(prices)
+    today = pd.Timestamp.now()
+    avg_mom, ret12 = momentum_scores(prices, today)
     
-    all_results = pd.DataFrame({'MomentumScore': momentum, 'Return12m': return12m}).reset_index()
+    # Create DataFrame from the Series objects
+    all_results = pd.DataFrame({'MomentumScore': avg_mom, 'Return12m': ret12}).reset_index()
     all_results.rename(columns={'index': 'Ticker'}, inplace=True)
     
     bond_data = all_results[all_results['Ticker'] == BOND_TICKER].copy()
@@ -138,13 +164,33 @@ def main() -> None:
         score: float = row['MomentumScore']
         print(f"{i+1}. {UNIVERSE.get(ticker, ticker)} ({ticker}): {score:.4f}")
 
-    # Save to CSV - only the winners
-    ranked_results.to_csv('momentum_scores.csv', index=False)
-    print("\n💾 Full results saved to momentum_scores.csv")
+    # Get all tickers data (not just winners)
+    tickers = list(UNIVERSE.keys())
+    prices = get_price_data(tickers)
+    
+    if not prices.empty and len(prices) >= 260:
+        avg_mom, ret12 = momentum_scores(prices, pd.Timestamp.now())
+        
+        # Extract latest values for all tickers
+        momentum = avg_mom.iloc[-1]
+        return12m = ret12.iloc[-1]
+        
+        all_results = pd.DataFrame({'MomentumScore': avg_mom, 'Return12m': ret12}).reset_index()
+        all_results.rename(columns={'index': 'Ticker'}, inplace=True)
+        
+        # Save to CSV - ALL tickers (not just winners)
+        all_results.to_csv('momentum_scores.csv', index=False)
+        print("\n💾 All results saved to momentum_scores.csv")
 
-    # also export JSON for the dashboard - include bond data
-    results_for_json = pd.concat([ranked_results, bond_data], ignore_index=True)
-    results_for_json.to_json("momentum_scores.json", orient="records", indent=2)
+        # also export JSON for the dashboard - include bond data
+        results_for_json = pd.concat([all_results, bond_data], ignore_index=True)
+        results_for_json.to_json("momentum_scores.json", orient="records", indent=2)
+    else:
+        # Fallback to just winners if we can't get all data
+        ranked_results.to_csv('momentum_scores.csv', index=False)
+        print("\n💾 Winners saved to momentum_scores.csv")
+        results_for_json = pd.concat([ranked_results, bond_data], ignore_index=True)
+        results_for_json.to_json("momentum_scores.json", orient="records", indent=2)
 
 if __name__ == "__main__":
     main()
