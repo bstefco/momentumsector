@@ -1,60 +1,73 @@
 import os
 import pandas as pd
-from datetime import datetime
+from datetime import datetime, timedelta
 from markdown import markdown
 
+# This dictionary should be kept in sync with sector_momentum_screen.py
+UNIVERSE = {
+    "XLK": "US Technology", "XLE": "US Energy", "XLF": "US Financials",
+    "XLV": "US Health Care", "XLI": "US Industrials", "XLP": "US Cons. Staples",
+    "XLY": "US Cons. Discretionary", "XLU": "US Utilities", "XLB": "US Materials",
+    "XLRE": "US Real Estate", "XLC": "US Communication", "IXN": "Global Technology",
+    "IXG": "Global Financials", "IXJ": "Global Healthcare", "IXI": "Global Industrials",
+    "IXP": "Global Telecom", "IXC": "Global Energy", "IXM": "Global Materials",
+    "KWEB": "China Internet", "FXI": "China Large Cap", "EWJ": "Japan", "AGG": "US Aggregate Bond"
+}
+
 # Load the momentum scores
-df: pd.DataFrame
-try:
-    df = pd.read_csv('momentum_scores.csv')
-    df = df.dropna(subset=['MomentumScore'])
-    df['MomentumScore'] = pd.to_numeric(df['MomentumScore'], errors='coerce')
-    df = df.dropna(subset=['MomentumScore'])
-except (FileNotFoundError, KeyError) as e:
-    print(f"Error reading or processing momentum_scores.csv: {e}")
-    # Create an empty DataFrame with expected columns if file is missing or broken
-    df = pd.DataFrame({'Ticker': pd.Series(dtype='str'), 'MomentumScore': pd.Series(dtype='float')})
+df: pd.DataFrame = pd.read_csv('momentum_scores.csv')
+df = df.dropna(subset=['MomentumScore', 'Return12m'])
+df[['MomentumScore', 'Return12m']] = df[['MomentumScore', 'Return12m']].apply(pd.to_numeric, errors='coerce')
 
-# Get top 3 winners
-winners: pd.DataFrame
-if not df.empty:
-    winners = df.nlargest(n=3, columns='MomentumScore')
-else:
-    winners = pd.DataFrame({'Ticker': pd.Series(dtype='str'), 'MomentumScore': pd.Series(dtype='float')})
+# Get bond data
+bond_ticker = 'AGG'
+bond_return_series: pd.Series = df[df['Ticker'] == bond_ticker]['Return12m']
+bond_return = bond_return_series.iloc[0] * 100 if not bond_return_series.empty else 0
 
-# Get current time for the report
-report_time = datetime.utcnow().strftime('%Y-%m-%d %H:%M UTC')
+# Get top 3 winners (excluding bond)
+winners: pd.DataFrame = df[df['Ticker'] != bond_ticker].nlargest(n=3, columns='MomentumScore')
 
-# Set subject
-subject = f"Your Momentum Sector Report for {datetime.utcnow().strftime('%B %Y')}"
+# Read the template
+with open('email_template.txt', 'r') as f:
+    template = f.read()
 
-# Load email template from file
-try:
-    with open('email_template.txt', 'r') as f:
-        body_markdown = f.read()
-except FileNotFoundError:
-    body_markdown = "Email template not found."
+# Calculate next rebalance date
+today = datetime.now()
+next_rebalance_date = (today.replace(day=1) + timedelta(days=32)).replace(day=14)
 
-# Replace time placeholder
-body_markdown = body_markdown.replace('{{ report_time }}', report_time)
+# Prepare replacements
+replacements = {
+    '{{ run_date }}': today.strftime('%Y-%m-%d'),
+    '{{ run_time }}': today.strftime('%H:%M'),
+    '{{ winner1_ticker }}': winners.iloc[0]['Ticker'] if len(winners) > 0 else 'N/A',
+    '{{ winner1_label }}': UNIVERSE.get(winners.iloc[0]['Ticker'], 'N/A') if len(winners) > 0 else 'N/A',
+    '{{ winner1_score }}': f"{winners.iloc[0]['MomentumScore']*100:.1f}" if len(winners) > 0 else 'N/A',
+    '{{ winner2_ticker }}': winners.iloc[1]['Ticker'] if len(winners) > 1 else 'N/A',
+    '{{ winner2_label }}': UNIVERSE.get(winners.iloc[1]['Ticker'], 'N/A') if len(winners) > 1 else 'N/A',
+    '{{ winner2_score }}': f"{winners.iloc[1]['MomentumScore']*100:.1f}" if len(winners) > 1 else 'N/A',
+    '{{ winner3_ticker }}': winners.iloc[2]['Ticker'] if len(winners) > 2 else 'N/A',
+    '{{ winner3_label }}': UNIVERSE.get(winners.iloc[2]['Ticker'], 'N/A') if len(winners) > 2 else 'N/A',
+    '{{ winner3_score }}': f"{winners.iloc[2]['MomentumScore']*100:.1f}" if len(winners) > 2 else 'N/A',
+    '{{ bond_ticker }}': bond_ticker,
+    '{{ bond_return }}': f'{bond_return:.2f}',
+    '{{ next_rebalance_date }}': next_rebalance_date.strftime('%Y-%m-%d'),
+    # --- These are placeholders; you might want to calculate them dynamically ---
+    '{{ target_eur }}': '10,000',
+    '{{ total_book }}': '30,000',
+    '{{ calc_shares(price, target_eur) }}': '...' 
+}
 
-# Generate winner table markdown
-table_markdown = "| Rank | Ticker | Momentum Score |\n|------|--------|----------------|\n"
-if not winners.empty:
-    for i in range(len(winners)):
-        rank = i + 1
-        row = winners.iloc[i]
-        ticker = row['Ticker']
-        score = f"{row['MomentumScore']:.1%}"
-        table_markdown += f"| {rank} | **{ticker}** | {score} |\n"
-else:
-    # Add placeholder rows if there are no winners
-    for i in range(3):
-        table_markdown += f"| {i+1} | N/A | N/A |\n"
+# Apply replacements
+email_content = template
+for placeholder, value in replacements.items():
+    email_content = email_content.replace(placeholder, str(value))
 
-body_markdown = body_markdown.replace('{{ winner_table }}', table_markdown)
+# Extract subject and body
+lines = email_content.split('\n')
+subject = lines[0].replace('Subject: ', '').strip()
+body_markdown = '\n'.join(lines[2:])
 
-# Convert body to HTML with professional styling
+# Convert markdown body to HTML
 body_html = f"""
 <!DOCTYPE html>
 <html>
@@ -74,10 +87,10 @@ body_html = f"""
 </html>
 """
 
-# Save subject and body to files
+# Save to files for the workflow
 with open('email_subject.txt', 'w') as f:
     f.write(subject)
 with open('email_body.html', 'w') as f:
     f.write(body_html)
 
-print("HTML email content and subject generated successfully.") 
+print("Email content generated from template and saved to files.") 
