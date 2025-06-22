@@ -123,7 +123,6 @@ except FileNotFoundError:
 context = ssl.create_default_context()
 try:
     with smtplib.SMTP("smtp.mail.me.com", 587) as server:
-        server.set_debuglevel(1)  # Enable verbose debug output
         server.starttls(context=context)  # Secure the connection
         server.login(sender_email, password)
         server.sendmail(sender_email, receiver_email, message.as_string())
