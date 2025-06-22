@@ -1,0 +1,192 @@
+{
+  "run_date": "2025-06-22",
+  "bond_ticker": "AGG",
+  "bond_return": "0.92",
+  "target_eur": "1,650",
+  "next_rebalance_date": "2025-07-14",
+  "winners": [
+    {
+      "rank": 1,
+      "ticker": "EWJ",
+      "country": "JP",
+      "segment": "Broad Market",
+      "momentum": "7.0"
+    },
+    {
+      "rank": 2,
+      "ticker": "FXI",
+      "country": "CN",
+      "segment": "Large Cap",
+      "momentum": "6.8"
+    },
+    {
+      "rank": 3,
+      "ticker": "IXG",
+      "country": "Global",
+      "segment": "Financials",
+      "momentum": "6.2"
+    }
+  ],
+  "allEtfs": [
+    {
+      "rank": 1,
+      "ticker": "EWJ",
+      "country": "JP",
+      "segment": "Broad Market",
+      "ret12": "8.5",
+      "momentum": "7.0"
+    },
+    {
+      "rank": 2,
+      "ticker": "FXI",
+      "country": "CN",
+      "segment": "Large Cap",
+      "ret12": "13.9",
+      "momentum": "6.8"
+    },
+    {
+      "rank": 3,
+      "ticker": "IXG",
+      "country": "Global",
+      "segment": "Financials",
+      "ret12": "13.5",
+      "momentum": "6.2"
+    },
+    {
+      "rank": 4,
+      "ticker": "XLI",
+      "country": "US",
+      "segment": "Industrials",
+      "ret12": "4.7",
+      "momentum": "5.0"
+    },
+    {
+      "rank": 5,
+      "ticker": "IXP",
+      "country": "Global",
+      "segment": "Telecom",
+      "ret12": "10.7",
+      "momentum": "4.1"
+    },
+    {
+      "rank": 6,
+      "ticker": "XLU",
+      "country": "US",
+      "segment": "Utilities",
+      "ret12": "3.8",
+      "momentum": "3.4"
+    },
+    {
+      "rank": 7,
+      "ticker": "KWEB",
+      "country": "CN",
+      "segment": "Internet",
+      "ret12": "6.6",
+      "momentum": "3.0"
+    },
+    {
+      "rank": 8,
+      "ticker": "XLK",
+      "country": "US",
+      "segment": "Technology",
+      "ret12": "-2.5",
+      "momentum": "2.2"
+    },
+    {
+      "rank": 9,
+      "ticker": "XLC",
+      "country": "US",
+      "segment": "Communication",
+      "ret12": "9.2",
+      "momentum": "2.1"
+    },
+    {
+      "rank": 10,
+      "ticker": "IXN",
+      "country": "Global",
+      "segment": "Technology",
+      "ret12": "-1.6",
+      "momentum": "2.0"
+    },
+    {
+      "rank": 11,
+      "ticker": "XLF",
+      "country": "US",
+      "segment": "Financials",
+      "ret12": "7.5",
+      "momentum": "1.7"
+    },
+    {
+      "rank": 12,
+      "ticker": "XLP",
+      "country": "US",
+      "segment": "Cons. Staples",
+      "ret12": "2.8",
+      "momentum": "1.4"
+    },
+    {
+      "rank": 13,
+      "ticker": "XLB",
+      "country": "US",
+      "segment": "Materials",
+      "ret12": "-8.0",
+      "momentum": "0.3"
+    },
+    {
+      "rank": 14,
+      "ticker": "AGG",
+      "country": "US",
+      "segment": "Aggregate Bond",
+      "ret12": "0.9",
+      "momentum": "0.1"
+    },
+    {
+      "rank": 15,
+      "ticker": "XLRE",
+      "country": "US",
+      "segment": "Real Estate",
+      "ret12": "-5.6",
+      "momentum": "-0.4"
+    },
+    {
+      "rank": 16,
+      "ticker": "XLY",
+      "country": "US",
+      "segment": "Cons. Discretionary",
+      "ret12": "5.7",
+      "momentum": "-1.0"
+    },
+    {
+      "rank": 17,
+      "ticker": "IXC",
+      "country": "Global",
+      "segment": "Energy",
+      "ret12": "-3.5",
+      "momentum": "-1.8"
+    },
+    {
+      "rank": 18,
+      "ticker": "XLE",
+      "country": "US",
+      "segment": "Energy",
+      "ret12": "-5.1",
+      "momentum": "-3.8"
+    },
+    {
+      "rank": 19,
+      "ticker": "IXJ",
+      "country": "Global",
+      "segment": "Healthcare",
+      "ret12": "-10.2",
+      "momentum": "-3.9"
+    },
+    {
+      "rank": 20,
+      "ticker": "XLV",
+      "country": "US",
+      "segment": "Health Care",
+      "ret12": "-11.4",
+      "momentum": "-6.1"
+    }
+  ]
+}
