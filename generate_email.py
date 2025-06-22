@@ -68,8 +68,25 @@ lines = email_content.split('\n')
 subject = lines[0].replace('Subject: ', '')
 body_markdown = '\n'.join(lines[2:])
 
-# Convert body to HTML
-body_html = markdown(body_markdown, extensions=['tables'])
+# Convert body to HTML with professional styling
+body_html = f"""
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<style>
+    body {{ font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6; color: #333; max-width: 600px; margin: 0 auto; padding: 20px; }}
+    table {{ width: 100%; border-collapse: collapse; margin-bottom: 20px; }}
+    th, td {{ padding: 12px; text-align: left; border-bottom: 1px solid #ddd; }}
+    th {{ background-color: #f2f2f2; }}
+    h2 {{ border-bottom: 2px solid #ddd; padding-bottom: 10px; }}
+</style>
+</head>
+<body>
+    {markdown(body_markdown, extensions=['tables'])}
+</body>
+</html>
+"""
 
 # Set outputs directly for GitHub Actions
 if 'GITHUB_OUTPUT' in os.environ:
