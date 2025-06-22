@@ -139,18 +139,8 @@ jobs:
           path: momentum_scores.csv
 
       - name: Generate email from template
-        id: email_content
+        id: generate_email
         run: python3 generate_email.py
-
-      - name: Set email subject and body
-        id: set_email
-        run: |
-          echo "subject<<EOF" >> $GITHUB_OUTPUT
-          cat email_subject.txt >> $GITHUB_OUTPUT
-          echo "EOF" >> $GITHUB_OUTPUT
-          echo "body<<EOF" >> $GITHUB_OUTPUT
-          cat email_body.txt >> $GITHUB_OUTPUT
-          echo "EOF" >> $GITHUB_OUTPUT
 
       - name: Send email with report
         uses: dawidd6/action-send-mail@v3
@@ -159,12 +149,12 @@ jobs:
           server_port: 587
           username: boris.stefanik@me.com
           password: ${{ secrets.Email }}
-          subject: ${{ steps.set_email.outputs.subject }}
+          subject: ${{ steps.generate_email.outputs.subject }}
           to: boris.stefanik@me.com
           from: boris.stefanik@me.com
           content_type: text/plain
           secure: false
-          body: ${{ steps.set_email.outputs.body }}
+          body: ${{ steps.generate_email.outputs.body }}
           attachments: momentum_scores.csv
 
       - name: Create notification issue

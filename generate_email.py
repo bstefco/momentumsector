@@ -1,6 +1,7 @@
 import pandas as pd
 from datetime import datetime, timedelta
 import re
+import os
 
 # This dictionary should be kept in sync with sector_momentum_screen.py
 UNIVERSE = {
@@ -61,14 +62,18 @@ for placeholder, value in replacements.items():
     email_content = email_content.replace(placeholder, str(value))
 
 # Extract subject and body
-lines = email_content.split('\n')
+lines = email_content.split('\\n')
 subject = lines[0].replace('Subject: ', '')
-body = '\n'.join(lines[2:])  # Skip subject and empty line
+body = '\\n'.join(lines[2:])  # Skip subject and empty line
 
-# Save to files for the workflow
-with open('email_subject.txt', 'w') as f:
-    f.write(subject)
-with open('email_body.txt', 'w') as f:
-    f.write(body)
+# Set outputs directly for GitHub Actions
+if 'GITHUB_OUTPUT' in os.environ:
+    with open(os.environ['GITHUB_OUTPUT'], 'a') as f:
+        print(f'subject<<EOF', file=f)
+        print(subject, file=f)
+        print(f'EOF', file=f)
+        print(f'body<<EOF', file=f)
+        print(body, file=f)
+        print(f'EOF', file=f)
 
-print("Email content generated successfully.") 
+print("Email content generated and outputs set.") 
