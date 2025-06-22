@@ -14,17 +14,17 @@
     },
     {
       "rank": 2,
-      "ticker": "FXI",
-      "country": "CN",
-      "segment": "Large Cap",
-      "momentum": "56.5"
-    },
-    {
-      "rank": 3,
       "ticker": "EXV2.DE",
       "country": "EU",
       "segment": "Energy",
       "momentum": "39.6"
+    },
+    {
+      "rank": 3,
+      "ticker": "XLC",
+      "country": "US",
+      "segment": "Communication",
+      "momentum": "32.5"
     }
   ],
   "allEtfs": [
@@ -38,14 +38,6 @@
     },
     {
       "rank": 2,
-      "ticker": "FXI",
-      "country": "CN",
-      "segment": "Large Cap",
-      "ret12": "40.7",
-      "momentum": "56.5"
-    },
-    {
-      "rank": 3,
       "ticker": "EXV2.DE",
       "country": "EU",
       "segment": "Energy",
@@ -53,7 +45,7 @@
       "momentum": "39.6"
     },
     {
-      "rank": 4,
+      "rank": 3,
       "ticker": "XLC",
       "country": "US",
       "segment": "Communication",
@@ -61,7 +53,7 @@
       "momentum": "32.5"
     },
     {
-      "rank": 5,
+      "rank": 4,
       "ticker": "XLU",
       "country": "US",
       "segment": "Utilities",
@@ -69,7 +61,7 @@
       "momentum": "32.3"
     },
     {
-      "rank": 6,
+      "rank": 5,
       "ticker": "XLI",
       "country": "US",
       "segment": "Industrials",
@@ -77,7 +69,7 @@
       "momentum": "32.2"
     },
     {
-      "rank": 7,
+      "rank": 6,
       "ticker": "EXV8.DE",
       "country": "EU",
       "segment": "Materials",
@@ -85,7 +77,7 @@
       "momentum": "31.9"
     },
     {
-      "rank": 8,
+      "rank": 7,
       "ticker": "KWEB",
       "country": "CN",
       "segment": "Internet",
@@ -93,12 +85,20 @@
       "momentum": "30.3"
     },
     {
-      "rank": 9,
+      "rank": 8,
       "ticker": "XLF",
       "country": "US",
       "segment": "Financials",
       "ret12": "23.9",
       "momentum": "29.0"
+    },
+    {
+      "rank": 9,
+      "ticker": "XCTE.L",
+      "country": "N/A",
+      "segment": "N/A",
+      "ret12": "30.5",
+      "momentum": "28.5"
     },
     {
       "rank": 10,
@@ -118,14 +118,6 @@
     },
     {
       "rank": 12,
-      "ticker": "EWJ",
-      "country": "JP",
-      "segment": "Broad Market",
-      "ret12": "7.7",
-      "momentum": "18.1"
-    },
-    {
-      "rank": 13,
       "ticker": "XLP",
       "country": "US",
       "segment": "Cons. Staples",
@@ -133,7 +125,7 @@
       "momentum": "12.6"
     },
     {
-      "rank": 14,
+      "rank": 13,
       "ticker": "XLY",
       "country": "US",
       "segment": "Cons. Discretionary",
@@ -141,7 +133,7 @@
       "momentum": "10.7"
     },
     {
-      "rank": 15,
+      "rank": 14,
       "ticker": "EXV9.DE",
       "country": "EU",
       "segment": "Real Estate",
