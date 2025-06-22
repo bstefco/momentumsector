@@ -1,28 +1,28 @@
 [
   {
     "Ticker":"EXV1.DE",
-    "MomentumScore":0.8034035314,
-    "Return12m":0.458523711
+    "MomentumScore":0.8034036801,
+    "Return12m":0.4585238596
   },
   {
     "Ticker":"EXV2.DE",
-    "MomentumScore":0.3958493237,
-    "Return12m":0.279774657
+    "MomentumScore":0.3958490687,
+    "Return12m":0.279774402
   },
   {
     "Ticker":"XLC",
-    "MomentumScore":0.324639493,
-    "Return12m":0.2109078914
+    "MomentumScore":0.3246393842,
+    "Return12m":0.2109077826
   },
   {
     "Ticker":"XLU",
-    "MomentumScore":0.3234358202,
-    "Return12m":0.2119632771
+    "MomentumScore":0.323435959,
+    "Return12m":0.2119634158
   },
   {
     "Ticker":"XLI",
-    "MomentumScore":0.3221040722,
-    "Return12m":0.1815204416
+    "MomentumScore":0.322104147,
+    "Return12m":0.1815205164
   },
   {
     "Ticker":"EXV8.DE",
@@ -46,8 +46,8 @@
   },
   {
     "Ticker":"XLK",
-    "MomentumScore":0.2350378297,
-    "Return12m":0.0687826545
+    "MomentumScore":0.2350376848,
+    "Return12m":0.0687825095
   },
   {
     "Ticker":"XLRE",
@@ -76,8 +76,8 @@
   },
   {
     "Ticker":"EXV7.DE",
-    "MomentumScore":0.0252048386,
-    "Return12m":0.0007739462
+    "MomentumScore":0.02520483,
+    "Return12m":0.0007740079
   },
   {
     "Ticker":"XLB",
@@ -88,5 +88,10 @@
     "Ticker":"JPJP.L",
     "MomentumScore":0.0069923031,
     "Return12m":0.0101128052
+  },
+  {
+    "Ticker":"SUAG.L",
+    "MomentumScore":-0.1084863683,
+    "Return12m":-0.0393323428
   }
 ]

@@ -87,42 +87,49 @@ def calculate_momentum(prices: pd.DataFrame) -> Tuple[pd.Series, pd.Series]:
     
     return momentum.dropna(), return12m.dropna()
 
-def momentum_screen() -> pd.DataFrame:
-    """Perform the momentum screen and return ranked results."""
+def momentum_screen() -> Tuple[pd.DataFrame, pd.DataFrame]:
+    """
+    Perform the momentum screen.
+    Returns a tuple of (ranked_results, bond_data).
+    """
     tickers = list(UNIVERSE.keys())
     prices = get_price_data(tickers)
     
     if prices.empty or len(prices) < 260:
         print("Not enough price data to perform screen.")
-        return pd.DataFrame(columns=['Ticker', 'MomentumScore', 'Return12m'])
+        return pd.DataFrame(columns=['Ticker', 'MomentumScore', 'Return12m']), pd.DataFrame()
 
     momentum, return12m = calculate_momentum(prices)
     
-    results = pd.DataFrame({'MomentumScore': momentum, 'Return12m': return12m}).reset_index()
-    results.rename(columns={'index': 'Ticker'}, inplace=True)
+    all_results = pd.DataFrame({'MomentumScore': momentum, 'Return12m': return12m}).reset_index()
+    all_results.rename(columns={'index': 'Ticker'}, inplace=True)
     
-    bond_return_12m_series = results[results['Ticker'] == BOND_TICKER]['Return12m']
-    if bond_return_12m_series.empty:
-        print(f"Could not find 12m return for bond ticker {BOND_TICKER}.")
+    bond_data = all_results[all_results['Ticker'] == BOND_TICKER].copy()
+    
+    if bond_data.empty:
+        print(f"Could not find data for bond ticker {BOND_TICKER}.")
         bond_return_12m = 0.0
     else:
-        bond_return_12m = bond_return_12m_series.iloc[0]
+        bond_return_12m = bond_data['Return12m'].iloc[0]
 
-    results = results[results['Return12m'] > bond_return_12m]
+    results = all_results[all_results['Return12m'] > bond_return_12m]
     results = results[results['Ticker'] != BOND_TICKER]
 
-    return results.sort_values(by='MomentumScore', ascending=False)
+    return results.sort_values(by='MomentumScore', ascending=False), bond_data
 
 def main() -> None:
     """Main function to run the screen and save results."""
     today = datetime.today()
     print(f"Running momentum screen for {today.date()}...")
     
-    ranked_results = momentum_screen()
+    ranked_results, bond_data = momentum_screen()
     
     if ranked_results.empty:
         print("No assets passed the screen. No results to save.")
         pd.DataFrame(columns=['Ticker', 'MomentumScore', 'Return12m']).to_csv('momentum_scores.csv', index=False)
+        # Still save bond data if it exists
+        if not bond_data.empty:
+            bond_data.to_json("momentum_scores.json", orient="records", indent=2)
         return
 
     print("\n🏆 Top 3 Momentum Winners:")
@@ -131,11 +138,13 @@ def main() -> None:
         score: float = row['MomentumScore']
         print(f"{i+1}. {UNIVERSE.get(ticker, ticker)} ({ticker}): {score:.4f}")
 
+    # Save to CSV - only the winners
     ranked_results.to_csv('momentum_scores.csv', index=False)
     print("\n💾 Full results saved to momentum_scores.csv")
 
-    # also export JSON for the dashboard
-    ranked_results.to_json("momentum_scores.json", orient="records", indent=2)
+    # also export JSON for the dashboard - include bond data
+    results_for_json = pd.concat([ranked_results, bond_data], ignore_index=True)
+    results_for_json.to_json("momentum_scores.json", orient="records", indent=2)
 
 if __name__ == "__main__":
     main()
