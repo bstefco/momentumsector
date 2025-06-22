@@ -6,6 +6,9 @@ Hi Boris,
 Your monthly sector-momentum screen finished running at **{{ run_time }} UTC**.  
 Below are the results and step-by-step actions for today's trades.
 
+**You can view the full, interactive report online here:**  
+**https://bstefco.github.io/momentumsector/**
+
 ---
 
 ## 1 | Top-3 winners to **own for the coming month**
