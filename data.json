@@ -1,7 +1,11 @@
 {
   "run_date": "2025-06-22",
   "bond_ticker": "AGG",
+<<<<<<< HEAD
   "bond_return": "0.92",
+=======
+  "bond_return": "0.00",
+>>>>>>> f9e0dca7d8e8b6b56e83bc3728cea956f11401dd
   "target_eur": "1,650",
   "next_rebalance_date": "2025-07-14",
   "winners": [
@@ -142,6 +146,7 @@
     },
     {
       "rank": 15,
+<<<<<<< HEAD
       "ticker": "EWJ",
       "country": "JP",
       "segment": "Broad Market",
@@ -198,11 +203,14 @@
     },
     {
       "rank": 22,
+=======
+>>>>>>> f9e0dca7d8e8b6b56e83bc3728cea956f11401dd
       "ticker": "EXV9.DE",
       "country": "EU",
       "segment": "Real Estate",
       "ret12": "8.9",
       "momentum": "2.7"
+<<<<<<< HEAD
     },
     {
       "rank": 23,
@@ -307,6 +315,8 @@
       "segment": "Health Care",
       "ret12": "-11.4",
       "momentum": "-6.1"
+=======
+>>>>>>> f9e0dca7d8e8b6b56e83bc3728cea956f11401dd
     }
   ]
 }
