@@ -2,6 +2,7 @@ import pandas as pd
 from datetime import datetime, timedelta
 import re
 import os
+from markdown import markdown
 
 # This dictionary should be kept in sync with sector_momentum_screen.py
 UNIVERSE = {
@@ -19,7 +20,8 @@ df = pd.read_csv('momentum_scores.csv')
 
 # Get bond data
 bond_ticker = 'AGG'
-bond_return = df[df['Ticker'] == bond_ticker]['Return12m'].iloc[0] * 100
+bond_return_series = df[df['Ticker'] == bond_ticker]['Return12m']
+bond_return = bond_return_series.iloc[0] * 100 if not bond_return_series.empty else 0
 
 # Get top 3 winners (excluding bond)
 winners = df[df['Ticker'] != bond_ticker].nlargest(3, 'MomentumScore')
@@ -62,18 +64,19 @@ for placeholder, value in replacements.items():
     email_content = email_content.replace(placeholder, str(value))
 
 # Extract subject and body
-lines = email_content.split('\\n')
+lines = email_content.split('\n')
 subject = lines[0].replace('Subject: ', '')
-body = '\\n'.join(lines[2:])  # Skip subject and empty line
+body_markdown = '\n'.join(lines[2:])
+
+# Convert body to HTML
+body_html = markdown(body_markdown, extensions=['tables'])
 
 # Set outputs directly for GitHub Actions
 if 'GITHUB_OUTPUT' in os.environ:
     with open(os.environ['GITHUB_OUTPUT'], 'a') as f:
-        print(f'subject<<EOF', file=f)
-        print(subject, file=f)
-        print(f'EOF', file=f)
+        print(f'subject={subject}', file=f)
         print(f'body<<EOF', file=f)
-        print(body, file=f)
+        print(body_html, file=f)
         print(f'EOF', file=f)
 
-print("Email content generated and outputs set.") 
+print("HTML email content generated and outputs set.") 

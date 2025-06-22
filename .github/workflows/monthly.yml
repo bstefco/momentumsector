@@ -25,7 +25,9 @@ jobs:
           python-version: '3.11'
 
       - name: Install dependencies
-        run: pip install pandas yfinance numpy
+        run: |
+          pip install pandas yfinance numpy
+          pip install markdown PyYAML
 
       - name: Run momentum screen
         run: python sector_momentum_screen.py
@@ -152,7 +154,7 @@ jobs:
           subject: ${{ steps.generate_email.outputs.subject }}
           to: boris.stefanik@me.com
           from: boris.stefanik@me.com
-          content_type: text/plain
+          content_type: text/html
           secure: false
           body: ${{ steps.generate_email.outputs.body }}
           attachments: momentum_scores.csv
