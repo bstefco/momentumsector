@@ -36,11 +36,14 @@ jobs:
       - name: Generate data file
         run: python3 generate_data_json.py
 
+      - name: Verify data integrity
+        run: python3 refresh_data.py
+
       - name: Commit and push results
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
-          git add momentum_scores.csv data.json index.html
+          git add momentum_scores.csv data.json index.html historical_momentum.json
           git commit -m "Update momentum results - $(date +'%Y-%m-%d')" || exit 0
           git push origin main
 
@@ -51,18 +54,21 @@ jobs:
           path: |
             momentum_scores.csv
             momentum_scores.json
+            historical_momentum.json
 
-      - name: Copy JSON into docs folder
+      - name: Copy files to docs folder for GitHub Pages
         run: |
           mkdir -p docs
-          cp momentum_scores.json docs/
+          cp data.json docs/
+          cp index.html docs/
+          cp historical_momentum.json docs/
 
-      - name: Commit updated JSON to Pages path
+      - name: Commit updated files to Pages path
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          commit_message: "Auto-update momentum_scores.json"
+          commit_message: "Auto-update GitHub Pages files"
           branch: main
-          file_pattern: docs/momentum_scores.json
+          file_pattern: docs/
 
       - name: Generate and send email report
         env:

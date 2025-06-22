@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <title>Sector-Momentum Rebalance Dashboard</title>
+    <!-- Tailwind CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body class="bg-slate-100 text-slate-800 font-sans leading-relaxed min-h-screen">
+    <!-- Header -->
+    <header class="bg-white shadow p-6 mb-6">
+      <h1 class="text-2xl font-bold">Sector-Momentum Rebalance</h1>
+      <p class="text-sm mt-1">Run date: <span id="run-date" class="font-mono"></span></p>
+      <p class="text-xs mt-1 text-gray-600">Last updated: <span id="last-updated" class="font-mono"></span></p>
+    </header>
+
+    <main class="max-w-5xl mx-auto p-4 space-y-10">
+      <!-- Winners table -->
+      <section>
+        <h2 class="text-xl font-semibold mb-4">Top-3 Winners</h2>
+        <div class="overflow-x-auto">
+          <table class="min-w-full bg-white rounded-xl shadow">
+            <thead class="bg-slate-200 text-sm">
+              <tr>
+                <th class="py-2 px-4 text-left">Rank</th>
+                <th class="py-2 px-4 text-left">Ticker</th>
+                <th class="py-2 px-4 text-left">Country</th>
+                <th class="py-2 px-4 text-left">Segment</th>
+                <th class="py-2 px-4 text-right">Momentum</th>
+              </tr>
+            </thead>
+            <tbody id="winners-body" class="text-sm">
+              <!-- rows inserted by JS -->
+            </tbody>
+          </table>
+        </div>
+        <p class="mt-2 text-xs italic">Bond sleeve 12-m return (<span id="bond-ticker"></span>): <span id="bond-return"></span></p>
+      </section>
+
+      <!-- Historical Changes Section -->
+      <section>
+        <h2 class="text-xl font-semibold mb-4">Top 5 Changes vs Previous Month</h2>
+        <div class="bg-white rounded-xl shadow p-4">
+          <div class="flex items-center justify-between mb-4">
+            <p class="text-sm text-gray-600">
+              <span id="current-month"></span> vs <span id="previous-month"></span>
+            </p>
+            <div class="text-xs text-gray-500">
+              <span id="changes-summary"></span>
+            </div>
+          </div>
+          
+          <div id="changes-container" class="space-y-2">
+            <!-- Changes will be inserted here by JS -->
+          </div>
+          
+          <div id="no-changes-message" class="text-center text-gray-500 py-4 hidden">
+            No changes to display (first run or no previous data available)
+          </div>
+        </div>
+      </section>
+
+      <!-- Collapsible full ranking panel -->
+      <section>
+        <details class="bg-white rounded-xl shadow p-4">
+          <summary class="cursor-pointer text-lg font-medium select-none">Full ETF Ranking (click to expand)</summary>
+          <div class="overflow-x-auto mt-4">
+            <table class="min-w-full text-sm">
+              <thead class="bg-slate-200">
+                <tr>
+                  <th class="py-2 px-3 text-left">Rank</th>
+                  <th class="py-2 px-3 text-left">Ticker</th>
+                  <th class="py-2 px-3 text-left">Country</th>
+                  <th class="py-2 px-3 text-left">Segment</th>
+                  <th class="py-2 px-3 text-right">12-m Return</th>
+                  <th class="py-2 px-3 text-right">Momentum Score</th>
+                </tr>
+              </thead>
+              <tbody id="all-etfs-body"></tbody>
+            </table>
+          </div>
+        </details>
+      </section>
+
+      <!-- Trading checklist -->
+      <section>
+        <h2 class="text-xl font-semibold mb-4">Trading Checklist (IBKR desktop)</h2>
+        <ol class="list-decimal list-inside space-y-2 text-sm md:text-base">
+          <li>Log in to IBKR → <strong>Portfolio</strong> tab.</li>
+          <li>Exit any ETF <strong>not</strong> in the winners table.</li>
+          <li>Enter each winner so positions are equal-weighted (~<span id="target-eur"></span> each).</li>
+          <li>Confirm fills in <em>Trades</em> panel.</li>
+          <li>Sweep leftover cash &gt; €50 into Flex USD or leave idle.</li>
+        </ol>
+      </section>
+
+      <!-- Next dates -->
+      <section>
+        <h2 class="text-xl font-semibold mb-4">Next Key Dates</h2>
+        <ul class="list-disc list-inside text-sm md:text-base space-y-1">
+          <li>Next automated screen: <span id="next-date"></span></li>
+          <li>Mid-month manual check: move any holding that drops &gt;12 % into <span id="bond-ticker-next"></span>.</li>
+        </ul>
+      </section>
+    </main>
+
+    <!-- JS injection -->
+    <script>
+      // Set last updated timestamp
+      document.getElementById("last-updated").textContent = new Date().toLocaleString();
+      
+      // Create cache-busting URL with multiple parameters
+      const timestamp = Date.now();
+      const random = Math.random();
+      const cacheBuster = `?t=${timestamp}&r=${random}&v=1`;
+      
+      fetch("data.json" + cacheBuster, {
+        method: 'GET',
+        headers: {
+          'Cache-Control': 'no-cache, no-store, must-revalidate',
+          'Pragma': 'no-cache',
+          'Expires': '0'
+        }
+      })
+        .then(r => {
+          if (!r.ok) {
+            throw new Error(`HTTP error! status: ${r.status}`);
+          }
+          return r.json();
+        })
+        .then(data => {
+          console.log(`✅ Data loaded successfully at ${new Date().toLocaleString()}`);
+          console.log(`📊 Loaded ${data.allEtfs ? data.allEtfs.length : 0} tickers`);
+          
+          // === header placeholders ===
+          document.getElementById("run-date").textContent = data.run_date;
+          document.getElementById("bond-ticker").textContent = data.bond_ticker;
+          document.getElementById("bond-return").textContent = data.bond_return + "%";
+          document.getElementById("target-eur").textContent = data.target_eur;
+          document.getElementById("next-date").textContent = data.next_rebalance_date;
+          document.getElementById("bond-ticker-next").textContent = data.bond_ticker;
+
+          // === winners table ===
+          const winTbody = document.getElementById("winners-body");
+          winTbody.innerHTML = ''; // Clear existing content
+          data.winners.forEach((w) => {
+            winTbody.insertAdjacentHTML("beforeend",`
+              <tr>
+                <td class="py-2 px-4">${w.rank}</td>
+                <td class="py-2 px-4 font-mono">${w.ticker}</td>
+                <td class="py-2 px-4">${w.country}</td>
+                <td class="py-2 px-4">${w.segment}</td>
+                <td class="py-2 px-4 text-right">${w.momentum}%</td>
+              </tr>`);
+          });
+
+          // === historical changes section ===
+          if (data.historical_changes) {
+            const changes = data.historical_changes;
+            
+            // Update month labels
+            document.getElementById("current-month").textContent = changes.current_month;
+            document.getElementById("previous-month").textContent = changes.previous_month;
+            
+            // Update summary
+            const summary = changes.summary;
+            document.getElementById("changes-summary").textContent = 
+              `${summary.new_entries} new, ${summary.exits} exited, ${summary.rank_changes} rank changes`;
+            
+            // Display changes
+            const changesContainer = document.getElementById("changes-container");
+            const noChangesMessage = document.getElementById("no-changes-message");
+            
+            if (changes.changes && changes.changes.length > 0) {
+              changesContainer.innerHTML = ''; // Clear existing content
+              changes.changes.forEach((change) => {
+                let bgColor = 'bg-gray-50';
+                let borderColor = 'border-gray-200';
+                
+                if (change.type === 'new') {
+                  bgColor = 'bg-green-50';
+                  borderColor = 'border-green-200';
+                } else if (change.type === 'exit') {
+                  bgColor = 'bg-red-50';
+                  borderColor = 'border-red-200';
+                } else if (change.type === 'change') {
+                  bgColor = change.rank_change > 0 ? 'bg-blue-50' : 'bg-yellow-50';
+                  borderColor = change.rank_change > 0 ? 'border-blue-200' : 'border-yellow-200';
+                }
+                
+                changesContainer.insertAdjacentHTML("beforeend",`
+                  <div class="p-3 rounded-lg border ${bgColor} ${borderColor}">
+                    <div class="flex items-center justify-between">
+                      <div class="flex items-center space-x-3">
+                        <span class="font-mono text-sm font-medium">${change.ticker}</span>
+                        <span class="text-sm text-gray-600">${change.description}</span>
+                      </div>
+                      ${change.momentum ? `<span class="text-sm font-medium">${change.momentum}</span>` : ''}
+                    </div>
+                  </div>`);
+              });
+              noChangesMessage.classList.add('hidden');
+            } else {
+              changesContainer.innerHTML = '';
+              noChangesMessage.classList.remove('hidden');
+            }
+          }
+
+          // === full ranking table ===
+          const fullBody = document.getElementById("all-etfs-body");
+          fullBody.innerHTML = ''; // Clear existing content
+          data.allEtfs.forEach((r) => {
+            fullBody.insertAdjacentHTML("beforeend",`
+              <tr>
+                <td class="py-1 px-3">${r.rank}</td>
+                <td class="py-1 px-3 font-mono">${r.ticker}</td>
+                <td class="py-1 px-3">${r.country}</td>
+                <td class="py-1 px-3">${r.segment}</td>
+                <td class="py-1 px-3 text-right">${r.ret12}%</td>
+                <td class="py-1 px-3 text-right">${r.momentum}%</td>
+              </tr>`);
+          });
+        })
+        .catch(err => {
+          console.error("⚠️ JSON load failed:", err);
+          document.body.innerHTML = '<div class="p-8 text-center"><h1 class="text-2xl text-red-600 mb-4">Data Loading Error</h1><p class="text-gray-600">Unable to load momentum data. Please check if data.json exists and is valid.</p><p class="text-sm mt-2">Error: ' + err.message + '</p></div>';
+        });
+    </script>
+  </body>
+</html>

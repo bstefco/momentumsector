@@ -1,0 +1,68 @@
+{
+  "months": {
+    "2025-05": [
+      {
+        "ticker": "EXV2.DE",
+        "momentum": 0.15,
+        "rank": 1,
+        "return12m": 0.25
+      },
+      {
+        "ticker": "XCTE.L",
+        "momentum": 0.12,
+        "rank": 2,
+        "return12m": 0.2
+      },
+      {
+        "ticker": "KWEB",
+        "momentum": 0.1,
+        "rank": 3,
+        "return12m": 0.18
+      },
+      {
+        "ticker": "EXV8.DE",
+        "momentum": 0.08,
+        "rank": 4,
+        "return12m": 0.15
+      },
+      {
+        "ticker": "XLF",
+        "momentum": 0.06,
+        "rank": 5,
+        "return12m": 0.12
+      }
+    ],
+    "2025-06": [
+      {
+        "ticker": "EXV1.DE",
+        "momentum": 34.23230984566728,
+        "rank": 1,
+        "return12m": 48.10343231148613
+      },
+      {
+        "ticker": "EXV2.DE",
+        "momentum": 20.30776542275835,
+        "rank": 2,
+        "return12m": 36.11039235227606
+      },
+      {
+        "ticker": "XCTE.L",
+        "momentum": 19.78080241528678,
+        "rank": 3,
+        "return12m": 31.189331054687507
+      },
+      {
+        "ticker": "KWEB",
+        "momentum": 14.72100030490523,
+        "rank": 4,
+        "return12m": 20.99942068036926
+      },
+      {
+        "ticker": "EXV8.DE",
+        "momentum": 14.387809021922928,
+        "rank": 5,
+        "return12m": 18.99376778933563
+      }
+    ]
+  }
+}
