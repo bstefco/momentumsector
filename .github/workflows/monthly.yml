@@ -1,0 +1,32 @@
+name: monthly run
+
+on:
+  schedule:
+    # ───── 18:00 UTC on the 14-th of every month ─────
+    - cron: '0 18 14 * *'
+  workflow_dispatch:      # lets me trigger it manually
+
+jobs:
+  momentum:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install pandas yfinance numpy
+
+      - name: Run momentum screen
+        run: python sector_momentum_screen.py
+
+      - name: Upload results
+        uses: actions/upload-artifact@v4
+        with:
+          name: momentum_scores
+          path: momentum_scores.csv 
