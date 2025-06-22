@@ -126,6 +126,14 @@
     },
     {
       "rank": 13,
+      "ticker": "XLE",
+      "country": "US",
+      "segment": "Energy",
+      "ret12": "0.0",
+      "momentum": "11.6"
+    },
+    {
+      "rank": 14,
       "ticker": "XLY",
       "country": "US",
       "segment": "Cons. Discretionary",
@@ -133,12 +141,36 @@
       "momentum": "10.7"
     },
     {
-      "rank": 14,
+      "rank": 15,
       "ticker": "EXV9.DE",
       "country": "EU",
       "segment": "Real Estate",
       "ret12": "8.9",
       "momentum": "2.7"
+    },
+    {
+      "rank": 16,
+      "ticker": "EXV7.DE",
+      "country": "EU",
+      "segment": "Industrials",
+      "ret12": "0.1",
+      "momentum": "2.5"
+    },
+    {
+      "rank": 17,
+      "ticker": "XLB",
+      "country": "US",
+      "segment": "Materials",
+      "ret12": "-0.7",
+      "momentum": "1.9"
+    },
+    {
+      "rank": 18,
+      "ticker": "JPJP.L",
+      "country": "N/A",
+      "segment": "N/A",
+      "ret12": "1.0",
+      "momentum": "0.7"
     }
   ]
 }
