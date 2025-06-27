@@ -1,132 +1,132 @@
 [
   {
     "Ticker":"CDIS.L",
-    "MomentumScore":-0.0295247259,
-    "Return12m":-0.0502860892
+    "MomentumScore":-0.0195159967,
+    "Return12m":-0.0388120696
   },
   {
     "Ticker":"EXV1.DE",
-    "MomentumScore":0.3442577425,
-    "Return12m":0.5142734844
+    "MomentumScore":0.3262274398,
+    "Return12m":0.4843903452
   },
   {
     "Ticker":"EXV2.DE",
-    "MomentumScore":0.2033717141,
-    "Return12m":0.3674069684
+    "MomentumScore":0.1923034252,
+    "Return12m":0.3375608026
   },
   {
     "Ticker":"EXV3.DE",
-    "MomentumScore":0.0045054708,
-    "Return12m":-0.0511832117
+    "MomentumScore":0.0124896197,
+    "Return12m":-0.0438017343
   },
   {
     "Ticker":"EXV4.DE",
-    "MomentumScore":-0.0818454036,
-    "Return12m":-0.1001130875
+    "MomentumScore":-0.074950492,
+    "Return12m":-0.1125183153
   },
   {
     "Ticker":"EXV5.DE",
-    "MomentumScore":-0.0270099376,
-    "Return12m":-0.1095302154
+    "MomentumScore":-0.0219166892,
+    "Return12m":-0.1074210178
   },
   {
     "Ticker":"EXV6.DE",
-    "MomentumScore":-0.0533292232,
-    "Return12m":-0.1061267575
+    "MomentumScore":-0.0794075244,
+    "Return12m":-0.1388809879
   },
   {
     "Ticker":"EXV7.DE",
-    "MomentumScore":0.0403321714,
-    "Return12m":0.0408773862
+    "MomentumScore":0.0363833868,
+    "Return12m":0.0298247911
   },
   {
     "Ticker":"EXV8.DE",
-    "MomentumScore":0.1569167729,
-    "Return12m":0.2390070434
+    "MomentumScore":0.1419361405,
+    "Return12m":0.2100815423
   },
   {
     "Ticker":"EXV9.DE",
-    "MomentumScore":0.0443686907,
-    "Return12m":0.1253693889
+    "MomentumScore":0.0430699272,
+    "Return12m":0.1181221406
   },
   {
     "Ticker":"JPJP.L",
-    "MomentumScore":0.0190695898,
-    "Return12m":0.0507070718
+    "MomentumScore":0.0324563183,
+    "Return12m":0.0644412706
   },
   {
     "Ticker":"KWEB",
-    "MomentumScore":0.1613114915,
-    "Return12m":0.2103588536
+    "MomentumScore":0.1300183304,
+    "Return12m":0.1934882952
   },
   {
     "Ticker":"SUAG.L",
-    "MomentumScore":-0.0553396733,
-    "Return12m":-0.0502732063
+    "MomentumScore":-0.039348649,
+    "Return12m":-0.0275361024
   },
   {
     "Ticker":"XCTE.L",
-    "MomentumScore":0.1813805131,
-    "Return12m":0.2897325812
+    "MomentumScore":0.1452990391,
+    "Return12m":0.2403420391
   },
   {
     "Ticker":"XLB",
-    "MomentumScore":-0.0236503435,
-    "Return12m":-0.0254562574
+    "MomentumScore":-0.023114021,
+    "Return12m":-0.0208386257
   },
   {
     "Ticker":"XLC",
-    "MomentumScore":0.0990610898,
-    "Return12m":0.1986364778
+    "MomentumScore":0.1131137542,
+    "Return12m":0.2251446543
   },
   {
     "Ticker":"XLE",
-    "MomentumScore":-0.0521823038,
-    "Return12m":-0.0406094235
+    "MomentumScore":-0.0628230221,
+    "Return12m":-0.0485758445
   },
   {
     "Ticker":"XLF",
-    "MomentumScore":0.1033665412,
-    "Return12m":0.2394400162
+    "MomentumScore":0.1055668546,
+    "Return12m":0.2449197718
   },
   {
     "Ticker":"XLI",
-    "MomentumScore":0.0917195736,
-    "Return12m":0.1668192701
+    "MomentumScore":0.0980299013,
+    "Return12m":0.1751523116
   },
   {
     "Ticker":"XLK",
-    "MomentumScore":0.0126356567,
-    "Return12m":-0.0118152327
+    "MomentumScore":0.0280485659,
+    "Return12m":0.006223173
   },
   {
     "Ticker":"XLP",
-    "MomentumScore":0.0328285022,
-    "Return12m":0.0777710183
+    "MomentumScore":0.036529376,
+    "Return12m":0.0787597165
   },
   {
     "Ticker":"XLRE",
-    "MomentumScore":0.0020599406,
-    "Return12m":0.0971215228
+    "MomentumScore":0.020288795,
+    "Return12m":0.1108619202
   },
   {
     "Ticker":"XLU",
-    "MomentumScore":0.0979261386,
-    "Return12m":0.2077141255
+    "MomentumScore":0.0911146891,
+    "Return12m":0.1992976822
   },
   {
     "Ticker":"XLV",
-    "MomentumScore":-0.1001250465,
-    "Return12m":-0.0911695671
+    "MomentumScore":-0.0904342621,
+    "Return12m":-0.0844143615
   },
   {
     "Ticker":"XLY",
-    "MomentumScore":0.0564930346,
-    "Return12m":0.1711837077
+    "MomentumScore":0.0741127973,
+    "Return12m":0.1987317029
   },
   {
     "Ticker":"SUAG.L",
-    "MomentumScore":-0.0553396733,
-    "Return12m":-0.0502732063
+    "MomentumScore":-0.0393486225,
+    "Return12m":-0.0275359965
   }
 ]
