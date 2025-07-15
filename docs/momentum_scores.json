@@ -1,132 +1,137 @@
 [
   {
-    "Ticker": "CDIS.L",
-    "MomentumScore": -0.041182279,
-    "Return12m": -0.0771885317
+    "Ticker":"CDIS.L",
+    "MomentumScore":-0.041182279,
+    "Return12m":-0.0771885317
   },
   {
-    "Ticker": "EXV1.DE",
-    "MomentumScore": 0.3329311475,
-    "Return12m": 0.4250650149
+    "Ticker":"EXH1.DE",
+    "MomentumScore":0.0931349037,
+    "Return12m":0.0182563973
   },
   {
-    "Ticker": "EXV2.DE",
-    "MomentumScore": 0.1516581451,
-    "Return12m": 0.261733984
+    "Ticker":"EXV1.DE",
+    "MomentumScore":0.3329311475,
+    "Return12m":0.4250650149
   },
   {
-    "Ticker": "EXV3.DE",
-    "MomentumScore": 0.0315168908,
-    "Return12m": -0.073062699
+    "Ticker":"EXV2.DE",
+    "MomentumScore":0.1516581451,
+    "Return12m":0.261733984
   },
   {
-    "Ticker": "EXV4.DE",
-    "MomentumScore": -0.0151056579,
-    "Return12m": -0.0800354415
+    "Ticker":"EXV3.DE",
+    "MomentumScore":0.0315168704,
+    "Return12m":-0.0730627806
   },
   {
-    "Ticker": "EXV5.DE",
-    "MomentumScore": -0.0217891154,
-    "Return12m": -0.1519210913
+    "Ticker":"EXV4.DE",
+    "MomentumScore":-0.0151056559,
+    "Return12m":-0.0800354415
   },
   {
-    "Ticker": "EXV6.DE",
-    "MomentumScore": -0.076031762,
-    "Return12m": -0.1656338897
+    "Ticker":"EXV5.DE",
+    "MomentumScore":-0.0217891154,
+    "Return12m":-0.1519210913
   },
   {
-    "Ticker": "EXV7.DE",
-    "MomentumScore": 0.0471472222,
-    "Return12m": 0.0171142827
+    "Ticker":"EXV6.DE",
+    "MomentumScore":-0.0760317346,
+    "Return12m":-0.1656338355
   },
   {
-    "Ticker": "EXV8.DE",
-    "MomentumScore": 0.1534575473,
-    "Return12m": 0.179598293
+    "Ticker":"EXV7.DE",
+    "MomentumScore":0.0471472555,
+    "Return12m":0.0171143449
   },
   {
-    "Ticker": "EXV9.DE",
-    "MomentumScore": 0.0465771723,
-    "Return12m": 0.0651234504
+    "Ticker":"EXV8.DE",
+    "MomentumScore":0.1534575473,
+    "Return12m":0.179598293
   },
   {
-    "Ticker": "JPJP.L",
-    "MomentumScore": 0.0337173895,
-    "Return12m": 0.0123731581
+    "Ticker":"EXV9.DE",
+    "MomentumScore":0.0465771959,
+    "Return12m":0.0651235451
   },
   {
-    "Ticker": "KWEB",
-    "MomentumScore": 0.1245629643,
-    "Return12m": 0.2741777987
+    "Ticker":"JPJP.L",
+    "MomentumScore":0.0337173895,
+    "Return12m":0.0123731581
   },
   {
-    "Ticker": "SUAG.L",
-    "MomentumScore": -0.0457319613,
-    "Return12m": -0.0425777578
+    "Ticker":"KWEB",
+    "MomentumScore":0.1245629643,
+    "Return12m":0.2741777987
   },
   {
-    "Ticker": "XCTE.L",
-    "MomentumScore": 0.1300163158,
-    "Return12m": 0.3289561246
+    "Ticker":"SUAG.L",
+    "MomentumScore":-0.0457319613,
+    "Return12m":-0.0425777578
   },
   {
-    "Ticker": "XLB",
-    "MomentumScore": 0.016814755,
-    "Return12m": 0.0085130893
+    "Ticker":"XCTE.L",
+    "MomentumScore":0.1300163158,
+    "Return12m":0.3289561246
   },
   {
-    "Ticker": "XLC",
-    "MomentumScore": 0.1277878015,
-    "Return12m": 0.1789439386
+    "Ticker":"XLB",
+    "MomentumScore":0.016814755,
+    "Return12m":0.0085130893
   },
   {
-    "Ticker": "XLE",
-    "MomentumScore": 0.0211765194,
-    "Return12m": 0.0019017676
+    "Ticker":"XLC",
+    "MomentumScore":0.1277877768,
+    "Return12m":0.1789439386
   },
   {
-    "Ticker": "XLF",
-    "MomentumScore": 0.1094836302,
-    "Return12m": 0.2166087444
+    "Ticker":"XLE",
+    "MomentumScore":0.0211764991,
+    "Return12m":0.0019018552
   },
   {
-    "Ticker": "XLI",
-    "MomentumScore": 0.1166110971,
-    "Return12m": 0.190192232
+    "Ticker":"XLF",
+    "MomentumScore":0.1094836063,
+    "Return12m":0.2166087444
   },
   {
-    "Ticker": "XLK",
-    "MomentumScore": 0.0837891428,
-    "Return12m": 0.0323494761
+    "Ticker":"XLI",
+    "MomentumScore":0.1166110971,
+    "Return12m":0.190192232
   },
   {
-    "Ticker": "XLP",
-    "MomentumScore": 0.0353778151,
-    "Return12m": 0.0654198663
+    "Ticker":"XLK",
+    "MomentumScore":0.0837891598,
+    "Return12m":0.0323495442
   },
   {
-    "Ticker": "XLRE",
-    "MomentumScore": 0.0582683675,
-    "Return12m": 0.1203702665
+    "Ticker":"XLP",
+    "MomentumScore":0.035377842,
+    "Return12m":0.065419974
   },
   {
-    "Ticker": "XLU",
-    "MomentumScore": 0.1001528389,
-    "Return12m": 0.214259322
+    "Ticker":"XLRE",
+    "MomentumScore":0.0582683899,
+    "Return12m":0.1203702665
   },
   {
-    "Ticker": "XLV",
-    "MomentumScore": -0.042211617,
-    "Return12m": -0.0458596257
+    "Ticker":"XLU",
+    "MomentumScore":0.1001528389,
+    "Return12m":0.214259322
   },
   {
-    "Ticker": "XLY",
-    "MomentumScore": 0.0711509551,
-    "Return12m": 0.1260651434
+    "Ticker":"XLV",
+    "MomentumScore":-0.042211617,
+    "Return12m":-0.0458596257
   },
   {
-    "Ticker": "SUAG.L",
-    "MomentumScore": -0.0457319613,
-    "Return12m": -0.0425777578
+    "Ticker":"XLY",
+    "MomentumScore":0.0711509336,
+    "Return12m":0.1260651434
+  },
+  {
+    "Ticker":"SUAG.L",
+    "MomentumScore":-0.0457319613,
+    "Return12m":-0.0425777578
   }
 ]
