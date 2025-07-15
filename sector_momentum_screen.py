@@ -45,9 +45,9 @@ UNIVERSE: Dict[str, str] = {
     "CDIS.L":  "EU Consumer Discretionary",   # SPDR MSCI Europe Cons-Disc (London)
     "EXV5.DE": "EU Utilities",
     "EXV8.DE": "EU Materials",
-    "EXV2.DE": "EU Communication Services",  # správny label pre EXV2
-    "EXV0.DE": "EU Oil & Gas",               # správny label pre EXV0
+    "EXH1.DE": "EU Oil & Gas",                # <-- changed from EXV0.DE or EXV2.DE
     "EXV9.DE": "EU Real Estate",
+    "EXV2.DE": "EU Communication Services",   # <-- ensure correct sector
 
     # ---------- Asia proxies ----------
     "XCTE.L": "China Technology",
