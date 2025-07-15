@@ -45,9 +45,9 @@ UNIVERSE: Dict[str, str] = {
     "CDIS.L":  "EU Consumer Discretionary",   # SPDR MSCI Europe Cons-Disc (London)
     "EXV5.DE": "EU Utilities",
     "EXV8.DE": "EU Materials",
-    "EXV2.DE": "EU Energy",
+    "EXV2.DE": "EU Communication Services",  # správny label pre EXV2
+    "EXV0.DE": "EU Oil & Gas",               # správny label pre EXV0
     "EXV9.DE": "EU Real Estate",
-    # "EXV0.DE": "EU Communication Services",  # Delisted - no data available
 
     # ---------- Asia proxies ----------
     "XCTE.L": "China Technology",

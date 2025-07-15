@@ -26,9 +26,9 @@ UNIVERSE_DETAILS = {
     "CDIS.L":  {"country": "EU", "segment": "Consumer Discretionary"},
     "EXV5.DE": {"country": "EU", "segment": "Utilities"},
     "EXV8.DE": {"country": "EU", "segment": "Materials"},
-    "EXV2.DE": {"country": "EU", "segment": "Energy"},
+    "EXV2.DE": {"country": "EU", "segment": "Communication Services"},  # správny label pre EXV2
+    "EXV0.DE": {"country": "EU", "segment": "Oil & Gas"},               # správny label pre EXV0
     "EXV9.DE": {"country": "EU", "segment": "Real Estate"},
-    "EXV0.DE": {"country": "EU", "segment": "Communication Services"},
     # Country Specific
     "KWEB": {"country": "CN", "segment": "Internet"},
     "FXI": {"country": "CN", "segment": "Large Cap"},
