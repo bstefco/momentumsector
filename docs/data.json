@@ -1,7 +1,7 @@
 {
-  "run_date": "2025-07-14",
+  "run_date": "2025-07-15",
   "bond_ticker": "SUAG.L",
-  "bond_return": "-1.79",
+  "bond_return": "-3.59",
   "target_eur": "1,650",
   "next_rebalance_date": "2025-08-14",
   "winners": [
@@ -227,21 +227,21 @@
     "changes": [
       {
         "type": "change",
+        "ticker": "XCTE.L",
+        "current_rank": 5,
+        "previous_rank": 3,
+        "rank_change": -2,
+        "momentum_change": "+0.8%",
+        "description": "\u2198\ufe0f Rank 3 \u2192 5 (+0.8%)"
+      },
+      {
+        "type": "change",
         "ticker": "KWEB",
         "current_rank": 4,
         "previous_rank": 5,
         "rank_change": 1,
         "momentum_change": "+2.7%",
         "description": "\u2197\ufe0f Rank 5 \u2192 4 (+2.7%)"
-      },
-      {
-        "type": "change",
-        "ticker": "EXV2.DE",
-        "current_rank": 3,
-        "previous_rank": 2,
-        "rank_change": -1,
-        "momentum_change": "-2.9%",
-        "description": "\u2198\ufe0f Rank 2 \u2192 3 (-2.9%)"
       },
       {
         "type": "change",
@@ -254,12 +254,12 @@
       },
       {
         "type": "change",
-        "ticker": "XCTE.L",
-        "current_rank": 5,
-        "previous_rank": 3,
-        "rank_change": -2,
-        "momentum_change": "+0.8%",
-        "description": "\u2198\ufe0f Rank 3 \u2192 5 (+0.8%)"
+        "ticker": "EXV2.DE",
+        "current_rank": 3,
+        "previous_rank": 2,
+        "rank_change": -1,
+        "momentum_change": "-2.9%",
+        "description": "\u2198\ufe0f Rank 2 \u2192 3 (-2.9%)"
       }
     ],
     "summary": {
