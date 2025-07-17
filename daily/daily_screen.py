@@ -4,6 +4,8 @@ import yfinance as yf
 import pandas_ta as ta
 from rulebook import RULES
 
+os.makedirs(os.path.join("..", "docs"), exist_ok=True)
+
 # Output paths
 HTML_PATH = os.path.join("..", "docs", "daily_screen.html")
 CSV_PATH = os.path.join("..", "docs", "daily_screen.csv")
