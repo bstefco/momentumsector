@@ -66,3 +66,6 @@ print(results_df)
 
 print("Writing CSV to", CSV_PATH)
 results_df.to_csv(CSV_PATH, index=False)
+
+print("Writing HTML to", HTML_PATH)
+results_df.to_html(HTML_PATH, index=False)
