@@ -27,6 +27,9 @@ jobs:
       - name: Run daily_screen.py
         run: python daily/daily_screen.py
 
+      - name: List docs directory
+        run: ls -l docs/
+
       - name: Commit and push results
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
