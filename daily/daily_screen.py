@@ -62,8 +62,8 @@ for ticker, params in RULES.items():
 # Create DataFrame
 results_df = pd.DataFrame(results)
 
-# Write to CSV
-results_df.to_csv(CSV_PATH, index=False)
+print("Results DataFrame:")
+print(results_df)
 
-# Write to HTML (no index)
-results_df.to_html(HTML_PATH, index=False) 
+print("Writing CSV to", CSV_PATH)
+results_df.to_csv(CSV_PATH, index=False)
