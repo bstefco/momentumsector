@@ -1,0 +1,39 @@
+name: Daily Screen
+
+on:
+  schedule:
+    - cron: '5 19 * * 1-5' # 21:05 CET (19:05 UTC) on weekdays
+  workflow_dispatch:
+
+jobs:
+  daily-screen:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r daily/requirements.txt
+
+      - name: Run daily_screen.py
+        run: python daily/daily_screen.py
+
+      - name: Commit and push results
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: 'Update daily_screen results [auto]'
+          file_pattern: 'docs/daily_screen.*'
+
+      - name: Send daily email
+        env:
+          EMAIL_PASSWORD: ${{ secrets.Email }}
+        run: python3 daily/generate_daily_email.py 
