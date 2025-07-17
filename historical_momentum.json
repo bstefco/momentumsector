@@ -67,33 +67,33 @@
     "2025-07": [
       {
         "ticker": "EXV1.DE",
-        "momentum": 33.29311474512579,
+        "momentum": 31.85650565657975,
         "rank": 1,
-        "return12m": 42.50650148516917
+        "return12m": 44.09203222692497
       },
       {
-        "ticker": "EXV8.DE",
-        "momentum": 15.34575472927452,
+        "ticker": "KWEB",
+        "momentum": 16.30795160616408,
         "rank": 2,
-        "return12m": 17.959829298348758
-      },
-      {
-        "ticker": "EXV2.DE",
-        "momentum": 15.165814508001299,
-        "rank": 3,
-        "return12m": 26.1733983983762
+        "return12m": 26.820091232960653
       },
       {
         "ticker": "XCTE.L",
-        "momentum": 13.00163157634437,
-        "rank": 4,
-        "return12m": 32.89561246140091
+        "momentum": 15.68103004142079,
+        "rank": 3,
+        "return12m": 32.2106963170647
       },
       {
-        "ticker": "XLC",
-        "momentum": 12.778777679018399,
+        "ticker": "EXV8.DE",
+        "momentum": 15.08036296152413,
+        "rank": 4,
+        "return12m": 19.65081678642237
+      },
+      {
+        "ticker": "EXV2.DE",
+        "momentum": 14.07238055091681,
         "rank": 5,
-        "return12m": 17.89439385931457
+        "return12m": 26.724345178470486
       }
     ]
   }
