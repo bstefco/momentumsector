@@ -49,19 +49,25 @@ for ticker, rule in RULES.items():
     sma_len = rule["sma"]
     rsi_cut = rule["rsi"]
     sma = df.Close.rolling(sma_len).mean().iloc[-1]
-    rsi = ta.rsi(df.Close, length=14).iloc[-1]
+    rsi_series = ta.rsi(df.Close, length=14)
+    rsi = rsi_series.iloc[-1] if rsi_series is not None else None
 
-    if pd.isna(sma) or pd.isna(rsi):
+    if pd.isna(sma) or sma is None or pd.isna(rsi) or rsi is None:
         signal = "SKIP"
-    elif close < sma:
-        signal = "EXIT"
-    elif rsi <= rsi_cut:
-        signal = "BUY"
+        sma_out = None
+        rsi_out = None
     else:
-        signal = "HOLD"
+        sma_out = round(sma, 2)
+        rsi_out = round(rsi, 1)
+        if close < sma:
+            signal = "EXIT"
+        elif rsi <= rsi_cut:
+            signal = "BUY"
+        else:
+            signal = "HOLD"
 
     records.append([
-        ticker, name, close, round(sma, 2), round(rsi, 1), val_flag, signal
+        ticker, name, close, sma_out, rsi_out, val_flag, signal
     ])
 
 cols = ["Ticker", "Name", "Close", "SMA", "RSI", "Valuation", "Signal"]
