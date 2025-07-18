@@ -83,13 +83,6 @@ for ticker, rule in RULES.items():
 cols = ["Ticker", "Name", "Close", "SMA", "RSI", "Valuation", "Signal"]
 table = pd.DataFrame(records, columns=cols).sort_values("Ticker")
 
-table.to_html(
-    f"{DOC_PATH}.html",
-    index=False,
-    justify="center",
-    border=0,
-    classes="datatable",
-)
 table.to_csv(f"{DOC_PATH}.csv", index=False)
 
 print("✅ daily screen updated", date.today())
