@@ -33,7 +33,7 @@ for ticker, rule in RULES.items():
         records.append([ticker, "—", "—", "—", "NoPrice", "SKIP"])
         continue
 
-    close = float(hist.iloc[-1])  # scalar
+    close = float(hist.iloc[-1].item())  # scalar
     name  = yf.Ticker(ticker).info.get("shortName", "—")
 
     # -------------------------------------------------
@@ -51,7 +51,7 @@ for ticker, rule in RULES.items():
     # -------------------------------------------------
     sma_len, rsi_cut = rule["sma"], rule["rsi"]
 
-    sma_val = float(hist.tail(sma_len).mean()) if len(hist) >= sma_len else None
+    sma_val = float(hist.tail(sma_len).mean().item()) if len(hist) >= sma_len else None
 
     # Manual RSI calculation with Wilder's smoothing (EMA, alpha=1/14)
     if len(hist) >= 14:
@@ -63,7 +63,7 @@ for ticker, rule in RULES.items():
         rs = avg_gain / avg_loss
         rsi_series = 100 - (100 / (1 + rs))
         rsi_series = rsi_series.ffill()  # Forward-fill any NaNs
-        rsi_val = float(rsi_series.dropna().iloc[-1]) if not rsi_series.dropna().empty else None
+        rsi_val = float(rsi_series.dropna().iloc[-1].item()) if not rsi_series.dropna().empty else None
     else:
         rsi_val = None
 
