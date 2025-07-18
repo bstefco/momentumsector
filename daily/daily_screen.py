@@ -30,7 +30,12 @@ for ticker, rule in RULES.items():
         continue
 
     close_val = df.Close.iloc[-1]
-    close = round(float(close_val), 2) if pd.notna(close_val) else None
+    if isinstance(close_val, pd.Series):
+        close_val = close_val.item()
+    if close_val is None or pd.isna(close_val):
+        close = None
+    else:
+        close = round(float(close_val), 2)
     fast = yf.Ticker(ticker).fast_info or {}
     pe = fast.get("forwardPE") or fast.get("trailingPE")
     ev_ebitda = fast.get("enterpriseToEbitda")
