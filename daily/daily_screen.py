@@ -52,31 +52,15 @@ for ticker, rule in RULES.items():
         records.append([ticker, name, close, None, None, val_flag, "SKIP"])
         continue
 
-    sma_len = rule["sma"]
-    rsi_cut = rule["rsi"]
-    sma = df.Close.rolling(sma_len).mean().iloc[-1]
-    rsi_series = ta.rsi(df.Close, length=14)
-    rsi = rsi_series.iloc[-1] if rsi_series is not None else None
+    # ---------- 3. TECHNICALS ----------
+    sma_len, rsi_cut = rule["sma"], rule["rsi"]
+    prices = df['Close'].dropna()
+    sma_val = prices.rolling(sma_len).mean().iloc[-1]
+    rsi_val = ta.rsi(prices, length=14).iloc[-1]
 
-    # Ensure sma and rsi are scalars
-    if sma is not None and hasattr(sma, 'item'):
-        sma_val = sma.item()
-    else:
-        sma_val = sma if isinstance(sma, (float, int)) else None
-    if rsi is not None and hasattr(rsi, 'item'):
-        rsi_val = rsi.item()
-    else:
-        rsi_val = rsi if isinstance(rsi, (float, int)) else None
-
-    if close is None or sma_val is None or rsi_val is None or pd.isna(sma_val) or pd.isna(rsi_val):
+    if pd.isna(sma_val) or pd.isna(rsi_val):
         signal = "SKIP"
-        sma_out = None
-        rsi_out = None
-        close_out = None
     else:
-        sma_out = round(sma_val, 2)
-        rsi_out = round(rsi_val, 1)
-        close_out = close
         if close < sma_val:
             signal = "EXIT"
         elif rsi_val <= rsi_cut:
@@ -85,7 +69,13 @@ for ticker, rule in RULES.items():
             signal = "HOLD"
 
     records.append([
-        ticker, name, close_out, sma_out, rsi_out, val_flag, signal
+        ticker,
+        name,
+        round(close, 2) if close is not None else None,
+        round(float(sma_val), 2) if not pd.isna(sma_val) else None,
+        round(float(rsi_val), 1) if not pd.isna(rsi_val) else None,
+        val_flag,
+        signal
     ])
 
 cols = ["Ticker", "Name", "Close", "SMA", "RSI", "Valuation", "Signal"]
