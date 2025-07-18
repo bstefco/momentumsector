@@ -45,17 +45,15 @@ for ticker, rule in RULES.items():
     # 3-d. Technical indicators -------------------------------------------
     sma_len, rsi_cut = rule["sma"], rule["rsi"]
 
-    # --- SMA: mean of last `sma_len` valid closes
+    # SMA: average of the last `sma_len` valid closes
     sma_val = float(df.tail(sma_len).mean()) if len(df) >= sma_len else None
 
-    # --- RSI: pandas_ta with extra ffill to kill NaNs
-    rsi_raw = ta.rsi(df, length=14, fillna=True)
-    if rsi_raw is not None:
-        rsi_series = rsi_raw.ffill()
-        rsi_val = float(rsi_series.iloc[-1]) if not pd.isna(rsi_series.iloc[-1]) else None
-    else:
-        rsi_val = None
+    # RSI: take the last *valid* value only
+    rsi_series = ta.rsi(df, length=14, fillna=False)
+    rsi_series = rsi_series.dropna()
+    rsi_val = float(rsi_series.iloc[-1]) if not rsi_series.empty else None
 
+    # Signal logic
     if sma_val is None or rsi_val is None:
         signal = "SKIP"
     elif close < sma_val:
