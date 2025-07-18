@@ -1,17 +1,17 @@
 Ticker,Name,Close,SMA,RSI,Valuation,Signal
-BYD,Boyd Gaming Corporation,81.99,76.67,58.3,Pass,HOLD
-CEG,Constellation Energy Corporatio,318.9200134277344,—,—,Fail,SKIP
-D,"Dominion Energy, Inc.",57.99,55.83,60.4,Pass,HOLD
-EOSE,"Eos Energy Enterprises, Inc.",6.16,4.63,67.0,Pass,HOLD
-GWH,"ESS Tech, Inc.",1.71,1.32,56.9,Pass,HOLD
-INTC,Intel Corporation,23.25,21.55,57.7,Pass,HOLD
-LEU,Centrus Energy Corp.,239.7030029296875,—,—,Fail,SKIP
-NEE,"NextEra Energy, Inc.",75.31,71.75,60.7,Pass,HOLD
-NTLA,"Intellia Therapeutics, Inc.",12.34,9.99,67.6,Pass,HOLD
-OKLO,Oklo Inc.,66.86,58.02,66.1,Pass,HOLD
-SANA,"Sana Biotechnology, Inc.",4.58,3.22,82.3,Pass,HOLD
-SMR,NuScale Power Corporation,47.38,38.73,70.7,Pass,HOLD
+BYD,Boyd Gaming Corporation,82.38,76.68,59.8,Pass,HOLD
+CEG,Constellation Energy Corporatio,322.1382141113281,—,—,Fail,SKIP
+D,"Dominion Energy, Inc.",58.01,55.84,60.5,Pass,HOLD
+EOSE,"Eos Energy Enterprises, Inc.",5.83,4.62,63.9,Pass,HOLD
+GWH,"ESS Tech, Inc.",1.58,1.32,53.0,Pass,HOLD
+INTC,Intel Corporation,23.23,21.55,57.5,Pass,HOLD
+LEU,Centrus Energy Corp.,247.27999877929688,—,—,Fail,SKIP
+NEE,"NextEra Energy, Inc.",75.91,71.76,62.7,Pass,HOLD
+NTLA,"Intellia Therapeutics, Inc.",11.93,9.98,65.0,Pass,HOLD
+OKLO,Oklo Inc.,67.67,58.05,67.3,Pass,HOLD
+SANA,"Sana Biotechnology, Inc.",4.57,3.22,82.2,Pass,HOLD
+SMR,NuScale Power Corporation,50.48,38.83,74.2,Pass,HOLD
 STOR,—,—,—,NoPrice,SKIP,
-TMC,TMC the metals company Inc.,7.7,6.21,63.9,Pass,HOLD
-URNM,Sprott Uranium Miners ETF,49.06,45.86,66.0,Pass,HOLD
-WIX,Wix.com Ltd.,152.63,156.72,43.8,Pass,EXIT
+TMC,TMC the metals company Inc.,7.64,6.21,63.0,Pass,HOLD
+URNM,Sprott Uranium Miners ETF,49.26,45.87,66.9,Pass,HOLD
+WIX,Wix.com Ltd.,155.1,156.8,47.1,Pass,EXIT
