@@ -30,8 +30,15 @@ for ticker, rule in RULES.items():
         continue
 
     prices = df['Close'].dropna()
-    close_val = prices.iloc[-1] if not prices.empty else None
-    close = round(float(close_val), 2) if close_val is not None and not pd.isna(close_val) else None
+    if not prices.empty:
+        close_val = prices.iloc[-1]
+        if isinstance(close_val, pd.Series):
+            close_val = close_val.item()
+        if hasattr(close_val, 'item'):
+            close_val = close_val.item()
+        close = round(float(close_val), 2) if close_val is not None and not pd.isna(close_val) else None
+    else:
+        close = None
     fast = yf.Ticker(ticker).fast_info or {}
     pe = fast.get("forwardPE") or fast.get("trailingPE")
     ev_ebitda = fast.get("enterpriseToEbitda")
@@ -51,8 +58,15 @@ for ticker, rule in RULES.items():
     # ---------- 3. TECHNICALS ----------
     sma_len, rsi_cut = rule["sma"], rule["rsi"]
     prices = df['Close'].dropna()
-    close_val = prices.iloc[-1] if not prices.empty else None
-    close = round(float(close_val), 2) if close_val is not None and not pd.isna(close_val) else None
+    if not prices.empty:
+        close_val = prices.iloc[-1]
+        if isinstance(close_val, pd.Series):
+            close_val = close_val.item()
+        if hasattr(close_val, 'item'):
+            close_val = close_val.item()
+        close = round(float(close_val), 2) if close_val is not None and not pd.isna(close_val) else None
+    else:
+        close = None
     sma_val = prices.rolling(sma_len).mean().iloc[-1]
     rsi_series = ta.rsi(prices, length=14)
     rsi_val = rsi_series.iloc[-1] if rsi_series is not None else None
