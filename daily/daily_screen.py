@@ -49,8 +49,12 @@ for ticker, rule in RULES.items():
     sma_val = float(df.tail(sma_len).mean()) if len(df) >= sma_len else None
 
     # --- RSI: pandas_ta with extra ffill to kill NaNs
-    rsi_series = ta.rsi(df, length=14, fillna=True).ffill()
-    rsi_val = float(rsi_series.iloc[-1]) if not pd.isna(rsi_series.iloc[-1]) else None
+    rsi_raw = ta.rsi(df, length=14, fillna=True)
+    if rsi_raw is not None:
+        rsi_series = rsi_raw.ffill()
+        rsi_val = float(rsi_series.iloc[-1]) if not pd.isna(rsi_series.iloc[-1]) else None
+    else:
+        rsi_val = None
 
     if sma_val is None or rsi_val is None:
         signal = "SKIP"
