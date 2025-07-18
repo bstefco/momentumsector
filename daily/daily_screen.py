@@ -36,17 +36,22 @@ for ticker, rule in RULES.items():
     # technicals --------------------
     sma_len, rsi_cut = rule["sma"], rule["rsi"]
     sma_series = prices.rolling(sma_len).mean()
+    if sma_series is not None and not sma_series.empty:
+        sma_last = sma_series.iloc[-1]
+        if isinstance(sma_last, pd.Series):
+            sma_last = sma_last.item()
+        sma_val = float(sma_last) if pd.notna(sma_last) else None
+    else:
+        sma_val = None
+
     rsi_series = ta.rsi(prices, length=14)
-
-    sma_last = sma_series.iloc[-1]
-    if isinstance(sma_last, pd.Series):
-        sma_last = sma_last.item()
-    sma_val = float(sma_last) if pd.notna(sma_last) else None
-
-    rsi_last = rsi_series.iloc[-1]
-    if isinstance(rsi_last, pd.Series):
-        rsi_last = rsi_last.item()
-    rsi_val = float(rsi_last) if pd.notna(rsi_last) else None
+    if rsi_series is not None and not rsi_series.empty:
+        rsi_last = rsi_series.iloc[-1]
+        if isinstance(rsi_last, pd.Series):
+            rsi_last = rsi_last.item()
+        rsi_val = float(rsi_last) if pd.notna(rsi_last) else None
+    else:
+        rsi_val = None
 
     if sma_val is None or rsi_val is None:
         signal = "SKIP"
