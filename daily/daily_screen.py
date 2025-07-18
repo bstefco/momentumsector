@@ -1,4 +1,4 @@
-import pandas as pd, yfinance as yf, pandas_ta as ta, pathlib, sys
+import pandas as pd, yfinance as yf, pathlib, sys
 from datetime import date
 
 # ensure rulebook import works no matter where script is run
@@ -53,10 +53,19 @@ for ticker, rule in RULES.items():
 
     sma_val = float(hist.tail(sma_len).mean()) if len(hist) >= sma_len else None
 
-    rsi_series = ta.rsi(hist, length=14, fillna=True)
-    rsi_val = None
-    if rsi_series is not None and not rsi_series.dropna().empty:
-        rsi_val = float(rsi_series.dropna().iloc[-1])
+    # Manual RSI calculation with Wilder's smoothing (EMA, alpha=1/14)
+    if len(hist) >= 14:
+        delta = hist.diff()
+        gain = delta.clip(lower=0)
+        loss = -delta.clip(upper=0)
+        avg_gain = gain.ewm(alpha=1/14, min_periods=14, adjust=False).mean()
+        avg_loss = loss.ewm(alpha=1/14, min_periods=14, adjust=False).mean()
+        rs = avg_gain / avg_loss
+        rsi_series = 100 - (100 / (1 + rs))
+        rsi_series = rsi_series.ffill()  # Forward-fill any NaNs
+        rsi_val = float(rsi_series.dropna().iloc[-1]) if not rsi_series.dropna().empty else None
+    else:
+        rsi_val = None
 
     if sma_val is None or rsi_val is None:
         signal = "SKIP"
@@ -70,8 +79,8 @@ for ticker, rule in RULES.items():
     records.append([
         ticker, name,
         round(close, 2),
-        round(sma_val, 2) if sma_val else "—",
-        round(rsi_val, 1) if rsi_val else "—",
+        round(sma_val, 2) if sma_val is not None else "—",
+        round(rsi_val, 1) if rsi_val is not None else "—",
         val_flag,
         signal
     ])
