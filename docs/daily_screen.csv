@@ -1,38 +1,14 @@
 Ticker,Name,Close,SMA,RSI,Valuation,Signal
-BYD,Boyd Gaming Corporation,"Ticker
-BYD    82.44
-Name: 2025-07-17 00:00:00, dtype: float64",,,Pass,SKIP
-CCJ,Cameco Corporation,"Ticker
-CCJ    77.91
-Name: 2025-07-17 00:00:00, dtype: float64",,,Fail,SKIP
-CEG,Constellation Energy Corporatio,"Ticker
-CEG    308.08
-Name: 2025-07-17 00:00:00, dtype: float64",,,Fail,SKIP
-D,"Dominion Energy, Inc.","Ticker
-D    57.61
-Name: 2025-07-17 00:00:00, dtype: float64",,,Fail,SKIP
-DNN,Denison Mines Corp,"Ticker
-DNN    2.11
-Name: 2025-07-17 00:00:00, dtype: float64",,,Pass,SKIP
-INTC,Intel Corporation,"Ticker
-INTC    22.8
-Name: 2025-07-17 00:00:00, dtype: float64",,,Fail,SKIP
-LEU,Centrus Energy Corp.,"Ticker
-LEU    233.89
-Name: 2025-07-17 00:00:00, dtype: float64",,,Fail,SKIP
-LTBR,Lightbridge Corporation,"Ticker
-LTBR    14.89
-Name: 2025-07-17 00:00:00, dtype: float64",,,Fail,SKIP
-NEE,"NextEra Energy, Inc.","Ticker
-NEE    75.18
-Name: 2025-07-17 00:00:00, dtype: float64",,,Fail,SKIP
+BYD,Boyd Gaming Corporation,,,,Pass,SKIP
+CCJ,Cameco Corporation,77.91,,,Fail,SKIP
+CEG,Constellation Energy Corporatio,308.08,,,Fail,SKIP
+D,"Dominion Energy, Inc.",57.61,,,Fail,SKIP
+DNN,Denison Mines Corp,,,,Pass,SKIP
+INTC,Intel Corporation,22.8,,,Fail,SKIP
+LEU,Centrus Energy Corp.,233.89,,,Fail,SKIP
+LTBR,Lightbridge Corporation,14.89,,,Fail,SKIP
+NEE,"NextEra Energy, Inc.",75.18,,,Fail,SKIP
 STOR,STOR,,,,NoPrice,SKIP
-UEC,Uranium Energy Corp.,"Ticker
-UEC    8.16
-Name: 2025-07-17 00:00:00, dtype: float64",,,Pass,SKIP
-URNM,Sprott Uranium Miners ETF,"Ticker
-URNM    49.14
-Name: 2025-07-17 00:00:00, dtype: float64",,,Pass,SKIP
-UUUU,Energy Fuels Inc,"Ticker
-UUUU    9.16
-Name: 2025-07-17 00:00:00, dtype: float64",,,Pass,SKIP
+UEC,Uranium Energy Corp.,,,,Pass,SKIP
+URNM,Sprott Uranium Miners ETF,,,,Pass,SKIP
+UUUU,Energy Fuels Inc,,,,Pass,SKIP
