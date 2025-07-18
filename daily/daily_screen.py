@@ -38,8 +38,10 @@ for ticker, rule in RULES.items():
     sma_series = prices.rolling(sma_len).mean()
     rsi_series = ta.rsi(prices, length=14)
 
-    sma_val = float(sma_series.iloc[-1]) if not pd.isna(sma_series.iloc[-1]) else None
-    rsi_val = float(rsi_series.iloc[-1]) if not pd.isna(rsi_series.iloc[-1]) else None
+    sma_last = sma_series.iloc[-1]
+    sma_val = float(sma_last) if pd.notna(sma_last) else None
+    rsi_last = rsi_series.iloc[-1]
+    rsi_val = float(rsi_last) if pd.notna(rsi_last) else None
 
     if sma_val is None or rsi_val is None:
         signal = "SKIP"
