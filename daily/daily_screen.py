@@ -9,57 +9,59 @@ os.makedirs("docs", exist_ok=True)
 HTML_PATH = os.path.join("docs", "daily_screen.html")
 CSV_PATH = os.path.join("docs", "daily_screen.csv")
 
-# Helper for valuation pass
-VALUATION_PE = 15
-VALUATION_EV_EBITDA = 8
+cols = ["Ticker","Close","SMA","RSI","Valuation","Signal"]
+records = []
 
-results = []
+for ticker, rule in RULES.items():
+    # ---------- 1. PRICE DATA ----------
+    df = yf.download(ticker, period="500d", progress=False)
+    if df.empty:
+        records.append([ticker, None, None, None, "NoPrice", "SKIP"])
+        continue
+    close = round(df.Close.iloc[-1], 2)
 
-for ticker, params in RULES.items():
-    try:
-        yf_ticker = yf.Ticker(ticker)
-        # Get fast_info for valuation
-        fast_info = yf_ticker.fast_info
-        pe = fast_info.get("forwardPE")
-        ev_ebitda = fast_info.get("evToEbitda")
-        val_pass = False
-        if pe is not None and pe <= VALUATION_PE:
-            val_pass = True
-        if ev_ebitda is not None and ev_ebitda <= VALUATION_EV_EBITDA:
-            val_pass = True
-        # Get last 100 trading days OHLCV
-        df = yf_ticker.history(period="130d").tail(100)
-        if df.empty:
-            results.append({"Ticker": ticker, "Valuation": "No Data", "Signal": "NO DATA"})
-            continue
-        close = df["Close"]
-        if val_pass:
-            sma_len = params["sma"]
-            rsi_cut = params["rsi"]
-            df["SMA"] = close.rolling(sma_len).mean()
-            df["RSI"] = ta.rsi(close, length=14)
-            last = df.iloc[-1]
-            if last["Close"] < last["SMA"]:
-                signal = "EXIT"
-            elif last["Close"] > last["SMA"] and last["RSI"] <= rsi_cut:
-                signal = "BUY"
-            else:
-                signal = "HOLD"
-            results.append({
-                "Ticker": ticker,
-                "Valuation": "PASS",
-                "Close": round(last["Close"], 2),
-                "SMA": round(last["SMA"], 2),
-                "RSI": round(last["RSI"], 2),
-                "Signal": signal
-            })
-        else:
-            results.append({"Ticker": ticker, "Valuation": "FAIL", "Signal": "NO TRADE"})
-    except Exception as e:
-        results.append({"Ticker": ticker, "Valuation": "ERROR", "Signal": str(e)})
+    # ---------- 2. VALUATION ----------
+    info = yf.Ticker(ticker).fast_info or {}
+    pe = info.get("forwardPE") or info.get("trailingPE")
+    ev_ebitda = info.get("enterpriseToEbitda") or info.get("evToEbitda")
 
-# Create DataFrame
-results_df = pd.DataFrame(results)
+    # fallback – slower but richer
+    if pe is None and ev_ebitda is None:
+        slow = yf.Ticker(ticker).info
+        pe        = slow.get("forwardPE") or slow.get("trailingPE")
+        ev_ebitda = slow.get("enterpriseToEbitda") or slow.get("evToEbitda")
+
+    val_ok = (
+        (pe and 0 < pe <= 15) or
+        (ev_ebitda and ev_ebitda <= 8)
+    )
+    val_flag = "Pass" if val_ok else "Fail"
+
+    if not val_ok:
+        records.append([ticker, close, None, None, val_flag, "SKIP"])
+        continue
+
+    # ---------- 3. TECHNICALS ----------
+    sma_len, rsi_cut = rule["sma"], rule["rsi"]
+    sma = df.Close.rolling(sma_len).mean().iloc[-1]
+    rsi = ta.rsi(df.Close, length=14).iloc[-1]
+
+    if pd.isna(sma) or pd.isna(rsi):
+        signal = "SKIP"
+    elif close < sma:
+        signal = "EXIT"
+    elif rsi <= rsi_cut:
+        signal = "BUY"
+    else:
+        signal = "HOLD"
+
+    records.append([
+        ticker, close,
+        round(sma, 2), round(rsi, 1),
+        val_flag, signal
+    ])
+
+results_df = pd.DataFrame(records, columns=cols)
 
 print("Results DataFrame:")
 print(results_df)
