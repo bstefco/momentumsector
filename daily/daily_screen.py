@@ -54,11 +54,18 @@ for ticker, rule in RULES.items():
     close_val = prices.iloc[-1] if not prices.empty else None
     close = round(float(close_val), 2) if close_val is not None and not pd.isna(close_val) else None
     sma_val = prices.rolling(sma_len).mean().iloc[-1]
-    rsi_val = ta.rsi(prices, length=14).iloc[-1]
+    rsi_series = ta.rsi(prices, length=14)
+    rsi_val = rsi_series.iloc[-1] if rsi_series is not None else None
 
-    if pd.isna(sma_val) or pd.isna(rsi_val):
+    if pd.isna(sma_val) or sma_val is None or pd.isna(rsi_val) or rsi_val is None or close is None or pd.isna(close):
         signal = "SKIP"
+        close_out = None
+        sma_out = None
+        rsi_out = None
     else:
+        close_out = round(close, 2)
+        sma_out = round(float(sma_val), 2)
+        rsi_out = round(float(rsi_val), 1)
         if close < sma_val:
             signal = "EXIT"
         elif rsi_val <= rsi_cut:
@@ -69,9 +76,9 @@ for ticker, rule in RULES.items():
     records.append([
         ticker,
         name,
-        round(close, 2) if close is not None else None,
-        round(float(sma_val), 2) if not pd.isna(sma_val) else None,
-        round(float(rsi_val), 1) if not pd.isna(rsi_val) else None,
+        close_out,
+        sma_out,
+        rsi_out,
         val_flag,
         signal
     ])
