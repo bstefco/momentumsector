@@ -1,48 +1,53 @@
-import os
+from datetime import date
 import pandas as pd
 import yfinance as yf
 import pandas_ta as ta
 from rulebook import RULES
 
-os.makedirs("docs", exist_ok=True)
+DOC_PATH = "docs/daily_screen"  # base path without extension
 
-HTML_PATH = os.path.join("docs", "daily_screen.html")
-CSV_PATH = os.path.join("docs", "daily_screen.csv")
+def valuation_pass(pe: float | None, ev_ebitda: float | None) -> bool:
+    return (
+        pe is not None and 0 < pe <= 15
+    ) or (
+        ev_ebitda is not None and ev_ebitda <= 8
+    )
 
-cols = ["Ticker","Close","SMA","RSI","Valuation","Signal"]
-records = []
+def get_company_name(tkr: str) -> str:
+    try:
+        info = yf.Ticker(tkr).info
+        return info.get("shortName") or info.get("longName") or tkr
+    except Exception:
+        return tkr
+
+records: list[list] = []
 
 for ticker, rule in RULES.items():
-    # ---------- 1. PRICE DATA ----------
+    name = get_company_name(ticker)
     df = yf.download(ticker, period="500d", progress=False)
     if df.empty:
-        records.append([ticker, None, None, None, "NoPrice", "SKIP"])
+        records.append([ticker, name, None, None, None, "NoPrice", "SKIP"])
         continue
+
     close = round(df.Close.iloc[-1], 2)
+    fast = yf.Ticker(ticker).fast_info or {}
+    pe = fast.get("forwardPE") or fast.get("trailingPE")
+    ev_ebitda = fast.get("enterpriseToEbitda")
 
-    # ---------- 2. VALUATION ----------
-    info = yf.Ticker(ticker).fast_info or {}
-    pe = info.get("forwardPE") or info.get("trailingPE")
-    ev_ebitda = info.get("enterpriseToEbitda") or info.get("evToEbitda")
-
-    # fallback – slower but richer
     if pe is None and ev_ebitda is None:
         slow = yf.Ticker(ticker).info
-        pe        = slow.get("forwardPE") or slow.get("trailingPE")
-        ev_ebitda = slow.get("enterpriseToEbitda") or slow.get("evToEbitda")
+        pe = slow.get("forwardPE") or slow.get("trailingPE")
+        ev_ebitda = slow.get("enterpriseToEbitda")
 
-    val_ok = (
-        (pe and 0 < pe <= 15) or
-        (ev_ebitda and ev_ebitda <= 8)
-    )
+    val_ok = valuation_pass(pe, ev_ebitda)
     val_flag = "Pass" if val_ok else "Fail"
 
     if not val_ok:
-        records.append([ticker, close, None, None, val_flag, "SKIP"])
+        records.append([ticker, name, close, None, None, val_flag, "SKIP"])
         continue
 
-    # ---------- 3. TECHNICALS ----------
-    sma_len, rsi_cut = rule["sma"], rule["rsi"]
+    sma_len = rule["sma"]
+    rsi_cut = rule["rsi"]
     sma = df.Close.rolling(sma_len).mean().iloc[-1]
     rsi = ta.rsi(df.Close, length=14).iloc[-1]
 
@@ -56,18 +61,19 @@ for ticker, rule in RULES.items():
         signal = "HOLD"
 
     records.append([
-        ticker, close,
-        round(sma, 2), round(rsi, 1),
-        val_flag, signal
+        ticker, name, close, round(sma, 2), round(rsi, 1), val_flag, signal
     ])
 
-results_df = pd.DataFrame(records, columns=cols)
+cols = ["Ticker", "Name", "Close", "SMA", "RSI", "Valuation", "Signal"]
+table = pd.DataFrame(records, columns=cols).sort_values("Ticker")
 
-print("Results DataFrame:")
-print(results_df)
+table.to_html(
+    f"{DOC_PATH}.html",
+    index=False,
+    justify="center",
+    border=0,
+    classes="datatable",
+)
+table.to_csv(f"{DOC_PATH}.csv", index=False)
 
-print("Writing CSV to", CSV_PATH)
-results_df.to_csv(CSV_PATH, index=False)
-
-print("Writing HTML to", HTML_PATH)
-results_df.to_html(HTML_PATH, index=False)
+print("✅ daily screen updated", date.today())
