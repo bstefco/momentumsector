@@ -1,17 +1,17 @@
-Ticker,Close,SMA,RSI,Valuation,Signal
-BYD,82.44,76.41,—,Pass,SKIP
-CEG,308.08,—,—,Fail,SKIP
-D,57.61,—,—,Fail,SKIP
-EOSE,5.3,4.55,—,Pass,SKIP
-GWH,1.71,1.31,—,Pass,SKIP
-INTC,22.8,—,—,Fail,SKIP
-LEU,233.89,—,—,Fail,SKIP
-NEE,75.18,—,—,Fail,SKIP
-NTLA,11.83,9.84,—,Pass,SKIP
-OKLO,67.17,57.43,—,Pass,SKIP
-SANA,4.45,3.14,—,Pass,SKIP
-SMR,46.83,38.19,—,Pass,SKIP
-STOR,—,—,—,NoPrice,SKIP
-TMC,7.9,6.1,—,Pass,SKIP
-URNM,49.14,45.63,—,Pass,SKIP
-WIX,154.71,—,—,Fail,SKIP
+Ticker,Name,Close,SMA,RSI,Valuation,Signal
+BYD,Boyd Gaming Corporation,82.44,76.41,—,Pass,SKIP
+CEG,Constellation Energy Corporatio,308.08,—,—,Fail,SKIP
+D,"Dominion Energy, Inc.",57.61,55.76,—,Pass,SKIP
+EOSE,"Eos Energy Enterprises, Inc.",5.3,4.55,—,Pass,SKIP
+GWH,"ESS Tech, Inc.",1.71,1.31,—,Pass,SKIP
+INTC,Intel Corporation,22.8,21.48,—,Pass,SKIP
+LEU,Centrus Energy Corp.,233.89,—,—,Fail,SKIP
+NEE,"NextEra Energy, Inc.",75.18,71.57,—,Pass,SKIP
+NTLA,"Intellia Therapeutics, Inc.",11.83,9.84,—,Pass,SKIP
+OKLO,Oklo Inc.,67.17,57.43,—,Pass,SKIP
+SANA,"Sana Biotechnology, Inc.",4.45,3.14,—,Pass,SKIP
+SMR,NuScale Power Corporation,46.83,38.19,—,Pass,SKIP
+STOR,STOR,—,—,—,NoPrice,SKIP
+TMC,TMC the metals company Inc.,7.9,6.1,—,Pass,SKIP
+URNM,Sprott Uranium Miners ETF,49.14,45.63,—,Pass,SKIP
+WIX,Wix.com Ltd.,154.71,156.74,—,Pass,SKIP
