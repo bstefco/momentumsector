@@ -29,7 +29,8 @@ for ticker, rule in RULES.items():
         records.append([ticker, name, None, None, None, "NoPrice", "SKIP"])
         continue
 
-    close = round(df.Close.iloc[-1], 2)
+    close_val = df.Close.iloc[-1]
+    close = round(float(close_val), 2) if pd.notna(close_val) else None
     fast = yf.Ticker(ticker).fast_info or {}
     pe = fast.get("forwardPE") or fast.get("trailingPE")
     ev_ebitda = fast.get("enterpriseToEbitda")
@@ -62,13 +63,15 @@ for ticker, rule in RULES.items():
     else:
         rsi_val = rsi if isinstance(rsi, (float, int)) else None
 
-    if sma_val is None or rsi_val is None or pd.isna(sma_val) or pd.isna(rsi_val):
+    if close is None or sma_val is None or rsi_val is None or pd.isna(sma_val) or pd.isna(rsi_val):
         signal = "SKIP"
         sma_out = None
         rsi_out = None
+        close_out = None
     else:
         sma_out = round(sma_val, 2)
         rsi_out = round(rsi_val, 1)
+        close_out = close
         if close < sma_val:
             signal = "EXIT"
         elif rsi_val <= rsi_cut:
@@ -77,7 +80,7 @@ for ticker, rule in RULES.items():
             signal = "HOLD"
 
     records.append([
-        ticker, name, close, sma_out, rsi_out, val_flag, signal
+        ticker, name, close_out, sma_out, rsi_out, val_flag, signal
     ])
 
 cols = ["Ticker", "Name", "Close", "SMA", "RSI", "Valuation", "Signal"]
