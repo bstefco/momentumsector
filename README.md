@@ -1,5 +1,7 @@
 # Sector-Momentum ETF Screener
 
+[**View the Daily Screen Report**](https://bstefco.github.io/momentumsector/daily_screen.html)
+
 A momentum-based ETF screening tool that identifies the best-performing sector ETFs for portfolio rebalancing.
 
 ## Features
