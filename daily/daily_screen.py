@@ -1,108 +1,11 @@
-from datetime import date
-import pandas as pd
-import yfinance as yf
-import pandas_ta as ta
-from rulebook import RULES
+import yfinance as yf, pandas_ta as ta, pandas as pd, numpy as np
 
-DOC_PATH = "docs/daily_screen"  # base path without extension
+ticker = "BYD"
+df = yf.download(ticker, period="500d")["Close"].dropna()
+print("Last close =", df.iloc[-1])
 
-def valuation_pass(pe: float | None, ev_ebitda: float | None) -> bool:
-    return (
-        pe is not None and 0 < pe <= 15
-    ) or (
-        ev_ebitda is not None and ev_ebitda <= 8
-    )
+sma50 = df.rolling(50).mean().iloc[-1]
+rsi14 = ta.rsi(df, length=14).iloc[-1]
 
-def get_company_name(tkr: str) -> str:
-    try:
-        info = yf.Ticker(tkr).info
-        return info.get("shortName") or info.get("longName") or tkr
-    except Exception:
-        return tkr
-
-def is_scalar_nan(val):
-    return val is None or (isinstance(val, float) and pd.isna(val))
-
-records: list[list] = []
-
-for ticker, rule in RULES.items():
-    name = get_company_name(ticker)
-    df = yf.download(ticker, period="500d", progress=False)
-    if df.empty:
-        records.append([ticker, name, None, None, None, "NoPrice", "SKIP"])
-        continue
-
-    prices = df['Close'].dropna()
-    if not prices.empty:
-        close_val = prices.iloc[-1]
-        if isinstance(close_val, pd.Series):
-            close_val = close_val.item()
-        if hasattr(close_val, 'item'):
-            close_val = close_val.item()
-        close = round(float(close_val), 2) if close_val is not None and not pd.isna(close_val) else None
-    else:
-        close = None
-    fast = yf.Ticker(ticker).fast_info or {}
-    pe = fast.get("forwardPE") or fast.get("trailingPE")
-    ev_ebitda = fast.get("enterpriseToEbitda")
-
-    if pe is None and ev_ebitda is None:
-        slow = yf.Ticker(ticker).info
-        pe = slow.get("forwardPE") or slow.get("trailingPE")
-        ev_ebitda = slow.get("enterpriseToEbitda")
-
-    val_ok = valuation_pass(pe, ev_ebitda)
-    val_flag = "Pass" if val_ok else "Fail"
-
-    if not val_ok:
-        records.append([ticker, name, close, None, None, val_flag, "SKIP"])
-        continue
-
-    # ---------- 3. TECHNICALS ----------
-    sma_len, rsi_cut = rule["sma"], rule["rsi"]
-    prices = df['Close'].dropna()
-    if not prices.empty:
-        close_val = prices.iloc[-1]
-        if isinstance(close_val, pd.Series):
-            close_val = close_val.item()
-        if hasattr(close_val, 'item'):
-            close_val = close_val.item()
-        close = round(float(close_val), 2) if close_val is not None and not pd.isna(close_val) else None
-    else:
-        close = None
-    sma_val = prices.rolling(sma_len).mean().iloc[-1]
-    rsi_series = ta.rsi(prices, length=14)
-    rsi_val = rsi_series.iloc[-1] if rsi_series is not None else None
-
-    if is_scalar_nan(sma_val) or is_scalar_nan(rsi_val) or is_scalar_nan(close):
-        signal = "SKIP"
-        close_out = None
-        sma_out = None
-        rsi_out = None
-    else:
-        close_out = round(float(close), 2) if close is not None and not pd.isna(close) else None
-        sma_out = round(float(sma_val), 2) if sma_val is not None and not pd.isna(sma_val) else None
-        rsi_out = round(float(rsi_val), 1) if rsi_val is not None and not pd.isna(rsi_val) else None
-        if close is not None and sma_val is not None and close < sma_val:
-            signal = "EXIT"
-        elif rsi_val is not None and rsi_cut is not None and rsi_val <= rsi_cut:
-            signal = "BUY"
-        else:
-            signal = "HOLD"
-
-    records.append([
-        ticker,
-        name,
-        close_out,
-        sma_out,
-        rsi_out,
-        val_flag,
-        signal
-    ])
-
-cols = ["Ticker", "Name", "Close", "SMA", "RSI", "Valuation", "Signal"]
-table = pd.DataFrame(records, columns=cols).sort_values("Ticker")
-
-table.to_csv(f"{DOC_PATH}.csv", index=False)
-
-print("✅ daily screen updated", date.today())
+print("SMA-50 =", sma50)
+print("RSI-14 =", rsi14)
