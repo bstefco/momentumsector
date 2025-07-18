@@ -20,6 +20,9 @@ def get_company_name(tkr: str) -> str:
     except Exception:
         return tkr
 
+def is_scalar_nan(val):
+    return val is None or (isinstance(val, float) and pd.isna(val))
+
 records: list[list] = []
 
 for ticker, rule in RULES.items():
@@ -71,18 +74,18 @@ for ticker, rule in RULES.items():
     rsi_series = ta.rsi(prices, length=14)
     rsi_val = rsi_series.iloc[-1] if rsi_series is not None else None
 
-    if pd.isna(sma_val) or sma_val is None or pd.isna(rsi_val) or rsi_val is None or close is None or pd.isna(close):
+    if is_scalar_nan(sma_val) or is_scalar_nan(rsi_val) or is_scalar_nan(close):
         signal = "SKIP"
         close_out = None
         sma_out = None
         rsi_out = None
     else:
-        close_out = round(close, 2)
-        sma_out = round(float(sma_val), 2)
-        rsi_out = round(float(rsi_val), 1)
-        if close < sma_val:
+        close_out = round(float(close), 2) if close is not None and not pd.isna(close) else None
+        sma_out = round(float(sma_val), 2) if sma_val is not None and not pd.isna(sma_val) else None
+        rsi_out = round(float(rsi_val), 1) if rsi_val is not None and not pd.isna(rsi_val) else None
+        if close is not None and sma_val is not None and close < sma_val:
             signal = "EXIT"
-        elif rsi_val <= rsi_cut:
+        elif rsi_val is not None and rsi_cut is not None and rsi_val <= rsi_cut:
             signal = "BUY"
         else:
             signal = "HOLD"
