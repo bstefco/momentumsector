@@ -8,7 +8,10 @@ from rulebook import RULES
 def valuation_pass(info: dict) -> bool:
     pe = info.get("forwardPE") or info.get("trailingPE")
     ev = info.get("enterpriseToEbitda")
-    return ((pe and 0 < pe <= 15) or (ev and ev <= 8))
+    return (
+        (pe and 0 < pe <= 25) or      # raised from 15 to 25
+        (ev and ev <= 12)             # raised from 8 to 12
+    )
 
 def get_company_name(ticker):
     try:
@@ -39,20 +42,15 @@ for ticker, rule in RULES.items():
         records.append([ticker, name, safe_round(close,2), "—", "—", val_flag, "SKIP"])
         continue
 
-    # technicals --------------------
+    # 3-d. Technical indicators -------------------------------------------
     sma_len, rsi_cut = rule["sma"], rule["rsi"]
-    sma_series = df.rolling(sma_len).mean()
-    rsi_series = ta.rsi(df, length=14)
 
-    sma_last = sma_series.iloc[-1]
-    if isinstance(sma_last, pd.Series):
-        sma_last = sma_last.item()
-    sma_val = float(sma_last) if pd.notna(sma_last) else None
+    # --- SMA: mean of last `sma_len` valid closes
+    sma_val = float(df.tail(sma_len).mean()) if len(df) >= sma_len else None
 
-    rsi_last = rsi_series.iloc[-1] if rsi_series is not None and not rsi_series.empty else None
-    if isinstance(rsi_last, pd.Series):
-        rsi_last = rsi_last.item()
-    rsi_val = float(rsi_last) if rsi_last is not None and pd.notna(rsi_last) else None
+    # --- RSI: pandas_ta with extra ffill to kill NaNs
+    rsi_series = ta.rsi(df, length=14, fillna=True).ffill()
+    rsi_val = float(rsi_series.iloc[-1]) if not pd.isna(rsi_series.iloc[-1]) else None
 
     if sma_val is None or rsi_val is None:
         signal = "SKIP"
@@ -64,12 +62,11 @@ for ticker, rule in RULES.items():
         signal = "HOLD"
 
     records.append([
-        ticker,
-        name,
-        safe_round(close,2),
-        safe_round(sma_val,2),
-        safe_round(rsi_val,1),
-        val_flag,
+        ticker, name,
+        round(close, 2),
+        round(sma_val, 2) if sma_val else "—",
+        round(rsi_val, 1)  if rsi_val else "—",
+        "Pass",
         signal
     ])
 
