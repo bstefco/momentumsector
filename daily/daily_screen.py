@@ -42,18 +42,21 @@ for ticker, rule in RULES.items():
         records.append([ticker, name, safe_round(close,2), "—", "—", val_flag, "SKIP"])
         continue
 
-    # 3-d. Technical indicators -------------------------------------------
+    # ── Technical indicators ──────────────────────────────────────────────
     sma_len, rsi_cut = rule["sma"], rule["rsi"]
 
-    # SMA: average of the last `sma_len` valid closes
-    sma_val = float(df.tail(sma_len).mean()) if len(df) >= sma_len else None
+    # SMA: mean of last `sma_len` valid closes
+    sma_val = df.tail(sma_len).mean() if len(df) >= sma_len else None
+    sma_val = round(float(sma_val), 2) if pd.notna(sma_val) else None
 
-    # RSI: take the last *valid* value only
-    rsi_series = ta.rsi(df, length=14, fillna=False)
-    rsi_series = rsi_series.dropna()
-    rsi_val = float(rsi_series.iloc[-1]) if not rsi_series.empty else None
+    # RSI: handle None gracefully
+    rsi_series = ta.rsi(df, length=14, fillna=True)
+    if rsi_series is None or rsi_series.empty:
+        rsi_val = None
+    else:
+        rsi_val = round(float(rsi_series.iloc[-1]), 1)
 
-    # Signal logic
+    # Signal
     if sma_val is None or rsi_val is None:
         signal = "SKIP"
     elif close < sma_val:
@@ -65,9 +68,9 @@ for ticker, rule in RULES.items():
 
     records.append([
         ticker, name,
-        round(close, 2),
-        round(sma_val, 2) if sma_val else "—",
-        round(rsi_val, 1)  if rsi_val else "—",
+        round(float(close), 2),
+        sma_val if sma_val is not None else "—",
+        rsi_val if rsi_val is not None else "—",
         "Pass",
         signal
     ])
