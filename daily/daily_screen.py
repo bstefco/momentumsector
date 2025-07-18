@@ -25,38 +25,39 @@ def safe_round(val, ndigits):
 
 records = []
 for ticker, rule in RULES.items():
-    name = get_company_name(ticker)
-    df = yf.download(ticker, period="1000d", progress=False)["Close"].dropna()
-    print(f"{ticker}: {len(df)} closing prices")
-    if df.empty:
-        records.append([ticker, name, "—", "—", "—", "NoPrice", "SKIP"])
+    # -------------------------------------------------
+    #  Price history (adjusted)  +  company name
+    # -------------------------------------------------
+    hist = yf.download(ticker, period="1000d", auto_adjust=True, progress=False)["Close"].dropna()  # <-- Series
+    if hist.empty:
+        records.append([ticker, "—", "—", "—", "NoPrice", "SKIP"])
         continue
 
-    close = float(df.iloc[-1])
+    close = float(hist.iloc[-1])  # scalar
+    name  = yf.Ticker(ticker).info.get("shortName", "—")
 
-    # valuation ---------------------
+    # -------------------------------------------------
+    #  Valuation filter  (PE ≤ 25  OR  EV/EBITDA ≤ 12)
+    # -------------------------------------------------
     fast = yf.Ticker(ticker).fast_info or {}
-    val_ok = valuation_pass(fast) or valuation_pass(yf.Ticker(ticker).info)
-    val_flag = "Pass" if val_ok else "Fail"
-    if not val_ok:
-        records.append([ticker, name, safe_round(close,2), "—", "—", val_flag, "SKIP"])
+    slow = yf.Ticker(ticker).info
+    if not (valuation_pass(fast) or valuation_pass(slow)):
+        records.append([ticker, name, close, "—", "—", "Fail", "SKIP"])
         continue
+    val_flag = "Pass"
 
-    # ── Technical indicators ──────────────────────────────────────────────
+    # -------------------------------------------------
+    #  Technicals: SMA  +  RSI
+    # -------------------------------------------------
     sma_len, rsi_cut = rule["sma"], rule["rsi"]
 
-    # SMA: mean of last `sma_len` valid closes
-    sma_val = df.tail(sma_len).mean() if len(df) >= sma_len else None
-    sma_val = round(float(sma_val), 2) if pd.notna(sma_val) else None
+    sma_val = float(hist.tail(sma_len).mean()) if len(hist) >= sma_len else None
 
-    # RSI: handle None gracefully
-    rsi_series = ta.rsi(df, length=14, fillna=True)
-    if rsi_series is None or rsi_series.empty:
-        rsi_val = None
-    else:
-        rsi_val = round(float(rsi_series.iloc[-1]), 1)
+    rsi_series = ta.rsi(hist, length=14, fillna=True)
+    rsi_val = None
+    if rsi_series is not None and not rsi_series.dropna().empty:
+        rsi_val = float(rsi_series.dropna().iloc[-1])
 
-    # Signal
     if sma_val is None or rsi_val is None:
         signal = "SKIP"
     elif close < sma_val:
@@ -68,10 +69,10 @@ for ticker, rule in RULES.items():
 
     records.append([
         ticker, name,
-        round(float(close), 2),
-        sma_val if sma_val is not None else "—",
-        rsi_val if rsi_val is not None else "—",
-        "Pass",
+        round(close, 2),
+        round(sma_val, 2) if sma_val else "—",
+        round(rsi_val, 1) if rsi_val else "—",
+        val_flag,
         signal
     ])
 
