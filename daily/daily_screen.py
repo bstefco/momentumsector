@@ -52,16 +52,26 @@ for ticker, rule in RULES.items():
     rsi_series = ta.rsi(df.Close, length=14)
     rsi = rsi_series.iloc[-1] if rsi_series is not None else None
 
-    if pd.isna(sma) or sma is None or pd.isna(rsi) or rsi is None:
+    # Ensure sma and rsi are scalars
+    if sma is not None and hasattr(sma, 'item'):
+        sma_val = sma.item()
+    else:
+        sma_val = sma if isinstance(sma, (float, int)) else None
+    if rsi is not None and hasattr(rsi, 'item'):
+        rsi_val = rsi.item()
+    else:
+        rsi_val = rsi if isinstance(rsi, (float, int)) else None
+
+    if sma_val is None or rsi_val is None or pd.isna(sma_val) or pd.isna(rsi_val):
         signal = "SKIP"
         sma_out = None
         rsi_out = None
     else:
-        sma_out = round(sma, 2)
-        rsi_out = round(rsi, 1)
-        if close < sma:
+        sma_out = round(sma_val, 2)
+        rsi_out = round(rsi_val, 1)
+        if close < sma_val:
             signal = "EXIT"
-        elif rsi <= rsi_cut:
+        elif rsi_val <= rsi_cut:
             signal = "BUY"
         else:
             signal = "HOLD"
