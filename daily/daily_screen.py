@@ -9,14 +9,13 @@ from rulebook import RULES
 ALIAS = {
     "U_T": "SRUUF",     # Sprott Physical Uranium Trust (USD OTC)
     # use "U.TO" instead if you prefer CAD TSX pricing
-    "STOR": "STOR.AS",   # iShares Energy Storage & Hydrogen UCITS ETF (Amsterdam)
-    "BYD": "BYDDF",      # BYD Co. (Chinese automaker, OTC)
+    "STOR": "STOR.AS",    # iShares Energy Storage & Hydro ETF (Euronext)
 }
 
 # ETFs / trusts with no earnings → auto-pass valuation
-ETF_SET = {"NUKZ", "U_T", "STOR"}
+ETF_SET = {"NUKZ", "U_T"}
 
-ESTABLISHED = {"D","NEE","CEG","BYD","INTC"}
+ESTABLISHED = {"D","NEE","CEG","BYDDY","INTC"}
 
 def valuation_pass(ticker: str, info: dict) -> bool:
     pe = info.get("forwardPE") or info.get("trailingPE")
