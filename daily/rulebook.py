@@ -13,7 +13,7 @@ RULES = {
     "WIX":  {"sma": 30, "rsi": 35},
     "EOSE": {"sma": 30, "rsi": 35},
     "GWH":  {"sma": 30, "rsi": 35},
-    "STOR": {"sma": 30, "rsi": 35},
+    "STOR": {"sma": 30, "rsi": 35},    # iShares Energy Storage & Hydro ETF (SIX)
     "NUKZ": {"sma": 30, "rsi": 35},
     "U_T": {"sma": 30, "rsi": 35},   # TSX symbol for the uranium trust
 
@@ -21,6 +21,6 @@ RULES = {
     "D":    {"sma": 50, "rsi": 40},
     "NEE":  {"sma": 50, "rsi": 40},
     "CEG":  {"sma": 50, "rsi": 40},
-    "BYDDY": {"sma": 50, "rsi": 40},   # BYD Company Ltd. ADR
+    "BYDDY": {"sma": 50, "rsi": 40},   # BYD Company ADR
     "INTC": {"sma": 50, "rsi": 40},
 } 

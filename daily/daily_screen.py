@@ -9,11 +9,11 @@ from rulebook import RULES
 ALIAS = {
     "U_T": "SRUUF",     # Sprott Physical Uranium Trust (USD OTC)
     # use "U.TO" instead if you prefer CAD TSX pricing
-    "STOR": "STOR.AS",    # iShares Energy Storage & Hydro ETF (Euronext)
+    "STOR": "STOR.SW",   # SIX Swiss Exchange symbol for the ETF
 }
 
 # ETFs / trusts with no earnings → auto-pass valuation
-ETF_SET = {"NUKZ", "U_T"}
+ETF_SET = {"NUKZ", "U_T", "STOR"}
 
 ESTABLISHED = {"D","NEE","CEG","BYDDY","INTC"}
 
