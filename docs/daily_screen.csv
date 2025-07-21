@@ -1,5 +1,5 @@
 Ticker,Name,Close,SMA,RSI,Valuation,Signal
-BYDDY,"BYD Co., Ltd.",97.47,100.98,52.9,Pass,EXIT
+BYDDY,"BYD Co., Ltd.",97.5,100.98,52.9,Pass,EXIT
 CEG,Constellation Energy Corporatio,317.88,304.3,54.7,Pass,HOLD
 D,"Dominion Energy, Inc.",57.68,55.9,57.6,Pass,HOLD
 EOSE,"Eos Energy Enterprises, Inc.",6.0,4.69,65.7,Pass,HOLD
