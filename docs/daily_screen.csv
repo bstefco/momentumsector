@@ -1,17 +1,19 @@
 Ticker,Name,Close,SMA,RSI,Valuation,Signal
-BYD,Boyd Gaming Corporation,82.14,76.67,58.9,Pass,HOLD
-CEG,Constellation Energy Corporatio,321.4200134277344,—,—,Fail,SKIP
-D,"Dominion Energy, Inc.",58.09,55.84,60.9,Pass,HOLD
-EOSE,"Eos Energy Enterprises, Inc.",5.87,4.62,64.3,Pass,HOLD
-GWH,"ESS Tech, Inc.",1.56,1.32,52.4,Pass,HOLD
-INTC,Intel Corporation,23.1,21.55,56.7,Pass,HOLD
-LEU,Centrus Energy Corp.,249.33999633789062,—,—,Fail,SKIP
-NEE,"NextEra Energy, Inc.",75.95,71.77,62.8,Pass,HOLD
-NTLA,"Intellia Therapeutics, Inc.",12.06,9.98,65.9,Pass,HOLD
+BYD,"BYD Co., Ltd.",16.33,32.5,26.2,Pass,EXIT
+CEG,Constellation Energy Corporatio,318.13,304.3,54.8,Pass,HOLD
+D,"Dominion Energy, Inc.",57.75,55.9,58.2,Pass,HOLD
+EOSE,"Eos Energy Enterprises, Inc.",5.96,4.69,65.3,Pass,HOLD
+GWH,"ESS Tech, Inc.",1.57,1.33,52.6,Pass,HOLD
+INTC,Intel Corporation,23.25,21.6,57.7,Pass,HOLD
+LEU,Centrus Energy Corp.,223.55999755859375,—,—,Fail,SKIP
+NEE,"NextEra Energy, Inc.",76.08,71.95,63.3,Pass,HOLD
+NTLA,"Intellia Therapeutics, Inc.",12.7,10.15,69.9,Pass,HOLD
+NUKZ,Exchange Traded Concepts Trust ,58.46,55.46,65.9,Pass,HOLD
 OKLO,Oklo Inc.,68.98,58.09,68.5,Pass,HOLD
-SANA,"Sana Biotechnology, Inc.",4.63,3.22,82.8,Pass,HOLD
-SMR,NuScale Power Corporation,50.25,38.82,73.9,Pass,HOLD
-STOR,—,—,—,NoPrice,SKIP,
-TMC,TMC the metals company Inc.,7.64,6.21,63.1,Pass,HOLD
-URNM,Sprott Uranium Miners ETF,49.18,45.87,66.6,Pass,HOLD
-WIX,Wix.com Ltd.,155.05,156.8,47.0,Pass,EXIT
+SANA,"Sana Biotechnology, Inc.",4.47,3.28,75.9,Pass,HOLD
+SMR,NuScale Power Corporation,45.62,39.31,62.1,Pass,HOLD
+STOR,iShares Energy Storage & Hydrog,5.41,5.08,72.0,Pass,HOLD
+TMC,TMC the metals company Inc.,7.05,6.31,55.8,Pass,HOLD
+URNM,Sprott Uranium Miners ETF,48.83,46.09,64.4,Pass,HOLD
+U_T,Sprott Physical Uranium Trust,16.23,17.25,39.1,Pass,EXIT
+WIX,Wix.com Ltd.,154.17,156.83,45.8,Pass,EXIT
