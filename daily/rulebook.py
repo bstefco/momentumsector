@@ -21,6 +21,6 @@ RULES = {
     "D":    {"sma": 50, "rsi": 40},
     "NEE":  {"sma": 50, "rsi": 40},
     "CEG":  {"sma": 50, "rsi": 40},
-    "BYDDY": {"sma": 50, "rsi": 40},   # BYD Company ADR
+    "1211.HK": {"sma": 50, "rsi": 40},
     "INTC": {"sma": 50, "rsi": 40},
 } 

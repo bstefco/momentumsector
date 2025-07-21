@@ -15,7 +15,7 @@ ALIAS = {
 # ETFs / trusts with no earnings → auto-pass valuation
 ETF_SET = {"NUKZ", "U_T", "STOR"}
 
-ESTABLISHED = {"D","NEE","CEG","BYDDY","INTC"}
+ESTABLISHED = {"D", "NEE", "CEG", "INTC", "1211.HK"}
 
 def valuation_pass(ticker: str, info: dict) -> bool:
     pe = info.get("forwardPE") or info.get("trailingPE")
