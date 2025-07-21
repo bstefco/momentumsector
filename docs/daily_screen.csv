@@ -1,5 +1,9 @@
 Ticker,Name,Close,SMA,RSI,Valuation,Signal
+<<<<<<< HEAD
 1211.HK,BYD COMPANY,127.7,131.06,54.8,Pass,EXIT
+=======
+BYDDY,"BYD Co., Ltd.",97.5,100.98,52.9,Pass,EXIT
+>>>>>>> 6c0d482e4637e33c089c54b81e7d6592c66ae58c
 CEG,Constellation Energy Corporatio,317.88,304.3,54.7,Pass,HOLD
 D,"Dominion Energy, Inc.",57.68,55.9,57.6,Pass,HOLD
 EOSE,"Eos Energy Enterprises, Inc.",6.0,4.69,65.7,Pass,HOLD
