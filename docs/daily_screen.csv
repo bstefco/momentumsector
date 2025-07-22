@@ -1,23 +1,19 @@
 Ticker,Name,Close,SMA,RSI,Valuation,Signal
-<<<<<<< HEAD
-1211.HK,BYD COMPANY,127.7,131.06,54.8,Pass,EXIT
-=======
-BYDDY,"BYD Co., Ltd.",97.5,100.98,52.9,Pass,EXIT
->>>>>>> 6c0d482e4637e33c089c54b81e7d6592c66ae58c
-CEG,Constellation Energy Corporatio,317.88,304.3,54.7,Pass,HOLD
-D,"Dominion Energy, Inc.",57.68,55.9,57.6,Pass,HOLD
-EOSE,"Eos Energy Enterprises, Inc.",6.0,4.69,65.7,Pass,HOLD
-GWH,"ESS Tech, Inc.",1.55,1.33,52.3,Pass,HOLD
+1211.HK,BYD COMPANY,134.2,131.01,64.6,Pass,HOLD
+CEG,Constellation Energy Corporatio,317.62,305.25,54.5,Pass,HOLD
+D,"Dominion Energy, Inc.",58.44,55.98,61.8,Pass,HOLD
+EOSE,"Eos Energy Enterprises, Inc.",6.05,4.77,66.2,Pass,HOLD
+GWH,"ESS Tech, Inc.",2.06,1.36,63.5,Pass,HOLD
 INTC,Intel Corporation,23.26,21.6,57.8,Pass,HOLD
-LEU,Centrus Energy Corp.,223.80999755859375,—,—,Fail,SKIP
-NEE,"NextEra Energy, Inc.",76.21,71.95,63.7,Pass,HOLD
-NTLA,"Intellia Therapeutics, Inc.",12.63,10.15,69.5,Pass,HOLD
-NUKZ,Exchange Traded Concepts Trust ,58.39,55.46,65.5,Pass,HOLD
-OKLO,Oklo Inc.,62.5,58.6,57.0,Pass,HOLD
-SANA,"Sana Biotechnology, Inc.",4.44,3.28,74.9,Pass,HOLD
-SMR,NuScale Power Corporation,45.46,39.3,61.7,Pass,HOLD
-STOR,iShrs ESH UCITS ETF USD A,5.32,5.06,69.5,Pass,HOLD
-TMC,TMC the metals company Inc.,7.06,6.31,56.0,Pass,HOLD
-URNM,Sprott Uranium Miners ETF,49.04,46.1,65.8,Pass,HOLD
-U_T,Sprott Physical Uranium Trust,16.23,17.25,39.1,Pass,EXIT
-WIX,Wix.com Ltd.,153.96,156.82,45.5,Pass,EXIT
+LEU,Centrus Energy Corp.,217.11000061035156,—,—,Fail,SKIP
+NEE,"NextEra Energy, Inc.",77.16,72.14,66.7,Pass,HOLD
+NTLA,"Intellia Therapeutics, Inc.",13.27,10.33,72.9,Pass,HOLD
+NUKZ,Exchange Traded Concepts Trust ,58.25,55.65,64.6,Pass,HOLD
+OKLO,Oklo Inc.,61.44,58.97,55.4,Pass,HOLD
+SANA,"Sana Biotechnology, Inc.",4.78,3.35,78.8,Pass,HOLD
+SMR,NuScale Power Corporation,44.36,39.64,59.3,Pass,HOLD
+STOR,iShrs ESH UCITS ETF USD A,5.4,5.08,73.3,Pass,HOLD
+TMC,TMC the metals company Inc.,7.3,6.41,58.1,Pass,HOLD
+URNM,Sprott Uranium Miners ETF,49.76,46.36,68.0,Pass,HOLD
+U_T,Sprott Physical Uranium Trust,16.3,17.25,40.4,Pass,EXIT
+WIX,Wix.com Ltd.,154.75,156.9,46.8,Pass,EXIT
