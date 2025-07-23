@@ -1,19 +1,19 @@
 Ticker,Name,Close,SMA,RSI,Valuation,Signal
-1211.HK,BYD COMPANY,134.2,131.01,64.6,Pass,HOLD
-CEG,Constellation Energy Corporatio,317.62,305.25,54.5,Pass,HOLD
-D,"Dominion Energy, Inc.",58.44,55.98,61.8,Pass,HOLD
-EOSE,"Eos Energy Enterprises, Inc.",6.05,4.77,66.2,Pass,HOLD
-GWH,"ESS Tech, Inc.",2.06,1.36,63.5,Pass,HOLD
-INTC,Intel Corporation,23.26,21.6,57.8,Pass,HOLD
-LEU,Centrus Energy Corp.,217.11000061035156,—,—,Fail,SKIP
-NEE,"NextEra Energy, Inc.",77.16,72.14,66.7,Pass,HOLD
-NTLA,"Intellia Therapeutics, Inc.",13.27,10.33,72.9,Pass,HOLD
-NUKZ,Exchange Traded Concepts Trust ,58.25,55.65,64.6,Pass,HOLD
-OKLO,Oklo Inc.,61.44,58.97,55.4,Pass,HOLD
-SANA,"Sana Biotechnology, Inc.",4.78,3.35,78.8,Pass,HOLD
-SMR,NuScale Power Corporation,44.36,39.64,59.3,Pass,HOLD
-STOR,iShrs ESH UCITS ETF USD A,5.4,5.08,73.3,Pass,HOLD
-TMC,TMC the metals company Inc.,7.3,6.41,58.1,Pass,HOLD
-URNM,Sprott Uranium Miners ETF,49.76,46.36,68.0,Pass,HOLD
-U_T,Sprott Physical Uranium Trust,16.3,17.25,40.4,Pass,EXIT
-WIX,Wix.com Ltd.,154.75,156.9,46.8,Pass,EXIT
+1211.HK,BYD COMPANY,133.4,131.06,62.8,Pass,HOLD
+CEG,Constellation Energy Corporatio,325.47,306.34,59.0,Pass,HOLD
+D,"Dominion Energy, Inc.",58.08,56.06,58.7,Pass,HOLD
+EOSE,"Eos Energy Enterprises, Inc.",6.28,4.84,68.7,Pass,HOLD
+GWH,"ESS Tech, Inc.",2.24,1.39,66.6,Pass,HOLD
+INTC,Intel Corporation,23.44,21.69,59.2,Pass,HOLD
+LEU,Centrus Energy Corp.,229.91000366210938,—,—,Fail,SKIP
+NEE,"NextEra Energy, Inc.",72.55,72.2,46.6,Pass,HOLD
+NTLA,"Intellia Therapeutics, Inc.",14.29,10.53,77.2,Pass,HOLD
+NUKZ,Exchange Traded Concepts Trust ,59.94,55.87,69.8,Pass,HOLD
+OKLO,Oklo Inc.,61.32,58.97,55.2,Pass,HOLD
+SANA,"Sana Biotechnology, Inc.",5.14,3.43,82.0,Pass,HOLD
+SMR,NuScale Power Corporation,47.62,40.05,63.9,Pass,HOLD
+STOR,iShrs ESH UCITS ETF USD A,5.43,5.1,74.5,Pass,HOLD
+TMC,TMC the metals company Inc.,7.59,6.52,60.6,Pass,HOLD
+URNM,Sprott Uranium Miners ETF,49.81,46.55,68.2,Pass,HOLD
+U_T,Sprott Physical Uranium Trust,16.27,17.23,39.9,Pass,EXIT
+WIX,Wix.com Ltd.,155.46,156.94,48.2,Pass,EXIT
