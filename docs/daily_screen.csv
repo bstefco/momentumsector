@@ -1,19 +1,19 @@
 Ticker,Name,Close,SMA,RSI,Valuation,Signal
-1211.HK,BYD COMPANY,132.1,130.97,59.9,Pass,HOLD
-CEG,Constellation Energy Corporatio,322.53,307.06,57.1,Pass,HOLD
-D,"Dominion Energy, Inc.",58.87,56.15,63.3,Pass,HOLD
-EOSE,"Eos Energy Enterprises, Inc.",6.47,4.91,70.6,Pass,HOLD
-GWH,"ESS Tech, Inc.",2.39,1.44,67.1,Pass,HOLD
-INTC,Intel Corporation,22.72,21.7,51.5,Pass,HOLD
-LEU,Centrus Energy Corp.,243.16000366210938,—,—,Fail,SKIP
-NEE,"NextEra Energy, Inc.",71.75,72.26,44.2,Pass,EXIT
-NTLA,"Intellia Therapeutics, Inc.",12.78,10.67,61.6,Pass,HOLD
-NUKZ,Exchange Traded Concepts Trust ,60.72,56.17,72.0,Pass,HOLD
-OKLO,Oklo Inc.,76.58,60.19,69.4,Pass,HOLD
-SANA,"Sana Biotechnology, Inc.",5.28,3.51,82.9,Pass,HOLD
-SMR,NuScale Power Corporation,51.14,40.61,68.0,Pass,HOLD
-STOR,iShrs ESH UCITS ETF USD A,5.59,5.13,80.5,Pass,HOLD
-TMC,TMC the metals company Inc.,8.15,6.65,64.8,Pass,HOLD
-URNM,Sprott Uranium Miners ETF,50.46,46.84,70.3,Pass,HOLD
-U_T,Sprott Physical Uranium Trust,16.76,17.25,49.2,Pass,EXIT
-WIX,Wix.com Ltd.,151.77,156.69,42.1,Pass,EXIT
+1211.HK,BYD COMPANY,129.6,130.79,54.6,Pass,EXIT
+CEG,Constellation Energy Corporatio,325.75,307.73,58.9,Pass,HOLD
+D,"Dominion Energy, Inc.",58.85,56.27,63.3,Pass,HOLD
+EOSE,"Eos Energy Enterprises, Inc.",6.45,4.99,70.4,Pass,HOLD
+GWH,"ESS Tech, Inc.",1.9,1.45,55.0,Pass,HOLD
+INTC,Intel Corporation,20.49,21.66,36.3,Pass,EXIT
+LEU,Centrus Energy Corp.,245.08749389648438,—,—,Fail,SKIP
+NEE,"NextEra Energy, Inc.",71.65,72.27,43.8,Pass,EXIT
+NTLA,"Intellia Therapeutics, Inc.",13.69,10.85,66.1,Pass,HOLD
+NUKZ,Exchange Traded Concepts Trust ,61.31,56.42,73.5,Pass,HOLD
+OKLO,Oklo Inc.,75.28,60.37,68.6,Pass,HOLD
+SANA,"Sana Biotechnology, Inc.",4.99,3.58,76.6,Pass,HOLD
+SMR,NuScale Power Corporation,52.1,40.96,69.1,Pass,HOLD
+STOR,iShrs ESH UCITS ETF USD A,5.52,5.15,72.5,Pass,HOLD
+TMC,TMC the metals company Inc.,7.92,6.77,62.1,Pass,HOLD
+URNM,Sprott Uranium Miners ETF,50.17,47.09,67.3,Pass,HOLD
+U_T,Sprott Physical Uranium Trust,16.66,17.24,47.6,Pass,EXIT
+WIX,Wix.com Ltd.,154.5,156.67,47.2,Pass,EXIT
