@@ -94,12 +94,9 @@ def _fetch_sp500() -> pd.Series:
     """
     for symbol in ("^GSPC", "^SPX", "SPY"):
         try:
-            df = yf.download(symbol, period="6mo", interval="1d", progress=False)
+            df = yf.download(symbol, period="6mo", interval="1d", progress=False, auto_adjust=True)
             if not df.empty:
-                if 'Adj Close' in df:
-                    return df['Adj Close']
-                elif 'Close' in df:
-                    return df['Close']
+                return df['Close']
         except Exception as e:
             logger.warning(f"Failed to fetch {symbol}: {e}")
     raise RuntimeError("S&P 500 price unavailable from all sources.")
@@ -122,6 +119,6 @@ def market_uptrend() -> bool:
         logger.warning("S&P 500 close or MA50 data missing. Assuming not in uptrend.")
         return False
     # Extract scalar values for comparison
-    last_close = float(close.iloc[-1])
-    last_ma50 = float(ma50.iloc[-1])
+    last_close = float(close.iloc[-1].iloc[0])
+    last_ma50 = float(ma50.iloc[-1].iloc[0])
     return last_close > last_ma50 
