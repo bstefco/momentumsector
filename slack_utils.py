@@ -51,7 +51,9 @@ Your daily momentum screen is ready for review.
 
 — Your Momentum Bot 🚀"""
     
-    return send_slack_message(message)
+    # Use dedicated webhook for reports, fallback to main webhook
+    webhook_url = os.environ.get("SLACK_WEBHOOK_URL_REPORTS") or os.environ.get("SLACK_WEBHOOK_URL")
+    return send_slack_message(message, webhook_url)
 
 def send_monthly_notification(report_url: str) -> bool:
     """
@@ -70,4 +72,6 @@ Your comprehensive sector-momentum analysis is ready.
 
 — Your Momentum Bot 🚀"""
     
-    return send_slack_message(message) 
+    # Use dedicated webhook for reports, fallback to main webhook
+    webhook_url = os.environ.get("SLACK_WEBHOOK_URL_REPORTS") or os.environ.get("SLACK_WEBHOOK_URL")
+    return send_slack_message(message, webhook_url) 
