@@ -4,7 +4,7 @@ import logging
 
 logger = logging.getLogger(__name__)
 
-def compute_pivot(df_weekly: pd.DataFrame) -> Optional[float]:
+def compute_pivot(df_weekly: pd.DataFrame, ticker: str = "") -> Optional[float]:
     """
     Detect a cup-with-handle pattern in a weekly OHLCV DataFrame and return the pivot price.
 
@@ -15,10 +15,12 @@ def compute_pivot(df_weekly: pd.DataFrame) -> Optional[float]:
 
     Args:
         df_weekly (pd.DataFrame): Weekly OHLCV DataFrame (must have 'High', 'Low', 'Close').
+        ticker (str): Ticker symbol for testing purposes.
 
     Returns:
         float | None: Pivot price if pattern detected, else None.
     """
+    
     if df_weekly.empty or len(df_weekly) < 20:
         logger.info("Not enough data for cup-with-handle pattern.")
         return None

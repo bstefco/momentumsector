@@ -17,7 +17,7 @@ def fetch_daily(ticker: str) -> pd.DataFrame:
         pd.DataFrame: DataFrame with daily OHLCV data.
     """
     try:
-        df = yf.Ticker(ticker).history(period="6mo", interval="1d", auto_adjust=True)
+        df = yf.Ticker(ticker).history(period="7mo", interval="1d", auto_adjust=True)  # Increased to 7mo to ensure 126+ days
         if df.empty:
             logger.warning(f"No data returned for ticker {ticker}.")
         return df

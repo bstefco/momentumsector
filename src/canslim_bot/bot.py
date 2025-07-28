@@ -59,7 +59,7 @@ def scan_once(alerter: SlackAlerter) -> None:
             logger.info(f"No data for {ticker} in BUY logic.")
             continue
         df_weekly = data.to_weekly(df_daily)
-        pivot = patterns.compute_pivot(df_weekly)
+        pivot = patterns.compute_pivot(df_weekly, ticker)
         if pivot is None:
             continue
         last_close = df_daily["Close"].iloc[-1]
