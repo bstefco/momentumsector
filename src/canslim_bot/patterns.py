@@ -1,5 +1,8 @@
 import pandas as pd
 from typing import Optional
+import logging
+
+logger = logging.getLogger(__name__)
 
 def compute_pivot(df_weekly: pd.DataFrame) -> Optional[float]:
     """
@@ -16,39 +19,29 @@ def compute_pivot(df_weekly: pd.DataFrame) -> Optional[float]:
     Returns:
         float | None: Pivot price if pattern detected, else None.
     """
-    # --- Step 1: Check if there are at least 20 weeks ---
-    if len(df_weekly) < 20:
-        # Not enough data for pattern detection
+    if df_weekly.empty or len(df_weekly) < 20:
+        logger.info("Not enough data for cup-with-handle pattern.")
         return None
-
-    # --- Step 2: Define base and handle ---
     base = df_weekly.iloc[-20:]
     handle = df_weekly.iloc[-3:]
-
-    # --- Step 3: Calculate base depth ---
     base_high = base['High'].max()
     base_low = base['Low'].min()
     if base_high == 0:
-        # Prevent division by zero
+        logger.info("Base high is zero, invalid pattern.")
         return None
     depth = (base_high - base_low) / base_high
     if depth > 0.33:
-        # Base is too deep for a valid cup-with-handle
+        logger.info(f"Base depth {depth:.2%} too deep for valid cup-with-handle.")
         return None
-
-    # --- Step 4: Check handle closes in upper half of base ---
     base_mid = base_low + 0.5 * (base_high - base_low)
     if not (handle['Close'] > base_mid).all():
-        # Not all handle closes are in the upper half
+        logger.info("Not all handle closes are in the upper half of the base.")
         return None
-
-    # --- Step 5: Pivot is the max high of the handle ---
     pivot = handle['High'].max()
-    return float(pivot)
-
-    # --- Notes for future improvement ---
-    # - Add checks for proper cup shape (U, not V)
+    # --- Future improvements ---
+    # - Check for U-shape, not V
     # - Require handle to drift lower or be tight
-    # - Confirm volume contraction in base and handle
+    # - Confirm volume contraction in base/handle
     # - Add tolerance for minor handle dips below mid
-    # - Add minimum base duration (e.g., 7+ weeks) 
+    # - Add minimum base duration (e.g., 7+ weeks)
+    return float(pivot) 

@@ -1,18 +1,18 @@
 import os
 from typing import List
 from dotenv import load_dotenv
+import logging
 
-# Load environment variables from .env file
 load_dotenv()
 
-# Environment variables
 SLACK_WEBHOOK_URL: str = os.getenv("SLACK_WEBHOOK_URL", "")
 RISK_PCT_PER_TRADE: float = float(os.getenv("RISK_PCT_PER_TRADE", 1.0))
 
-# Constants
 WATCH: List[str] = [
-    "AAPL", "MSFT", "NVDA", "AMZN", "META", "GOOGL", "TSLA", "AVGO", "LLY",
-    "JPM", "V", "UNH", "HD", "MA", "MRK", "ABBV", "COST", "ADBE"
+    "LPLA", "PWR", "ATAT", "KLAC", "IBKR",
+    "AGX", "ROAD", "AXON", "ANET", "WELL",
+    "FUTU", "CLS", "CHEF", "AVGO", "PLTR",
+    "TSM", "NVDA", "VRT"
 ]
 VOL_RATIO: float = 1.4
 BUY_WINDOW: float = 0.05
@@ -36,5 +36,6 @@ def position_size_pct(
         float: Percentage of equity to deploy in the trade.
     """
     if stop_pct == 0:
+        logging.error("stop_pct must not be zero.")
         raise ValueError("stop_pct must not be zero.")
     return risk_pct / stop_pct 

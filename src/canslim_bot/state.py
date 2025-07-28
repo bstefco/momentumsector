@@ -1,6 +1,9 @@
 import json
 import os
+import logging
 from typing import Any, Dict
+
+logger = logging.getLogger(__name__)
 
 def load_state(path: str = "positions.json") -> Dict[str, Any]:
     """
@@ -15,9 +18,12 @@ def load_state(path: str = "positions.json") -> Dict[str, Any]:
     if not os.path.exists(path):
         with open(path, 'w') as f:
             json.dump({}, f)
+        logger.info(f"Created new state file at {path}.")
         return {}
     with open(path, 'r') as f:
-        return json.load(f)
+        state = json.load(f)
+    logger.debug(f"Loaded state from {path}.")
+    return state
 
 def save_state(state: Dict[str, Any], path: str = "positions.json") -> None:
     """
@@ -28,4 +34,5 @@ def save_state(state: Dict[str, Any], path: str = "positions.json") -> None:
         path (str): Path to the JSON file.
     """
     with open(path, 'w') as f:
-        json.dump(state, f, indent=2) 
+        json.dump(state, f, indent=2)
+    logger.debug(f"Saved state to {path}.") 

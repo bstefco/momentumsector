@@ -1,5 +1,19 @@
 # Sector-Momentum ETF Screener
 
+---
+
+## CANSLIM Slack Bot
+
+The **CANSLIM Slack Bot** is an automation project within this repository. It provides CANSLIM-based stock screening and delivers results directly to Slack. All code for the bot lives in the `src/canslim_bot/` directory, and its dependencies are managed in `requirements-canslim.txt`.
+
+- Project code: `src/canslim_bot/`
+- Tests: `tests/canslim_bot/`
+- Requirements: `requirements-canslim.txt`
+
+Whenever you see references to `canslim_bot` in the code or file structure, it refers to this CANSLIM Slack Bot project.
+
+---
+
 [**View the Daily Screen Report**](https://bstefco.github.io/momentumsector/daily_screen.html)
 
 A momentum-based ETF screening tool that identifies the best-performing sector ETFs for portfolio rebalancing.
