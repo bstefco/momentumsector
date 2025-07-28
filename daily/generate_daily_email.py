@@ -4,6 +4,12 @@ import ssl
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from datetime import datetime
+import sys
+import pathlib
+
+# Add parent directory to path to import slack_utils
+sys.path.append(str(pathlib.Path(__file__).parent.parent))
+from slack_utils import send_daily_notification
 
 # --- Email Configuration ---
 SENDER_EMAIL = "boris.stefanik@me.com"
@@ -42,12 +48,25 @@ message.attach(MIMEText(body_html, "html"))
 
 # --- Send the Email ---
 context = ssl.create_default_context()
+email_sent = False
 try:
     with smtplib.SMTP(SMTP_SERVER, SMTP_PORT) as server:
         server.starttls(context=context)
         server.login(SENDER_EMAIL, password)
         server.sendmail(SENDER_EMAIL, RECEIVER_EMAIL, message.as_string())
     print("Daily notification email sent successfully!")
+    email_sent = True
 except Exception as e:
     print(f"Error sending daily email: {e}")
+
+# --- Send Slack Notification ---
+slack_sent = send_daily_notification(REPORT_URL)
+if slack_sent:
+    print("Daily notification Slack message sent successfully!")
+else:
+    print("Slack notification failed or not configured")
+
+# Exit with error only if both email and Slack failed
+if not email_sent and not slack_sent:
+    print("Both email and Slack notifications failed!")
     exit(1) 
