@@ -1,0 +1,31 @@
+name: CANSLIM Slack Bot
+
+on:
+  schedule:
+    # Run every 30 minutes
+    - cron: '*/30 * * * *'
+  workflow_dispatch:  # Allow manual runs
+
+jobs:
+  run-bot:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+        
+    - name: Install dependencies
+      run: |
+        pip install -r requirements-canslim.txt
+        
+    - name: Run CANSLIM bot
+      env:
+        SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+        RISK_PCT_PER_TRADE: ${{ secrets.RISK_PCT_PER_TRADE || '1' }}
+      run: |
+        python -m src.canslim_bot.bot --once 
