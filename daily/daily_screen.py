@@ -47,35 +47,24 @@ ESTABLISHED_RULES = {
     "ENGI":   {"sma": 50, "rsi": 40},
     "IBE":    {"sma": 50, "rsi": 40},
     "KOMB":   {"sma": 50, "rsi": 40},
-    "EOAN":   {"sma": 50, "rsi": 40},
-    "BAS":    {"sma": 50, "rsi": 40},
     "FGR":    {"sma": 50, "rsi": 40},
     "AI":     {"sma": 50, "rsi": 40},
-    "ALV":    {"sma": 50, "rsi": 40},
-    "MUV2":   {"sma": 50, "rsi": 40},
     "1211.HK": {"sma": 50, "rsi": 40},
 }
 
 # Map display tickers to Yahoo symbols
 ALIAS = {
-    "U_T": "SRUUF",     # Sprott Physical Uranium Trust (USD OTC)
-    # use "U.TO" instead if you prefer CAD TSX pricing
-    "STOR": "STOR.SW",   # SIX Swiss Exchange symbol for the ETF
     "BNP":  "BNP.PA",    # BNP Paribas – Euronext Paris
     "ENGI": "ENGI.PA",   # Engie – Euronext Paris
     "IBE":  "IBE.MC",    # Iberdrola – Bolsa Madrid
     "KOMB": "KOMB.PR",   # Komercni banka – Prague exchange
-    "EOAN": "EOAN.DE",   # E.ON SE – Deutsche Börse
-    "BAS":  "BAS.DE",    # BASF SE – Deutsche Börse
     "FGR":  "FGR.PA",    # Eiffage S.A. – Euronext Paris
     "AI":   "AI.PA",     # Air Liquide – Euronext Paris
-    "ALV":  "ALV.DE",    # Allianz SE – Deutsche Börse
-    "MUV2": "MUV2.DE",   # Munich Re – Deutsche Börse
     "ALFA.ST": "ALFA.ST", # Alfa Laval – Stockholm
 }
 
 # ETFs / trusts with no earnings → auto-pass valuation
-ETF_SET = {"NUKZ", "U_T", "STOR"}
+ETF_SET = {"NUKZ"}
 
 # Ticker categorization sets
 HIGH_BETA = set(HIGH_BETA_RULES.keys())
@@ -253,65 +242,70 @@ caption {
 </style>
 """
 
-# Build HTML table manually
-columns = table.columns.tolist()
-rows = table.values.tolist()
-caption = f"Daily Valuation + MA/RSI Screen • {date.today()}"
+# Build three separate HTML tables by tier
+columns = ["Ticker", "Name", "Close", "SMA", "RSI", "Valuation", "Signal"]
 
+def build_table_html(tier_name, ticker_list, caption):
+    """Build a styled HTML table for a specific tier"""
+    tier_records = [row for row in records if row[0] in ticker_list]
+    if not tier_records:
+        return ""
+    
+    tier_df = pd.DataFrame(tier_records, columns=columns).sort_values("Ticker")
+    rows = tier_df.values.tolist()
+    
+    html_parts = [f'<table id="daily">']
+    html_parts.append(f'<caption>{caption}</caption>')
+    html_parts.append('<thead><tr>' + ''.join(f'<th>{col}</th>' for col in columns) + '</tr></thead>')
+    html_parts.append('<tbody>')
+    
+    for row in rows:
+        html_parts.append('<tr>')
+        for i, cell in enumerate(row):
+            style = ''
+            if columns[i] == "Signal":
+                style = colour_signal(cell)
+            html_parts.append(f'<td style="{style}">{cell}</td>')
+        html_parts.append('</tr>')
+    
+    html_parts.append('</tbody></table>')
+    return '\n'.join(html_parts)
+
+# Build the three tier tables
+thematic_table = build_table_html("Thematic", list(THEMATIC_RULES.keys()), 
+                                 f"Thematic Momentum (SMA-100, RSI≤45) • {date.today()}")
+high_beta_table = build_table_html("High-Beta", list(HIGH_BETA_RULES.keys()), 
+                                   f"High-Beta / Tactical (SMA-30, RSI≤35) • {date.today()}")
+established_table = build_table_html("Established", list(ESTABLISHED_RULES.keys()), 
+                                     f"Dividend / Established (SMA-50, RSI≤40) • {date.today()}")
+
+# Add disclaimer
+disclaimer_html = """
+    <div style="margin: 40px auto; max-width: 1100px; padding: 20px; background: #fff; border-radius: 14px; box-shadow: 0 2px 16px rgba(0,0,0,0.08);">
+        <h4>Disclaimer</h4>
+        <p>This screener is for educational purposes only and is <strong>not</strong> investment advice.</p>
+
+        <h4 style='margin-top:1em;'>Thesis-Break Test for Thematic Holdings</h4>
+        <p>Act on EXIT <em>only</em> if <strong>two or more</strong> of these red flags appear:</p>
+        <ol>
+          <li><strong>Narrative flip</strong>&nbsp;&mdash; project or major customer lost.</li>
+          <li><strong>Regulatory hit</strong>&nbsp;&mdash; new rule or licence denial undermines the business.</li>
+          <li><strong>Moat breached</strong>&nbsp;&mdash; competitor leap-frogs tech or captures key share.</li>
+          <li><strong>Balance-sheet blow-up</strong>&nbsp;&mdash; leverage spike, credit-rating plunge, or dilutive rescue financing.</li>
+        </ol>
+    </div>
+    """
+
+# Combine all tables and disclaimer
 html = [f"<!DOCTYPE html><html><head>{extra_css}</head><body>"]
-html.append(f'<table id="daily">')
-html.append(f'<caption>{caption}</caption>')
-html.append('<thead><tr>' + ''.join(f'<th>{col}</th>' for col in columns) + '</tr></thead>')
-html.append('<tbody>')
-for row in rows:
-    html.append('<tr>')
-    for i, cell in enumerate(row):
-        style = ''
-        if columns[i] == "Signal":
-            style = colour_signal(cell)
-        html.append(f'<td style="{style}">{cell}</td>')
-    html.append('</tr>')
-html.append('</tbody></table></body></html>')
+html.append(thematic_table)
+html.append(high_beta_table)
+html.append(established_table)
+html.append(disclaimer_html)
+html.append('</body></html>')
 
 with open(out_dir / "daily_screen.html", "w", encoding="utf-8") as f:
     f.write('\n'.join(html))
-
-# ── 5. Add Exit-Action tables ─────────────────────────────────────────────────
-cheat_chunks = [
-    ("High-Beta / Tactical – EXIT rule: sell entire (or ≥ 50 %) next day",
-     list(HIGH_BETA_RULES.keys())),
-    ("Thematic Momentum – EXIT rule: hold/trim; sell only if thesis breaks",
-     list(THEMATIC_RULES.keys())),
-    ("Dividend / Established – EXIT rule: usually ignore; may average-down",
-     list(ESTABLISHED_RULES.keys())),
-]
-
-with open(out_dir / "daily_screen.html", "a", encoding="utf-8") as f:
-    for title, ticks in cheat_chunks:
-        df = pd.DataFrame(
-            {"Ticker": ticks,
-             "What to do on EXIT": [title.split("–")[1].strip()]*len(ticks)}
-        )
-        f.write(f"<h3 style='margin-top:2em;'>{title}</h3>")
-        f.write(df.to_html(index=False, escape=False))
-
-# ── 6. Add enhanced disclaimer with Thesis-Break checklist ─────────────────────
-disclaimer_html = """
-    <h4>Disclaimer</h4>
-    <p>This screener is for educational purposes only and is <strong>not</strong> investment advice.</p>
-
-    <h4 style='margin-top:1em;'>Thesis-Break Test for Thematic Holdings</h4>
-    <p>Act on EXIT <em>only</em> if <strong>two or more</strong> of these red flags appear:</p>
-    <ol>
-      <li><strong>Narrative flip</strong>&nbsp;&mdash; project or major customer lost.</li>
-      <li><strong>Regulatory hit</strong>&nbsp;&mdash; new rule or licence denial undermines the business.</li>
-      <li><strong>Moat breached</strong>&nbsp;&mdash; competitor leap-frogs tech or captures key share.</li>
-      <li><strong>Balance-sheet blow-up</strong>&nbsp;&mdash; leverage spike, credit-rating plunge, or dilutive rescue financing.</li>
-    </ol>
-    """
-
-with open(out_dir / "daily_screen.html", "a", encoding="utf-8") as f:
-    f.write(disclaimer_html)
 
 table.to_csv(out_dir / "daily_screen.csv", index=False)
 print("✅ daily screen updated", date.today())

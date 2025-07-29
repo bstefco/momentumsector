@@ -11,37 +11,29 @@ RULES = {
     "SMR":   {"sma": 100, "rsi": 45},   # NuScale Power
 
     # ── High-beta / smaller (SMA-30, RSI≤35)
-    "OKLO": {"sma": 30, "rsi": 35},
-    "SANA": {"sma": 30, "rsi": 35},
-    "NTLA": {"sma": 30, "rsi": 35},
-    "TMC":  {"sma": 30, "rsi": 35},
-    "WIX":  {"sma": 30, "rsi": 35},
-    "EOSE": {"sma": 30, "rsi": 35},
-    "GWH":  {"sma": 30, "rsi": 35},
-    "STOR": {"sma": 30, "rsi": 35},    # iShares Energy Storage & Hydro ETF (SIX)
-    "U_T": {"sma": 30, "rsi": 35},   # TSX symbol for the uranium trust
-    "ATLX": {"sma": 30, "rsi": 35},   # Atlas Lithium
-    "BEAM": {"sma": 30, "rsi": 35},   # Beam Therapeutics
-    "6324.T": {"sma": 30, "rsi": 35}, # Harmonic Drive Systems (Tokyo)
-    "VRT":  {"sma": 30, "rsi": 35},   # Vertiv Holdings
-    "FLS":  {"sma": 30, "rsi": 35},   # Flowserve Corporation
-    "BMI":  {"sma": 30, "rsi": 35},   # Badger Meter
-    "FLNC": {"sma": 30, "rsi": 35},   # Fluence Energy
+    "ATLX":   {"sma": 30, "rsi": 35},   # Atlas Lithium
+    "BEAM":   {"sma": 30, "rsi": 35},   # Beam Therapeutics
+    "BMI":    {"sma": 30, "rsi": 35},   # Badger Meter
+    "EOSE":   {"sma": 30, "rsi": 35},   # Eos Energy Enterprises
+    "FLNC":   {"sma": 30, "rsi": 35},   # Fluence Energy
+    "FLS":    {"sma": 30, "rsi": 35},   # Flowserve Corporation
+    "GWH":    {"sma": 30, "rsi": 35},   # ESS Tech
+    "SANA":   {"sma": 30, "rsi": 35},   # Sana Biotechnology
+    "TMC":    {"sma": 30, "rsi": 35},   # TMC the metals company
+    "VRT":    {"sma": 30, "rsi": 35},   # Vertiv Holdings
+    "WIX":    {"sma": 30, "rsi": 35},   # Wix.com
+    "6324.T": {"sma": 30, "rsi": 35},   # Harmonic Drive Systems
 
     # ── Established players (SMA-50, RSI≤40)
-    "D":    {"sma": 50, "rsi": 40},
-    "NEE":  {"sma": 50, "rsi": 40},
-    "CEG":  {"sma": 50, "rsi": 40},
-    "1211.HK": {"sma": 50, "rsi": 40},
-    "INTC": {"sma": 50, "rsi": 40},
-    "BNP":  {"sma": 50, "rsi": 40},   # BNP Paribas
-    "ENGI": {"sma": 50, "rsi": 40},   # Engie
-    "IBE":  {"sma": 50, "rsi": 40},   # Iberdrola
-    "KOMB": {"sma": 50, "rsi": 40},   # Komercni banka
-    "EOAN": {"sma": 50, "rsi": 40},   # E.ON SE
-    "BAS":  {"sma": 50, "rsi": 40},   # BASF SE
-    "FGR":  {"sma": 50, "rsi": 40},   # Fraport AG
-    "AI":   {"sma": 50, "rsi": 40},   # Air Liquide
-    "ALV":  {"sma": 50, "rsi": 40},   # Allianz SE
-    "MUV2": {"sma": 50, "rsi": 40},   # Munich Re
+    "D":      {"sma": 50, "rsi": 40},   # Dominion Energy
+    "NEE":    {"sma": 50, "rsi": 40},   # NextEra Energy
+    "CEG":    {"sma": 50, "rsi": 40},   # Constellation Energy
+    "INTC":   {"sma": 50, "rsi": 40},   # Intel Corporation
+    "BNP":    {"sma": 50, "rsi": 40},   # BNP Paribas
+    "ENGI":   {"sma": 50, "rsi": 40},   # Engie
+    "IBE":    {"sma": 50, "rsi": 40},   # Iberdrola
+    "KOMB":   {"sma": 50, "rsi": 40},   # Komercni banka
+    "FGR":    {"sma": 50, "rsi": 40},   # Eiffage S.A.
+    "AI":     {"sma": 50, "rsi": 40},   # Air Liquide
+    "1211.HK": {"sma": 50, "rsi": 40},  # BYD COMPANY
 } 

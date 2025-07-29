@@ -1,34 +1,30 @@
 Ticker,Name,Close,SMA,RSI,Valuation,Signal
 1211.HK,BYD COMPANY,128.3,130.2,52.0,Pass,EXIT
 6324.T,HARMONIC DRIVE SYSTEMS,2868.0,—,—,Fail,SKIP
-AI,AIR LIQUIDE,176.34,178.43,54.7,Pass,EXIT
-ALFA.ST,Alfa Laval AB,427.0,412.27,58.0,Pass,HOLD
-ALV,Allianz SE                    v,344.5,345.43,50.6,Pass,EXIT
-ATLX,Atlas Lithium Corporation,4.81,4.22,56.7,Pass,HOLD
-BAS,BASF SE                       N,44.11,42.7,54.3,Pass,HOLD
-BEAM,Beam Therapeutics Inc.,20.3,19.36,51.9,Pass,HOLD
-BMI,"Badger Meter, Inc.",191.8699951171875,—,—,Fail,SKIP
-BNP,BNP PARIBAS ACT.A,78.7,76.73,57.2,Pass,HOLD
-CEG,Constellation Energy Corporatio,336.56,309.63,64.8,Pass,HOLD
-D,"Dominion Energy, Inc.",58.26,56.43,57.8,Pass,HOLD
-ENGI,ENGIE,19.65,19.48,52.0,Pass,HOLD
-EOAN,E.ON SE                       N,15.72,15.65,48.1,Pass,HOLD
-EOSE,"Eos Energy Enterprises, Inc.",6.05,5.12,61.9,Pass,HOLD
+AI,AIR LIQUIDE,175.9,178.42,53.5,Pass,EXIT
+ALFA.ST,Alfa Laval AB,426.0,412.26,57.4,Pass,HOLD
+ATLX,Atlas Lithium Corporation,4.76,4.22,56.0,Pass,HOLD
+BEAM,Beam Therapeutics Inc.,20.36,19.36,52.2,Pass,HOLD
+BMI,"Badger Meter, Inc.",186.80999755859375,—,—,Fail,SKIP
+BNP,BNP PARIBAS ACT.A,78.56,76.73,56.7,Pass,HOLD
+CEG,—,—,—,NoPrice,SKIP,
+D,"Dominion Energy, Inc.",58.0,56.43,56.2,Pass,HOLD
+ENGI,ENGIE,19.62,19.48,51.4,Pass,HOLD
+EOSE,"Eos Energy Enterprises, Inc.",5.99,5.12,60.7,Pass,HOLD
 FGR,EIFFAGE,117.95,118.58,53.2,Pass,EXIT
-FLNC,"Fluence Energy, Inc.",8.73,7.71,58.0,Pass,HOLD
-FLS,Flowserve Corporation,57.0,52.2,67.6,Pass,HOLD
-GWH,"ESS Tech, Inc.",1.93,1.51,55.6,Pass,HOLD
-IBE,ACCIONES IBERDROLA,15.19,15.72,38.2,Pass,EXIT
-INTC,Intel Corporation,20.68,21.65,37.3,Pass,EXIT
-KOMB,KOMERCNI BANKA,1041.0,1020.47,59.2,Pass,HOLD
-LEU,Centrus Energy Corp.,237.68600463867188,—,—,Fail,SKIP
-MUV2,MUENCHENER RUECKVERS.-GES. AG V,574.4,565.5,57.3,Pass,HOLD
-NEE,"NextEra Energy, Inc.",71.88,72.23,45.1,Pass,EXIT
-NUKZ,Exchange Traded Concepts Trust ,61.2,47.36,71.7,Pass,HOLD
+FLNC,"Fluence Energy, Inc.",8.81,7.71,59.1,Pass,HOLD
+FLS,Flowserve Corporation,56.21,52.18,65.3,Pass,HOLD
+GWH,"ESS Tech, Inc.",1.89,1.51,54.6,Pass,HOLD
+IBE,ACCIONES IBERDROLA,15.22,15.72,38.9,Pass,EXIT
+INTC,Intel Corporation,20.61,21.63,36.9,Pass,EXIT
+KOMB,KOMERCNI BANKA,1043.0,1020.51,60.0,Pass,HOLD
+LEU,Centrus Energy Corp.,235.15499877929688,—,—,Fail,SKIP
+NEE,"NextEra Energy, Inc.",71.91,72.23,45.2,Pass,EXIT
+NUKZ,Exchange Traded Concepts Trust ,60.65,47.36,69.1,Pass,HOLD
 SANA,"Sana Biotechnology, Inc.",4.57,3.72,62.8,Pass,HOLD
-SMR,NuScale Power Corporation,51.45,27.15,67.5,Pass,HOLD
-TMC,TMC the metals company Inc.,7.09,6.94,52.4,Pass,HOLD
-URNM,Sprott Uranium Miners ETF,48.07,39.2,54.5,Pass,HOLD
-VRT,"Vertiv Holdings, LLC",145.08999633789062,—,—,Fail,SKIP
-WIX,Wix.com Ltd.,150.77,156.52,40.7,Pass,EXIT
-XYL,Xylem Inc.,132.38999938964844,—,—,Fail,SKIP
+SMR,NuScale Power Corporation,50.05,27.14,64.6,Pass,HOLD
+TMC,TMC the metals company Inc.,7.0,6.94,51.6,Pass,HOLD
+URNM,Sprott Uranium Miners ETF,47.76,39.2,52.9,Pass,HOLD
+VRT,"Vertiv Holdings, LLC",145.47000122070312,—,—,Fail,SKIP
+WIX,Wix.com Ltd.,150.35,156.51,39.8,Pass,EXIT
+XYL,Xylem Inc.,132.2550048828125,—,—,Fail,SKIP
