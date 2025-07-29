@@ -1,26 +1,34 @@
 Ticker,Name,Close,SMA,RSI,Valuation,Signal
 1211.HK,BYD COMPANY,128.3,130.2,52.0,Pass,EXIT
 6324.T,HARMONIC DRIVE SYSTEMS,2868.0,—,—,Fail,SKIP
+AI,AIR LIQUIDE,176.7,178.43,55.7,Pass,EXIT
+ALFA.ST,Alfa Laval AB,427.8,412.28,58.5,Pass,HOLD
+ALV,Allianz SE                    v,344.5,345.43,50.6,Pass,EXIT
 ATLX,Atlas Lithium Corporation,4.66,4.2,54.5,Pass,HOLD
+BAS,BASF SE                       N,44.28,42.7,55.4,Pass,HOLD
 BEAM,Beam Therapeutics Inc.,20.83,19.25,55.1,Pass,HOLD
-BNP,BNP PARIBAS ACT.A,77.82,76.71,53.8,Pass,HOLD
+BNP,BNP PARIBAS ACT.A,78.85,76.74,57.7,Pass,HOLD
 CEG,Constellation Energy Corporatio,328.66,308.58,60.5,Pass,HOLD
 D,"Dominion Energy, Inc.",58.0,56.36,56.2,Pass,HOLD
-ENGI,ENGIE,19.67,19.48,52.6,Pass,HOLD
+ENGI,ENGIE,19.64,19.48,51.7,Pass,HOLD
+EOAN,E.ON SE                       N,15.75,15.65,49.1,Pass,HOLD
 EOSE,"Eos Energy Enterprises, Inc.",6.18,5.06,65.0,Pass,HOLD
+FGR,EIFFAGE,117.85,118.58,52.8,Pass,EXIT
 GWH,"ESS Tech, Inc.",1.96,1.48,56.2,Pass,HOLD
-IBE,ACCIONES IBERDROLA,15.19,15.71,38.1,Pass,EXIT
+IBE,ACCIONES IBERDROLA,15.21,15.72,38.8,Pass,EXIT
 INTC,Intel Corporation,20.68,21.65,37.3,Pass,EXIT
-KOMB,KOMERCNI BANKA,1034.0,1020.33,55.9,Pass,HOLD
+KOMB,KOMERCNI BANKA,1041.0,1020.47,59.2,Pass,HOLD
 LEU,Centrus Energy Corp.,239.39999389648438,—,—,Fail,SKIP
+MUV2,MUENCHENER RUECKVERS.-GES. AG V,574.6,565.51,57.4,Pass,HOLD
 NEE,"NextEra Energy, Inc.",71.34,72.27,42.8,Pass,EXIT
 NTLA,"Intellia Therapeutics, Inc.",13.11,11.01,61.4,Pass,HOLD
-NUKZ,Exchange Traded Concepts Trust ,60.88,56.65,70.8,Pass,HOLD
+NUKZ,Exchange Traded Concepts Trust ,60.88,47.17,70.8,Pass,HOLD
 OKLO,Oklo Inc.,75.5,60.74,68.7,Pass,HOLD
 SANA,"Sana Biotechnology, Inc.",4.88,3.65,72.6,Pass,HOLD
-SMR,NuScale Power Corporation,50.99,41.3,66.9,Pass,HOLD
+SMR,NuScale Power Corporation,50.99,26.81,66.9,Pass,HOLD
 STOR,iShrs ESH UCITS ETF USD A,5.48,5.17,68.6,Pass,HOLD
 TMC,TMC the metals company Inc.,7.45,6.85,56.5,Pass,HOLD
-URNM,Sprott Uranium Miners ETF,48.23,47.27,55.3,Pass,HOLD
+URNM,Sprott Uranium Miners ETF,48.23,39.06,55.3,Pass,HOLD
 U_T,Sprott Physical Uranium Trust,16.29,17.22,42.1,Pass,EXIT
 WIX,Wix.com Ltd.,150.5,156.46,40.0,Pass,EXIT
+XYL,Xylem Inc.,132.25999450683594,—,—,Fail,SKIP

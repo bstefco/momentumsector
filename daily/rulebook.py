@@ -1,11 +1,16 @@
-# rulebook.py – Ticker‑specific technical rules
+# rulebook.py – Ticker‑specific technical rules
 # Only the tickers the user explicitly wants.
 
 RULES = {
-    # ── Smaller / high-beta (SMA-30, RSI≤35)
-    "URNM": {"sma": 30, "rsi": 35},
-    "LEU":  {"sma": 30, "rsi": 35},
-    "SMR":  {"sma": 30, "rsi": 35},
+    # ── Thematic (SMA-100, RSI≤45)
+    "URNM":  {"sma": 100, "rsi": 45},   # Sprott Uranium Miners ETF
+    "NUKZ":  {"sma": 100, "rsi": 45},   # Range Nuclear Renaissance ETF
+    "XYL":   {"sma": 100, "rsi": 45},   # Xylem
+    "ALFA.ST":{"sma": 100, "rsi": 45},   # Alfa Laval
+    "LEU":   {"sma": 100, "rsi": 45},   # Centrus
+    "SMR":   {"sma": 100, "rsi": 45},   # NuScale Power
+
+    # ── High-beta / smaller (SMA-30, RSI≤35)
     "OKLO": {"sma": 30, "rsi": 35},
     "SANA": {"sma": 30, "rsi": 35},
     "NTLA": {"sma": 30, "rsi": 35},
@@ -14,7 +19,6 @@ RULES = {
     "EOSE": {"sma": 30, "rsi": 35},
     "GWH":  {"sma": 30, "rsi": 35},
     "STOR": {"sma": 30, "rsi": 35},    # iShares Energy Storage & Hydro ETF (SIX)
-    "NUKZ": {"sma": 30, "rsi": 35},
     "U_T": {"sma": 30, "rsi": 35},   # TSX symbol for the uranium trust
     "ATLX": {"sma": 30, "rsi": 35},   # Atlas Lithium
     "BEAM": {"sma": 30, "rsi": 35},   # Beam Therapeutics
@@ -30,4 +34,10 @@ RULES = {
     "ENGI": {"sma": 50, "rsi": 40},   # Engie
     "IBE":  {"sma": 50, "rsi": 40},   # Iberdrola
     "KOMB": {"sma": 50, "rsi": 40},   # Komercni banka
+    "EOAN": {"sma": 50, "rsi": 40},   # E.ON SE
+    "BAS":  {"sma": 50, "rsi": 40},   # BASF SE
+    "FGR":  {"sma": 50, "rsi": 40},   # Fraport AG
+    "AI":   {"sma": 50, "rsi": 40},   # Air Liquide
+    "ALV":  {"sma": 50, "rsi": 40},   # Allianz SE
+    "MUV2": {"sma": 50, "rsi": 40},   # Munich Re
 } 

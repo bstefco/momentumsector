@@ -5,6 +5,11 @@ from datetime import date
 sys.path.append(str(pathlib.Path(__file__).parent))
 from rulebook import RULES
 
+# RULES:
+#   HIGH_BETA    ➜ SMA-30, RSI≤35
+#   ESTABLISHED  ➜ SMA-50, RSI≤40
+#   THEMATIC     ➜ SMA-100, RSI≤45
+
 # Map display tickers to Yahoo symbols
 ALIAS = {
     "U_T": "SRUUF",     # Sprott Physical Uranium Trust (USD OTC)
@@ -14,14 +19,31 @@ ALIAS = {
     "ENGI": "ENGI.PA",   # Engie – Euronext Paris
     "IBE":  "IBE.MC",    # Iberdrola – Bolsa Madrid
     "KOMB": "KOMB.PR",   # Komercni banka – Prague exchange
+    "EOAN": "EOAN.DE",   # E.ON SE – Deutsche Börse
+    "BAS":  "BAS.DE",    # BASF SE – Deutsche Börse
+    "FGR":  "FGR.PA",    # Eiffage S.A. – Euronext Paris
+    "AI":   "AI.PA",     # Air Liquide – Euronext Paris
+    "ALV":  "ALV.DE",    # Allianz SE – Deutsche Börse
+    "MUV2": "MUV2.DE",   # Munich Re – Deutsche Börse
+    "ALFA.ST": "ALFA.ST", # Alfa Laval – Stockholm
 }
 
 # ETFs / trusts with no earnings → auto-pass valuation
 ETF_SET = {"NUKZ", "U_T", "STOR"}
 
+# Ticker categorization sets
+HIGH_BETA = {
+    "ATLX","BEAM","EOSE","GWH","SANA","TMC","WIX","6324.T"
+}
+
+THEMATIC = {
+    "URNM","NUKZ","XYL","ALFA.ST","LEU","SMR"
+}
+
 ESTABLISHED = {
     "D","NEE","CEG","INTC",          # existing
-    "BNP","ENGI","IBE","KOMB"        # new
+    "BNP","ENGI","IBE","KOMB",       # new
+    "EOAN","BAS","FGR","AI","ALV","MUV2"  # European established
 }
 
 def valuation_pass(ticker: str, info: dict) -> bool:
