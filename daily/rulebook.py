@@ -23,6 +23,10 @@ RULES = {
     "ATLX": {"sma": 30, "rsi": 35},   # Atlas Lithium
     "BEAM": {"sma": 30, "rsi": 35},   # Beam Therapeutics
     "6324.T": {"sma": 30, "rsi": 35}, # Harmonic Drive Systems (Tokyo)
+    "VRT":  {"sma": 30, "rsi": 35},   # Vertiv Holdings
+    "FLS":  {"sma": 30, "rsi": 35},   # Flowserve Corporation
+    "BMI":  {"sma": 30, "rsi": 35},   # Badger Meter
+    "FLNC": {"sma": 30, "rsi": 35},   # Fluence Energy
 
     # ── Established players (SMA-50, RSI≤40)
     "D":    {"sma": 50, "rsi": 40},

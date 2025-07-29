@@ -33,7 +33,8 @@ ETF_SET = {"NUKZ", "U_T", "STOR"}
 
 # Ticker categorization sets
 HIGH_BETA = {
-    "ATLX","BEAM","EOSE","GWH","SANA","TMC","WIX","6324.T"
+    "ATLX","BEAM","EOSE","GWH","SANA","TMC","WIX","6324.T",
+    "VRT","FLS","BMI","FLNC"
 }
 
 THEMATIC = {
