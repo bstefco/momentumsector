@@ -29,6 +29,7 @@ jobs:
         run: |
           pip install pandas yfinance numpy
           pip install markdown PyYAML
+          pip install requests==2.32.4
 
       - name: Run momentum screen
         run: python sector_momentum_screen.py
@@ -70,9 +71,11 @@ jobs:
           branch: main
           file_pattern: docs/
 
-      - name: Generate and send email report
+      - name: Generate and send email report and Slack notification
         env:
           EMAIL_PASSWORD: ${{ secrets.Email }}
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          SLACK_WEBHOOK_URL_REPORTS: ${{ secrets.SLACK_WEBHOOK_URL_REPORTS }}
         run: python3 generate_email.py
 
       - name: Create notification issue

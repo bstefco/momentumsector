@@ -20,17 +20,21 @@ def send_slack_message(message: str, webhook_url: Optional[str] = None) -> bool:
         webhook_url = os.environ.get("SLACK_WEBHOOK_URL")
     
     if not webhook_url:
+        print("WARNING: No Slack webhook URL provided. Skipping Slack notification.")
         logger.warning("No Slack webhook URL provided. Skipping Slack notification.")
         return False
     
     payload = {"text": message}
     
     try:
+        print(f"Attempting to send Slack message to webhook: {webhook_url[:20]}...")
         response = requests.post(webhook_url, json=payload, timeout=10)
         response.raise_for_status()
+        print("Slack message sent successfully!")
         logger.info("Slack message sent successfully")
         return True
     except Exception as e:
+        print(f"ERROR: Failed to send Slack message: {e}")
         logger.error(f"Failed to send Slack message: {e}")
         return False
 
@@ -53,6 +57,10 @@ Your daily momentum screen is ready for review.
     
     # Use dedicated webhook for reports, fallback to main webhook
     webhook_url = os.environ.get("SLACK_WEBHOOK_URL_REPORTS") or os.environ.get("SLACK_WEBHOOK_URL")
+    if os.environ.get("SLACK_WEBHOOK_URL_REPORTS"):
+        print("Using dedicated reports webhook for daily notification")
+    else:
+        print("Using main webhook for daily notification (reports webhook not configured)")
     return send_slack_message(message, webhook_url)
 
 def send_monthly_notification(report_url: str) -> bool:
@@ -74,4 +82,8 @@ Your comprehensive sector-momentum analysis is ready.
     
     # Use dedicated webhook for reports, fallback to main webhook
     webhook_url = os.environ.get("SLACK_WEBHOOK_URL_REPORTS") or os.environ.get("SLACK_WEBHOOK_URL")
+    if os.environ.get("SLACK_WEBHOOK_URL_REPORTS"):
+        print("Using dedicated reports webhook for monthly notification")
+    else:
+        print("Using main webhook for monthly notification (reports webhook not configured)")
     return send_slack_message(message, webhook_url) 

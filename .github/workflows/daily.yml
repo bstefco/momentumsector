@@ -37,7 +37,9 @@ jobs:
           commit_message: 'Update daily_screen results [auto]'
           file_pattern: 'docs/daily_screen.*'
 
-      - name: Send daily email
+      - name: Send daily email and Slack notification
         env:
           EMAIL_PASSWORD: ${{ secrets.Email }}
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          SLACK_WEBHOOK_URL_REPORTS: ${{ secrets.SLACK_WEBHOOK_URL_REPORTS }}
         run: python3 daily/generate_daily_email.py

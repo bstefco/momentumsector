@@ -10,12 +10,19 @@ ALIAS = {
     "U_T": "SRUUF",     # Sprott Physical Uranium Trust (USD OTC)
     # use "U.TO" instead if you prefer CAD TSX pricing
     "STOR": "STOR.SW",   # SIX Swiss Exchange symbol for the ETF
+    "BNP":  "BNP.PA",    # BNP Paribas – Euronext Paris
+    "ENGI": "ENGI.PA",   # Engie – Euronext Paris
+    "IBE":  "IBE.MC",    # Iberdrola – Bolsa Madrid
+    "KOMB": "KOMB.PR",   # Komercni banka – Prague exchange
 }
 
 # ETFs / trusts with no earnings → auto-pass valuation
 ETF_SET = {"NUKZ", "U_T", "STOR"}
 
-ESTABLISHED = {"D", "NEE", "CEG", "INTC", "1211.HK"}
+ESTABLISHED = {
+    "D","NEE","CEG","INTC",          # existing
+    "BNP","ENGI","IBE","KOMB"        # new
+}
 
 def valuation_pass(ticker: str, info: dict) -> bool:
     pe = info.get("forwardPE") or info.get("trailingPE")
