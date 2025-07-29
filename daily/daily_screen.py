@@ -10,6 +10,52 @@ from rulebook import RULES
 #   ESTABLISHED  ➜ SMA-50, RSI≤40
 #   THEMATIC     ➜ SMA-100, RSI≤45
 
+# ── THREE-TIER RULE SETS ──────────────────────────────────────────────────────
+# THEME: SMA-100, RSI≤45
+THEMATIC_RULES = {
+    "URNM":  {"sma": 100, "rsi": 45},
+    "NUKZ":  {"sma": 100, "rsi": 45},
+    "XYL":   {"sma": 100, "rsi": 45},
+    "ALFA.ST":{"sma": 100, "rsi": 45},
+    "LEU":   {"sma": 100, "rsi": 45},
+    "SMR":   {"sma": 100, "rsi": 45},
+}
+
+# HIGH-BETA: SMA-30, RSI≤35
+HIGH_BETA_RULES = {
+    "ATLX":   {"sma": 30, "rsi": 35},
+    "BEAM":   {"sma": 30, "rsi": 35},
+    "BMI":    {"sma": 30, "rsi": 35},
+    "EOSE":   {"sma": 30, "rsi": 35},
+    "FLNC":   {"sma": 30, "rsi": 35},
+    "FLS":    {"sma": 30, "rsi": 35},
+    "GWH":    {"sma": 30, "rsi": 35},
+    "SANA":   {"sma": 30, "rsi": 35},
+    "TMC":    {"sma": 30, "rsi": 35},
+    "VRT":    {"sma": 30, "rsi": 35},
+    "WIX":    {"sma": 30, "rsi": 35},
+    "6324.T": {"sma": 30, "rsi": 35},
+}
+
+# ESTABLISHED: SMA-50, RSI≤40
+ESTABLISHED_RULES = {
+    "D":      {"sma": 50, "rsi": 40},
+    "NEE":    {"sma": 50, "rsi": 40},
+    "CEG":    {"sma": 50, "rsi": 40},
+    "INTC":   {"sma": 50, "rsi": 40},
+    "BNP":    {"sma": 50, "rsi": 40},
+    "ENGI":   {"sma": 50, "rsi": 40},
+    "IBE":    {"sma": 50, "rsi": 40},
+    "KOMB":   {"sma": 50, "rsi": 40},
+    "EOAN":   {"sma": 50, "rsi": 40},
+    "BAS":    {"sma": 50, "rsi": 40},
+    "FGR":    {"sma": 50, "rsi": 40},
+    "AI":     {"sma": 50, "rsi": 40},
+    "ALV":    {"sma": 50, "rsi": 40},
+    "MUV2":   {"sma": 50, "rsi": 40},
+    "1211.HK": {"sma": 50, "rsi": 40},
+}
+
 # Map display tickers to Yahoo symbols
 ALIAS = {
     "U_T": "SRUUF",     # Sprott Physical Uranium Trust (USD OTC)
@@ -32,20 +78,9 @@ ALIAS = {
 ETF_SET = {"NUKZ", "U_T", "STOR"}
 
 # Ticker categorization sets
-HIGH_BETA = {
-    "ATLX","BEAM","EOSE","GWH","SANA","TMC","WIX","6324.T",
-    "VRT","FLS","BMI","FLNC"
-}
-
-THEMATIC = {
-    "URNM","NUKZ","XYL","ALFA.ST","LEU","SMR"
-}
-
-ESTABLISHED = {
-    "D","NEE","CEG","INTC",          # existing
-    "BNP","ENGI","IBE","KOMB",       # new
-    "EOAN","BAS","FGR","AI","ALV","MUV2"  # European established
-}
+HIGH_BETA = set(HIGH_BETA_RULES.keys())
+THEMATIC = set(THEMATIC_RULES.keys())
+ESTABLISHED = set(ESTABLISHED_RULES.keys())
 
 def valuation_pass(ticker: str, info: dict) -> bool:
     pe = info.get("forwardPE") or info.get("trailingPE")
@@ -75,7 +110,9 @@ def safe_round(val, ndigits):
     return round(float(val), ndigits) if val is not None else "—"
 
 records = []
-for ticker, rule in RULES.items():
+# Combine all rule dictionaries
+ALL_RULES = {**THEMATIC_RULES, **HIGH_BETA_RULES, **ESTABLISHED_RULES}
+for ticker, rule in ALL_RULES.items():
     # -------------------------------------------------
     #  Price history (adjusted)  +  company name
     # -------------------------------------------------
@@ -238,6 +275,43 @@ html.append('</tbody></table></body></html>')
 
 with open(out_dir / "daily_screen.html", "w", encoding="utf-8") as f:
     f.write('\n'.join(html))
+
+# ── 5. Add Exit-Action tables ─────────────────────────────────────────────────
+cheat_chunks = [
+    ("High-Beta / Tactical – EXIT rule: sell entire (or ≥ 50 %) next day",
+     list(HIGH_BETA_RULES.keys())),
+    ("Thematic Momentum – EXIT rule: hold/trim; sell only if thesis breaks",
+     list(THEMATIC_RULES.keys())),
+    ("Dividend / Established – EXIT rule: usually ignore; may average-down",
+     list(ESTABLISHED_RULES.keys())),
+]
+
+with open(out_dir / "daily_screen.html", "a", encoding="utf-8") as f:
+    for title, ticks in cheat_chunks:
+        df = pd.DataFrame(
+            {"Ticker": ticks,
+             "What to do on EXIT": [title.split("–")[1].strip()]*len(ticks)}
+        )
+        f.write(f"<h3 style='margin-top:2em;'>{title}</h3>")
+        f.write(df.to_html(index=False, escape=False))
+
+# ── 6. Add enhanced disclaimer with Thesis-Break checklist ─────────────────────
+disclaimer_html = """
+    <h4>Disclaimer</h4>
+    <p>This screener is for educational purposes only and is <strong>not</strong> investment advice.</p>
+
+    <h4 style='margin-top:1em;'>Thesis-Break Test for Thematic Holdings</h4>
+    <p>Act on EXIT <em>only</em> if <strong>two or more</strong> of these red flags appear:</p>
+    <ol>
+      <li><strong>Narrative flip</strong>&nbsp;&mdash; project or major customer lost.</li>
+      <li><strong>Regulatory hit</strong>&nbsp;&mdash; new rule or licence denial undermines the business.</li>
+      <li><strong>Moat breached</strong>&nbsp;&mdash; competitor leap-frogs tech or captures key share.</li>
+      <li><strong>Balance-sheet blow-up</strong>&nbsp;&mdash; leverage spike, credit-rating plunge, or dilutive rescue financing.</li>
+    </ol>
+    """
+
+with open(out_dir / "daily_screen.html", "a", encoding="utf-8") as f:
+    f.write(disclaimer_html)
 
 table.to_csv(out_dir / "daily_screen.csv", index=False)
 print("✅ daily screen updated", date.today())
