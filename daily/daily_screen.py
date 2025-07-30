@@ -19,6 +19,7 @@ THEMATIC_RULES = {
     "ALFA.ST":{"sma": 100, "rsi": 45},
     "LEU":   {"sma": 100, "rsi": 45},
     "SMR":   {"sma": 100, "rsi": 45},
+    "TSLA":  {"sma": 100, "rsi": 45},
 }
 
 # 🔥 HIGH-BETA / Tactical (SMA-30, RSI≤35) – Short-term tactical trades
@@ -33,8 +34,7 @@ HIGH_BETA_RULES = {
     "KD":     {"sma": 30, "rsi": 35},
     "ONON":   {"sma": 30, "rsi": 35},
     "SANA":   {"sma": 30, "rsi": 35},
-    "TMC":    {"sma": 30, "rsi": 35},
-    "TSLA":   {"sma": 30, "rsi": 35},
+
     "VEEV":   {"sma": 30, "rsi": 35},
     "VRT":    {"sma": 30, "rsi": 35},
     "WIX":    {"sma": 30, "rsi": 35},
@@ -43,9 +43,9 @@ HIGH_BETA_RULES = {
 
 # 🏢 DIVIDEND / Established (SMA-50, RSI≤40) – Core & income holdings
 ESTABLISHED_RULES = {
-    "1211.HK": {"sma": 50, "rsi": 40},
+    "BYDDY": {"sma": 50, "rsi": 40},
     "AI":     {"sma": 50, "rsi": 40},
-    "ALV":    {"sma": 50, "rsi": 40},
+
     "ASML":   {"sma": 50, "rsi": 40},
     "BNP":    {"sma": 50, "rsi": 40},
     "CEG":    {"sma": 50, "rsi": 40},
@@ -72,7 +72,7 @@ ALIAS = {
     "FGR":  "FGR.PA",    # Eiffage S.A. – Euronext Paris
     "AI":   "AI.PA",     # Air Liquide – Euronext Paris
     "ALFA.ST": "ALFA.ST", # Alfa Laval – Stockholm
-    "ALV":  "ALV.DE",    # Allianz SE – Deutsche Börse
+
     "ASML": "ASML",      # ASML Holding
     "NTDOY": "NTDOY",    # Nintendo
     "PGR":  "PGR",       # Progressive Corporation
