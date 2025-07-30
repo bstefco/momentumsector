@@ -1,30 +1,30 @@
 Ticker,Name,Close,SMA,RSI,Valuation,Signal
-1211.HK,BYD COMPANY,120.8,129.68,39.7,Pass,EXIT
+1211.HK,BYD COMPANY,120.9,129.68,39.8,Pass,EXIT
 6324.T,HARMONIC DRIVE SYSTEMS,2852.0,—,—,Fail,SKIP
-AI,AIR LIQUIDE,173.74,178.17,46.4,Pass,EXIT
+AI,AIR LIQUIDE,174.0,178.17,47.2,Pass,EXIT
 ALFA.ST,Alfa Laval AB,427.4,412.15,58.1,Pass,HOLD
-ALV,Allianz SE                    v,344.1,345.29,50.1,Pass,EXIT
+ALV,Allianz SE                    v,344.9,345.3,51.1,Pass,EXIT
 ASML,ASML Holding N.V. - New York Re,718.49,761.74,40.0,Pass,EXIT
 ATLX,Atlas Lithium Corporation,4.87,4.22,57.7,Pass,HOLD
-BAS,BASF SE                       N,44.63,42.73,56.9,Pass,HOLD
+BAS,BASF SE                       N,44.19,42.72,54.7,Pass,HOLD
 BEAM,Beam Therapeutics Inc.,19.93,19.34,49.8,Pass,HOLD
 BMI,"Badger Meter, Inc.",188.0,—,—,Fail,SKIP
-BNP,BNP PARIBAS ACT.A,78.31,76.74,55.5,Pass,HOLD
+BNP,BNP PARIBAS ACT.A,78.39,76.74,56.0,Pass,HOLD
 CEG,Constellation Energy Corporatio,330.52,309.51,61.6,Pass,HOLD
 D,"Dominion Energy, Inc.",58.66,56.44,60.1,Pass,HOLD
-ENGI,ENGIE,19.55,19.49,49.4,Pass,HOLD
-EOAN,E.ON SE                       N,15.78,15.65,50.2,Pass,HOLD
+ENGI,ENGIE,19.61,19.49,51.2,Pass,HOLD
+EOAN,E.ON SE                       N,15.81,15.65,50.8,Pass,HOLD
 EOSE,"Eos Energy Enterprises, Inc.",5.95,5.12,59.9,Pass,HOLD
 FGR,EIFFAGE,117.85,118.46,52.6,Pass,EXIT
 FLNC,"Fluence Energy, Inc.",8.45,7.7,54.7,Pass,HOLD
 FLS,Flowserve Corporation,56.2,52.18,65.3,Pass,HOLD
 GWH,"ESS Tech, Inc.",1.87,1.51,54.0,Pass,HOLD
-IBE,ACCIONES IBERDROLA,15.22,15.71,39.5,Pass,EXIT
+IBE,ACCIONES IBERDROLA,15.24,15.71,40.0,Pass,EXIT
 INTC,Intel Corporation,20.41,21.62,35.8,Pass,EXIT
 KD,"Kyndryl Holdings, Inc.",38.5,40.43,41.4,Pass,EXIT
-KOMB,KOMERCNI BANKA,1043.0,1020.33,60.0,Pass,HOLD
+KOMB,KOMERCNI BANKA,1044.0,1020.35,60.5,Pass,HOLD
 LEU,Centrus Energy Corp.,224.0800018310547,—,—,Fail,SKIP
-MUV2,MUENCHENER RUECKVERS.-GES. AG V,569.8,565.25,51.8,Pass,HOLD
+MUV2,MUENCHENER RUECKVERS.-GES. AG V,570.8,565.27,52.8,Pass,HOLD
 NEE,"NextEra Energy, Inc.",71.95,72.23,45.4,Pass,EXIT
 NTDOY,"Nintendo Co., Ltd.",21.57,21.47,47.4,Pass,HOLD
 NUKZ,Exchange Traded Concepts Trust ,60.03,47.35,65.0,Pass,HOLD
