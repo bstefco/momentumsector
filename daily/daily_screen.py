@@ -11,7 +11,7 @@ from rulebook import RULES
 #   THEMATIC     ➜ SMA-100, RSI≤45
 
 # ── THREE-TIER RULE SETS ──────────────────────────────────────────────────────
-# THEME: SMA-100, RSI≤45
+# 🎯 THEMATIC Momentum (SMA-100, RSI≤45) – Long-term thematic holdings
 THEMATIC_RULES = {
     "URNM":  {"sma": 100, "rsi": 45},
     "NUKZ":  {"sma": 100, "rsi": 45},
@@ -21,7 +21,7 @@ THEMATIC_RULES = {
     "SMR":   {"sma": 100, "rsi": 45},
 }
 
-# HIGH-BETA: SMA-30, RSI≤35
+# 🔥 HIGH-BETA / Tactical (SMA-30, RSI≤35) – Short-term tactical trades
 HIGH_BETA_RULES = {
     "ATLX":   {"sma": 30, "rsi": 35},
     "BEAM":   {"sma": 30, "rsi": 35},
@@ -30,26 +30,40 @@ HIGH_BETA_RULES = {
     "FLNC":   {"sma": 30, "rsi": 35},
     "FLS":    {"sma": 30, "rsi": 35},
     "GWH":    {"sma": 30, "rsi": 35},
+    "KD":     {"sma": 30, "rsi": 35},
+    "ONON":   {"sma": 30, "rsi": 35},
     "SANA":   {"sma": 30, "rsi": 35},
     "TMC":    {"sma": 30, "rsi": 35},
+    "TSLA":   {"sma": 30, "rsi": 35},
+    "VEEV":   {"sma": 30, "rsi": 35},
     "VRT":    {"sma": 30, "rsi": 35},
     "WIX":    {"sma": 30, "rsi": 35},
     "6324.T": {"sma": 30, "rsi": 35},
 }
 
-# ESTABLISHED: SMA-50, RSI≤40
+# 🏢 DIVIDEND / Established (SMA-50, RSI≤40) – Core & income holdings
 ESTABLISHED_RULES = {
-    "D":      {"sma": 50, "rsi": 40},
-    "NEE":    {"sma": 50, "rsi": 40},
-    "CEG":    {"sma": 50, "rsi": 40},
-    "INTC":   {"sma": 50, "rsi": 40},
-    "BNP":    {"sma": 50, "rsi": 40},
-    "ENGI":   {"sma": 50, "rsi": 40},
-    "IBE":    {"sma": 50, "rsi": 40},
-    "KOMB":   {"sma": 50, "rsi": 40},
-    "FGR":    {"sma": 50, "rsi": 40},
-    "AI":     {"sma": 50, "rsi": 40},
     "1211.HK": {"sma": 50, "rsi": 40},
+    "AI":     {"sma": 50, "rsi": 40},
+    "ALV":    {"sma": 50, "rsi": 40},
+    "ASML":   {"sma": 50, "rsi": 40},
+    "BAS":    {"sma": 50, "rsi": 40},
+    "BNP":    {"sma": 50, "rsi": 40},
+    "CEG":    {"sma": 50, "rsi": 40},
+    "D":      {"sma": 50, "rsi": 40},
+    "ENGI":   {"sma": 50, "rsi": 40},
+    "EOAN":   {"sma": 50, "rsi": 40},
+    "FGR":    {"sma": 50, "rsi": 40},
+    "IBE":    {"sma": 50, "rsi": 40},
+    "INTC":   {"sma": 50, "rsi": 40},
+    "KOMB":   {"sma": 50, "rsi": 40},
+    "MUV2":   {"sma": 50, "rsi": 40},
+    "NEE":    {"sma": 50, "rsi": 40},
+    "NTDOY":  {"sma": 50, "rsi": 40},
+    "PGR":    {"sma": 50, "rsi": 40},
+    "RACE":   {"sma": 50, "rsi": 40},
+    "SBUX":   {"sma": 50, "rsi": 40},
+    "TJX":    {"sma": 50, "rsi": 40},
 }
 
 # Map display tickers to Yahoo symbols
@@ -61,6 +75,16 @@ ALIAS = {
     "FGR":  "FGR.PA",    # Eiffage S.A. – Euronext Paris
     "AI":   "AI.PA",     # Air Liquide – Euronext Paris
     "ALFA.ST": "ALFA.ST", # Alfa Laval – Stockholm
+    "ALV":  "ALV.DE",    # Allianz SE – Deutsche Börse
+    "ASML": "ASML",      # ASML Holding
+    "BAS":  "BAS.DE",    # BASF SE – Deutsche Börse
+    "EOAN": "EOAN.DE",   # E.ON SE – Deutsche Börse
+    "MUV2": "MUV2.DE",   # Munich Re – Deutsche Börse
+    "NTDOY": "NTDOY",    # Nintendo
+    "PGR":  "PGR",       # Progressive Corporation
+    "RACE": "RACE",      # Ferrari
+    "SBUX": "SBUX",      # Starbucks
+    "TJX":  "TJX",       # TJX Companies
 }
 
 # ETFs / trusts with no earnings → auto-pass valuation
