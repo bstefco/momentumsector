@@ -1,39 +1,39 @@
 Ticker,Name,Close,SMA,RSI,Valuation,Signal
 6324.T,HARMONIC DRIVE SYSTEMS,2852.0,2729.23,52.3,Pass,HOLD
-AI,AIR LIQUIDE,175.0,178.19,50.5,Pass,BUY
-ALFA.ST,Alfa Laval AB,426.6,412.14,57.4,Pass,HOLD
-ASML,ASML Holding N.V. - New York Re,717.94,761.18,39.9,Pass,BUY
-ATLX,Atlas Lithium Corporation,4.95,4.25,58.8,Pass,HOLD
-BEAM,Beam Therapeutics Inc.,21.13,19.49,55.9,Pass,HOLD
-BMI,"Badger Meter, Inc.",189.04,230.8,21.3,Pass,BUY
-BNP,BNP PARIBAS ACT.A,78.83,76.75,57.8,Pass,HOLD
-BYDDY,"BYD Co., Ltd.",15.48,16.34,41.7,Pass,BUY
-CEG,Constellation Energy Corporatio,338.83,310.47,66.1,Pass,HOLD
-D,"Dominion Energy, Inc.",58.83,56.52,61.1,Pass,HOLD
-ENGI,ENGIE,19.62,19.49,51.5,Pass,HOLD
-EOSE,"Eos Energy Enterprises, Inc.",6.22,5.17,63.5,Pass,HOLD
-FGR,EIFFAGE,118.3,118.47,54.4,Pass,BUY
-FLNC,"Fluence Energy, Inc.",8.39,7.81,53.9,Pass,HOLD
-FLS,Flowserve Corporation,56.52,52.49,66.3,Pass,HOLD
-GWH,"ESS Tech, Inc.",1.86,1.54,53.8,Pass,HOLD
-IBE,ACCIONES IBERDROLA,15.37,15.71,44.2,Pass,BUY
-INTC,Intel Corporation,20.41,21.6,35.7,Pass,BUY
-KD,"Kyndryl Holdings, Inc.",38.65,40.37,42.5,Pass,BUY
+AI,AIR LIQUIDE,174.54,178.18,48.9,Pass,BUY
+ALFA.ST,Alfa Laval AB,428.3,412.16,58.8,Pass,HOLD
+ASML,ASML Holding N.V. - New York Re,720.64,761.23,40.8,Pass,BUY
+ATLX,Atlas Lithium Corporation,4.96,4.25,59.1,Pass,HOLD
+BEAM,Beam Therapeutics Inc.,21.3,19.5,56.6,Pass,HOLD
+BMI,"Badger Meter, Inc.",189.01,230.8,21.3,Pass,BUY
+BNP,BNP PARIBAS ACT.A,78.95,76.75,58.2,Pass,HOLD
+BYDDY,"BYD Co., Ltd.",15.47,16.62,40.5,Pass,BUY
+CEG,Constellation Energy Corporatio,339.66,310.48,66.5,Pass,HOLD
+D,"Dominion Energy, Inc.",58.54,56.51,59.1,Pass,HOLD
+ENGI,ENGIE,19.64,19.49,51.7,Pass,HOLD
+EOSE,"Eos Energy Enterprises, Inc.",6.26,5.17,64.0,Pass,HOLD
+FGR,EIFFAGE,118.25,118.47,54.2,Pass,BUY
+FLNC,"Fluence Energy, Inc.",8.36,7.81,53.7,Pass,HOLD
+FLS,Flowserve Corporation,56.74,52.5,67.0,Pass,HOLD
+GWH,"ESS Tech, Inc.",1.82,1.54,52.9,Pass,HOLD
+IBE,ACCIONES IBERDROLA,15.36,15.71,43.9,Pass,BUY
+INTC,Intel Corporation,20.43,21.6,36.0,Pass,BUY
+KD,"Kyndryl Holdings, Inc.",38.6,40.37,42.1,Pass,BUY
 KOMB,KOMERCNI BANKA,1057.0,1020.61,65.5,Pass,HOLD
-LEU,Centrus Energy Corp.,230.38,123.11,60.4,Pass,HOLD
-NEE,"NextEra Energy, Inc.",71.7,72.17,44.5,Pass,BUY
-NTDOY,"Nintendo Co., Ltd.",21.39,21.5,45.6,Pass,BUY
-NUKZ,Exchange Traded Concepts Trust ,60.77,47.56,67.5,Pass,HOLD
-ONON,On Holding AG,50.63,52.43,42.6,Pass,BUY
-PGR,Progressive Corporation (The),242.45,262.86,36.7,Pass,BUY
-RACE,Ferrari N.V.,504.26,487.37,55.8,Pass,HOLD
-SANA,"Sana Biotechnology, Inc.",4.7,3.79,63.8,Pass,HOLD
-SBUX,Starbucks Corporation,91.74,91.2,45.4,Pass,HOLD
-SMR,NuScale Power Corporation,50.61,27.47,64.3,Pass,HOLD
-TJX,"TJX Companies, Inc. (The)",126.89,125.67,59.1,Pass,HOLD
-TSLA,"Tesla, Inc.",321.81,295.76,51.2,Pass,HOLD
-URNM,Sprott Uranium Miners ETF,47.05,39.32,49.6,Pass,HOLD
-VEEV,Veeva Systems Inc.,286.89,283.14,55.4,Pass,HOLD
-VRT,"Vertiv Holdings, LLC",147.59,127.13,74.4,Pass,HOLD
-WIX,Wix.com Ltd.,142.39,155.97,29.8,Pass,BUY
-XYL,Xylem Inc.,131.17,123.29,53.4,Pass,HOLD
+LEU,Centrus Energy Corp.,230.77,123.12,60.5,Pass,HOLD
+NEE,"NextEra Energy, Inc.",71.56,72.17,44.0,Pass,BUY
+NTDOY,"Nintendo Co., Ltd.",21.35,21.5,45.2,Pass,BUY
+NUKZ,Exchange Traded Concepts Trust ,60.88,47.56,67.8,Pass,HOLD
+ONON,On Holding AG,50.47,52.43,42.1,Pass,BUY
+PGR,Progressive Corporation (The),240.68,262.82,34.3,Pass,BUY
+RACE,Ferrari N.V.,504.93,487.39,56.4,Pass,HOLD
+SANA,"Sana Biotechnology, Inc.",4.61,3.79,62.6,Pass,HOLD
+SBUX,Starbucks Corporation,91.14,91.19,43.7,Pass,BUY
+SMR,NuScale Power Corporation,50.95,27.48,64.8,Pass,HOLD
+TJX,"TJX Companies, Inc. (The)",126.68,125.67,58.3,Pass,HOLD
+TSLA,"Tesla, Inc.",320.36,295.75,50.5,Pass,HOLD
+URNM,Sprott Uranium Miners ETF,47.04,39.32,49.6,Pass,HOLD
+VEEV,Veeva Systems Inc.,286.63,283.13,55.1,Pass,HOLD
+VRT,"Vertiv Holdings, LLC",147.81,127.14,74.5,Pass,HOLD
+WIX,Wix.com Ltd.,142.87,155.98,30.3,Pass,BUY
+XYL,Xylem Inc.,131.27,123.29,53.9,Pass,HOLD
