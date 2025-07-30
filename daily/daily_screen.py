@@ -6,61 +6,61 @@ sys.path.append(str(pathlib.Path(__file__).parent))
 from rulebook import RULES
 
 # RULES:
-#   HIGH_BETA    ➜ SMA-20, RSI≤40
-#   ESTABLISHED  ➜ SMA-50, RSI≤45
-#   THEMATIC     ➜ SMA-50, RSI≤48
+#   HIGH_BETA    ➜ SMA-30, RSI≤35
+#   ESTABLISHED  ➜ SMA-50, RSI≤40
+#   THEMATIC     ➜ SMA-100, RSI≤45
 
 # ── THREE-TIER RULE SETS ──────────────────────────────────────────────────────
-# 🎯 THEMATIC Momentum (SMA-50, RSI≤48) – Long-term thematic holdings
+# 🎯 THEMATIC Momentum (SMA-100, RSI≤45) – Long-term thematic holdings
 THEMATIC_RULES = {
-    "URNM":  {"sma": 50, "rsi": 48},
-    "NUKZ":  {"sma": 50, "rsi": 48},
-    "XYL":   {"sma": 50, "rsi": 48},
-    "ALFA.ST":{"sma": 50, "rsi": 48},
-    "LEU":   {"sma": 50, "rsi": 48},
-    "SMR":   {"sma": 50, "rsi": 48},
+    "URNM":  {"sma": 100, "rsi": 45},
+    "NUKZ":  {"sma": 100, "rsi": 45},
+    "XYL":   {"sma": 100, "rsi": 45},
+    "ALFA.ST":{"sma": 100, "rsi": 45},
+    "LEU":   {"sma": 100, "rsi": 45},
+    "SMR":   {"sma": 100, "rsi": 45},
 }
 
-# 🔥 HIGH-BETA / Tactical (SMA-20, RSI≤40) – Short-term tactical trades
+# 🔥 HIGH-BETA / Tactical (SMA-30, RSI≤35) – Short-term tactical trades
 HIGH_BETA_RULES = {
-    "ATLX":   {"sma": 20, "rsi": 40},
-    "BEAM":   {"sma": 20, "rsi": 40},
-    "BMI":    {"sma": 20, "rsi": 40},
-    "EOSE":   {"sma": 20, "rsi": 40},
-    "FLNC":   {"sma": 20, "rsi": 40},
-    "FLS":    {"sma": 20, "rsi": 40},
-    "GWH":    {"sma": 20, "rsi": 40},
-    "KD":     {"sma": 20, "rsi": 40},
-    "ONON":   {"sma": 20, "rsi": 40},
-    "SANA":   {"sma": 20, "rsi": 40},
-    "TMC":    {"sma": 20, "rsi": 40},
-    "TSLA":   {"sma": 20, "rsi": 40},
-    "VEEV":   {"sma": 20, "rsi": 40},
-    "VRT":    {"sma": 20, "rsi": 40},
-    "WIX":    {"sma": 20, "rsi": 40},
-    "6324.T": {"sma": 20, "rsi": 40},
+    "ATLX":   {"sma": 30, "rsi": 35},
+    "BEAM":   {"sma": 30, "rsi": 35},
+    "BMI":    {"sma": 30, "rsi": 35},
+    "EOSE":   {"sma": 30, "rsi": 35},
+    "FLNC":   {"sma": 30, "rsi": 35},
+    "FLS":    {"sma": 30, "rsi": 35},
+    "GWH":    {"sma": 30, "rsi": 35},
+    "KD":     {"sma": 30, "rsi": 35},
+    "ONON":   {"sma": 30, "rsi": 35},
+    "SANA":   {"sma": 30, "rsi": 35},
+    "TMC":    {"sma": 30, "rsi": 35},
+    "TSLA":   {"sma": 30, "rsi": 35},
+    "VEEV":   {"sma": 30, "rsi": 35},
+    "VRT":    {"sma": 30, "rsi": 35},
+    "WIX":    {"sma": 30, "rsi": 35},
+    "6324.T": {"sma": 30, "rsi": 35},
 }
 
-# 🏢 DIVIDEND / Established (SMA-50, RSI≤45) – Core & income holdings
+# 🏢 DIVIDEND / Established (SMA-50, RSI≤40) – Core & income holdings
 ESTABLISHED_RULES = {
-    "1211.HK": {"sma": 50, "rsi": 45},
-    "AI":     {"sma": 50, "rsi": 45},
-    "ALV":    {"sma": 50, "rsi": 45},
-    "ASML":   {"sma": 50, "rsi": 45},
-    "BNP":    {"sma": 50, "rsi": 45},
-    "CEG":    {"sma": 50, "rsi": 45},
-    "D":      {"sma": 50, "rsi": 45},
-    "ENGI":   {"sma": 50, "rsi": 45},
-    "FGR":    {"sma": 50, "rsi": 45},
-    "IBE":    {"sma": 50, "rsi": 45},
-    "INTC":   {"sma": 50, "rsi": 45},
-    "KOMB":   {"sma": 50, "rsi": 45},
-    "NEE":    {"sma": 50, "rsi": 45},
-    "NTDOY":  {"sma": 50, "rsi": 45},
-    "PGR":    {"sma": 50, "rsi": 45},
-    "RACE":   {"sma": 50, "rsi": 45},
-    "SBUX":   {"sma": 50, "rsi": 45},
-    "TJX":    {"sma": 50, "rsi": 45},
+    "1211.HK": {"sma": 50, "rsi": 40},
+    "AI":     {"sma": 50, "rsi": 40},
+    "ALV":    {"sma": 50, "rsi": 40},
+    "ASML":   {"sma": 50, "rsi": 40},
+    "BNP":    {"sma": 50, "rsi": 40},
+    "CEG":    {"sma": 50, "rsi": 40},
+    "D":      {"sma": 50, "rsi": 40},
+    "ENGI":   {"sma": 50, "rsi": 40},
+    "FGR":    {"sma": 50, "rsi": 40},
+    "IBE":    {"sma": 50, "rsi": 40},
+    "INTC":   {"sma": 50, "rsi": 40},
+    "KOMB":   {"sma": 50, "rsi": 40},
+    "NEE":    {"sma": 50, "rsi": 40},
+    "NTDOY":  {"sma": 50, "rsi": 40},
+    "PGR":    {"sma": 50, "rsi": 40},
+    "RACE":   {"sma": 50, "rsi": 40},
+    "SBUX":   {"sma": 50, "rsi": 40},
+    "TJX":    {"sma": 50, "rsi": 40},
 }
 
 # Map display tickers to Yahoo symbols
@@ -312,11 +312,11 @@ def build_table_html(tier_name, ticker_list, caption):
 
 # Build the three tier tables
 thematic_table = build_table_html("Thematic", list(THEMATIC_RULES.keys()), 
-                                 f"Thematic Momentum (SMA-50, RSI≤48) • {date.today()}")
+                                 f"Thematic Momentum (SMA-100, RSI≤45) • {date.today()}")
 high_beta_table = build_table_html("High-Beta", list(HIGH_BETA_RULES.keys()), 
-                                   f"High-Beta / Tactical (SMA-20, RSI≤40) • {date.today()}")
+                                   f"High-Beta / Tactical (SMA-30, RSI≤35) • {date.today()}")
 established_table = build_table_html("Established", list(ESTABLISHED_RULES.keys()), 
-                                     f"Dividend / Established (SMA-50, RSI≤45) • {date.today()}")
+                                     f"Dividend / Established (SMA-50, RSI≤40) • {date.today()}")
 
 # Add disclaimer
 disclaimer_html = """
