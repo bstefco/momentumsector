@@ -121,7 +121,14 @@ for ticker, rule in ALL_RULES.items():
     #  Price history (adjusted)  +  company name
     # -------------------------------------------------
     yahoo_symbol = ALIAS.get(ticker, ticker)
-    hist = yf.download(yahoo_symbol, period="1000d", auto_adjust=True, progress=False)["Close"].dropna()  # <-- Series
+    data = yf.download(yahoo_symbol, period="1000d", auto_adjust=True, progress=False)
+    if data.empty:
+        records.append([ticker, "—", "—", "—", "NoPrice", "SKIP"])
+        continue
+    
+    hist = data["Close"].dropna()  # <-- Series
+    volume = data["Volume"].dropna()  # <-- Volume Series
+    
     if hist.empty:
         records.append([ticker, "—", "—", "—", "NoPrice", "SKIP"])
         continue
@@ -199,6 +206,22 @@ for ticker, rule in ALL_RULES.items():
             signal = "EXIT"
         else:
             signal = "HOLD"
+
+    # -------------------------------------------------
+    #  Panic-flush filter (overrides BUY)
+    # -------------------------------------------------
+    if signal == "BUY" and len(hist) >= 4 and len(volume) >= 20:
+        # Calculate 3-day price drop percentage
+        drop_3d_pct = ((hist.iloc[-1] - hist.iloc[-4]) / hist.iloc[-4] * 100).item()
+        
+        # Calculate 20-day average volume
+        avg20vol = float(volume.tail(20).mean().item())
+        current_vol = float(volume.iloc[-1].item()) if len(volume) > 0 else 0
+        
+        # Panic-flush condition: -15% drop + 2x volume
+        panic = (drop_3d_pct <= -15) and (current_vol >= 2 * avg20vol)
+        if panic:
+            signal = "EXIT"
 
     records.append([
         ticker, name,
