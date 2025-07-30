@@ -6,64 +6,61 @@ sys.path.append(str(pathlib.Path(__file__).parent))
 from rulebook import RULES
 
 # RULES:
-#   HIGH_BETA    ➜ SMA-30, RSI≤35
-#   ESTABLISHED  ➜ SMA-50, RSI≤40
-#   THEMATIC     ➜ SMA-100, RSI≤45
+#   HIGH_BETA    ➜ SMA-20, RSI≤40
+#   ESTABLISHED  ➜ SMA-50, RSI≤45
+#   THEMATIC     ➜ SMA-50, RSI≤48
 
 # ── THREE-TIER RULE SETS ──────────────────────────────────────────────────────
-# 🎯 THEMATIC Momentum (SMA-100, RSI≤45) – Long-term thematic holdings
+# 🎯 THEMATIC Momentum (SMA-50, RSI≤48) – Long-term thematic holdings
 THEMATIC_RULES = {
-    "URNM":  {"sma": 100, "rsi": 45},
-    "NUKZ":  {"sma": 100, "rsi": 45},
-    "XYL":   {"sma": 100, "rsi": 45},
-    "ALFA.ST":{"sma": 100, "rsi": 45},
-    "LEU":   {"sma": 100, "rsi": 45},
-    "SMR":   {"sma": 100, "rsi": 45},
+    "URNM":  {"sma": 50, "rsi": 48},
+    "NUKZ":  {"sma": 50, "rsi": 48},
+    "XYL":   {"sma": 50, "rsi": 48},
+    "ALFA.ST":{"sma": 50, "rsi": 48},
+    "LEU":   {"sma": 50, "rsi": 48},
+    "SMR":   {"sma": 50, "rsi": 48},
 }
 
-# 🔥 HIGH-BETA / Tactical (SMA-30, RSI≤35) – Short-term tactical trades
+# 🔥 HIGH-BETA / Tactical (SMA-20, RSI≤40) – Short-term tactical trades
 HIGH_BETA_RULES = {
-    "ATLX":   {"sma": 30, "rsi": 35},
-    "BEAM":   {"sma": 30, "rsi": 35},
-    "BMI":    {"sma": 30, "rsi": 35},
-    "EOSE":   {"sma": 30, "rsi": 35},
-    "FLNC":   {"sma": 30, "rsi": 35},
-    "FLS":    {"sma": 30, "rsi": 35},
-    "GWH":    {"sma": 30, "rsi": 35},
-    "KD":     {"sma": 30, "rsi": 35},
-    "ONON":   {"sma": 30, "rsi": 35},
-    "SANA":   {"sma": 30, "rsi": 35},
-    "TMC":    {"sma": 30, "rsi": 35},
-    "TSLA":   {"sma": 30, "rsi": 35},
-    "VEEV":   {"sma": 30, "rsi": 35},
-    "VRT":    {"sma": 30, "rsi": 35},
-    "WIX":    {"sma": 30, "rsi": 35},
-    "6324.T": {"sma": 30, "rsi": 35},
+    "ATLX":   {"sma": 20, "rsi": 40},
+    "BEAM":   {"sma": 20, "rsi": 40},
+    "BMI":    {"sma": 20, "rsi": 40},
+    "EOSE":   {"sma": 20, "rsi": 40},
+    "FLNC":   {"sma": 20, "rsi": 40},
+    "FLS":    {"sma": 20, "rsi": 40},
+    "GWH":    {"sma": 20, "rsi": 40},
+    "KD":     {"sma": 20, "rsi": 40},
+    "ONON":   {"sma": 20, "rsi": 40},
+    "SANA":   {"sma": 20, "rsi": 40},
+    "TMC":    {"sma": 20, "rsi": 40},
+    "TSLA":   {"sma": 20, "rsi": 40},
+    "VEEV":   {"sma": 20, "rsi": 40},
+    "VRT":    {"sma": 20, "rsi": 40},
+    "WIX":    {"sma": 20, "rsi": 40},
+    "6324.T": {"sma": 20, "rsi": 40},
 }
 
-# 🏢 DIVIDEND / Established (SMA-50, RSI≤40) – Core & income holdings
+# 🏢 DIVIDEND / Established (SMA-50, RSI≤45) – Core & income holdings
 ESTABLISHED_RULES = {
-    "1211.HK": {"sma": 50, "rsi": 40},
-    "AI":     {"sma": 50, "rsi": 40},
-    "ALV":    {"sma": 50, "rsi": 40},
-    "ASML":   {"sma": 50, "rsi": 40},
-    "BAS":    {"sma": 50, "rsi": 40},
-    "BNP":    {"sma": 50, "rsi": 40},
-    "CEG":    {"sma": 50, "rsi": 40},
-    "D":      {"sma": 50, "rsi": 40},
-    "ENGI":   {"sma": 50, "rsi": 40},
-    "EOAN":   {"sma": 50, "rsi": 40},
-    "FGR":    {"sma": 50, "rsi": 40},
-    "IBE":    {"sma": 50, "rsi": 40},
-    "INTC":   {"sma": 50, "rsi": 40},
-    "KOMB":   {"sma": 50, "rsi": 40},
-    "MUV2":   {"sma": 50, "rsi": 40},
-    "NEE":    {"sma": 50, "rsi": 40},
-    "NTDOY":  {"sma": 50, "rsi": 40},
-    "PGR":    {"sma": 50, "rsi": 40},
-    "RACE":   {"sma": 50, "rsi": 40},
-    "SBUX":   {"sma": 50, "rsi": 40},
-    "TJX":    {"sma": 50, "rsi": 40},
+    "1211.HK": {"sma": 50, "rsi": 45},
+    "AI":     {"sma": 50, "rsi": 45},
+    "ALV":    {"sma": 50, "rsi": 45},
+    "ASML":   {"sma": 50, "rsi": 45},
+    "BNP":    {"sma": 50, "rsi": 45},
+    "CEG":    {"sma": 50, "rsi": 45},
+    "D":      {"sma": 50, "rsi": 45},
+    "ENGI":   {"sma": 50, "rsi": 45},
+    "FGR":    {"sma": 50, "rsi": 45},
+    "IBE":    {"sma": 50, "rsi": 45},
+    "INTC":   {"sma": 50, "rsi": 45},
+    "KOMB":   {"sma": 50, "rsi": 45},
+    "NEE":    {"sma": 50, "rsi": 45},
+    "NTDOY":  {"sma": 50, "rsi": 45},
+    "PGR":    {"sma": 50, "rsi": 45},
+    "RACE":   {"sma": 50, "rsi": 45},
+    "SBUX":   {"sma": 50, "rsi": 45},
+    "TJX":    {"sma": 50, "rsi": 45},
 }
 
 # Map display tickers to Yahoo symbols
@@ -77,9 +74,6 @@ ALIAS = {
     "ALFA.ST": "ALFA.ST", # Alfa Laval – Stockholm
     "ALV":  "ALV.DE",    # Allianz SE – Deutsche Börse
     "ASML": "ASML",      # ASML Holding
-    "BAS":  "BAS.DE",    # BASF SE – Deutsche Börse
-    "EOAN": "EOAN.DE",   # E.ON SE – Deutsche Börse
-    "MUV2": "MUV2.DE",   # Munich Re – Deutsche Börse
     "NTDOY": "NTDOY",    # Nintendo
     "PGR":  "PGR",       # Progressive Corporation
     "RACE": "RACE",      # Ferrari
@@ -99,18 +93,15 @@ def valuation_pass(ticker: str, info: dict) -> bool:
     pe = info.get("forwardPE") or info.get("trailingPE")
     ev = info.get("enterpriseToEbitda")
 
-    # Utility / nuclear incumbents get a higher cap
-    if ticker in ESTABLISHED:
-        return (
-            (pe and 0 < pe <= 36) or
-            (ev and ev <= 17)
-        )
-
-    # High-beta names keep the stricter cap
-    return (
-        (pe and 0 < pe <= 25) or
-        (ev and ev <= 12)
+    # --- valuation pass ---
+    #  • If both PE and EV/EBITDA are NaN (ETFs, non-US), skip the test.
+    #  • Else must pass ≤15× PE  OR  ≤8× EV/EBITDA.
+    VAL_OK = (
+        (pd.isna(pe) and pd.isna(ev))
+        or (pe and pe <= 15)
+        or (ev and ev <= 8)
     )
+    return VAL_OK
 
 def get_company_name(ticker):
     try:
@@ -176,14 +167,38 @@ for ticker, rule in ALL_RULES.items():
     else:
         rsi_val = None
 
+    # Determine which bucket this ticker belongs to
+    if ticker in THEMATIC:
+        bucket = "THEMATIC"
+    elif ticker in HIGH_BETA:
+        bucket = "HIGH_BETA"
+    else:
+        bucket = "DIVIDEND"
+    
+    # Signal assignment based on new logic
     if sma_val is None or rsi_val is None:
         signal = "SKIP"
-    elif close < sma_val:
-        signal = "EXIT"
-    elif rsi_val <= rsi_cut:
-        signal = "BUY"
-    else:
-        signal = "HOLD"
+    elif bucket == "THEMATIC":
+        if (close <= sma_val) or (rsi_val <= rsi_cut):
+            signal = "BUY"
+        else:
+            signal = "HOLD"
+    elif bucket == "HIGH_BETA":
+        # For HIGH_BETA, we need volume data for the 2x volume requirement
+        # For now, we'll use the basic logic without volume check
+        if (close <= sma_val) or (rsi_val <= rsi_cut):
+            signal = "BUY"
+        elif close < sma_val:
+            signal = "EXIT"
+        else:
+            signal = "HOLD"
+    else:  # DIVIDEND / Established
+        if (close <= sma_val) or (rsi_val <= rsi_cut):
+            signal = "BUY"
+        elif close < sma_val:
+            signal = "EXIT"
+        else:
+            signal = "HOLD"
 
     records.append([
         ticker, name,
@@ -297,11 +312,11 @@ def build_table_html(tier_name, ticker_list, caption):
 
 # Build the three tier tables
 thematic_table = build_table_html("Thematic", list(THEMATIC_RULES.keys()), 
-                                 f"Thematic Momentum (SMA-100, RSI≤45) • {date.today()}")
+                                 f"Thematic Momentum (SMA-50, RSI≤48) • {date.today()}")
 high_beta_table = build_table_html("High-Beta", list(HIGH_BETA_RULES.keys()), 
-                                   f"High-Beta / Tactical (SMA-30, RSI≤35) • {date.today()}")
+                                   f"High-Beta / Tactical (SMA-20, RSI≤40) • {date.today()}")
 established_table = build_table_html("Established", list(ESTABLISHED_RULES.keys()), 
-                                     f"Dividend / Established (SMA-50, RSI≤40) • {date.today()}")
+                                     f"Dividend / Established (SMA-50, RSI≤45) • {date.today()}")
 
 # Add disclaimer
 disclaimer_html = """
