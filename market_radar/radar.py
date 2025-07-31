@@ -9,6 +9,7 @@ Designed to run as a cron / GitHub Action once per hour US-trading hours.
 
 import os, sys, sqlite3, datetime as dt, requests, feedparser, json, textwrap, time
 import yfinance as yf
+import pandas as pd, io, zipfile
 from pathlib import Path
 from dotenv import load_dotenv
 
@@ -25,6 +26,7 @@ RSS_STATIC = {
 }
 
 YOLO_API = "https://yolostocks.live/api/top"
+FINRA_URL = "https://cdn.finra.org/equity/regsho/daily/CNMSshvol{date}.txt"
 DB_FILE  = Path(__file__).with_name("sent.db")
 
 # ───────────────────────────────────────────────────────────────────────────────
@@ -50,6 +52,8 @@ con = sqlite3.connect(DB_FILE)
 cur = con.cursor()
 cur.execute("CREATE TABLE IF NOT EXISTS sent_rss (guid TEXT PRIMARY KEY)")
 cur.execute("CREATE TABLE IF NOT EXISTS yolo_hist (ticker TEXT, date TEXT, cnt INT, "
+            "PRIMARY KEY(ticker,date))")
+cur.execute("CREATE TABLE IF NOT EXISTS finra_hist (ticker TEXT, date TEXT, ratio REAL, "
             "PRIMARY KEY(ticker,date))")
 con.commit()
 
@@ -166,13 +170,48 @@ def short_interest_alert():
             )
 
 # ───────────────────────────────────────────────────────────────────────────────
-# 6 ▸  MAIN
+# 6 ▸  FINRA FLOW ALERT (short volume data)
+# ───────────────────────────────────────────────────────────────────────────────
+def finra_flow_alert(tickers, ratio_thresh=0.60, spike_mult=2):
+    yday = (dt.date.today() - dt.timedelta(days=1)).strftime("%Y%m%d")
+    url  = FINRA_URL.format(date=yday)
+    try:
+        df = pd.read_csv(url, sep='|')
+    except Exception as exc:
+        print("FINRA fetch err", exc, file=sys.stderr)
+        return
+
+    for tk in tickers:
+        row = df.loc[df['Symbol']==tk.upper()]
+        if row.empty: 
+            continue
+        short_vol = row['ShortVolume'].iloc[0]
+        total_vol = row['TotalVolume'].iloc[0]
+        ratio = short_vol / total_vol if total_vol else 0
+
+        # look-back median (store 20-day history in SQLite)
+        cur.execute("""SELECT AVG(ratio) FROM finra_hist
+                       WHERE ticker=? ORDER BY date DESC LIMIT 20""", (tk,))
+        median20 = cur.fetchone()[0] or 0
+        # save today
+        cur.execute("INSERT OR REPLACE INTO finra_hist VALUES (?,?,?)",
+                    (tk, yday, ratio))
+        con.commit()
+
+        if ratio >= ratio_thresh and ratio >= spike_mult * median20:
+            slack(f":red_light: *${tk}* – {ratio*100:.0f}% of yesterday's volume was short "
+                  "(FINRA)",
+                  emoji=":red_light:")
+
+# ───────────────────────────────────────────────────────────────────────────────
+# 7 ▸  MAIN
 # ───────────────────────────────────────────────────────────────────────────────
 def main():
     scan_static_rss()                               # Reg / FDA / Insider
     dynamic_tickers = buzz_tickers() + NEWS_TICKERS_EXTRA
     scan_headlines(dynamic_tickers)                 # Yahoo headlines (Reddit buzz + manual list)
     short_interest_alert()                          # Optional SI ping
+    finra_flow_alert(SI_TICKERS)                    # FINRA short volume alerts
 
 if __name__ == "__main__":
     main() 
