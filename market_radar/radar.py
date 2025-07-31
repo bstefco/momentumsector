@@ -8,6 +8,7 @@ Designed to run as a cron / GitHub Action once per hour US-trading hours.
 """
 
 import os, sys, sqlite3, datetime as dt, requests, feedparser, json, textwrap, time
+import yfinance as yf
 from pathlib import Path
 from dotenv import load_dotenv
 
@@ -31,7 +32,6 @@ DB_FILE  = Path(__file__).with_name("sent.db")
 # ───────────────────────────────────────────────────────────────────────────────
 load_dotenv()
 SLACK = os.getenv("SLACK_WEBHOOK")
-IEX   = os.getenv("IEX_TOKEN")
 
 # user-tunable lists
 SI_TICKERS = os.getenv("SI_TICKERS","").split(",") if os.getenv("SI_TICKERS") else []
@@ -141,18 +141,29 @@ def scan_headlines(tickers):
 # 5 ▸  SHORT-INTEREST quick ping (optional)
 # ───────────────────────────────────────────────────────────────────────────────
 def short_interest_alert():
-    if not IEX or not SI_TICKERS:
+    if not SI_TICKERS:
         return
     for sym in SI_TICKERS:
-        url = f"https://cloud.iexapis.com/stable/stock/{sym}/short-interest"
         try:
-            data = requests.get(url, params={"token": IEX}, timeout=8).json()
+            tkr = yf.Ticker(sym)
+            info = tkr.get_info()
+            si_shares  = info.get("sharesShort", 0)
+            float_shr  = info.get("floatShares") or info.get("sharesOutstanding")
+            avg_vol30  = info.get("averageVolume")
         except Exception:
             continue
-        si_pct = data.get("shortInterest",0)/max(data.get("float",1),1)*100
-        ratio  = data.get("daysToCover",0)
-        if si_pct>=20 or ratio>=10:
-            slack(f"*${sym}* – Short {si_pct:.1f}% | DTC {ratio:.1f}×", emoji=":rotating_light:")
+
+        if not (si_shares and float_shr and avg_vol30):
+            continue
+
+        si_pct = si_shares / float_shr * 100
+        days2c = si_shares / avg_vol30
+
+        if si_pct >= 20 or days2c >= 10:
+            slack(
+                f"*${sym}* – Short {si_pct:.1f}% | DTC {days2c:.1f}×",
+                emoji=":rotating_light:",
+            )
 
 # ───────────────────────────────────────────────────────────────────────────────
 # 6 ▸  MAIN
