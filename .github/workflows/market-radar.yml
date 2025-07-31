@@ -1,0 +1,16 @@
+name: Market Radar
+on:
+  schedule:
+    - cron: '0 14-20 * * 1-5'   # hourly 14–20 UTC weekdays
+jobs:
+  radar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - run: pip install -r market_radar/requirements.txt
+      - run: |
+          echo "SLACK_WEBHOOK=${{ secrets.SLACK_WEBHOOK }}" >  market_radar/.env
+          echo "IEX_TOKEN=${{ secrets.IEX_TOKEN }}"       >> market_radar/.env
+      - run: python market_radar/radar.py 
