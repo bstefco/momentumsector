@@ -64,17 +64,18 @@ def scan_static():
             if not ts or dt.date(*ts[:3])!=today or seen(e.id): continue
             slack(f"*{label}*\n• {e.title[:240]}\n<{e.link}>"); mark(e.id)
 
-#──── Notion live ticker list (optional)
+#──── Notion live ticker list (Active Ticker Overview)
 def notion_tickers():
     if not (NOTION_TOK and NOTION_DB): 
         print("Notion not configured - skipping live ticker list", file=sys.stderr)
         return []
     try:
         nc = Client(auth=NOTION_TOK)
-        res = nc.databases.query(database_id=NOTION_DB,
-                 filter={"property":"Active","checkbox":{"equals":True}},
-                 page_size=200)["results"]
-        return [p["properties"]["Ticker"]["title"][0]["plain_text"].upper() for p in res]
+        # Get all tickers from Title column (no Active filter for now)
+        res = nc.databases.query(database_id=NOTION_DB, page_size=200)["results"]
+        tickers = [p["properties"]["Title"]["title"][0]["plain_text"].upper() for p in res if p["properties"]["Title"]["title"]]
+        print(f"Found {len(tickers)} tickers from Notion: {tickers}", file=sys.stderr)
+        return tickers
     except Exception as e:
         print("Notion API error:", e, file=sys.stderr); return []
 
