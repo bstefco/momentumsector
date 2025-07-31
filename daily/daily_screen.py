@@ -34,10 +34,11 @@ HIGH_BETA_RULES = {
     "KD":     {"sma": 30, "rsi": 35},
     "ONON":   {"sma": 30, "rsi": 35},
     "SANA":   {"sma": 30, "rsi": 35},
-
+    "TSLA":   {"sma": 30, "rsi": 35},   # Tesla
     "VEEV":   {"sma": 30, "rsi": 35},
     "VRT":    {"sma": 30, "rsi": 35},
     "WIX":    {"sma": 30, "rsi": 35},
+    "NBIS":   {"sma": 30, "rsi": 35},   # Nebius – added 30 Jul 2025
     "6324.T": {"sma": 30, "rsi": 35},
 }
 

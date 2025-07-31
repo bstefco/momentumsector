@@ -22,10 +22,11 @@ RULES = {
     "KD":     {"sma": 30, "rsi": 35},   # Kyndryl Holdings
     "ONON":   {"sma": 30, "rsi": 35},   # On Holding
     "SANA":   {"sma": 30, "rsi": 35},   # Sana Biotechnology
-
+    "TSLA":   {"sma": 30, "rsi": 35},   # Tesla
     "VEEV":   {"sma": 30, "rsi": 35},   # Veeva Systems
     "VRT":    {"sma": 30, "rsi": 35},   # Vertiv Holdings
     "WIX":    {"sma": 30, "rsi": 35},   # Wix.com
+    "NBIS":   {"sma": 30, "rsi": 35},   # Nebius – added 30 Jul 2025
     "6324.T": {"sma": 30, "rsi": 35},   # Harmonic Drive Systems
 
     # 🏢 DIVIDEND / Established (SMA-50, RSI≤40) – Core & income holdings
