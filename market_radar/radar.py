@@ -43,6 +43,8 @@ cur = con.cursor()
 cur.execute("CREATE TABLE IF NOT EXISTS sent_rss (guid TEXT PRIMARY KEY)")
 cur.execute("CREATE TABLE IF NOT EXISTS yolo_hist (ticker TEXT, date TEXT, cnt INT, "
             "PRIMARY KEY(ticker,date))")
+cur.execute("CREATE TABLE IF NOT EXISTS sent_news (ticker TEXT, title TEXT, date TEXT, "
+            "PRIMARY KEY(ticker,title,date))")
 con.commit()
 
 def slack(msg:str, emoji=":newspaper:"):
@@ -59,6 +61,17 @@ def slack(msg:str, emoji=":newspaper:"):
 def seen(guid:str)->bool:
     cur.execute("SELECT 1 FROM sent_rss WHERE guid=?", (guid,)); return cur.fetchone() is not None
 def mark(guid): cur.execute("INSERT OR IGNORE INTO sent_rss VALUES (?)",(guid,)); con.commit()
+
+def seen_news(ticker:str, title:str)->bool:
+    today = dt.date.today().isoformat()
+    cur.execute("SELECT 1 FROM sent_news WHERE ticker=? AND title=? AND date=?", 
+                (ticker, title[:100], today))
+    return cur.fetchone() is not None
+def mark_news(ticker:str, title:str):
+    today = dt.date.today().isoformat()
+    cur.execute("INSERT OR IGNORE INTO sent_news VALUES (?,?,?)", 
+                (ticker, title[:100], today))
+    con.commit()
 
 #──── Static RSS  (Reg / FDA / Insider)
 def scan_static():
@@ -143,6 +156,7 @@ def yolo_daily_mentions(symbol: str, today: dt.date = None) -> tuple[int, int]:
 def send_yolo_mentions_alert(ticker: str):
     """Send YOLO mentions alert with link to YOLO page."""
     mentions_today, mentions_prev = yolo_daily_mentions(ticker)
+    print(f"YOLO {ticker}: {mentions_today} today, {mentions_prev} yesterday", file=sys.stderr)
     if mentions_today > 0:
         delta = mentions_today - mentions_prev
         yolo_url = f"https://yolostocks.live/stock/{ticker}"
@@ -161,9 +175,11 @@ def scan_headlines(tickers):
     for tk in tickers:
         for e in yahoo(tk).entries:
             ts=e.get("published_parsed")or e.get("updated_parsed")
-            if not ts or dt.date(*ts[:3])!=today or seen(e.id): continue
+            if not ts or dt.date(*ts[:3])!=today: continue
+            if seen_news(tk, e.title): continue  # Skip if already sent today
             src=e.get("source",{}).get("title","News")
-            slack(f"*${tk}* — <{e.link}|{e.title}>  _({src})_"); mark(e.id)
+            slack(f"*${tk}* — <{e.link}|{e.title}>  _({src})_")
+            mark_news(tk, e.title)  # Mark as sent for today
 
 #──── Short-interest alert via yfinance
 def short_interest():
