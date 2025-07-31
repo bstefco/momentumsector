@@ -2,6 +2,7 @@ name: Market Radar
 on:
   schedule:
     - cron: '0 10-20 * * 1-5'   # hourly 10–20 UTC weekdays
+  workflow_dispatch:  # allow manual runs
 jobs:
   radar:
     runs-on: ubuntu-latest
