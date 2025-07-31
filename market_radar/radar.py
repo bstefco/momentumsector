@@ -64,13 +64,18 @@ def mark(guid): cur.execute("INSERT OR IGNORE INTO sent_rss VALUES (?)",(guid,))
 
 def seen_news(ticker:str, title:str)->bool:
     today = dt.date.today().isoformat()
+    # Create a normalized title (lowercase, remove extra spaces, take first 80 chars)
+    normalized_title = " ".join(title.lower().split())[:80]
     cur.execute("SELECT 1 FROM sent_news WHERE ticker=? AND title=? AND date=?", 
-                (ticker, title[:100], today))
+                (ticker, normalized_title, today))
     return cur.fetchone() is not None
+
 def mark_news(ticker:str, title:str):
     today = dt.date.today().isoformat()
+    # Create a normalized title (lowercase, remove extra spaces, take first 80 chars)
+    normalized_title = " ".join(title.lower().split())[:80]
     cur.execute("INSERT OR IGNORE INTO sent_news VALUES (?,?,?)", 
-                (ticker, title[:100], today))
+                (ticker, normalized_title, today))
     con.commit()
 
 #──── Static RSS  (Reg / FDA / Insider)
@@ -124,14 +129,24 @@ def yahoo(tkr): return feedparser.parse(
 
 def scan_headlines(tickers):
     today=dt.date.today()
+    sent_count = 0  # Track how many messages we've sent
+    
     for tk in tickers:
+        if sent_count >= 20:  # Limit to 20 news items per run to prevent spam
+            break
+            
         for e in yahoo(tk).entries:
+            if sent_count >= 20:  # Double check limit
+                break
+                
             ts=e.get("published_parsed")or e.get("updated_parsed")
             if not ts or dt.date(*ts[:3])!=today: continue
             if seen_news(tk, e.title): continue  # Skip if already sent today
+            
             src=e.get("source",{}).get("title","News")
             slack(f"*${tk}* — <{e.link}|{e.title}>  _({src})_")
             mark_news(tk, e.title)  # Mark as sent for today
+            sent_count += 1
 
 #──── Short-interest alert via yfinance
 def short_interest():
