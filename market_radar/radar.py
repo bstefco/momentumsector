@@ -1,217 +1,130 @@
 #!/usr/bin/env python3
 """
-market_radar – Slack alert bot
-•  RSS feeds  (Reg, FDA, Insider, Yahoo headline per-ticker)
-•  Reddit-buzz scanner via YoloStocks.live
-•  Short-interest pings via IEX Cloud
-Designed to run as a cron / GitHub Action once per hour US-trading hours.
+market_radar – Slack news & buzz bot
+• Static RSS feeds (Reg, FDA, Insider)
+• Live ticker list from Notion 'Active tickers' database
+• Reddit buzz scan via YoloStocks.live
+• Short-interest alert via yfinance
+Designed for hourly cron / GH-Actions (US trading hours).
 """
-
-import os, sys, sqlite3, datetime as dt, requests, feedparser, json, textwrap, time
-import yfinance as yf
-import pandas as pd, io, zipfile
+import os, sys, sqlite3, datetime as dt, requests, feedparser
 from pathlib import Path
 from dotenv import load_dotenv
+from notion_client import Client
+import yfinance as yf
 
-# ───────────────────────────────────────────────────────────────────────────────
-# 0 ▸  CONFIG
-# ───────────────────────────────────────────────────────────────────────────────
+#──────────────── CONFIG
 RSS_STATIC = {
     "Federal Register – nuclear":
-        "https://www.federalregister.gov/api/v1/articles.rss?conditions%5Bterm%5D=nuclear",
+      "https://www.federalregister.gov/api/v1/articles.rss?conditions%5Bterm%5D=nuclear",
     "FDA Calendar":
-        "https://www.fda.gov/about-fda/center-drug-evaluation-and-research-drug-approvals/calendar/rss.xml",
+      "https://www.fda.gov/about-fda/center-drug-evaluation-and-research-drug-approvals/calendar/rss.xml",
     "OpenInsider – Top Buys":
-        "https://openinsider.com/top-insider-purchases-of-the-day?rss=1",
+      "https://openinsider.com/top-insider-purchases-of-the-day?rss=1",
 }
-
 YOLO_API = "https://yolostocks.live/api/top"
-FINRA_URL = "https://cdn.finra.org/equity/regsho/daily/CNMSshvol{date}.txt"
 DB_FILE  = Path(__file__).with_name("sent.db")
 
-# ───────────────────────────────────────────────────────────────────────────────
-# 1 ▸  ENV / DB  INIT
-# ───────────────────────────────────────────────────────────────────────────────
-load_dotenv()
-SLACK = os.getenv("SLACK_WEBHOOK")
-
-# user-tunable lists
-SI_TICKERS = os.getenv("SI_TICKERS","").split(",") if os.getenv("SI_TICKERS") else []
-NEWS_TICKERS_EXTRA = os.getenv("NEWS_TICKERS_EXTRA","").split(",") if os.getenv("NEWS_TICKERS_EXTRA") else []
-
-# buzz thresholds
-MIN_MENTIONS   = int(os.getenv("MENTION_MIN", 25))
-ACCEL_FACTOR   = int(os.getenv("ACCEL_FACTOR", 3))
-SUBREDDITS     = os.getenv("SUBREDDITS","wallstreetbets").split(",")
+#──────────────── ENV / DB
+load_dotenv(override=True)
+SLACK  = os.getenv("SLACK_WEBHOOK")
+NOTION_TOK, NOTION_DB  = os.getenv("NOTION_TOKEN"), os.getenv("NOTION_DB")
+SI_SET = set(os.getenv("SI_TICKERS","").upper().split(",")) if os.getenv("SI_TICKERS") else set()
+MANUAL_EXTRA = set(os.getenv("NEWS_TICKERS_EXTRA","").upper().split(",")) if os.getenv("NEWS_TICKERS_EXTRA") else set()
+MIN_MENTIONS = int(os.getenv("MENTION_MIN",25))
+ACCEL_FACTOR = int(os.getenv("ACCEL_FACTOR",3))
+SUBREDDITS   = os.getenv("SUBREDDITS","wallstreetbets").split(",")
 
 if not SLACK:
     sys.exit("⚠️  SLACK_WEBHOOK missing in .env")
 
-# SQLite
 con = sqlite3.connect(DB_FILE)
 cur = con.cursor()
 cur.execute("CREATE TABLE IF NOT EXISTS sent_rss (guid TEXT PRIMARY KEY)")
 cur.execute("CREATE TABLE IF NOT EXISTS yolo_hist (ticker TEXT, date TEXT, cnt INT, "
             "PRIMARY KEY(ticker,date))")
-cur.execute("CREATE TABLE IF NOT EXISTS finra_hist (ticker TEXT, date TEXT, ratio REAL, "
-            "PRIMARY KEY(ticker,date))")
 con.commit()
 
+def slack(msg:str, emoji=":newspaper:"):
+    try:
+        requests.post(SLACK, json={"text":f"{emoji} {msg}"}, timeout=8)
+    except Exception as e:
+        print("Slack error:", e, file=sys.stderr)
+
 def seen(guid:str)->bool:
-    cur.execute("SELECT 1 FROM sent_rss WHERE guid=?", (guid,))
-    return cur.fetchone() is not None
+    cur.execute("SELECT 1 FROM sent_rss WHERE guid=?", (guid,)); return cur.fetchone() is not None
+def mark(guid): cur.execute("INSERT OR IGNORE INTO sent_rss VALUES (?)",(guid,)); con.commit()
 
-def mark_seen(guid:str):
-    cur.execute("INSERT OR IGNORE INTO sent_rss VALUES (?)", (guid,))
-    con.commit()
-
-def slack(text:str, emoji=":newspaper:"):
-    try:
-        requests.post(SLACK, json={"text": f"{emoji} {text}"}, timeout=8)
-    except Exception as exc:
-        print("Slack error:", exc, file=sys.stderr)
-
-# ───────────────────────────────────────────────────────────────────────────────
-# 2 ▸  STATIC RSS (Reg / FDA / Insider)
-# ───────────────────────────────────────────────────────────────────────────────
-def is_today(ts):
+#──── Static RSS  (Reg / FDA / Insider)
+def scan_static():
     today = dt.date.today()
-    return dt.date(ts.tm_year, ts.tm_mon, ts.tm_mday) == today
-
-def scan_static_rss():
-    for label, url in RSS_STATIC.items():
-        feed = feedparser.parse(url)
-        for e in feed.entries:
+    for label,url in RSS_STATIC.items():
+        for e in feedparser.parse(url).entries:
             ts = e.get("published_parsed") or e.get("updated_parsed")
-            if not ts or not is_today(ts) or seen(e.id):
-                continue
-            slack(f"*{label}*\n• {e.title[:240]}\n<{e.link}>")
-            mark_seen(e.id)
+            if not ts or dt.date(*ts[:3])!=today or seen(e.id): continue
+            slack(f"*{label}*\n• {e.title[:240]}\n<{e.link}>"); mark(e.id)
 
-# ───────────────────────────────────────────────────────────────────────────────
-# 3 ▸  REDDIT BUZZ via YOLOSTOCKS
-# ───────────────────────────────────────────────────────────────────────────────
-def yolo_top(subreddit:str):
-    params = {"subreddit": subreddit, "window": "daily", "limit": 200}
+#──── Notion live ticker list
+def notion_tickers():
+    if not (NOTION_TOK and NOTION_DB): return []
     try:
-        return requests.get(YOLO_API, params=params, timeout=10).json()
-    except Exception as exc:
-        print("Yolo API error:", exc, file=sys.stderr)
-        return []
+        nc = Client(auth=NOTION_TOK)
+        res = nc.databases.query(database_id=NOTION_DB,
+                 filter={"property":"Active","checkbox":{"equals":True}},
+                 page_size=200)["results"]
+        return [p["properties"]["Ticker"]["title"][0]["plain_text"].upper() for p in res]
+    except Exception as e:
+        print("Notion API error:", e, file=sys.stderr); return []
 
+#──── Reddit buzz
 def buzz_tickers():
-    today = dt.date.today().isoformat()
-    buzz = set()
+    today = dt.date.today().isoformat(); buzz = set()
     for sub in SUBREDDITS:
-        for row in yolo_top(sub):
-            tk, hits = row["ticker"], row["mentions"]
-            if hits < MIN_MENTIONS:
-                continue
-            # 3-day average from SQLite
-            cur.execute("SELECT AVG(cnt) FROM yolo_hist "
-                        "WHERE ticker=? AND date>? ",
-                        (tk, (dt.date.today()-dt.timedelta(days=3)).isoformat()))
+        try:
+            rows = requests.get(YOLO_API,
+                params={"subreddit":sub,"window":"daily","limit":200},timeout=10).json()
+        except Exception: continue
+        for r in rows:
+            tk,hits=r["ticker"].upper(),r["mentions"]
+            if hits < MIN_MENTIONS: continue
+            cur.execute("SELECT AVG(cnt) FROM yolo_hist WHERE ticker=? AND date>?",
+                        (tk,(dt.date.today()-dt.timedelta(days=3)).isoformat()))
             avg3 = cur.fetchone()[0] or 0
-            if hits >= ACCEL_FACTOR * avg3:
-                buzz.add(tk)
-            # store today's count
-            cur.execute("INSERT OR REPLACE INTO yolo_hist VALUES (?,?,?)",
-                        (tk, today, hits))
-    con.commit()
-    return list(buzz)
+            if hits >= ACCEL_FACTOR*avg3: buzz.add(tk)
+            cur.execute("INSERT OR REPLACE INTO yolo_hist VALUES (?,?,?)",(tk,today,hits))
+    con.commit(); return buzz
 
-# ───────────────────────────────────────────────────────────────────────────────
-# 4 ▸  HEADLINE SCRAPE (Yahoo)
-# ───────────────────────────────────────────────────────────────────────────────
-def yahoo_rss(tkr):
-    url = f"https://feeds.finance.yahoo.com/rss/2.0/headline?s={tkr}&region=US&lang=en-US"
-    return feedparser.parse(url)
+#──── Yahoo headline fetch
+def yahoo(tkr): return feedparser.parse(
+    f"https://feeds.finance.yahoo.com/rss/2.0/headline?s={tkr}&region=US&lang=en-US")
 
 def scan_headlines(tickers):
-    today = dt.date.today()
-    for t in tickers:
-        feed = yahoo_rss(t)
-        for e in feed.entries:
-            ts = e.get("published_parsed") or e.get("updated_parsed")
-            if not ts or dt.date(ts.tm_year, ts.tm_mon, ts.tm_mday) != today:
-                continue
-            if seen(e.id):
-                continue
-            src = e.get("source",{}).get("title","News")
-            slack(f"*${t}* — {e.title}  _({src})_")
-            mark_seen(e.id)
-
-# ───────────────────────────────────────────────────────────────────────────────
-# 5 ▸  SHORT-INTEREST quick ping (optional)
-# ───────────────────────────────────────────────────────────────────────────────
-def short_interest_alert():
-    if not SI_TICKERS:
-        return
-    for sym in SI_TICKERS:
-        try:
-            tkr = yf.Ticker(sym)
-            info = tkr.get_info()
-            si_shares  = info.get("sharesShort", 0)
-            float_shr  = info.get("floatShares") or info.get("sharesOutstanding")
-            avg_vol30  = info.get("averageVolume")
-        except Exception:
-            continue
-
-        if not (si_shares and float_shr and avg_vol30):
-            continue
-
-        si_pct = si_shares / float_shr * 100
-        days2c = si_shares / avg_vol30
-
-        if si_pct >= 20 or days2c >= 10:
-            slack(
-                f"*${sym}* – Short {si_pct:.1f}% | DTC {days2c:.1f}×",
-                emoji=":rotating_light:",
-            )
-
-# ───────────────────────────────────────────────────────────────────────────────
-# 6 ▸  FINRA FLOW ALERT (short volume data)
-# ───────────────────────────────────────────────────────────────────────────────
-def finra_flow_alert(tickers, ratio_thresh=0.60, spike_mult=2):
-    yday = (dt.date.today() - dt.timedelta(days=1)).strftime("%Y%m%d")
-    url  = FINRA_URL.format(date=yday)
-    try:
-        df = pd.read_csv(url, sep='|')
-    except Exception as exc:
-        print("FINRA fetch err", exc, file=sys.stderr)
-        return
-
+    today=dt.date.today()
     for tk in tickers:
-        row = df.loc[df['Symbol']==tk.upper()]
-        if row.empty: 
-            continue
-        short_vol = row['ShortVolume'].iloc[0]
-        total_vol = row['TotalVolume'].iloc[0]
-        ratio = short_vol / total_vol if total_vol else 0
+        for e in yahoo(tk).entries:
+            ts=e.get("published_parsed")or e.get("updated_parsed")
+            if not ts or dt.date(*ts[:3])!=today or seen(e.id): continue
+            src=e.get("source",{}).get("title","News")
+            slack(f"*${tk}* — {e.title}  _({src})_"); mark(e.id)
 
-        # look-back median (store 20-day history in SQLite)
-        cur.execute("""SELECT AVG(ratio) FROM finra_hist
-                       WHERE ticker=? ORDER BY date DESC LIMIT 20""", (tk,))
-        median20 = cur.fetchone()[0] or 0
-        # save today
-        cur.execute("INSERT OR REPLACE INTO finra_hist VALUES (?,?,?)",
-                    (tk, yday, ratio))
-        con.commit()
+#──── Short-interest alert via yfinance
+def short_interest():
+    for sym in SI_SET:
+        try:
+            info=yf.Ticker(sym).get_info()
+            si=float(info.get("sharesShort",0)); flo=float(info.get("floatShares")or info.get("sharesOutstanding") or 0)
+            vol=float(info.get("averageVolume",0))
+        except Exception: continue
+        if not (si and flo and vol): continue
+        pct,dtc=si/flo*100, si/vol
+        if pct>=20 or dtc>=10:
+            slack(f"*${sym}* – Short {pct:.1f}% | DTC {dtc:.1f}×", emoji=":rotating_light:")
 
-        if ratio >= ratio_thresh and ratio >= spike_mult * median20:
-            slack(f":red_light: *${tk}* – {ratio*100:.0f}% of yesterday's volume was short "
-                  "(FINRA)",
-                  emoji=":red_light:")
-
-# ───────────────────────────────────────────────────────────────────────────────
-# 7 ▸  MAIN
-# ───────────────────────────────────────────────────────────────────────────────
+#──── MAIN
 def main():
-    scan_static_rss()                               # Reg / FDA / Insider
-    dynamic_tickers = buzz_tickers() + NEWS_TICKERS_EXTRA
-    scan_headlines(dynamic_tickers)                 # Yahoo headlines (Reddit buzz + manual list)
-    short_interest_alert()                          # Optional SI ping
-    finra_flow_alert(SI_TICKERS)                    # FINRA short volume alerts
+    scan_static()
+    tks = set(notion_tickers()) | MANUAL_EXTRA | buzz_tickers()
+    scan_headlines(sorted(tks))
+    if SI_SET: short_interest()
 
-if __name__ == "__main__":
-    main() 
+if __name__=="__main__": main() 
