@@ -64,9 +64,11 @@ def scan_static():
             if not ts or dt.date(*ts[:3])!=today or seen(e.id): continue
             slack(f"*{label}*\n• {e.title[:240]}\n<{e.link}>"); mark(e.id)
 
-#──── Notion live ticker list
+#──── Notion live ticker list (optional)
 def notion_tickers():
-    if not (NOTION_TOK and NOTION_DB): return []
+    if not (NOTION_TOK and NOTION_DB): 
+        print("Notion not configured - skipping live ticker list", file=sys.stderr)
+        return []
     try:
         nc = Client(auth=NOTION_TOK)
         res = nc.databases.query(database_id=NOTION_DB,
