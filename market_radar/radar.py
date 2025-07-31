@@ -67,7 +67,7 @@ def scan_static():
         for e in feedparser.parse(url).entries:
             ts = e.get("published_parsed") or e.get("updated_parsed")
             if not ts or dt.date(*ts[:3])!=today or seen(e.id): continue
-            slack(f"*{label}*\n• {e.title[:240]}\n<{e.link}>"); mark(e.id)
+            slack(f"*{label}*\n• <{e.link}|{e.title[:240]}>\n<{e.link}>"); mark(e.id)
 
 #──── Notion live ticker list (Active Ticker Overview)
 def notion_tickers():
@@ -113,7 +113,7 @@ def scan_headlines(tickers):
             ts=e.get("published_parsed")or e.get("updated_parsed")
             if not ts or dt.date(*ts[:3])!=today or seen(e.id): continue
             src=e.get("source",{}).get("title","News")
-            slack(f"*${tk}* — {e.title}  _({src})_"); mark(e.id)
+            slack(f"*${tk}* — <{e.link}|{e.title}>  _({src})_"); mark(e.id)
 
 #──── Short-interest alert via yfinance
 def short_interest():
