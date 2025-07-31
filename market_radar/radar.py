@@ -47,7 +47,12 @@ con.commit()
 
 def slack(msg:str, emoji=":newspaper:"):
     try:
-        requests.post(SLACK, json={"text":f"{emoji} {msg}"}, timeout=8)
+        # Clean the webhook URL and ensure it's a proper URL
+        webhook_url = SLACK.strip()
+        if not webhook_url.startswith('http'):
+            print(f"Invalid webhook URL: {webhook_url}", file=sys.stderr)
+            return
+        requests.post(webhook_url, json={"text":f"{emoji} {msg}"}, timeout=8)
     except Exception as e:
         print("Slack error:", e, file=sys.stderr)
 
