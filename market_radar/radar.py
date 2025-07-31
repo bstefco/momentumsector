@@ -115,8 +115,21 @@ def yolo_daily_mentions(symbol: str, today: dt.date = None) -> tuple[int, int]:
         raw = requests.get(CSV_DAILY, timeout=4).text
         reader = csv.reader(io.StringIO(raw))
         header = next(reader)
-        idx_today = header.index(str(today))
-        idx_yest  = header.index(str(yest))
+        
+        # Find available dates (CSV might not have today yet)
+        available_dates = [d for d in header if d.replace('-', '').isdigit()]
+        if not available_dates:
+            return 0, 0
+            
+        # Use most recent date as "today", previous as "yesterday"
+        most_recent = max(available_dates)
+        if len(available_dates) > 1:
+            second_recent = sorted(available_dates)[-2]
+        else:
+            second_recent = most_recent
+            
+        idx_today = header.index(most_recent)
+        idx_yest  = header.index(second_recent)
         
         for row in reader:
             if row[0].upper() == symbol:
