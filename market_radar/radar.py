@@ -7,7 +7,7 @@ market_radar – Slack news & buzz bot
 • Short-interest alert via yfinance
 Designed for hourly cron / GH-Actions (US trading hours).
 """
-import os, sys, sqlite3, datetime as dt, requests, feedparser
+import os, sys, sqlite3, datetime as dt, requests, feedparser, io, csv
 from pathlib import Path
 from dotenv import load_dotenv
 from notion_client import Client
@@ -102,6 +102,43 @@ def buzz_tickers():
             cur.execute("INSERT OR REPLACE INTO yolo_hist VALUES (?,?,?)",(tk,today,hits))
     con.commit(); return buzz
 
+#──── YOLO CSV mentions (more accurate than API)
+def yolo_daily_mentions(symbol: str, today: dt.date = None) -> tuple[int, int]:
+    """Return today's and yesterday's mention counts for `symbol` (upper-case)."""
+    today = today or dt.date.today()
+    yest  = today - dt.timedelta(days=1)
+    
+    YOLO_BASE = "https://raw.githubusercontent.com/youyanggu/yolostocks-data"
+    CSV_DAILY = f"{YOLO_BASE}/main/data/r/WallStreetBets_daily_mentions.csv"
+    
+    try:
+        raw = requests.get(CSV_DAILY, timeout=4).text
+        reader = csv.reader(io.StringIO(raw))
+        header = next(reader)
+        idx_today = header.index(str(today))
+        idx_yest  = header.index(str(yest))
+        
+        for row in reader:
+            if row[0].upper() == symbol:
+                t = int(row[idx_today] or 0)
+                y = int(row[idx_yest]  or 0)
+                return t, y
+    except Exception as e:
+        print(f"YOLO CSV error for {symbol}: {e}", file=sys.stderr)
+    return 0, 0
+
+def send_yolo_mentions_alert(ticker: str):
+    """Send YOLO mentions alert with link to YOLO page."""
+    mentions_today, mentions_prev = yolo_daily_mentions(ticker)
+    if mentions_today > 0:
+        delta = mentions_today - mentions_prev
+        yolo_url = f"https://yolostocks.live/stock/{ticker}"
+        slack(
+            f"*${ticker}* YOLO Mentions: {mentions_today:,} today "
+            f"({delta:+,} vs yesterday) - <{yolo_url}|View on YOLO>",
+            emoji=":rocket:"
+        )
+
 #──── Yahoo headline fetch
 def yahoo(tkr): return feedparser.parse(
     f"https://feeds.finance.yahoo.com/rss/2.0/headline?s={tkr}&region=US&lang=en-US")
@@ -133,6 +170,11 @@ def main():
     scan_static()
     tks = set(notion_tickers()) | MANUAL_EXTRA | buzz_tickers()
     scan_headlines(sorted(tks))
+    
+    # Send YOLO mentions for top tickers
+    for ticker in sorted(tks)[:10]:  # Top 10 tickers to avoid spam
+        send_yolo_mentions_alert(ticker)
+    
     if SI_SET: short_interest()
 
 if __name__=="__main__": main() 
