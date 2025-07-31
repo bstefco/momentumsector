@@ -1,7 +1,7 @@
 name: Market Radar
 on:
   schedule:
-    - cron: '0 14-20 * * 1-5'   # hourly 14–20 UTC weekdays
+    - cron: '0 10-20 * * 1-5'   # hourly 10–20 UTC weekdays
 jobs:
   radar:
     runs-on: ubuntu-latest
