@@ -192,9 +192,18 @@ for ticker, rule in ALL_RULES.items():
         else:
             signal = "HOLD"
     elif bucket == "HIGH_BETA":
-        # For HIGH_BETA, we need volume data for the 2x volume requirement
-        # For now, we'll use the basic logic without volume check
-        if (close <= sma_val) or (rsi_val <= rsi_cut):
+        # HIGH_BETA specific logic with TRIM conditions
+        # Calculate extension percentage above SMA-20
+        sma20_val = float(hist.tail(20).mean().item()) if len(hist) >= 20 else None
+        
+        # TRIM conditions for high-beta stocks
+        extension_pct = ((close - sma20_val) / sma20_val * 100) if sma20_val else 0
+        overbought_rsi = rsi_val >= 70 if rsi_val else False
+        
+        # TRIM rules: 15% above SMA-20 OR RSI >= 70
+        if (extension_pct >= 15) or overbought_rsi:
+            signal = "TRIM"
+        elif (close <= sma_val) or (rsi_val <= rsi_cut):
             signal = "BUY"
         elif close < sma_val:
             signal = "EXIT"
@@ -209,9 +218,9 @@ for ticker, rule in ALL_RULES.items():
             signal = "HOLD"
 
     # -------------------------------------------------
-    #  Panic-flush filter (overrides BUY)
+    #  Panic-flush filter (overrides BUY and TRIM)
     # -------------------------------------------------
-    if signal == "BUY" and len(hist) >= 4 and len(volume) >= 20:
+    if (signal == "BUY" or signal == "TRIM") and len(hist) >= 4 and len(volume) >= 20:
         # Calculate 3-day price drop percentage
         drop_3d_pct = ((hist.iloc[-1] - hist.iloc[-4]) / hist.iloc[-4] * 100).item()
         
@@ -245,6 +254,7 @@ def colour_signal(val: str) -> str:
         "BUY":  "background-color:#d4f4be;color:#000;",
         "HOLD": "background-color:#f0f0f0;color:#000;",
         "EXIT": "background-color:#ffcccc;color:#000;",
+        "TRIM": "background-color:#ffeb3b;color:#000;",
         "SKIP": "background-color:#fff3bf;color:#000;",
     }.get(val, "")
 
