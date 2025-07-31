@@ -115,42 +115,41 @@ def buzz_tickers():
             cur.execute("INSERT OR REPLACE INTO yolo_hist VALUES (?,?,?)",(tk,today,hits))
     con.commit(); return buzz
 
-#──── YOLO CSV mentions (more accurate than API)
+#──── YOLO API mentions (using actual YOLO API)
 def yolo_daily_mentions(symbol: str, today: dt.date = None) -> tuple[int, int]:
     """Return today's and yesterday's mention counts for `symbol` (upper-case)."""
-    today = today or dt.date.today()
-    yest  = today - dt.timedelta(days=1)
-    
-    YOLO_BASE = "https://raw.githubusercontent.com/youyanggu/yolostocks-data"
-    CSV_DAILY = f"{YOLO_BASE}/main/data/r/WallStreetBets_daily_mentions.csv"
-    
     try:
-        raw = requests.get(CSV_DAILY, timeout=4).text
-        reader = csv.reader(io.StringIO(raw))
-        header = next(reader)
+        # Use YOLO API to get current mentions
+        response = requests.get(f"https://yolostocks.live/api/top", 
+                              params={"subreddit": "wallstreetbets", "window": "daily", "limit": 200}, 
+                              timeout=10)
+        data = response.json()
         
-        # Find available dates (CSV might not have today yet)
-        available_dates = [d for d in header if d.replace('-', '').isdigit()]
-        if not available_dates:
-            return 0, 0
-            
-        # Use most recent date as "today", previous as "yesterday"
-        most_recent = max(available_dates)
-        if len(available_dates) > 1:
-            second_recent = sorted(available_dates)[-2]
-        else:
-            second_recent = most_recent
-            
-        idx_today = header.index(most_recent)
-        idx_yest  = header.index(second_recent)
-        
-        for row in reader:
-            if row[0].upper() == symbol:
-                t = int(row[idx_today] or 0)
-                y = int(row[idx_yest]  or 0)
-                return t, y
+        # Find the ticker in the results
+        for item in data:
+            if item.get("ticker", "").upper() == symbol.upper():
+                mentions_today = item.get("mentions", 0)
+                # For now, we'll use a simple approach - store yesterday's count
+                # and compare with today's
+                today_str = dt.date.today().isoformat()
+                cur.execute("SELECT cnt FROM yolo_hist WHERE ticker=? AND date=?", (symbol, today_str))
+                result = cur.fetchone()
+                
+                if result:
+                    mentions_yesterday = result[0]
+                else:
+                    # If no history, assume 0 yesterday
+                    mentions_yesterday = 0
+                
+                # Store today's count for next time
+                cur.execute("INSERT OR REPLACE INTO yolo_hist VALUES (?,?,?)", 
+                           (symbol, today_str, mentions_today))
+                con.commit()
+                
+                return mentions_today, mentions_yesterday
+                
     except Exception as e:
-        print(f"YOLO CSV error for {symbol}: {e}", file=sys.stderr)
+        print(f"YOLO API error for {symbol}: {e}", file=sys.stderr)
     return 0, 0
 
 def send_yolo_mentions_alert(ticker: str):
