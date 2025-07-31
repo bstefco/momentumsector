@@ -115,46 +115,51 @@ def buzz_tickers():
             cur.execute("INSERT OR REPLACE INTO yolo_hist VALUES (?,?,?)",(tk,today,hits))
     con.commit(); return buzz
 
-#──── YOLO API mentions (using actual YOLO API)
-def yolo_daily_mentions(symbol: str, today: dt.date = None) -> tuple[int, int]:
-    """Return today's and yesterday's mention counts for `symbol` (upper-case)."""
+#──── YOLO API mentions (optimized - single API call)
+def get_yolo_mentions_data():
+    """Get all YOLO mentions data in a single API call."""
     try:
-        # Use YOLO API to get current mentions
-        response = requests.get(f"https://yolostocks.live/api/top", 
+        response = requests.get("https://yolostocks.live/api/top", 
                               params={"subreddit": "wallstreetbets", "window": "daily", "limit": 200}, 
                               timeout=10)
-        data = response.json()
-        
-        # Find the ticker in the results
-        for item in data:
-            if item.get("ticker", "").upper() == symbol.upper():
-                mentions_today = item.get("mentions", 0)
-                # For now, we'll use a simple approach - store yesterday's count
-                # and compare with today's
-                today_str = dt.date.today().isoformat()
-                cur.execute("SELECT cnt FROM yolo_hist WHERE ticker=? AND date=?", (symbol, today_str))
-                result = cur.fetchone()
-                
-                if result:
-                    mentions_yesterday = result[0]
-                else:
-                    # If no history, assume 0 yesterday
-                    mentions_yesterday = 0
-                
-                # Store today's count for next time
-                cur.execute("INSERT OR REPLACE INTO yolo_hist VALUES (?,?,?)", 
-                           (symbol, today_str, mentions_today))
-                con.commit()
-                
-                return mentions_today, mentions_yesterday
-                
+        if response.status_code == 200:
+            return response.json()
+        else:
+            print(f"YOLO API error: HTTP {response.status_code}", file=sys.stderr)
     except Exception as e:
-        print(f"YOLO API error for {symbol}: {e}", file=sys.stderr)
+        print(f"YOLO API error: {e}", file=sys.stderr)
+    return []
+
+def yolo_daily_mentions(symbol: str, yolo_data: list = None) -> tuple[int, int]:
+    """Return today's and yesterday's mention counts for `symbol` (upper-case)."""
+    if not yolo_data:
+        return 0, 0
+        
+    # Find the ticker in the results
+    for item in yolo_data:
+        if item.get("ticker", "").upper() == symbol.upper():
+            mentions_today = item.get("mentions", 0)
+            # Get yesterday's count from database
+            today_str = dt.date.today().isoformat()
+            cur.execute("SELECT cnt FROM yolo_hist WHERE ticker=? AND date=?", (symbol, today_str))
+            result = cur.fetchone()
+            
+            if result:
+                mentions_yesterday = result[0]
+            else:
+                mentions_yesterday = 0
+            
+            # Store today's count for next time
+            cur.execute("INSERT OR REPLACE INTO yolo_hist VALUES (?,?,?)", 
+                       (symbol, today_str, mentions_today))
+            con.commit()
+            
+            return mentions_today, mentions_yesterday
     return 0, 0
 
-def send_yolo_mentions_alert(ticker: str):
+def send_yolo_mentions_alert(ticker: str, yolo_data: list):
     """Send YOLO mentions alert with link to YOLO page."""
-    mentions_today, mentions_prev = yolo_daily_mentions(ticker)
+    mentions_today, mentions_prev = yolo_daily_mentions(ticker, yolo_data)
     print(f"YOLO {ticker}: {mentions_today} today, {mentions_prev} yesterday", file=sys.stderr)
     if mentions_today > 0:
         delta = mentions_today - mentions_prev
@@ -199,9 +204,11 @@ def main():
     tks = set(notion_tickers()) | MANUAL_EXTRA | buzz_tickers()
     scan_headlines(sorted(tks))
     
-    # Send YOLO mentions for top tickers
-    for ticker in sorted(tks)[:10]:  # Top 10 tickers to avoid spam
-        send_yolo_mentions_alert(ticker)
+    # Get YOLO data once and send mentions for top tickers
+    yolo_data = get_yolo_mentions_data()
+    if yolo_data:
+        for ticker in sorted(tks)[:10]:  # Top 10 tickers to avoid spam
+            send_yolo_mentions_alert(ticker, yolo_data)
     
     if SI_SET: short_interest()
 
