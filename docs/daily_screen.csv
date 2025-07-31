@@ -1,40 +1,40 @@
 Ticker,Name,Close,SMA,RSI,Valuation,Signal
 6324.T,HARMONIC DRIVE SYSTEMS,2906.0,2728.37,54.8,Pass,HOLD
-AI,AIR LIQUIDE,173.94,177.95,46.9,Pass,BUY
-ALFA.ST,Alfa Laval AB,433.9,412.03,62.1,Pass,HOLD
-ASML,ASML Holding N.V. - New York Re,721.45,761.25,41.1,Pass,BUY
-ATLX,Atlas Lithium Corporation,4.67,4.24,53.7,Pass,HOLD
-BEAM,Beam Therapeutics Inc.,20.15,19.46,51.0,Pass,HOLD
-BMI,"Badger Meter, Inc.",191.3,230.88,24.1,Pass,BUY
-BNP,BNP PARIBAS ACT.A,79.07,76.78,58.6,Pass,HOLD
-BYDDY,"BYD Co., Ltd.",15.35,16.62,39.3,Pass,BUY
-CEG,Constellation Energy Corporatio,345.27,310.6,68.9,Pass,HOLD
-D,"Dominion Energy, Inc.",58.25,56.51,56.7,Pass,HOLD
-ENGI,ENGIE,19.58,19.5,50.1,Pass,HOLD
-EOSE,"Eos Energy Enterprises, Inc.",5.92,5.16,59.1,Pass,HOLD
-FGR,EIFFAGE,118.25,118.35,54.1,Pass,BUY
-FLNC,"Fluence Energy, Inc.",8.2,7.81,51.8,Pass,HOLD
-FLS,Flowserve Corporation,56.0,52.47,64.1,Pass,HOLD
-GWH,"ESS Tech, Inc.",1.88,1.54,54.2,Pass,HOLD
-IBE,ACCIONES IBERDROLA,15.4,15.7,45.2,Pass,BUY
-INTC,Intel Corporation,20.34,21.6,35.3,Pass,BUY
-KD,"Kyndryl Holdings, Inc.",38.0,40.35,38.8,Pass,BUY
-KOMB,KOMERCNI BANKA,1058.0,1021.33,65.9,Pass,HOLD
-LEU,Centrus Energy Corp.,225.19,123.06,58.6,Pass,HOLD
-NBIS,Nebius Group N.V.,51.29,50.41,53.6,Pass,HOLD
-NEE,"NextEra Energy, Inc.",70.99,72.16,42.2,Pass,BUY
-NTDOY,"Nintendo Co., Ltd.",21.46,21.5,46.3,Pass,BUY
-NUKZ,Exchange Traded Concepts Trust ,60.55,47.56,66.8,Pass,HOLD
-ONON,On Holding AG,50.68,52.44,42.8,Pass,BUY
-PGR,Progressive Corporation (The),241.71,262.84,35.4,Pass,BUY
-RACE,Ferrari N.V.,498.79,487.26,51.5,Pass,HOLD
-SANA,"Sana Biotechnology, Inc.",4.36,3.78,57.5,Pass,HOLD
-SBUX,Starbucks Corporation,92.76,91.22,48.6,Pass,HOLD
-SMR,NuScale Power Corporation,50.51,27.47,64.2,Pass,HOLD
-TJX,"TJX Companies, Inc. (The)",125.81,125.65,54.2,Pass,HOLD
-TSLA,"Tesla, Inc.",319.04,318.86,49.9,Pass,HOLD
-URNM,Sprott Uranium Miners ETF,46.4,39.31,46.7,Pass,HOLD
-VEEV,Veeva Systems Inc.,286.9,283.14,55.5,Pass,HOLD
-VRT,"Vertiv Holdings, LLC",144.17,127.02,72.1,Pass,TRIM
-WIX,Wix.com Ltd.,139.37,155.87,27.2,Pass,BUY
-XYL,Xylem Inc.,130.6,123.29,50.9,Pass,HOLD
+AI,AIR LIQUIDE,172.8,177.93,43.4,Pass,BUY
+ALFA.ST,Alfa Laval AB,426.5,411.95,56.9,Pass,HOLD
+ASML,ASML Holding N.V. - New York Re,697.1,760.26,35.6,Pass,BUY
+ATLX,Atlas Lithium Corporation,4.53,4.26,51.0,Pass,HOLD
+BEAM,Beam Therapeutics Inc.,19.61,19.56,47.9,Pass,HOLD
+BMI,"Badger Meter, Inc.",191.11,229.16,24.0,Pass,BUY
+BNP,BNP PARIBAS ACT.A,80.06,76.8,62.1,Pass,HOLD
+BYDDY,"BYD Co., Ltd.",14.65,16.6,32.8,Pass,BUY
+CEG,Constellation Energy Corporatio,347.32,311.66,69.8,Pass,HOLD
+D,"Dominion Energy, Inc.",58.22,56.56,56.4,Pass,HOLD
+ENGI,ENGIE,19.62,19.51,51.2,Pass,HOLD
+EOSE,"Eos Energy Enterprises, Inc.",5.78,5.21,55.9,Pass,HOLD
+FGR,EIFFAGE,117.65,118.33,51.6,Pass,BUY
+FLNC,"Fluence Energy, Inc.",8.2,7.89,51.9,Pass,HOLD
+FLS,Flowserve Corporation,56.07,52.8,64.3,Pass,HOLD
+GWH,"ESS Tech, Inc.",1.85,1.57,53.5,Pass,HOLD
+IBE,ACCIONES IBERDROLA,15.35,15.7,43.9,Pass,BUY
+INTC,Intel Corporation,19.8,21.57,32.3,Pass,BUY
+KD,"Kyndryl Holdings, Inc.",38.05,40.27,39.2,Pass,BUY
+KOMB,KOMERCNI BANKA,1029.0,1020.75,50.6,Pass,HOLD
+LEU,Centrus Energy Corp.,215.98,124.42,54.1,Pass,HOLD
+NBIS,Nebius Group N.V.,54.54,50.61,60.3,Pass,HOLD
+NEE,"NextEra Energy, Inc.",70.73,72.11,41.3,Pass,BUY
+NTDOY,"Nintendo Co., Ltd.",21.04,21.52,42.2,Pass,BUY
+NUKZ,Exchange Traded Concepts Trust ,60.16,47.76,64.1,Pass,HOLD
+ONON,On Holding AG,48.53,52.32,36.4,Pass,BUY
+PGR,Progressive Corporation (The),242.85,261.94,37.5,Pass,BUY
+RACE,Ferrari N.V.,436.63,486.04,26.3,Pass,BUY
+SANA,"Sana Biotechnology, Inc.",4.09,3.82,51.3,Pass,HOLD
+SBUX,Starbucks Corporation,90.0,91.33,40.4,Pass,BUY
+SMR,NuScale Power Corporation,50.98,27.82,64.8,Pass,HOLD
+TJX,"TJX Companies, Inc. (The)",124.98,125.45,50.1,Pass,BUY
+TSLA,"Tesla, Inc.",310.3,318.66,46.0,Pass,BUY
+URNM,Sprott Uranium Miners ETF,44.95,39.43,41.0,Pass,BUY
+VEEV,Veeva Systems Inc.,287.56,283.33,56.2,Pass,HOLD
+VRT,"Vertiv Holdings, LLC",146.18,128.0,73.6,Pass,TRIM
+WIX,Wix.com Ltd.,135.99,155.16,24.6,Pass,BUY
+XYL,Xylem Inc.,143.85,123.42,77.7,Pass,HOLD
