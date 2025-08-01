@@ -1,28 +1,28 @@
 Ticker,Name,Close,SMA,RSI,Valuation,Signal
 6324.T,HARMONIC DRIVE SYSTEMS,2922.0,2733.63,55.5,Pass,HOLD
-AI,AIR LIQUIDE,171.16,177.67,38.9,Pass,BUY
-ALFA.ST,Alfa Laval AB,421.1,411.66,52.3,Pass,HOLD
+AI,AIR LIQUIDE,171.04,177.67,38.6,Pass,BUY
+ALFA.ST,Alfa Laval AB,421.4,411.66,52.6,Pass,HOLD
 AMZN,"Amazon.com, Inc.",234.11,217.39,67.0,Pass,HOLD
-ASML,ASML Holding N.V. - New York Re,694.71,760.21,35.1,Pass,BUY
+ASML,ASML Holding N.V. - New York Re,694.71,760.2,35.1,Pass,BUY
 ATLX,Atlas Lithium Corporation,4.56,4.26,51.7,Pass,HOLD
 BEAM,Beam Therapeutics Inc.,19.71,19.56,48.5,Pass,HOLD
 BMI,"Badger Meter, Inc.",188.76,229.08,23.1,Pass,BUY
-BNP,BNP PARIBAS ACT.A,77.88,76.84,51.8,Pass,HOLD
+BNP,BNP PARIBAS ACT.A,77.85,76.84,51.6,Pass,HOLD
 BYDDY,"BYD Co., Ltd.",14.65,16.6,32.8,Pass,BUY
 CEG,Constellation Energy Corporatio,347.84,311.67,70.0,Pass,HOLD
 D,"Dominion Energy, Inc.",58.45,56.56,58.0,Pass,HOLD
 DASH,"DoorDash, Inc.",250.25,228.75,63.0,Pass,HOLD
 DIS,Walt Disney Company (The),119.11,118.04,47.0,Pass,HOLD
-ENGI,ENGIE,19.17,19.51,40.4,Pass,BUY
+ENGI,ENGIE,19.17,19.51,40.5,Pass,BUY
 EOSE,"Eos Energy Enterprises, Inc.",5.7,5.21,54.4,Pass,HOLD
 FGR,EIFFAGE,116.7,118.18,47.8,Pass,BUY
 FLNC,"Fluence Energy, Inc.",8.12,7.89,50.9,Pass,HOLD
 FLS,Flowserve Corporation,56.04,52.8,64.2,Pass,HOLD
 GWH,"ESS Tech, Inc.",1.9,1.57,54.7,Pass,HOLD
-IBE,ACCIONES IBERDROLA,15.26,15.69,41.3,Pass,BUY
+IBE,ACCIONES IBERDROLA,15.26,15.69,41.2,Pass,BUY
 INTC,Intel Corporation,19.8,21.57,32.3,Pass,BUY
 KD,"Kyndryl Holdings, Inc.",37.77,40.05,37.6,Pass,BUY
-KOMB,KOMERCNI BANKA,1017.0,1020.83,45.8,Pass,BUY
+KOMB,KOMERCNI BANKA,1021.0,1020.91,47.3,Pass,HOLD
 LEU,Centrus Energy Corp.,215.4,124.42,53.9,Pass,HOLD
 MSFT,Microsoft Corporation,533.5,487.25,81.7,Pass,HOLD
 NBIS,Nebius Group N.V.,54.43,50.61,60.1,Pass,HOLD
@@ -32,7 +32,7 @@ NUKZ,Exchange Traded Concepts Trust ,60.2,47.76,64.4,Pass,HOLD
 NVDA,NVIDIA Corporation,177.87,153.72,71.1,Pass,HOLD
 ONON,On Holding AG,48.57,52.32,36.5,Pass,BUY
 PGR,Progressive Corporation (The),242.04,261.92,36.0,Pass,BUY
-RACE.MI,FERRARI,371.5,417.79,25.7,Pass,BUY
+RACE.MI,FERRARI,371.2,417.78,25.6,Pass,BUY
 SANA,"Sana Biotechnology, Inc.",4.06,3.82,50.6,Pass,HOLD
 SBUX,Starbucks Corporation,89.16,91.31,38.4,Pass,BUY
 SMR,NuScale Power Corporation,50.21,27.82,63.4,Pass,HOLD
