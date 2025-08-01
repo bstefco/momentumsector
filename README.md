@@ -9,12 +9,29 @@ A serverless AWS Lambda function that provides comprehensive stock analysis incl
 - **Reddit Sentiment**: Real-time mentions from r/wallstreetbets via Ape Wisdom API
 - **Slack Integration**: Beautiful Slack Block Kit formatted responses
 - **Error Handling**: Comprehensive error handling and graceful degradation
+- **International Support**: European stock exchanges with currency conversion
 
 ## 📊 Data Sources
 
 - **Yahoo Finance**: Stock price, volume, market cap, short interest
 - **Ape Wisdom API**: Reddit mentions from r/wallstreetbets
 - **Real-time Calculations**: Price changes, short interest percentages
+
+## 🇪🇺 International Ticker Aliases
+
+The handler supports international stock exchanges through automatic ticker aliasing:
+
+### Supported Aliases
+- `URNM` → `URNM.L` (London Stock Exchange)
+- `RACE` → `RACE.MI` (Borsa Italiana)
+
+### Currency Conversion
+- **LSE (GBX)**: Automatic conversion from GBX to EUR using real-time exchange rates
+  - Format: `€48.10 (GBX 4810)`
+- **Borsa Italiana**: Already in EUR, displayed as `€123.45`
+
+### Data Limitations
+Some APIs (IEX, OptionChains, Short-Interest) may not return data for European tickers. In such cases, the handler gracefully falls back to "N/A" values.
 
 ## 🛠️ Architecture
 
@@ -39,6 +56,7 @@ Returns a Slack Block Kit formatted response with:
 - Short interest data
 - Reddit mentions (24h and change)
 - Company information
+- Exchange information
 
 ### Example Response
 ```json
@@ -156,6 +174,8 @@ python -m pytest test_handler.py -v
 - ✅ Slack Block Kit formatting
 - ✅ Error handling
 - ✅ Lambda handler responses
+- ✅ International ticker support
+- ✅ Currency conversion
 
 ## 📈 Performance
 
@@ -189,6 +209,11 @@ python -m pytest test_handler.py -v
    - Increase timeout setting
    - Optimize API calls
    - Add caching if needed
+
+4. **Currency Conversion Errors**
+   - Check exchange rate API availability
+   - Verify GBX ticker symbols
+   - Review conversion logic
 
 ### Debug Mode
 Enable detailed logging by setting the `LOG_LEVEL` environment variable:

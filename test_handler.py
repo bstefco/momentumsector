@@ -79,11 +79,85 @@ def test_get_stock_data_success(mock_ticker, mock_apewisdom):
     assert result['reddit_mentions_24h'] == 150
     assert result['reddit_mentions_change'] == 50
 
+@patch('handler.apewisdom_mentions')
+@patch('yfinance.Ticker')
+def test_get_stock_data_urnm_lse(mock_ticker, mock_apewisdom):
+    """Test URNM.L LSE stock with GBX to EUR conversion"""
+    # Mock yfinance data for URNM.L
+    mock_stock = Mock()
+    mock_stock.info = {
+        'volume': 500000,
+        'marketCap': 1000000000,
+        'currency': 'GBX',
+        'longName': 'Sprott Uranium Miners ETF',
+        'sector': 'Energy',
+        'industry': 'ETF'
+    }
+    mock_stock.history.return_value = Mock()
+    mock_stock.history.return_value.iloc = [
+        Mock(return_value={'Close': 4810}),
+        Mock(return_value={'Close': 4800})
+    ]
+    mock_stock.history.return_value.__len__ = lambda: 2
+    
+    # Mock exchange rate
+    mock_exchange = Mock()
+    mock_exchange.info = {"regularMarketPrice": 1.18}
+    
+    mock_ticker.side_effect = [mock_stock, mock_exchange]
+    
+    # Mock Ape Wisdom data
+    mock_apewisdom.return_value = (25, 5)
+    
+    result = get_stock_data('URNM')
+    
+    assert result['symbol'] == 'URNM'
+    assert result['yahoo_symbol'] == 'URNM.L'
+    assert result['current_price'] == 4810
+    assert result['price_display'] == "€56.76 (GBX 4810)"
+    assert result['exchange'] == 'LSE'
+    assert result['currency'] == 'GBX'
+
+@patch('handler.apewisdom_mentions')
+@patch('yfinance.Ticker')
+def test_get_stock_data_race_borsa(mock_ticker, mock_apewisdom):
+    """Test RACE.MI Borsa Italiana stock"""
+    # Mock yfinance data for RACE.MI
+    mock_stock = Mock()
+    mock_stock.info = {
+        'volume': 300000,
+        'marketCap': 50000000000,
+        'currency': 'EUR',
+        'longName': 'Ferrari N.V.',
+        'sector': 'Consumer Cyclical',
+        'industry': 'Auto Manufacturers'
+    }
+    mock_stock.history.return_value = Mock()
+    mock_stock.history.return_value.iloc = [
+        Mock(return_value={'Close': 443.39}),
+        Mock(return_value={'Close': 440.00})
+    ]
+    mock_stock.history.return_value.__len__ = lambda: 2
+    mock_ticker.return_value = mock_stock
+    
+    # Mock Ape Wisdom data
+    mock_apewisdom.return_value = (15, -2)
+    
+    result = get_stock_data('RACE')
+    
+    assert result['symbol'] == 'RACE'
+    assert result['yahoo_symbol'] == 'RACE.MI'
+    assert result['current_price'] == 443.39
+    assert result['price_display'] == "€443.39"
+    assert result['exchange'] == 'Borsa Italiana'
+    assert result['currency'] == 'EUR'
+
 def test_create_slack_block_kit_success():
     """Test Slack Block Kit creation"""
     data = {
         'symbol': 'TSLA',
         'current_price': 250.0,
+        'price_display': '$250.00',
         'price_change_pct': 4.17,
         'volume': 1000000,
         'market_cap': 50000000000,
@@ -92,7 +166,8 @@ def test_create_slack_block_kit_success():
         'reddit_mentions_change': 50,
         'company_name': 'Tesla, Inc.',
         'sector': 'Consumer Cyclical',
-        'industry': 'Auto Manufacturers'
+        'industry': 'Auto Manufacturers',
+        'exchange': 'NASDAQ'
     }
     
     result = create_slack_block_kit(data)
@@ -101,6 +176,7 @@ def test_create_slack_block_kit_success():
     assert len(result['blocks']) == 4  # header, section, section, context
     assert result['blocks'][0]['type'] == 'header'
     assert 'TSLA Analysis' in result['blocks'][0]['text']['text']
+    assert 'Exchange: NASDAQ' in result['blocks'][3]['elements'][0]['text']
 
 def test_create_slack_block_kit_error():
     """Test Slack Block Kit creation with error"""

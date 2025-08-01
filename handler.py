@@ -13,6 +13,9 @@ from datetime import datetime, timedelta
 # API endpoints
 APEW_URL = "https://apewisdom.io/api/v1.0/filter/wallstreetbets"
 
+# International ticker aliases
+ALIAS = {"URNM": "URNM.L", "RACE": "RACE.MI"}
+
 def apewisdom_mentions(symbol: str) -> tuple[int, int]:
     """
     Return (mentions_24h, Δmentions_vs_24h_ago) for `symbol`.
@@ -60,8 +63,11 @@ def get_stock_data(symbol: str) -> Dict[str, Any]:
     Fetch comprehensive stock data including price, short interest, and Reddit mentions.
     """
     try:
+        # Apply ticker alias if needed
+        yahoo_symbol = ALIAS.get(symbol, symbol)
+        
         # Get basic stock info
-        stock = yf.Ticker(symbol)
+        stock = yf.Ticker(yahoo_symbol)
         info = stock.info
         
         # Get current price data
@@ -70,21 +76,51 @@ def get_stock_data(symbol: str) -> Dict[str, Any]:
         prev_price = hist.iloc[-2]['Close'] if len(hist) > 1 else current_price
         price_change = ((current_price - prev_price) / prev_price * 100) if prev_price > 0 else 0
         
-        # Get short interest data
-        shares_short = info.get('sharesShort', 0)
-        float_shares = info.get('floatShares', info.get('sharesOutstanding', 0))
-        short_interest_pct = (shares_short / float_shares * 100) if float_shares > 0 else 0
+        # Handle GBX currency conversion for LSE stocks
+        price_display = current_price
+        currency = info.get('currency', 'USD')
+        
+        if yahoo_symbol.endswith('.L') and currency == 'GBX':
+            try:
+                gbp_eur = yf.Ticker("GBPEUR=X").info["regularMarketPrice"] / 100
+                price_eur = current_price * gbp_eur
+                price_display = f"€{price_eur:,.2f} (GBX {current_price:.0f})"
+            except Exception as e:
+                print(f"Error converting GBX to EUR for {symbol}: {e}")
+                price_display = f"GBX {current_price:.0f}"
+        elif yahoo_symbol.endswith('.MI'):
+            # Borsa Italiana stocks are already in EUR
+            price_display = f"€{current_price:,.2f}"
+        
+        # Get short interest data (wrap in try/except for EU tickers)
+        try:
+            shares_short = info.get('sharesShort', 0)
+            float_shares = info.get('floatShares', info.get('sharesOutstanding', 0))
+            short_interest_pct = (shares_short / float_shares * 100) if float_shares > 0 else 0
+        except Exception:
+            shares_short = "N/A"
+            float_shares = "N/A"
+            short_interest_pct = "N/A"
         
         # Get Ape Wisdom Reddit mentions
         mentions_24h, delta_mentions = apewisdom_mentions(symbol)
         
+        # Determine exchange name
+        exchange = "Unknown"
+        if yahoo_symbol.endswith('.L'):
+            exchange = "LSE"
+        elif yahoo_symbol.endswith('.MI'):
+            exchange = "Borsa Italiana"
+        
         return {
             'symbol': symbol.upper(),
-            'current_price': round(current_price, 2),
+            'yahoo_symbol': yahoo_symbol,
+            'current_price': current_price,
+            'price_display': price_display,
             'price_change_pct': round(price_change, 2),
             'volume': info.get('volume', 0),
             'market_cap': info.get('marketCap', 0),
-            'short_interest_pct': round(short_interest_pct, 2),
+            'short_interest_pct': short_interest_pct,
             'shares_short': shares_short,
             'float_shares': float_shares,
             'reddit_mentions_24h': mentions_24h,
@@ -92,6 +128,8 @@ def get_stock_data(symbol: str) -> Dict[str, Any]:
             'company_name': info.get('longName', symbol),
             'sector': info.get('sector', 'Unknown'),
             'industry': info.get('industry', 'Unknown'),
+            'exchange': exchange,
+            'currency': currency,
             'timestamp': datetime.now().isoformat()
         }
         
@@ -130,6 +168,9 @@ def create_slack_block_kit(data: Dict[str, Any]) -> Dict[str, Any]:
     market_cap_formatted = f"${data['market_cap']/1e9:.1f}B" if data['market_cap'] > 1e9 else f"${data['market_cap']/1e6:.1f}M"
     volume_formatted = f"{data['volume']/1e6:.1f}M" if data['volume'] > 1e6 else f"{data['volume']/1e3:.1f}K"
     
+    # Format short interest
+    short_interest_text = f"{data['short_interest_pct']:.1f}%" if isinstance(data['short_interest_pct'], (int, float)) else str(data['short_interest_pct'])
+    
     return {
         "blocks": [
             {
@@ -145,7 +186,7 @@ def create_slack_block_kit(data: Dict[str, Any]) -> Dict[str, Any]:
                 "fields": [
                     {
                         "type": "mrkdwn",
-                        "text": f"*Price:* ${data['current_price']} ({data['price_change_pct']:+.2f}%)"
+                        "text": f"*Price:* {data['price_display']} ({data['price_change_pct']:+.2f}%)"
                     },
                     {
                         "type": "mrkdwn",
@@ -157,7 +198,7 @@ def create_slack_block_kit(data: Dict[str, Any]) -> Dict[str, Any]:
                     },
                     {
                         "type": "mrkdwn",
-                        "text": f"*Short Interest:* {data['short_interest_pct']:.1f}%"
+                        "text": f"*Short Interest:* {short_interest_text}"
                     },
                     {
                         "type": "mrkdwn",
@@ -181,7 +222,7 @@ def create_slack_block_kit(data: Dict[str, Any]) -> Dict[str, Any]:
                 "elements": [
                     {
                         "type": "mrkdwn",
-                        "text": f"📊 Analysis generated at {datetime.now().strftime('%Y-%m-%d %H:%M:%S UTC')}"
+                        "text": f"📊 Analysis generated at {datetime.now().strftime('%Y-%m-%d %H:%M:%S UTC')} • Exchange: {data['exchange']}"
                     }
                 ]
             }
