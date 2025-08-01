@@ -16,7 +16,7 @@ The market radar bot is **fully functional** and ready for production use.
 
 ### Current Configuration:
 - **Slack Webhook**: ✅ Configured
-- **Tickers for Short Interest**: SANA,TMC,EOSE,GWH,ATLX,NBIS,VRT,BEAM,FLNC,BYDDY
+- **Tickers for Short Interest**: SANA,TMC,EOSE,GWH,ATLX,NBIS,VRT,BEAM,BYDDY
 - **News Tickers**: TSLA,NVDA,AAPL
 - **Schedule**: Hourly during US trading hours (10-20 UTC, Mon-Fri)
 

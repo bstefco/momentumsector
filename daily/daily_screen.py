@@ -35,7 +35,7 @@ HIGH_BETA_RULES = {
     "BEAM":   {"sma": 30, "rsi": 35},
     "BMI":    {"sma": 30, "rsi": 35},
     "EOSE":   {"sma": 30, "rsi": 35},
-    "FLNC":   {"sma": 30, "rsi": 35},
+
     "FLS":    {"sma": 30, "rsi": 35},
     "GWH":    {"sma": 30, "rsi": 35},
     "ONON":   {"sma": 30, "rsi": 35},

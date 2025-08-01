@@ -16,7 +16,7 @@ RULES = {
     "BEAM":   {"sma": 30, "rsi": 35},   # Beam Therapeutics
     "BMI":    {"sma": 30, "rsi": 35},   # Badger Meter
     "EOSE":   {"sma": 30, "rsi": 35},   # Eos Energy Enterprises
-    "FLNC":   {"sma": 30, "rsi": 35},   # Fluence Energy
+
     "FLS":    {"sma": 30, "rsi": 35},   # Flowserve Corporation
     "GWH":    {"sma": 30, "rsi": 35},   # ESS Tech
     "KD":     {"sma": 30, "rsi": 35},   # Kyndryl Holdings

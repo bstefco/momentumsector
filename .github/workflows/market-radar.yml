@@ -36,7 +36,7 @@ jobs:
           SLACK_WEBHOOK=${{ secrets.SLACK_WEBHOOK || '' }}
           NOTION_TOKEN=${{ secrets.NOTION_TOKEN || '' }}
           NOTION_DB=${{ secrets.NOTION_DB || '' }}
-          SI_TICKERS=${{ secrets.SI_TICKERS || 'SANA,TMC,EOSE,GWH,ATLX,NBIS,VRT,BEAM,FLNC,BYDDY' }}
+          SI_TICKERS=${{ secrets.SI_TICKERS || 'SANA,TMC,EOSE,GWH,ATLX,NBIS,VRT,BEAM,BYDDY' }}
           NEWS_TICKERS_EXTRA=${{ secrets.NEWS_TICKERS_EXTRA || 'TSLA,NVDA,AAPL' }}
           MENTION_MIN=${{ secrets.MENTION_MIN || '25' }}
           ACCEL_FACTOR=${{ secrets.ACCEL_FACTOR || '3' }}
