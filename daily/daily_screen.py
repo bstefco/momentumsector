@@ -13,7 +13,7 @@ from rulebook import RULES
 # ── THREE-TIER RULE SETS ──────────────────────────────────────────────────────
 # 🎯 THEMATIC Momentum (SMA-100, RSI≤45) – Long-term thematic holdings
 THEMATIC_RULES = {
-    "URNM EBS":  {"sma": 100, "rsi": 45},
+    "URNM.L":  {"sma": 100, "rsi": 45},
     "NUKZ":  {"sma": 100, "rsi": 45},
     "XYL":   {"sma": 100, "rsi": 45},
     "ALFA.ST":{"sma": 100, "rsi": 45},
@@ -87,7 +87,6 @@ ALIAS = {
     "RACE BVME": "RACE",      # Ferrari
     "SBUX": "SBUX",      # Starbucks
     "TJX":  "TJX",       # TJX Companies
-    "URNM EBS": "URNM",  # Sprott Uranium Miners ETF
 }
 
 # ETFs / trusts with no earnings → auto-pass valuation
