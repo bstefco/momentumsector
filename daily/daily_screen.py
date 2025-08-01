@@ -427,29 +427,40 @@ high_beta_table = build_table_html("High-Beta", list(HIGH_BETA_RULES.keys()),
 established_table = build_table_html("Established", list(ESTABLISHED_RULES.keys()), 
                                      f"Dividend / Established (SMA-50, RSI≤40) • {date.today()}")
 
-# Add disclaimer
-disclaimer_html = """
+# Add tactical exit legend
+legend_html = """
     <div style="margin: 40px auto; max-width: 1100px; padding: 20px; background: #fff; border-radius: 14px; box-shadow: 0 2px 16px rgba(0,0,0,0.08);">
-        <h4>Disclaimer</h4>
-        <p>This screener is for educational purposes only and is <strong>not</strong> investment advice.</p>
-
-        <h4 style='margin-top:1em;'>Thesis-Break Test for Thematic Holdings</h4>
-        <p>Act on EXIT <em>only</em> if <strong>two or more</strong> of these red flags appear:</p>
-        <ol>
-          <li><strong>Narrative flip</strong>&nbsp;&mdash; project or major customer lost.</li>
-          <li><strong>Regulatory hit</strong>&nbsp;&mdash; new rule or licence denial undermines the business.</li>
-          <li><strong>Moat breached</strong>&nbsp;&mdash; competitor leap-frogs tech or captures key share.</li>
-          <li><strong>Balance-sheet blow-up</strong>&nbsp;&mdash; leverage spike, credit-rating plunge, or dilutive rescue financing.</li>
-        </ol>
+        <hr style="margin-top:32px">
+        <h3 style="margin-bottom:8px">Tactical Exit Layers — Quick Guide</h3>
+        <table style="border-collapse:collapse;font-size:14px">
+          <thead>
+            <tr>
+              <th style="padding:4px 8px;border-bottom:1px solid #ccc">#</th>
+              <th style="padding:4px 8px;border-bottom:1px solid #ccc">Layer</th>
+              <th style="padding:4px 8px;border-bottom:1px solid #ccc">Trigger</th>
+              <th style="padding:4px 8px;border-bottom:1px solid #ccc">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>1</td><td>Structural Exit</td><td>Thesis broken</td><td>Sell 100 %</td></tr>
+            <tr><td>2</td><td>Risk-Trim</td><td>Price ≥ 1.15×SMA-20 <br>or RSI ≥ 70</td><td>Sell 25-35 %</td></tr>
+            <tr><td>3</td><td>Stop-Loss Guard</td><td>1-day drop ≤ –10 % (High-Beta)</td><td>Sell 50 %</td></tr>
+            <tr><td>4</td><td>Panic / Trailing</td><td>2-day drop ≤ –15 % & ≥ 2× vol <br>or Close &lt; SMA-50 after Risk-Trim</td><td>Sell remainder</td></tr>
+            <tr><td>5</td><td>Quarterly Rebalance</td><td>End of Mar/Jun/Sep/Dec</td><td>Recycle gains into under-budget sleeves</td></tr>
+          </tbody>
+        </table>
+        <p style="font-size:12px;color:#666;margin-top:6px">
+        Hierarchy: Structural Exit → Bucket Trim caps → Risk-Trim/Stops → Calendar Rebalance.
+        </p>
     </div>
     """
 
-# Combine all tables and disclaimer
+# Combine all tables and legend
 html = [f"<!DOCTYPE html><html><head>{extra_css}</head><body>"]
 html.append(thematic_table)
 html.append(high_beta_table)
 html.append(established_table)
-html.append(disclaimer_html)
+html.append(legend_html)
 html.append('</body></html>')
 
 with open(out_dir / "daily_screen.html", "w", encoding="utf-8") as f:
