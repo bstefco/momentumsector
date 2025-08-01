@@ -1,0 +1,86 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: Stock Analysis Lambda with Ape Wisdom Reddit data
+
+Globals:
+  Function:
+    Timeout: 30
+    MemorySize: 256
+    Runtime: python3.12
+    Environment:
+      Variables:
+        LOG_LEVEL: INFO
+
+Resources:
+  StockAnalysisFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: .
+      Handler: handler.lambda_handler
+      Description: Stock analysis with Reddit sentiment data
+      Events:
+        Api:
+          Type: Api
+          Properties:
+            Path: /analyze
+            Method: post
+            RestApiId: !Ref StockAnalysisApi
+        ApiGet:
+          Type: Api
+          Properties:
+            Path: /analyze
+            Method: get
+            RestApiId: !Ref StockAnalysisApi
+
+  StockAnalysisApi:
+    Type: AWS::Serverless::Api
+    Properties:
+      StageName: prod
+      Cors:
+        AllowMethods: "'POST, GET, OPTIONS'"
+        AllowHeaders: "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'"
+        AllowOrigin: "'*'"
+
+  # IAM Role for Lambda
+  LambdaExecutionRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: lambda.amazonaws.com
+            Action: sts:AssumeRole
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
+      Policies:
+        - PolicyName: LambdaExecutionPolicy
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Effect: Allow
+                Action:
+                  - logs:CreateLogGroup
+                  - logs:CreateLogStream
+                  - logs:PutLogEvents
+                Resource: '*'
+
+Outputs:
+  ApiUrl:
+    Description: "API Gateway endpoint URL for Slack integration"
+    Value: !Sub "https://${StockAnalysisApi}.execute-api.${AWS::Region}.amazonaws.com/prod/analyze"
+    Export:
+      Name: !Sub "${AWS::StackName}-ApiUrl"
+  
+  FunctionName:
+    Description: "Lambda function name"
+    Value: !Ref StockAnalysisFunction
+    Export:
+      Name: !Sub "${AWS::StackName}-FunctionName"
+  
+  FunctionArn:
+    Description: "Lambda function ARN"
+    Value: !GetAtt StockAnalysisFunction.Arn
+    Export:
+      Name: !Sub "${AWS::StackName}-FunctionArn" 

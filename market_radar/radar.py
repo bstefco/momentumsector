@@ -46,6 +46,7 @@ cur.execute("CREATE TABLE IF NOT EXISTS yolo_hist (ticker TEXT, date TEXT, cnt I
 cur.execute("CREATE TABLE IF NOT EXISTS sent_news (ticker TEXT, title TEXT, date TEXT, "
             "PRIMARY KEY(ticker,title,date))")
 con.commit()
+print(f"[DEBUG] Using DB file: {DB_FILE}", file=sys.stderr)
 
 def slack(msg:str, emoji=":newspaper:"):
     try:
@@ -60,7 +61,9 @@ def slack(msg:str, emoji=":newspaper:"):
 
 def seen(guid:str)->bool:
     cur.execute("SELECT 1 FROM sent_rss WHERE guid=?", (guid,)); return cur.fetchone() is not None
-def mark(guid): cur.execute("INSERT OR IGNORE INTO sent_rss VALUES (?)",(guid,)); con.commit()
+def mark(guid):
+    print(f"[DEBUG] Marking RSS: {guid}", file=sys.stderr)
+    cur.execute("INSERT OR IGNORE INTO sent_rss VALUES (?)",(guid,)); con.commit()
 
 def seen_news(ticker:str, title:str)->bool:
     today = dt.date.today().isoformat()
@@ -74,6 +77,7 @@ def mark_news(ticker:str, title:str):
     today = dt.date.today().isoformat()
     # Create a normalized title (lowercase, remove extra spaces, take first 80 chars)
     normalized_title = " ".join(title.lower().split())[:80]
+    print(f"[DEBUG] Marking news: {ticker} | {normalized_title} | {today}", file=sys.stderr)
     cur.execute("INSERT OR IGNORE INTO sent_news VALUES (?,?,?)", 
                 (ticker, normalized_title, today))
     con.commit()
