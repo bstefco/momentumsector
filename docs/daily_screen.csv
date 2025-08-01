@@ -1,40 +1,40 @@
 Ticker,Name,Close,SMA,RSI,Valuation,Signal
-6324.T,HARMONIC DRIVE SYSTEMS,2906.0,2728.37,54.8,Pass,HOLD
-AI,AIR LIQUIDE,172.8,177.93,43.4,Pass,BUY
-ALFA.ST,Alfa Laval AB,426.5,411.95,56.9,Pass,HOLD
-ASML,ASML Holding N.V. - New York Re,697.1,760.26,35.6,Pass,BUY
-ATLX,Atlas Lithium Corporation,4.53,4.26,51.0,Pass,HOLD
-BEAM,Beam Therapeutics Inc.,19.61,19.56,47.9,Pass,HOLD
-BMI,"Badger Meter, Inc.",191.11,229.16,24.0,Pass,BUY
-BNP,BNP PARIBAS ACT.A,80.06,76.8,62.1,Pass,HOLD
+6324.T,HARMONIC DRIVE SYSTEMS,2922.0,2733.63,55.5,Pass,HOLD
+AI,AIR LIQUIDE,170.78,177.67,38.0,Pass,BUY
+ALFA.ST,Alfa Laval AB,420.8,411.66,52.1,Pass,HOLD
+ASML,ASML Holding N.V. - New York Re,694.71,760.21,35.1,Pass,BUY
+ATLX,Atlas Lithium Corporation,4.56,4.26,51.7,Pass,HOLD
+BEAM,Beam Therapeutics Inc.,19.71,19.56,48.5,Pass,HOLD
+BMI,"Badger Meter, Inc.",188.76,229.08,23.1,Pass,BUY
+BNP,BNP PARIBAS ACT.A,78.59,76.86,54.7,Pass,HOLD
 BYDDY,"BYD Co., Ltd.",14.65,16.6,32.8,Pass,BUY
-CEG,Constellation Energy Corporatio,347.32,311.66,69.8,Pass,HOLD
-D,"Dominion Energy, Inc.",58.22,56.56,56.4,Pass,HOLD
-ENGI,ENGIE,19.62,19.51,51.2,Pass,HOLD
-EOSE,"Eos Energy Enterprises, Inc.",5.78,5.21,55.9,Pass,HOLD
-FGR,EIFFAGE,117.65,118.33,51.6,Pass,BUY
-FLNC,"Fluence Energy, Inc.",8.2,7.89,51.9,Pass,HOLD
-FLS,Flowserve Corporation,56.07,52.8,64.3,Pass,HOLD
-GWH,"ESS Tech, Inc.",1.85,1.57,53.5,Pass,HOLD
-IBE,ACCIONES IBERDROLA,15.35,15.7,43.9,Pass,BUY
+CEG,Constellation Energy Corporatio,347.84,311.67,70.0,Pass,HOLD
+D,"Dominion Energy, Inc.",58.45,56.56,58.0,Pass,HOLD
+ENGI,ENGIE,18.83,19.5,35.1,Pass,BUY
+EOSE,"Eos Energy Enterprises, Inc.",5.7,5.21,54.4,Pass,HOLD
+FGR,EIFFAGE,117.0,118.19,48.9,Pass,BUY
+FLNC,"Fluence Energy, Inc.",8.12,7.89,50.9,Pass,HOLD
+FLS,Flowserve Corporation,56.04,52.8,64.2,Pass,HOLD
+GWH,"ESS Tech, Inc.",1.9,1.57,54.7,Pass,HOLD
+IBE,ACCIONES IBERDROLA,15.26,15.69,41.3,Pass,BUY
 INTC,Intel Corporation,19.8,21.57,32.3,Pass,BUY
-KD,"Kyndryl Holdings, Inc.",38.05,40.27,39.2,Pass,BUY
-KOMB,KOMERCNI BANKA,1029.0,1020.75,50.6,Pass,HOLD
-LEU,Centrus Energy Corp.,215.98,124.42,54.1,Pass,HOLD
-NBIS,Nebius Group N.V.,54.54,50.61,60.3,Pass,HOLD
-NEE,"NextEra Energy, Inc.",70.73,72.11,41.3,Pass,BUY
-NTDOY,"Nintendo Co., Ltd.",21.04,21.52,42.2,Pass,BUY
-NUKZ,Exchange Traded Concepts Trust ,60.16,47.76,64.1,Pass,HOLD
-ONON,On Holding AG,48.53,52.32,36.4,Pass,BUY
-PGR,Progressive Corporation (The),242.85,261.94,37.5,Pass,BUY
-RACE,Ferrari N.V.,436.63,486.04,26.3,Pass,BUY
-SANA,"Sana Biotechnology, Inc.",4.09,3.82,51.3,Pass,HOLD
-SBUX,Starbucks Corporation,90.0,91.33,40.4,Pass,BUY
-SMR,NuScale Power Corporation,50.98,27.82,64.8,Pass,HOLD
-TJX,"TJX Companies, Inc. (The)",124.98,125.45,50.1,Pass,BUY
-TSLA,"Tesla, Inc.",310.3,318.66,46.0,Pass,BUY
-URNM,Sprott Uranium Miners ETF,44.95,39.43,41.0,Pass,BUY
-VEEV,Veeva Systems Inc.,287.56,283.33,56.2,Pass,HOLD
-VRT,"Vertiv Holdings, LLC",146.18,128.0,73.6,Pass,TRIM
-WIX,Wix.com Ltd.,135.99,155.16,24.6,Pass,BUY
-XYL,Xylem Inc.,143.85,123.42,77.7,Pass,HOLD
+KD,"Kyndryl Holdings, Inc.",37.77,40.27,37.6,Pass,BUY
+KOMB,KOMERCNI BANKA,1028.0,1021.05,50.2,Pass,HOLD
+LEU,Centrus Energy Corp.,215.4,124.42,53.9,Pass,HOLD
+NBIS,Nebius Group N.V.,54.43,50.61,60.1,Pass,HOLD
+NEE,"NextEra Energy, Inc.",71.06,72.11,42.5,Pass,BUY
+NTDOY,"Nintendo Co., Ltd.",21.0,21.52,41.8,Pass,BUY
+NUKZ,Exchange Traded Concepts Trust ,60.2,47.76,64.4,Pass,HOLD
+ONON,On Holding AG,48.57,52.32,36.5,Pass,BUY
+PGR,Progressive Corporation (The),242.04,261.92,36.0,Pass,BUY
+RACE,Ferrari N.V.,443.39,486.18,27.8,Pass,BUY
+SANA,"Sana Biotechnology, Inc.",4.06,3.82,50.6,Pass,HOLD
+SBUX,Starbucks Corporation,89.16,91.31,38.4,Pass,BUY
+SMR,NuScale Power Corporation,50.21,27.82,63.4,Pass,HOLD
+TJX,"TJX Companies, Inc. (The)",124.53,125.44,48.1,Pass,BUY
+TSLA,"Tesla, Inc.",308.27,318.59,45.2,Pass,BUY
+URNM,Sprott Uranium Miners ETF,45.17,39.43,41.8,Pass,BUY
+VEEV,Veeva Systems Inc.,284.2,283.22,52.0,Pass,HOLD
+VRT,"Vertiv Holdings, LLC",145.6,127.98,73.2,Pass,TRIM
+WIX,Wix.com Ltd.,136.03,155.16,24.6,Pass,BUY
+XYL,Xylem Inc.,144.62,123.43,78.4,Pass,HOLD
