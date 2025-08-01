@@ -56,7 +56,7 @@ ESTABLISHED_RULES = {
     "NEE":    {"sma": 50, "rsi": 40},
     "NTDOY":  {"sma": 50, "rsi": 40},
     "PGR":    {"sma": 50, "rsi": 40},
-    "RACE BVME":   {"sma": 50, "rsi": 40},
+    "RACE.MI":   {"sma": 50, "rsi": 40},
     "SBUX":   {"sma": 50, "rsi": 40},
     "TJX":    {"sma": 50, "rsi": 40},
     
@@ -84,7 +84,6 @@ ALIAS = {
     "ASML": "ASML",      # ASML Holding
     "NTDOY": "NTDOY",    # Nintendo
     "PGR":  "PGR",       # Progressive Corporation
-    "RACE BVME": "RACE",      # Ferrari
     "SBUX": "SBUX",      # Starbucks
     "TJX":  "TJX",       # TJX Companies
 }
