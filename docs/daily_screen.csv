@@ -1,28 +1,28 @@
 Ticker,Name,Close,SMA,RSI,Valuation,Signal
 6324.T,HARMONIC DRIVE SYSTEMS,2922.0,2733.63,55.5,Pass,HOLD
 AI,AIR LIQUIDE,171.26,177.68,39.2,Pass,BUY
-ALFA.ST,Alfa Laval AB,422.1,411.67,53.1,Pass,HOLD
+ALFA.ST,Alfa Laval AB,421.9,411.67,53.0,Pass,HOLD
 AMZN,"Amazon.com, Inc.",234.11,217.39,67.0,Pass,HOLD
 ASML,ASML Holding N.V. - New York Re,694.71,760.21,35.1,Pass,BUY
 ATLX,Atlas Lithium Corporation,4.56,4.26,51.7,Pass,HOLD
 BEAM,Beam Therapeutics Inc.,19.71,19.56,48.5,Pass,HOLD
 BMI,"Badger Meter, Inc.",188.76,229.08,23.1,Pass,BUY
-BNP,BNP PARIBAS ACT.A,78.19,76.85,53.0,Pass,HOLD
+BNP,BNP PARIBAS ACT.A,78.15,76.85,52.9,Pass,HOLD
 BYDDY,"BYD Co., Ltd.",14.65,16.6,32.8,Pass,BUY
 CEG,Constellation Energy Corporatio,347.84,311.67,70.0,Pass,HOLD
 D,"Dominion Energy, Inc.",58.45,56.56,58.0,Pass,HOLD
 DASH,"DoorDash, Inc.",250.25,228.75,63.0,Pass,HOLD
 DIS,Walt Disney Company (The),119.11,118.04,47.0,Pass,HOLD
-ENGI,ENGIE,19.16,19.51,40.2,Pass,BUY
+ENGI,ENGIE,19.14,19.51,39.9,Pass,BUY
 EOSE,"Eos Energy Enterprises, Inc.",5.7,5.21,54.4,Pass,HOLD
-FGR,EIFFAGE,116.7,118.18,47.8,Pass,BUY
+FGR,EIFFAGE,116.6,118.18,47.4,Pass,BUY
 FLNC,"Fluence Energy, Inc.",8.12,7.89,50.9,Pass,HOLD
 FLS,Flowserve Corporation,56.04,52.8,64.2,Pass,HOLD
 GWH,"ESS Tech, Inc.",1.9,1.57,54.7,Pass,HOLD
-IBE,ACCIONES IBERDROLA,15.27,15.69,41.6,Pass,BUY
+IBE,ACCIONES IBERDROLA,15.26,15.69,41.3,Pass,BUY
 INTC,Intel Corporation,19.8,21.57,32.3,Pass,BUY
 KD,"Kyndryl Holdings, Inc.",37.77,40.05,37.6,Pass,BUY
-KOMB,KOMERCNI BANKA,1026.0,1021.01,49.3,Pass,HOLD
+KOMB,KOMERCNI BANKA,1025.0,1020.99,48.9,Pass,HOLD
 LEU,Centrus Energy Corp.,215.4,124.42,53.9,Pass,HOLD
 MSFT,Microsoft Corporation,533.5,487.25,81.7,Pass,HOLD
 NBIS,Nebius Group N.V.,54.43,50.61,60.1,Pass,HOLD
