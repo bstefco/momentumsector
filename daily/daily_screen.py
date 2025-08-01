@@ -19,7 +19,6 @@ THEMATIC_RULES = {
     "ALFA.ST":{"sma": 100, "rsi": 45},
     "LEU":   {"sma": 100, "rsi": 45},
     "SMR":   {"sma": 100, "rsi": 45},
-    "TSLA":  {"sma": 100, "rsi": 45},
 }
 
 # 🔥 HIGH-BETA / Tactical (SMA-30, RSI≤35) – Short-term tactical trades
@@ -31,10 +30,8 @@ HIGH_BETA_RULES = {
     "FLNC":   {"sma": 30, "rsi": 35},
     "FLS":    {"sma": 30, "rsi": 35},
     "GWH":    {"sma": 30, "rsi": 35},
-    "KD":     {"sma": 30, "rsi": 35},
     "ONON":   {"sma": 30, "rsi": 35},
     "SANA":   {"sma": 30, "rsi": 35},
-    "TSLA":   {"sma": 30, "rsi": 35},   # Tesla
     "VEEV":   {"sma": 30, "rsi": 35},
     "VRT":    {"sma": 30, "rsi": 35},
     "WIX":    {"sma": 30, "rsi": 35},
@@ -62,6 +59,16 @@ ESTABLISHED_RULES = {
     "RACE":   {"sma": 50, "rsi": 40},
     "SBUX":   {"sma": 50, "rsi": 40},
     "TJX":    {"sma": 50, "rsi": 40},
+    
+    # Added from Team Hidden Gems and Team Rule Breakers
+    "DASH":   {"sma": 50, "rsi": 40},
+    "KD":     {"sma": 50, "rsi": 40},
+    "TSLA":   {"sma": 50, "rsi": 40},
+    "AMZN":   {"sma": 50, "rsi": 40},
+    "MSFT":   {"sma": 50, "rsi": 40},
+    "NVDA":   {"sma": 50, "rsi": 40},
+    "VRTX":   {"sma": 50, "rsi": 40},
+    "DIS":    {"sma": 50, "rsi": 40},
 }
 
 # Map display tickers to Yahoo symbols
