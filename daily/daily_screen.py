@@ -38,6 +38,7 @@ HIGH_BETA_RULES = {
 
     "FLS":    {"sma": 30, "rsi": 35},
     "GWH":    {"sma": 30, "rsi": 35},
+    "KD":     {"sma": 30, "rsi": 35},
     "ONON":   {"sma": 30, "rsi": 35},
     "SANA":   {"sma": 30, "rsi": 35},
     "VEEV":   {"sma": 30, "rsi": 35},
@@ -69,7 +70,6 @@ ESTABLISHED_RULES = {
     
     # Added from Team Hidden Gems and Team Rule Breakers
     "DASH":   {"sma": 50, "rsi": 40},
-    "KD":     {"sma": 50, "rsi": 40},
     "TSLA":   {"sma": 50, "rsi": 40},
     "AMZN":   {"sma": 50, "rsi": 40},
     "MSFT":   {"sma": 50, "rsi": 40},
