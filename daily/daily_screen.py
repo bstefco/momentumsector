@@ -36,7 +36,6 @@ HIGH_BETA_RULES = {
     "VRT":    {"sma": 30, "rsi": 35},
     "WIX":    {"sma": 30, "rsi": 35},
     "NBIS":   {"sma": 30, "rsi": 35},   # Nebius – added 30 Jul 2025
-    "6324.T": {"sma": 30, "rsi": 35},
 }
 
 # 🏢 DIVIDEND / Established (SMA-50, RSI≤40) – Core & income holdings

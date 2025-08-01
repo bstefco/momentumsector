@@ -54,7 +54,7 @@ def check_exit_signals():
             sma_period = "50"  # Default
             if row['Ticker'] in ['URNM', 'NUKZ', 'XYL', 'ALFA.ST', 'LEU', 'SMR', 'TSLA']:
                 sma_period = "100"  # Thematic
-            elif row['Ticker'] in ['ATLX', 'BEAM', 'BMI', 'EOSE', 'FLNC', 'FLS', 'GWH', 'KD', 'ONON', 'SANA', 'VEEV', 'VRT', 'WIX', '6324.T']:
+            elif row['Ticker'] in ['ATLX', 'BEAM', 'BMI', 'EOSE', 'FLNC', 'FLS', 'GWH', 'KD', 'ONON', 'SANA', 'VEEV', 'VRT', 'WIX']:
                 sma_period = "30"   # High-Beta
             
             message = f":warning: *EXIT flag* – {row['Ticker']} closed {row['Close']:.2f} < SMA-{sma_period}. Follow sleeve rule."
