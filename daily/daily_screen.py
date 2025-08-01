@@ -122,6 +122,31 @@ def get_company_name(ticker):
 def safe_round(val, ndigits):
     return round(float(val), ndigits) if val is not None else "—"
 
+def gbx_gbp_eur(price: float, currency: str) -> float:
+    """
+    Convert GBX or GBP price to EUR. 
+    - GBX  (pence): divide by 100, then multiply by FX.
+    - GBP  (pounds): multiply by FX directly.
+    - Other currencies (EUR, USD, SEK …): return unchanged.
+    """
+    if currency not in ("GBX", "GBp", "GBP"):
+        return price                        # already native
+    gbp_eur = yf.Ticker("GBPEUR=X").fast_info["last_price"]
+    if currency in ("GBX", "GBp"):
+        price = price / 100                # to pounds first
+    return price * gbp_eur
+
+def normalize_row(row):
+    """
+    Convert URNM.L (and any other GBX/GBP lines) to euros *before*
+    SMA and RSI are calculated.
+    """
+    ticker = row["Ticker"]
+    currency = yf.Ticker(ticker).info.get("currency", "EUR")
+    row["Close"] = gbx_gbp_eur(row["Close"], currency)
+    row["SMA"]   = gbx_gbp_eur(row["SMA"],   currency)
+    return row
+
 records = []
 # Combine all rule dictionaries
 ALL_RULES = {**THEMATIC_RULES, **HIGH_BETA_RULES, **ESTABLISHED_RULES}
@@ -252,6 +277,9 @@ for ticker, rule in ALL_RULES.items():
 
 cols = ["Ticker", "Name", "Close", "SMA", "RSI", "Valuation", "Signal"]
 table = pd.DataFrame(records, columns=cols).sort_values("Ticker")
+
+# Apply currency conversion for GBX/GBP tickers
+table = table.apply(normalize_row, axis=1)
 
 # ── 4. styled HTML + CSV output ───────────────────────────────────────
 out_dir = pathlib.Path(__file__).parents[1] / "docs"
