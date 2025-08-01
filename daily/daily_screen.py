@@ -1,5 +1,13 @@
-import pandas as pd, yfinance as yf, pathlib, sys
+import pandas as pd, yfinance as yf, pathlib, sys, argparse
 from datetime import date
+
+# Ensure chained assignment warnings are enabled
+pd.options.mode.chained_assignment = 'warn'
+
+# Parse command line arguments
+parser = argparse.ArgumentParser(description='Daily momentum screen with enhanced features')
+parser.add_argument('--save-csv', action='store_true', help='Save DataFrame to CSV file')
+args = parser.parse_args()
 
 # ensure rulebook import works no matter where script is run
 sys.path.append(str(pathlib.Path(__file__).parent))
@@ -205,6 +213,26 @@ for ticker, rule in ALL_RULES.items():
     else:
         rsi_val = None
 
+    # -------------------------------------------------
+    #  Enhanced Technical Analysis - New Columns
+    # -------------------------------------------------
+    # 1. 20-day moving average and related fields
+    sma20_val = float(hist.tail(20).mean().item()) if len(hist) >= 20 else None
+    px_vs_sma20 = (close / sma20_val) if sma20_val else None
+    px_vs_sma20_flag = px_vs_sma20 >= 1.15 if px_vs_sma20 else False
+    
+    # 2. Short-term drawdown tracking for high-beta names
+    if len(hist) >= 2:
+        pct_1d = float(((hist.iloc[-1] - hist.iloc[-2]) / hist.iloc[-2]).item()) if len(hist) >= 2 else None
+        pct_2d = float(((hist.iloc[-1] - hist.iloc[-3]) / hist.iloc[-3]).item()) if len(hist) >= 3 else None
+    else:
+        pct_1d = None
+        pct_2d = None
+    
+    # Volume analysis for drawdown flags
+    vol_2d = float(volume.tail(2).mean().item()) if len(volume) >= 2 else None
+    avg_vol = float(volume.tail(20).mean().item()) if len(volume) >= 20 else None
+    
     # Determine which bucket this ticker belongs to
     if ticker in THEMATIC:
         bucket = "THEMATIC"
@@ -212,6 +240,14 @@ for ticker, rule in ALL_RULES.items():
         bucket = "HIGH_BETA"
     else:
         bucket = "DIVIDEND"
+    
+    # 3. Flag calculations
+    drop10_flag = (pct_1d <= -0.10) and (bucket == "HIGH_BETA") if pct_1d is not None else False
+    drop15vol_flag = (pct_2d <= -0.15) and (vol_2d >= 2 * avg_vol) and (bucket == "HIGH-BETA") if all(x is not None for x in [pct_2d, vol_2d, avg_vol]) else False
+    rsi70_flag = rsi_val >= 70 if rsi_val else False
+    
+    # 4. Master TRIM_FLAG
+    trim_flag = px_vs_sma20_flag or rsi70_flag or drop10_flag or drop15vol_flag
     
     # Signal assignment based on new logic
     if sma_val is None or rsi_val is None:
@@ -223,15 +259,8 @@ for ticker, rule in ALL_RULES.items():
             signal = "HOLD"
     elif bucket == "HIGH_BETA":
         # HIGH_BETA specific logic with TRIM conditions
-        # Calculate extension percentage above SMA-20
-        sma20_val = float(hist.tail(20).mean().item()) if len(hist) >= 20 else None
-        
-        # TRIM conditions for high-beta stocks
-        extension_pct = ((close - sma20_val) / sma20_val * 100) if sma20_val else 0
-        overbought_rsi = rsi_val >= 70 if rsi_val else False
-        
-        # TRIM rules: 15% above SMA-20 OR RSI >= 70
-        if (extension_pct >= 15) or overbought_rsi:
+        # TRIM rules: 15% above SMA-20 OR RSI >= 70 OR other trim flags
+        if trim_flag:
             signal = "TRIM"
         elif (close <= sma_val) or (rsi_val <= rsi_cut):
             signal = "BUY"
@@ -269,10 +298,16 @@ for ticker, rule in ALL_RULES.items():
         round(sma_val, 2) if sma_val is not None else "—",
         round(rsi_val, 1) if rsi_val is not None else "—",
         val_flag,
-        signal
+        signal,
+        round(sma20_val, 2) if sma20_val is not None else "—",
+        round(px_vs_sma20, 3) if px_vs_sma20 is not None else "—",
+        round(pct_1d * 100, 1) if pct_1d is not None else "—",
+        round(pct_2d * 100, 1) if pct_2d is not None else "—",
+        "✓" if rsi70_flag else "—",
+        "✓" if trim_flag else "—"
     ])
 
-cols = ["Ticker", "Name", "Close", "SMA", "RSI", "Valuation", "Signal"]
+cols = ["Ticker", "Name", "Close", "SMA", "RSI", "Valuation", "Signal", "SMA_20", "Px_vs_SMA20", "1d_pct", "2d_pct", "RSI70_Flag", "TRIM_FLAG"]
 table = pd.DataFrame(records, columns=cols).sort_values("Ticker")
 
 # Apply currency conversion for GBX/GBP tickers
@@ -349,7 +384,7 @@ caption {
 """
 
 # Build three separate HTML tables by tier
-columns = ["Ticker", "Name", "Close", "SMA", "RSI", "Valuation", "Signal"]
+columns = ["Ticker", "Name", "Close", "SMA", "RSI", "Valuation", "Signal", "SMA_20", "Px_vs_SMA20", "1d_pct", "2d_pct", "RSI70_Flag", "TRIM_FLAG"]
 
 def build_table_html(tier_name, ticker_list, caption):
     """Build a styled HTML table for a specific tier"""
@@ -366,7 +401,14 @@ def build_table_html(tier_name, ticker_list, caption):
     html_parts.append('<tbody>')
     
     for row in rows:
-        html_parts.append('<tr>')
+        # Check if this row has TRIM_FLAG set
+        trim_flag_index = columns.index("TRIM_FLAG")
+        has_trim_flag = row[trim_flag_index] == "✓"
+        
+        # Add red background for entire row if TRIM_FLAG is True
+        row_style = 'background-color:#ffebee;' if has_trim_flag else ''
+        html_parts.append(f'<tr style="{row_style}">')
+        
         for i, cell in enumerate(row):
             style = ''
             if columns[i] == "Signal":
@@ -413,5 +455,8 @@ html.append('</body></html>')
 with open(out_dir / "daily_screen.html", "w", encoding="utf-8") as f:
     f.write('\n'.join(html))
 
-table.to_csv(out_dir / "daily_screen.csv", index=False)
-print("✅ daily screen updated", date.today())
+if args.save_csv:
+    table.to_csv(out_dir / "daily_screen.csv", index=False)
+    print("✅ daily screen updated with CSV", date.today())
+else:
+    print("✅ daily screen updated (no CSV saved)", date.today())
