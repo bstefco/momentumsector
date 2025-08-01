@@ -39,6 +39,20 @@
    - ✅ 24-hour mention counts and changes
    - ✅ Smart filtering (only alerts on significant mentions)
    - ✅ Emoji indicators based on mention volume
+   - ✅ **Efficient API usage** - Single API call for all tickers
+
+7. **🚨 Enhanced Short Interest with Reddit Data**
+   - ✅ Combines short interest data with Reddit mentions
+   - ✅ Ranking information and heat indicators
+   - ✅ Duplicate prevention system
+   - ✅ **Efficient API usage** - Single Ape Wisdom call for all tickers
+
+8. **🏆 Top 15 Reddit Mentions Tracking**
+   - ✅ Monitors top 15 most mentioned tickers on r/wallstreetbets
+   - ✅ Alerts only on position changes (new entries, rank changes, mention count changes)
+   - ✅ Rank-based emoji indicators (🥇🥈🥉 for top 3, 🔥 for top 5, 📈 for top 10, 📊 for others)
+   - ✅ Duplicate prevention system
+   - ✅ **Efficient API usage** - Single Ape Wisdom call for all data
 
 ### 🔧 **Technical Improvements**
 

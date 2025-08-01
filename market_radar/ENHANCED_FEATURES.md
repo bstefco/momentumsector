@@ -69,12 +69,47 @@ The market radar bot has been significantly enhanced with the following new feat
 - 24-hour mention counts and changes
 - Smart filtering (only alerts on significant mentions)
 - Emoji indicators based on mention volume
+- **Duplicate prevention** - Only sends alerts when data changes
+- **Efficient API usage** - Single API call for all tickers
+- **Integrated alerts** - Reddit data combined with short interest alerts
+
+**Note:** Reddit mentions are now integrated into the enhanced short interest alerts rather than sent as separate alerts to prevent duplicates.
+
+### 6. 🏆 Top 15 Reddit Mentions Tracking
+**What it does:** Monitors the top 15 most mentioned tickers on r/wallstreetbets and alerts on position changes.
+
+**Features:**
+- Tracks top 15 Reddit mentions by volume
+- Only alerts when positions change (new entries, rank changes, mention count changes)
+- Rank-based emoji indicators (🥇🥈🥉 for top 3, 🔥 for top 5, 📈 for top 10, 📊 for others)
+- **Duplicate prevention** - Only sends alerts when data changes
+- **Efficient API usage** - Single Ape Wisdom call for all data
 
 **Alert Format:**
 ```
-🔥 *Reddit Mentions Alert*
-• *$TSLA* - 138 mentions (+44)
-• 24h change: +44
+🏆 *Top 15 Reddit Mentions Update*
+🥇 *#1* *$SPY* - 495 mentions (+156)
+🥈 *#2* *$NVDA* - 482 mentions (+291)
+🥉 *#3* *$META* - 448 mentions (+371)
+🔥 *#4* *$MSFT* - 433 mentions (+392)
+🔥 *#5* *$AMD* - 231 mentions (-74)
+```
+
+### 7. 🚨 Enhanced Short Interest with Reddit Data
+**What it does:** Combines short interest data with Reddit mentions for comprehensive alerts.
+
+**Features:**
+- Short interest percentage and Days to Cover (DTC)
+- Integrated Reddit mention data
+- Ranking information (if in top-100)
+- Heat indicators based on mention volume
+- **Duplicate prevention** - Only alerts when data changes
+- **Efficient API usage** - Single Ape Wisdom call for all tickers
+
+**Alert Format:**
+```
+🚀 *$TSLA* — Short 25.4% | DTC 3.2×
+ • WSB 24 h: *1,234* (+56) | Rank: #15
 ```
 
 ### 5. 🧠 Enhanced Sentiment Analysis
@@ -95,6 +130,30 @@ The market radar bot has been significantly enhanced with the following new feat
 ### Environment Variables
 
 Add these to your `.env` file or GitHub Secrets:
+
+## 🚫 Duplicate Prevention System
+
+The enhanced bot includes comprehensive duplicate prevention to avoid spam:
+
+### **How It Works:**
+- **Daily Tracking**: Each alert type is tracked per day
+- **Data Normalization**: Values are normalized for consistent comparison
+- **Change Detection**: Only sends alerts when data actually changes
+- **Database Storage**: Uses SQLite to track sent alerts
+
+### **Protected Alert Types:**
+- ✅ **News Headlines** - Prevents duplicate news alerts
+- ✅ **Short Interest** - Only alerts when SI/DTC values change
+- ✅ **Reddit Mentions** - Only alerts when mention counts change
+- ✅ **SEC Filings** - Prevents duplicate filing alerts
+- ✅ **Earnings** - Prevents duplicate earnings alerts
+- ✅ **Volume Spikes** - Prevents duplicate volume alerts
+- ✅ **Price Momentum** - Prevents duplicate momentum alerts
+
+### **Example:**
+- **First run**: Sends short interest alert for $TSLA (25.4% SI)
+- **Second run**: No alert (same data)
+- **Third run**: New alert only if SI changes to 26.1%
 
 ```bash
 # Enhanced Features Configuration
