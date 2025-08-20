@@ -1,5 +1,5 @@
 {
-  "run_date": "2025-08-19",
+  "run_date": "2025-08-20",
   "bond_ticker": "SUAG.L",
   "bond_return": "-3.20",
   "target_eur": "1,650",
@@ -258,21 +258,21 @@
       },
       {
         "type": "change",
-        "ticker": "XCTE.L",
-        "current_rank": 2,
-        "previous_rank": 3,
-        "rank_change": 1,
-        "momentum_change": "+3.1%",
-        "description": "\u2197\ufe0f Rank 3 \u2192 2 (+3.1%)"
-      },
-      {
-        "type": "change",
         "ticker": "EXV8.DE",
         "current_rank": 5,
         "previous_rank": 4,
         "rank_change": -1,
         "momentum_change": "-2.5%",
         "description": "\u2198\ufe0f Rank 4 \u2192 5 (-2.5%)"
+      },
+      {
+        "type": "change",
+        "ticker": "XCTE.L",
+        "current_rank": 2,
+        "previous_rank": 3,
+        "rank_change": 1,
+        "momentum_change": "+3.1%",
+        "description": "\u2197\ufe0f Rank 3 \u2192 2 (+3.1%)"
       }
     ],
     "summary": {
