@@ -1,44 +1,46 @@
 Ticker,Name,Close,SMA,RSI,Valuation,Signal,SMA_20,Px_vs_SMA20,1d_pct,2d_pct,RSI70_Flag,TRIM_FLAG
-AI,AIR LIQUIDE,170.22,177.66,36.8,Pass,BUY,173.62,0.98,-1.5,-2.4,—,—
-ALFA.ST,Alfa Laval AB,418.1,411.63,50.1,Pass,HOLD,421.06,0.993,-2.0,-2.6,—,—
-AMZN,"Amazon.com, Inc.",215.71,217.63,40.3,Pass,BUY,226.52,0.952,-7.9,-6.3,—,—
-ASML,ASML Holding N.V. - New York Re,691.0,759.08,34.4,Pass,BUY,747.49,0.924,-0.5,-4.2,—,—
-ATLX,Atlas Lithium Corporation,4.32,4.27,47.4,Pass,HOLD,4.47,0.967,-5.2,-7.4,—,—
-BEAM,Beam Therapeutics Inc.,18.81,19.62,43.6,Pass,BUY,20.65,0.911,-4.6,-6.7,—,—
-BMI,"Badger Meter, Inc.",181.48,227.08,20.5,Pass,BUY,218.56,0.83,-3.9,-5.1,—,—
-BNP,BNP PARIBAS ACT.A,76.53,76.82,46.9,Pass,BUY,77.61,0.986,-4.4,-3.2,—,—
-BYDDY,"BYD Co., Ltd.",14.19,16.5,29.5,Pass,BUY,15.78,0.899,-3.1,-7.6,—,—
-CEG,Constellation Energy Corporatio,341.32,312.65,64.0,Pass,HOLD,323.35,1.056,-1.9,-1.1,—,—
-D,"Dominion Energy, Inc.",60.42,56.63,67.9,Pass,HOLD,57.89,1.044,3.4,3.7,—,—
-DASH,"DoorDash, Inc.",248.63,229.62,60.8,Pass,HOLD,242.62,1.025,-0.6,0.3,—,—
-DIS,Walt Disney Company (The),116.59,118.14,38.7,Pass,BUY,120.66,0.966,-2.1,-2.5,—,—
-ENGI,ENGIE,19.14,19.51,40.0,Pass,BUY,19.6,0.977,-2.4,-2.6,—,—
-EOSE,"Eos Energy Enterprises, Inc.",5.51,5.24,50.5,Pass,HOLD,5.55,0.993,-3.4,-7.0,—,—
-FGR,EIFFAGE,115.7,118.16,44.3,Pass,BUY,116.98,0.989,-1.7,-2.2,—,—
-FLS,Flowserve Corporation,53.97,53.06,52.5,Pass,HOLD,54.22,0.995,-3.7,-3.6,—,—
-GWH,"ESS Tech, Inc.",1.69,1.59,49.3,Pass,TRIM,1.74,0.97,-11.1,-10.1,—,✓
-IBE,ACCIONES IBERDROLA,15.27,15.69,41.5,Pass,BUY,15.5,0.985,-0.6,-0.7,—,—
-INTC,Intel Corporation,19.34,21.53,30.0,Pass,BUY,22.25,0.869,-2.3,-4.9,—,—
-KD,"Kyndryl Holdings, Inc.",36.4,40.14,31.4,Pass,BUY,39.56,0.92,-3.6,-4.2,—,—
-KOMB,KOMERCNI BANKA,1005.0,1020.59,41.8,Pass,BUY,1029.05,0.977,-2.3,-4.9,—,—
-LEU,Centrus Energy Corp.,208.64,125.76,50.8,Pass,HOLD,217.41,0.96,-3.1,-7.3,—,—
-MSFT,Microsoft Corporation,524.62,488.57,69.1,Pass,HOLD,509.05,1.031,-1.7,2.2,—,—
-NBIS,Nebius Group N.V.,51.98,50.73,53.8,Pass,HOLD,50.83,1.023,-4.5,1.3,—,—
-NEE,"NextEra Energy, Inc.",70.61,72.05,40.9,Pass,BUY,73.59,0.959,-0.6,-0.5,—,—
-NTDOY,"Nintendo Co., Ltd.",20.68,21.54,39.0,Pass,BUY,21.71,0.953,-1.5,-3.6,—,—
-NUKZ,Exchange Traded Concepts Trust ,58.75,47.96,55.5,Pass,HOLD,58.38,1.006,-2.4,-3.0,—,—
-NVDA,NVIDIA Corporation,173.98,154.51,62.8,Pass,HOLD,170.08,1.023,-2.2,-3.0,—,—
-ONON,On Holding AG,47.01,52.16,32.7,Pass,BUY,51.93,0.905,-3.2,-7.2,—,—
-PGR,Progressive Corporation (The),241.32,261.04,35.2,Pass,BUY,246.24,0.98,-0.3,-0.2,—,—
-RACE.MI,FERRARI,379.3,417.95,27.7,Pass,BUY,424.57,0.893,-1.6,-13.0,—,—
-SANA,"Sana Biotechnology, Inc.",3.91,3.86,47.5,Pass,HOLD,4.36,0.896,-3.7,-10.3,—,—
-SBUX,Starbucks Corporation,86.74,91.33,33.4,Pass,BUY,93.41,0.929,-2.7,-6.5,—,—
-SMR,NuScale Power Corporation,44.24,28.11,50.7,Pass,HOLD,44.72,0.989,-11.9,-12.4,—,—
-TJX,"TJX Companies, Inc. (The)",125.92,125.26,54.1,Pass,HOLD,124.62,1.01,1.1,0.1,—,—
-TSLA,"Tesla, Inc.",303.42,323.01,43.2,Pass,BUY,315.07,0.963,-1.6,-4.9,—,—
-URNM.L,HANETF ICAV SPROTT URANIUM MINE,9.99,8.97,38.2,Pass,BUY,10.63,0.94,-1.9,-4.8,—,—
-VEEV,Veeva Systems Inc.,281.41,283.21,48.6,Pass,BUY,283.63,0.992,-1.0,-1.9,—,—
-VRT,"Vertiv Holdings, LLC",141.12,128.72,64.9,Pass,HOLD,131.42,1.074,-3.1,-2.1,—,—
-VRTX,Vertex Pharmaceuticals Incorpor,462.08,455.02,49.5,Pass,HOLD,467.36,0.989,1.1,-1.5,—,—
-WIX,Wix.com Ltd.,129.05,154.18,20.3,Pass,BUY,151.11,0.854,-5.1,-7.4,—,—
-XYL,Xylem Inc.,142.17,123.58,70.9,Pass,HOLD,132.65,1.072,-1.7,8.9,✓,✓
+AI,AIR LIQUIDE,184.22,175.79,71.6,Pass,HOLD,175.11,1.052,0.5,2.3,✓,✓
+ALFA.ST,Alfa Laval AB,438.2,408.94,65.1,Pass,HOLD,423.54,1.035,-0.4,3.9,—,—
+AMZN,"Amazon.com, Inc.",228.01,221.9,54.8,Pass,HOLD,225.86,1.01,-1.5,-1.3,—,—
+ASML,ASML Holding N.V. - New York Re,743.61,756.6,52.6,Pass,BUY,721.52,1.031,-0.5,0.2,—,—
+ATLX,Atlas Lithium Corporation,5.45,5.09,51.7,Pass,TRIM,5.51,0.99,-10.4,-8.2,—,✓
+BEAM,Beam Therapeutics Inc.,16.35,19.52,34.1,Pass,BUY,18.82,0.869,-4.4,-8.2,—,—
+BMI,"Badger Meter, Inc.",187.66,205.17,33.9,Pass,BUY,188.93,0.993,0.5,0.4,—,—
+BNP,BNP PARIBAS ACT.A,82.55,77.94,60.8,Pass,HOLD,80.4,1.027,-0.4,0.3,—,—
+BYDDY,"BYD Co., Ltd.",14.46,15.67,41.7,Pass,BUY,14.94,0.968,-0.3,0.5,—,—
+CEG,Constellation Energy Corporatio,317.23,319.83,43.2,Pass,BUY,332.69,0.954,-1.7,-1.4,—,—
+D,"Dominion Energy, Inc.",61.3,57.9,60.8,Pass,HOLD,60.26,1.017,1.5,0.3,—,—
+DASH,"DoorDash, Inc.",248.37,240.73,49.8,Pass,HOLD,252.19,0.985,-2.0,0.1,—,—
+DIS,Walt Disney Company (The),116.27,119.03,47.1,Pass,BUY,117.37,0.991,-0.2,0.8,—,—
+ENGI,ENGIE,18.73,19.44,41.0,Pass,BUY,19.07,0.982,0.6,0.6,—,—
+EOSE,"Eos Energy Enterprises, Inc.",6.05,5.88,51.8,Pass,HOLD,6.19,0.978,-4.4,3.2,—,—
+FGR,EIFFAGE,125.55,118.41,70.7,Pass,HOLD,120.55,1.041,-0.0,0.2,✓,✓
+FLS,Flowserve Corporation,52.79,53.86,47.6,Pass,BUY,53.91,0.979,-0.8,0.3,—,—
+GWH,"ESS Tech, Inc.",1.58,1.76,44.0,Pass,BUY,1.85,0.856,-3.1,-9.2,—,—
+H4N.F,Solar Foods Oyj               R,5.48,5.49,49.7,Pass,BUY,5.48,1.001,0.7,0.0,—,—
+IBE,ACCIONES IBERDROLA,16.54,15.75,72.2,Pass,HOLD,15.67,1.055,1.0,2.1,✓,✓
+INTC,Intel Corporation,25.31,21.92,68.4,Pass,HOLD,21.46,1.179,7.0,3.1,—,✓
+KD,"Kyndryl Holdings, Inc.",30.04,35.7,31.2,Pass,BUY,33.63,0.893,-1.0,0.2,—,—
+KOMB,KOMERCNI BANKA,1049.0,1026.77,56.8,Pass,HOLD,1038.5,1.01,0.1,-0.5,—,—
+LEU,Centrus Energy Corp.,166.58,141.4,33.5,Pass,BUY,214.01,0.778,-6.2,-9.2,—,—
+MSFT,Microsoft Corporation,509.77,503.58,46.1,Pass,HOLD,519.93,0.98,-1.4,-2.0,—,—
+NBIS,Nebius Group N.V.,67.19,57.21,59.8,Pass,HOLD,60.54,1.11,-7.4,-6.2,—,—
+NEE,"NextEra Energy, Inc.",76.51,72.88,66.2,Pass,HOLD,72.31,1.058,1.0,1.5,—,—
+NTDOY,"Nintendo Co., Ltd.",24.14,22.34,60.5,Pass,HOLD,22.94,1.052,-3.0,-1.2,—,—
+NUKZ,Exchange Traded Concepts Trust ,57.25,50.2,42.4,Pass,BUY,60.03,0.954,-2.8,-2.8,—,—
+NVDA,NVIDIA Corporation,175.64,165.02,51.7,Pass,HOLD,178.46,0.984,-3.5,-2.7,—,—
+ONON,On Holding AG,45.03,49.59,38.7,Pass,BUY,47.86,0.941,-0.4,-0.7,—,—
+PGR,Progressive Corporation (The),250.64,252.77,53.7,Pass,BUY,245.46,1.021,1.4,1.4,—,—
+RACE.MI,FERRARI,406.4,409.83,52.4,Pass,BUY,402.53,1.01,0.2,2.2,—,—
+SANA,"Sana Biotechnology, Inc.",3.46,4.07,45.5,Pass,BUY,3.93,0.881,1.8,3.9,—,—
+SBUX,Starbucks Corporation,90.93,92.16,48.3,Pass,BUY,91.39,0.995,-1.7,0.4,—,—
+SMR,NuScale Power Corporation,32.65,30.74,31.7,Pass,BUY,43.34,0.753,-6.7,-8.0,—,—
+TJX,"TJX Companies, Inc. (The)",134.62,125.93,71.9,Pass,HOLD,129.36,1.041,1.2,1.5,✓,✓
+TMC,TMC the metals company Inc.,4.72,6.36,33.7,Pass,BUY,5.93,0.796,-1.5,-4.1,—,—
+TSLA,"Tesla, Inc.",329.31,321.02,52.8,Pass,HOLD,323.52,1.018,-1.7,-0.4,—,—
+URNM.L,HANETF ICAV SPROTT URANIUM MINE,10.18,9.33,41.8,Pass,BUY,10.58,0.962,-1.3,-4.4,—,—
+VEEV,Veeva Systems Inc.,284.35,282.52,53.8,Pass,HOLD,283.24,1.004,0.8,1.3,—,—
+VRT,"Vertiv Holdings, LLC",129.05,134.2,43.2,Pass,BUY,138.22,0.934,-4.9,-3.0,—,—
+VRTX,Vertex Pharmaceuticals Incorpor,390.76,442.61,38.0,Pass,BUY,421.66,0.927,0.2,-0.5,—,—
+WIX,Wix.com Ltd.,126.62,139.82,40.0,Pass,BUY,133.04,0.952,-1.7,1.8,—,—
+XYL,Xylem Inc.,141.83,126.14,62.1,Pass,HOLD,139.48,1.017,0.7,0.7,—,—

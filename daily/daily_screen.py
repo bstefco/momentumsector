@@ -42,6 +42,7 @@ HIGH_BETA_RULES = {
     "KD":     {"sma": 30, "rsi": 35},
     "ONON":   {"sma": 30, "rsi": 35},
     "SANA":   {"sma": 30, "rsi": 35},
+    "TMC":    {"sma": 30, "rsi": 35},   # TMC the metals company Inc. – US exchange
     "VEEV":   {"sma": 30, "rsi": 35},
     "VRT":    {"sma": 30, "rsi": 35},
     "WIX":    {"sma": 30, "rsi": 35},
