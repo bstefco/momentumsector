@@ -38,6 +38,7 @@ HIGH_BETA_RULES = {
 
     "FLS":    {"sma": 30, "rsi": 35},
     "GWH":    {"sma": 30, "rsi": 35},
+    "H4N.F":  {"sma": 30, "rsi": 35},   # Solar Foods Oyj – Frankfurt exchange
     "KD":     {"sma": 30, "rsi": 35},
     "ONON":   {"sma": 30, "rsi": 35},
     "SANA":   {"sma": 30, "rsi": 35},
@@ -82,6 +83,7 @@ ESTABLISHED_RULES = {
 ALIAS = {
     "BNP":  "BNP.PA",    # BNP Paribas – Euronext Paris
     "ENGI": "ENGI.PA",   # Engie – Euronext Paris
+    "H4N.F": "H4N.F",    # Solar Foods Oyj – Frankfurt exchange
     "IBE":  "IBE.MC",    # Iberdrola – Bolsa Madrid
     "KOMB": "KOMB.PR",   # Komercni banka – Prague exchange
     "FGR":  "FGR.PA",    # Eiffage S.A. – Euronext Paris
