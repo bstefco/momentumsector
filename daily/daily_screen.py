@@ -48,7 +48,7 @@ HIGH_BETA_RULES = {
     "VRT":    {"sma": 30, "rsi": 35},
     "WIX":    {"sma": 30, "rsi": 35},
     "NBIS":   {"sma": 30, "rsi": 35},   # Nebius – added 30 Jul 2025
-    "IDR":    {"sma": 30, "rsi": 35},   # Indra Sistemas – added 20 Aug 2025
+    "IDR.MC": {"sma": 30, "rsi": 35},   # Indra Sistemas – Madrid exchange
 }
 
 # 🏢 DIVIDEND / Established (SMA-50, RSI≤40) – Core & income holdings
@@ -88,6 +88,7 @@ ALIAS = {
     "ENGI": "ENGI.PA",   # Engie – Euronext Paris
     "H4N.F": "H4N.F",    # Solar Foods Oyj – Frankfurt exchange
     "IBE":  "IBE.MC",    # Iberdrola – Bolsa Madrid
+    "IDR.MC": "IDR.MC",  # Indra Sistemas – Bolsa Madrid
     "KOMB": "KOMB.PR",   # Komercni banka – Prague exchange
     "FGR":  "FGR.PA",    # Eiffage S.A. – Euronext Paris
     "AI":   "AI.PA",     # Air Liquide – Euronext Paris
