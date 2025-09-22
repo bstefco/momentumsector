@@ -61,6 +61,7 @@ ESTABLISHED_RULES = {
     "CEG":    {"sma": 50, "rsi": 40},
     "D":      {"sma": 50, "rsi": 40},
     "ENGI":   {"sma": 50, "rsi": 40},
+    "GTT":    {"sma": 50, "rsi": 40},
     "FGR":    {"sma": 50, "rsi": 40},
     "IBE":    {"sma": 50, "rsi": 40},
     "INTC":   {"sma": 50, "rsi": 40},
@@ -92,6 +93,7 @@ ALIAS = {
     "KOMB": "KOMB.PR",   # Komercni banka – Prague exchange
     "FGR":  "FGR.PA",    # Eiffage S.A. – Euronext Paris
     "AI":   "AI.PA",     # Air Liquide – Euronext Paris
+    "GTT":  "GTT.PA",    # Gaztransport & Technigaz – Euronext Paris
     "ALFA.ST": "ALFA.ST", # Alfa Laval – Stockholm
 
     "ASML": "ASML",      # ASML Holding
