@@ -49,6 +49,7 @@ HIGH_BETA_RULES = {
     "WIX":    {"sma": 30, "rsi": 35},
     "NBIS":   {"sma": 30, "rsi": 35},   # Nebius – added 30 Jul 2025
     "IDR.MC": {"sma": 30, "rsi": 35},   # Indra Sistemas – Madrid exchange
+    "IREN":   {"sma": 30, "rsi": 35},   # IREN Ltd – NASDAQ
 }
 
 # 🏢 DIVIDEND / Established (SMA-50, RSI≤40) – Core & income holdings
