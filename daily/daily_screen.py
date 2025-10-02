@@ -50,6 +50,7 @@ HIGH_BETA_RULES = {
     "NBIS":   {"sma": 30, "rsi": 35},   # Nebius – added 30 Jul 2025
     "IDR.MC": {"sma": 30, "rsi": 35},   # Indra Sistemas – Madrid exchange
     "IREN":   {"sma": 30, "rsi": 35},   # IREN Ltd – NASDAQ
+    "9660":   {"sma": 30, "rsi": 35},   # Horizon Robotics – HKEX code 9660
 }
 
 # 🏢 DIVIDEND / Established (SMA-50, RSI≤40) – Core & income holdings
@@ -95,6 +96,7 @@ ALIAS = {
     "FGR":  "FGR.PA",    # Eiffage S.A. – Euronext Paris
     "AI":   "AI.PA",     # Air Liquide – Euronext Paris
     "GTT":  "GTT.PA",    # Gaztransport & Technigaz – Euronext Paris
+    "9660": "9660.HK",   # Horizon Robotics – Hong Kong (Yahoo symbol)
     "ALFA.ST": "ALFA.ST", # Alfa Laval – Stockholm
 
     "ASML": "ASML",      # ASML Holding
