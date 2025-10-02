@@ -65,6 +65,12 @@ ESTABLISHED_RULES = {
     "ENGI":   {"sma": 50, "rsi": 40},
     "GTT":    {"sma": 50, "rsi": 40},
     "FGR":    {"sma": 50, "rsi": 40},
+    "700":    {"sma": 50, "rsi": 40},   # Tencent Holdings – SEHK 0700.HK
+    "9880":   {"sma": 50, "rsi": 40},   # UBTECH Robotics – SEHK 9880.HK
+    "BIDU":   {"sma": 50, "rsi": 40},   # Baidu Inc. – ADR
+    "NKE":    {"sma": 50, "rsi": 40},   # Nike Inc. – NYSE
+    "BABA":   {"sma": 50, "rsi": 40},   # Alibaba Group – NYSE
+    "BARN":   {"sma": 50, "rsi": 40},   # Barry Callebaut – SIX Swiss
     "IBE":    {"sma": 50, "rsi": 40},
     "INTC":   {"sma": 50, "rsi": 40},
     "KOMB":   {"sma": 50, "rsi": 40},
@@ -92,6 +98,9 @@ ALIAS = {
     "H4N.F": "H4N.F",    # Solar Foods Oyj – Frankfurt exchange
     "IBE":  "IBE.MC",    # Iberdrola – Bolsa Madrid
     "IDR.MC": "IDR.MC",  # Indra Sistemas – Bolsa Madrid
+    "700":  "0700.HK",   # Tencent Holdings – Hong Kong
+    "9880": "9880.HK",   # UBTECH Robotics – Hong Kong
+    "BARN": "BARN.SW",   # Barry Callebaut AG – SIX Swiss
     "KOMB": "KOMB.PR",   # Komercni banka – Prague exchange
     "FGR":  "FGR.PA",    # Eiffage S.A. – Euronext Paris
     "AI":   "AI.PA",     # Air Liquide – Euronext Paris
