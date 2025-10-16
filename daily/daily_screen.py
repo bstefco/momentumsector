@@ -55,7 +55,6 @@ HIGH_BETA_RULES = {
     "TMC":    {"sma": 30, "rsi": 35},   # TMC the metals company Inc. – US exchange
     "TMDX":   {"sma": 30, "rsi": 35},   # TransMedics Group Inc. – US exchange
     "VEEV":   {"sma": 30, "rsi": 35},
-    "VRT":    {"sma": 30, "rsi": 35},
     "WIX":    {"sma": 30, "rsi": 35},
     "NBIS":   {"sma": 30, "rsi": 35},   # Nebius – added 30 Jul 2025
     "IDR.MC": {"sma": 30, "rsi": 35},   # Indra Sistemas – Madrid exchange
