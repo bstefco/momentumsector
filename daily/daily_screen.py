@@ -61,6 +61,7 @@ HIGH_BETA_RULES = {
     "IREN":   {"sma": 30, "rsi": 35},   # IREN Ltd – NASDAQ
     "9660":   {"sma": 30, "rsi": 35},   # Horizon Robotics – HKEX code 9660
     "ZETA":   {"sma": 30, "rsi": 35},   # Zeta Global Holdings – NYSE
+    "BROS":   {"sma": 30, "rsi": 35},   # Dutch Bros – NYSE
 }
 
 # 🏢 DIVIDEND / Established (SMA-50, RSI≤40) – Core & income holdings
