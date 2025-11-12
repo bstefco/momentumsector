@@ -83,6 +83,7 @@ ESTABLISHED_RULES = {
     "NKE":    {"sma": 50, "rsi": 40},   # Nike Inc. – NYSE
     "BABA":   {"sma": 50, "rsi": 40},   # Alibaba Group – NYSE
     "BARN":   {"sma": 50, "rsi": 40},   # Barry Callebaut – SIX Swiss
+    "CO6":    {"sma": 50, "rsi": 40},   # Copart Inc. – Frankfurt (CO6.F)
     "IBE":    {"sma": 50, "rsi": 40},
     "INTC":   {"sma": 50, "rsi": 40},
     "KOMB":   {"sma": 50, "rsi": 40},
@@ -113,6 +114,7 @@ ALIAS = {
     "700":  "0700.HK",   # Tencent Holdings – Hong Kong
     "9880": "9880.HK",   # UBTECH Robotics – Hong Kong
     "BARN": "BARN.SW",   # Barry Callebaut AG – SIX Swiss
+    "CO6":  "CO6.F",     # Copart Inc. – Frankfurt (FWB)
     "KOMB": "KOMB.PR",   # Komercni banka – Prague exchange
     "FGR":  "FGR.PA",    # Eiffage S.A. – Euronext Paris
     "AI":   "AI.PA",     # Air Liquide – Euronext Paris
