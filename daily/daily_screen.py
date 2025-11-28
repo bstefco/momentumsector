@@ -84,6 +84,8 @@ ESTABLISHED_RULES = {
     "BABA":   {"sma": 50, "rsi": 40},   # Alibaba Group – NYSE
     "BARN":   {"sma": 50, "rsi": 40},   # Barry Callebaut – SIX Swiss
     "CO6":    {"sma": 50, "rsi": 40},   # Copart Inc. – Frankfurt (CO6.F)
+    "JNJ":    {"sma": 50, "rsi": 40},   # Johnson & Johnson – NYSE
+    "TMUS":   {"sma": 50, "rsi": 40},   # T-Mobile US – NASDAQ
     "IBE":    {"sma": 50, "rsi": 40},
     "INTC":   {"sma": 50, "rsi": 40},
     "KOMB":   {"sma": 50, "rsi": 40},
