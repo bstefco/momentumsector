@@ -22,9 +22,7 @@ from rulebook import RULES
 # 🎯 THEMATIC Momentum (SMA-100, RSI≤45) – Long-term thematic holdings
 THEMATIC_RULES = {
     "URNM.L":  {"sma": 100, "rsi": 45},
-    "NUKZ":  {"sma": 100, "rsi": 45},
     "XYL":   {"sma": 100, "rsi": 45},
-    "ALFA.ST":{"sma": 100, "rsi": 45},
     "LEU":   {"sma": 100, "rsi": 45},
     "SMR":   {"sma": 100, "rsi": 45},
     "STRL":  {"sma": 100, "rsi": 45},   # Sterling Infrastructure
@@ -137,7 +135,7 @@ ALIAS = {
 }
 
 # ETFs / trusts with no earnings → auto-pass valuation
-ETF_SET = {"NUKZ"}
+ETF_SET = set()
 # Established stocks that should bypass valuation filter
 ESTABLISHED_BYPASS_VAL = {"BRYN", "AAPL"}
 

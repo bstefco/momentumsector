@@ -4,9 +4,7 @@
 RULES = {
     # 🎯 THEMATIC Momentum (SMA-100, RSI≤45) – Long-term thematic holdings
     "URNM":  {"sma": 100, "rsi": 45},   # Sprott Uranium Miners ETF
-    "NUKZ":  {"sma": 100, "rsi": 45},   # Range Nuclear Renaissance ETF
     "XYL":   {"sma": 100, "rsi": 45},   # Xylem
-    "ALFA.ST":{"sma": 100, "rsi": 45},   # Alfa Laval
     "LEU":   {"sma": 100, "rsi": 45},   # Centrus
     "SMR":   {"sma": 100, "rsi": 45},   # NuScale Power
     "TSLA":  {"sma": 100, "rsi": 45},   # Tesla
