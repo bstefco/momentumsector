@@ -133,6 +133,7 @@ ALIAS = {
     "PGR":  "PGR",       # Progressive Corporation
     "SBUX": "SBUX",      # Starbucks
     "TJX":  "TJX",       # TJX Companies
+    "BRYN": "BRK-B",     # Berkshire Hathaway Inc. Class B
 }
 
 # ETFs / trusts with no earnings → auto-pass valuation
