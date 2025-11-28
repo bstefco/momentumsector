@@ -84,6 +84,7 @@ ESTABLISHED_RULES = {
     "BABA":   {"sma": 50, "rsi": 40},   # Alibaba Group – NYSE
     "BARN":   {"sma": 50, "rsi": 40},   # Barry Callebaut – SIX Swiss
     "CO6":    {"sma": 50, "rsi": 40},   # Copart Inc. – Frankfurt (CO6.F)
+    "6324":  {"sma": 50, "rsi": 40},   # Harmonic Drive Systems – TSE
     "JNJ":    {"sma": 50, "rsi": 40},   # Johnson & Johnson – NYSE
     "TMUS":   {"sma": 50, "rsi": 40},   # T-Mobile US – NASDAQ
     "IBE":    {"sma": 50, "rsi": 40},
@@ -117,6 +118,7 @@ ALIAS = {
     "9880": "9880.HK",   # UBTECH Robotics – Hong Kong
     "BARN": "BARN.SW",   # Barry Callebaut AG – SIX Swiss
     "CO6":  "CO6.F",     # Copart Inc. – Frankfurt (FWB)
+    "6324": "6324.T",    # Harmonic Drive Systems – Tokyo
     "KOMB": "KOMB.PR",   # Komercni banka – Prague exchange
     "FGR":  "FGR.PA",    # Eiffage S.A. – Euronext Paris
     "AI":   "AI.PA",     # Air Liquide – Euronext Paris
