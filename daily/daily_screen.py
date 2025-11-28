@@ -105,6 +105,8 @@ ESTABLISHED_RULES = {
     "NVDA":   {"sma": 50, "rsi": 40},
     "VRTX":   {"sma": 50, "rsi": 40},
     "DIS":    {"sma": 50, "rsi": 40},
+    "BRYN":   {"sma": 50, "rsi": 40},
+    "AAPL":   {"sma": 50, "rsi": 40},
 }
 
 # Map display tickers to Yahoo symbols
@@ -135,6 +137,8 @@ ALIAS = {
 
 # ETFs / trusts with no earnings → auto-pass valuation
 ETF_SET = {"NUKZ"}
+# Established stocks that should bypass valuation filter
+ESTABLISHED_BYPASS_VAL = {"BRYN", "AAPL"}
 
 # Ticker categorization sets
 HIGH_BETA = set(HIGH_BETA_RULES.keys())
@@ -222,7 +226,7 @@ for ticker, rule in ALL_RULES.items():
     if ticker in {"CEG", "LEU"}:
         print(f"DEBUG {ticker} fast_info: PE={fast.get('forwardPE') or fast.get('trailingPE')}, EV/EBITDA={fast.get('enterpriseToEbitda')}")
         print(f"DEBUG {ticker} info: PE={slow.get('forwardPE') or slow.get('trailingPE')}, EV/EBITDA={slow.get('enterpriseToEbitda')}")
-    if ticker in ETF_SET:
+    if ticker in ETF_SET or ticker in ESTABLISHED_BYPASS_VAL:
         val_flag = "Pass"
     else:
         if not (valuation_pass(ticker, fast) or valuation_pass(ticker, slow)):

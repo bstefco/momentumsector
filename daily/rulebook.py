@@ -47,4 +47,6 @@ RULES = {
     "RACE":   {"sma": 50, "rsi": 40},   # Ferrari
     "SBUX":   {"sma": 50, "rsi": 40},   # Starbucks
     "TJX":    {"sma": 50, "rsi": 40},   # TJX Companies
+    "BRYN":   {"sma": 50, "rsi": 40},
+    "AAPL":   {"sma": 50, "rsi": 40},
 } 
