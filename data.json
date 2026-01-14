@@ -1,30 +1,30 @@
 {
-  "run_date": "2025-12-14",
+  "run_date": "2026-01-14",
   "bond_ticker": "SUAG.L",
-  "bond_return": "1.73",
+  "bond_return": "-0.08",
   "target_eur": "1,650",
-  "next_rebalance_date": "2026-01-14",
+  "next_rebalance_date": "2026-02-14",
   "winners": [
     {
       "rank": 1,
       "ticker": "EXV1.DE",
       "country": "EU",
       "segment": "Banks",
-      "momentum": "33.9"
+      "momentum": "40.0"
     },
     {
       "rank": 2,
       "ticker": "XLK",
       "country": "US",
       "segment": "Technology",
-      "momentum": "23.8"
+      "momentum": "27.8"
     },
     {
       "rank": 3,
-      "ticker": "XCTE.L",
-      "country": "CN",
-      "segment": "Technology",
-      "momentum": "19.9"
+      "ticker": "EXV6.DE",
+      "country": "EU",
+      "segment": "Consumer Staples",
+      "momentum": "27.4"
     }
   ],
   "allEtfs": [
@@ -33,210 +33,238 @@
       "ticker": "EXV1.DE",
       "country": "EU",
       "segment": "Banks",
-      "ret12": "69.4",
-      "momentum": "33.9"
+      "ret12": "66.6",
+      "momentum": "40.0"
     },
     {
       "rank": 2,
       "ticker": "XLK",
       "country": "US",
       "segment": "Technology",
-      "ret12": "22.7",
-      "momentum": "23.8"
+      "ret12": "24.5",
+      "momentum": "27.8"
     },
     {
       "rank": 3,
-      "ticker": "XCTE.L",
-      "country": "CN",
-      "segment": "Technology",
-      "ret12": "37.9",
-      "momentum": "19.9"
-    },
-    {
-      "rank": 4,
-      "ticker": "EXH1.DE",
-      "country": "EU",
-      "segment": "Oil & Gas",
-      "ret12": "25.6",
-      "momentum": "18.2"
-    },
-    {
-      "rank": 5,
       "ticker": "EXV6.DE",
       "country": "EU",
       "segment": "Consumer Staples",
-      "ret12": "12.7",
-      "momentum": "16.8"
+      "ret12": "23.6",
+      "momentum": "27.4"
+    },
+    {
+      "rank": 4,
+      "ticker": "XCTE.L",
+      "country": "CN",
+      "segment": "Technology",
+      "ret12": "38.0",
+      "momentum": "24.2"
+    },
+    {
+      "rank": 5,
+      "ticker": "EXH1.DE",
+      "country": "EU",
+      "segment": "Oil & Gas",
+      "ret12": "19.9",
+      "momentum": "17.8"
     },
     {
       "rank": 6,
-      "ticker": "JPJP.L",
-      "country": "JP",
-      "segment": "Broad Market",
-      "ret12": "17.7",
-      "momentum": "16.3"
-    },
-    {
-      "rank": 7,
-      "ticker": "KWEB",
-      "country": "CN",
-      "segment": "Internet",
-      "ret12": "32.7",
-      "momentum": "13.3"
-    },
-    {
-      "rank": 8,
-      "ticker": "XLU",
-      "country": "US",
-      "segment": "Utilities",
-      "ret12": "15.1",
-      "momentum": "12.9"
-    },
-    {
-      "rank": 9,
       "ticker": "XLC",
       "country": "US",
       "segment": "Communication",
-      "ret12": "14.6",
-      "momentum": "9.7"
+      "ret12": "19.1",
+      "momentum": "17.2"
+    },
+    {
+      "rank": 7,
+      "ticker": "JPJP.L",
+      "country": "JP",
+      "segment": "Broad Market",
+      "ret12": "17.0",
+      "momentum": "16.9"
+    },
+    {
+      "rank": 8,
+      "ticker": "XLI",
+      "country": "US",
+      "segment": "Industrials",
+      "ret12": "20.3",
+      "momentum": "16.8"
+    },
+    {
+      "rank": 9,
+      "ticker": "KWEB",
+      "country": "CN",
+      "segment": "Internet",
+      "ret12": "29.9",
+      "momentum": "16.4"
     },
     {
       "rank": 10,
       "ticker": "XLY",
       "country": "US",
       "segment": "Cons. Discretionary",
-      "ret12": "6.1",
-      "momentum": "9.6"
+      "ret12": "6.7",
+      "momentum": "14.3"
     },
     {
       "rank": 11,
-      "ticker": "XLI",
-      "country": "US",
-      "segment": "Industrials",
-      "ret12": "9.9",
-      "momentum": "9.3"
-    },
-    {
-      "rank": 12,
-      "ticker": "XLV",
-      "country": "US",
-      "segment": "Health Care",
-      "ret12": "6.0",
-      "momentum": "8.6"
-    },
-    {
-      "rank": 13,
       "ticker": "EXV8.DE",
       "country": "EU",
       "segment": "Materials",
-      "ret12": "17.5",
-      "momentum": "7.0"
+      "ret12": "22.3",
+      "momentum": "13.9"
     },
     {
-      "rank": 14,
+      "rank": 12,
       "ticker": "XLF",
       "country": "US",
       "segment": "Financials",
-      "ret12": "8.4",
-      "momentum": "6.7"
+      "ret12": "14.5",
+      "momentum": "12.5"
     },
     {
-      "rank": 15,
-      "ticker": "CDIS.L",
-      "country": "EU",
-      "segment": "Consumer Discretionary",
-      "ret12": "4.5",
-      "momentum": "5.3"
+      "rank": 13,
+      "ticker": "XLV",
+      "country": "US",
+      "segment": "Health Care",
+      "ret12": "11.9",
+      "momentum": "12.4"
     },
     {
-      "rank": 16,
-      "ticker": "EXV3.DE",
-      "country": "EU",
-      "segment": "Technology",
-      "ret12": "4.9",
-      "momentum": "4.5"
-    },
-    {
-      "rank": 17,
+      "rank": 14,
       "ticker": "XLE",
       "country": "US",
       "segment": "Energy",
-      "ret12": "1.1",
-      "momentum": "3.6"
+      "ret12": "8.2",
+      "momentum": "10.7"
     },
     {
-      "rank": 18,
-      "ticker": "EXV2.DE",
-      "country": "EU",
-      "segment": "Communication Services",
-      "ret12": "11.9",
-      "momentum": "3.3"
-    },
-    {
-      "rank": 19,
-      "ticker": "EXV4.DE",
-      "country": "EU",
-      "segment": "Health Care",
-      "ret12": "0.2",
-      "momentum": "2.4"
-    },
-    {
-      "rank": 20,
-      "ticker": "EXV9.DE",
-      "country": "EU",
-      "segment": "Real Estate",
-      "ret12": "0.0",
-      "momentum": "2.1"
-    },
-    {
-      "rank": 21,
-      "ticker": "EXV5.DE",
-      "country": "EU",
+      "rank": 15,
+      "ticker": "XLU",
+      "country": "US",
       "segment": "Utilities",
-      "ret12": "3.3",
-      "momentum": "-0.4"
+      "ret12": "15.3",
+      "momentum": "8.8"
     },
     {
-      "rank": 22,
+      "rank": 16,
       "ticker": "XLB",
       "country": "US",
       "segment": "Materials",
-      "ret12": "-3.8",
-      "momentum": "-0.8"
+      "ret12": "9.3",
+      "momentum": "8.5"
     },
     {
-      "rank": 23,
+      "rank": 17,
+      "ticker": "EXV9.DE",
+      "country": "EU",
+      "segment": "Real Estate",
+      "ret12": "2.5",
+      "momentum": "7.5"
+    },
+    {
+      "rank": 18,
+      "ticker": "EXV4.DE",
+      "country": "EU",
+      "segment": "Health Care",
+      "ret12": "4.6",
+      "momentum": "6.9"
+    },
+    {
+      "rank": 19,
+      "ticker": "CDIS.L",
+      "country": "EU",
+      "segment": "Consumer Discretionary",
+      "ret12": "1.4",
+      "momentum": "6.4"
+    },
+    {
+      "rank": 20,
+      "ticker": "EXV5.DE",
+      "country": "EU",
+      "segment": "Utilities",
+      "ret12": "-0.8",
+      "momentum": "5.0"
+    },
+    {
+      "rank": 21,
+      "ticker": "EXV3.DE",
+      "country": "EU",
+      "segment": "Technology",
+      "ret12": "0.7",
+      "momentum": "4.6"
+    },
+    {
+      "rank": 22,
       "ticker": "XLRE",
       "country": "US",
       "segment": "Real Estate",
-      "ret12": "-2.6",
-      "momentum": "-1.0"
+      "ret12": "3.6",
+      "momentum": "3.7"
+    },
+    {
+      "rank": 23,
+      "ticker": "EXV2.DE",
+      "country": "EU",
+      "segment": "Communication Services",
+      "ret12": "11.2",
+      "momentum": "3.3"
     },
     {
       "rank": 24,
       "ticker": "XLP",
       "country": "US",
       "segment": "Cons. Staples",
-      "ret12": "-3.7",
-      "momentum": "-3.9"
+      "ret12": "3.6",
+      "momentum": "1.7"
     },
     {
       "rank": 25,
       "ticker": "EXV7.DE",
       "country": "EU",
       "segment": "Industrials",
-      "ret12": "-3.4",
-      "momentum": "-6.6"
+      "ret12": "-6.3",
+      "momentum": "-6.3"
     }
   ],
   "historical_changes": {
-    "current_month": "2025-12",
-    "previous_month": "2025-11",
-    "changes": [],
+    "current_month": "2026-01",
+    "previous_month": "2025-12",
+    "changes": [
+      {
+        "type": "change",
+        "ticker": "EXV6.DE",
+        "current_rank": 3,
+        "previous_rank": 5,
+        "rank_change": 2,
+        "momentum_change": "+10.7%",
+        "description": "\u2197\ufe0f Rank 5 \u2192 3 (+10.7%)"
+      },
+      {
+        "type": "change",
+        "ticker": "EXH1.DE",
+        "current_rank": 5,
+        "previous_rank": 4,
+        "rank_change": -1,
+        "momentum_change": "-0.5%",
+        "description": "\u2198\ufe0f Rank 4 \u2192 5 (-0.5%)"
+      },
+      {
+        "type": "change",
+        "ticker": "XCTE.L",
+        "current_rank": 4,
+        "previous_rank": 3,
+        "rank_change": -1,
+        "momentum_change": "+4.3%",
+        "description": "\u2198\ufe0f Rank 3 \u2192 4 (+4.3%)"
+      }
+    ],
     "summary": {
-      "new_entries": 5,
+      "new_entries": 0,
       "exits": 0,
-      "rank_changes": 0
+      "rank_changes": 3
     }
   }
 }
