@@ -73,6 +73,7 @@ ESTABLISHED_RULES = {
     "CEG":    {"sma": 50, "rsi": 40},
     "D":      {"sma": 50, "rsi": 40},
     "ENGI":   {"sma": 50, "rsi": 40},
+    "LSEG":   {"sma": 50, "rsi": 40},   # London Stock Exchange Group
     "GTT":    {"sma": 50, "rsi": 40},
     "FGR":    {"sma": 50, "rsi": 40},
     "700":    {"sma": 50, "rsi": 40},   # Tencent Holdings – SEHK 0700.HK
@@ -114,6 +115,7 @@ ALIAS = {
     "H4N.F": "H4N.F",    # Solar Foods Oyj – Frankfurt exchange
     "IBE":  "IBE.MC",    # Iberdrola – Bolsa Madrid
     "IDR.MC": "IDR.MC",  # Indra Sistemas – Bolsa Madrid
+    "LSEG": "LSEG.L",    # London Stock Exchange Group – LSE (GBp)
     "700":  "0700.HK",   # Tencent Holdings – Hong Kong
     "9880": "9880.HK",   # UBTECH Robotics – Hong Kong
     "BARN": "BARN.SW",   # Barry Callebaut AG – SIX Swiss
@@ -137,7 +139,7 @@ ALIAS = {
 # ETFs / trusts with no earnings → auto-pass valuation
 ETF_SET = set()
 # Established stocks that should bypass valuation filter
-ESTABLISHED_BYPASS_VAL = {"BRYN", "AAPL"}
+ESTABLISHED_BYPASS_VAL = {"BRYN", "AAPL", "LSEG"}
 
 # Ticker categorization sets
 HIGH_BETA = set(HIGH_BETA_RULES.keys())
@@ -188,7 +190,8 @@ def normalize_row(row):
     SMA and RSI are calculated.
     """
     ticker = row["Ticker"]
-    currency = yf.Ticker(ticker).info.get("currency", "EUR")
+    yahoo_symbol = ALIAS.get(ticker, ticker)
+    currency = yf.Ticker(yahoo_symbol).info.get("currency", "EUR")
     row["Close"] = gbx_gbp_eur(row["Close"], currency)
     row["SMA"]   = gbx_gbp_eur(row["SMA"],   currency)
     return row

@@ -52,9 +52,16 @@ def check_exit_signals():
         for _, row in exit_rows.iterrows():
             # Determine SMA period based on ticker category
             sma_period = "50"  # Default
-            if row['Ticker'] in ['URNM', 'NUKZ', 'XYL', 'ALFA.ST', 'LEU', 'SMR', 'TSLA']:
+            if row['Ticker'] in [
+                # Thematic sleeve (SMA-100)
+                'URNM.L', 'XYL', 'LEU', 'SMR', 'STRL', 'URI', 'CAT', 'VRT', 'ETN', 'CMI', 'EME', 'POWL', 'PWR', 'JCI'
+            ]:
                 sma_period = "100"  # Thematic
-            elif row['Ticker'] in ['ATLX', 'BEAM', 'BMI', 'EOSE', 'FLS', 'GWH', 'KD', 'ONON', 'SANA', 'VEEV', 'VRT', 'WIX']:
+            elif row['Ticker'] in [
+                # High-Beta sleeve (SMA-30)
+                'ATLX', 'BEAM', 'BMI', 'EOSE', 'FLS', 'GWH', 'H4N.F', 'KD', 'ONON', 'SANA', 'TMC', 'TMDX', 'VEEV',
+                'WIX', 'NBIS', 'IDR.MC', 'IREN', '9660', 'ZETA', 'BROS', 'CORZ'
+            ]:
                 sma_period = "30"   # High-Beta
             
             message = f":warning: *EXIT flag* – {row['Ticker']} closed {row['Close']:.2f} < SMA-{sma_period}. Follow sleeve rule."

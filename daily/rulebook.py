@@ -35,6 +35,7 @@ RULES = {
     "CEG":    {"sma": 50, "rsi": 40},   # Constellation Energy
     "D":      {"sma": 50, "rsi": 40},   # Dominion Energy
     "ENGI":   {"sma": 50, "rsi": 40},   # Engie
+    "LSEG":   {"sma": 50, "rsi": 40},   # London Stock Exchange Group
     "FGR":    {"sma": 50, "rsi": 40},   # Eiffage S.A.
     "IBE":    {"sma": 50, "rsi": 40},   # Iberdrola
     "INTC":   {"sma": 50, "rsi": 40},   # Intel Corporation
