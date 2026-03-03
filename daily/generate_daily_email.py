@@ -53,14 +53,23 @@ def check_exit_signals():
             # Determine SMA period based on ticker category
             sma_period = "50"  # Default
             if row['Ticker'] in [
-                # Thematic sleeve (SMA-100)
-                'URNM.L', 'XYL', 'LEU', 'SMR', 'STRL', 'URI', 'CAT', 'VRT', 'ETN', 'CMI', 'EME', 'POWL', 'PWR', 'JCI'
+                # Thematic sleeve (SMA-100) + Finimize basket tickers
+                'URNM.L', 'XYL', 'LEU', 'SMR', 'STRL', 'URI', 'CAT', 'VRT', 'ETN', 'CMI', 'EME', 'POWL', 'PWR', 'JCI',
+                # Nuclear basket
+                'OKLO', 'UU',
+                # Utilities basket
+                'VST',
+                # Water basket
+                '6370.T', '6254.T', 'VATW.NS', '6368.T', 'LIN', 'MWA', 'NWPX', 'WMS', 'ITRI', 'VLTO',
+                'ALFA.ST', 'SPXC', 'ARIS', 'TTEK', 'ARCAD.AS', 'J', 'STN', 'FLR', 'ECL', 'CECO', 'VIE',
+                # China AI basket
+                '9698', '3690', '1810', 'XPEV', 'LI',
             ]:
                 sma_period = "100"  # Thematic
             elif row['Ticker'] in [
                 # High-Beta sleeve (SMA-30)
-                'ATLX', 'BEAM', 'BMI', 'EOSE', 'FLS', 'GWH', 'H4N.F', 'KD', 'ONON', 'SANA', 'TMC', 'TMDX', 'VEEV',
-                'WIX', 'NBIS', 'IDR.MC', 'IREN', '9660', 'ZETA', 'BROS', 'CORZ'
+                'ATLX', 'BMI', 'EOSE', 'FLS', 'GWH', 'H4N.F', 'KD', 'SANA', 'TMDX',
+                'NBIS', 'IDR.MC', 'IREN', '9660', 'CORZ', 'GTT', '6324', 'FLKR', 'HUMN'
             ]:
                 sma_period = "30"   # High-Beta
             

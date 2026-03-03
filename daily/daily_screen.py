@@ -40,7 +40,6 @@ THEMATIC_RULES = {
 # 🔥 HIGH-BETA / Tactical (SMA-30, RSI≤35) – Short-term tactical trades
 HIGH_BETA_RULES = {
     "ATLX":   {"sma": 30, "rsi": 35},
-    "BEAM":   {"sma": 30, "rsi": 35},
     "BMI":    {"sma": 30, "rsi": 35},
     "EOSE":   {"sma": 30, "rsi": 35},
 
@@ -48,19 +47,18 @@ HIGH_BETA_RULES = {
     "GWH":    {"sma": 30, "rsi": 35},
     "H4N.F":  {"sma": 30, "rsi": 35},   # Solar Foods Oyj – Frankfurt exchange
     "KD":     {"sma": 30, "rsi": 35},
-    "ONON":   {"sma": 30, "rsi": 35},
     "SANA":   {"sma": 30, "rsi": 35},
-    "TMC":    {"sma": 30, "rsi": 35},   # TMC the metals company Inc. – US exchange
     "TMDX":   {"sma": 30, "rsi": 35},   # TransMedics Group Inc. – US exchange
-    "VEEV":   {"sma": 30, "rsi": 35},
-    "WIX":    {"sma": 30, "rsi": 35},
     "NBIS":   {"sma": 30, "rsi": 35},   # Nebius – added 30 Jul 2025
     "IDR.MC": {"sma": 30, "rsi": 35},   # Indra Sistemas – Madrid exchange
     "IREN":   {"sma": 30, "rsi": 35},   # IREN Ltd – NASDAQ
     "9660":   {"sma": 30, "rsi": 35},   # Horizon Robotics – HKEX code 9660
-    "ZETA":   {"sma": 30, "rsi": 35},   # Zeta Global Holdings – NYSE
-    "BROS":   {"sma": 30, "rsi": 35},   # Dutch Bros – NYSE
     "CORZ":   {"sma": 30, "rsi": 35},   # Core Scientific – NASDAQ
+    "GTT":    {"sma": 30, "rsi": 35},   # Gaztransport & Technigaz – ~$4B mcap
+    "6324":   {"sma": 30, "rsi": 35},   # Harmonic Drive Systems – ~$2B mcap
+    # Finimize single-stock picks (market cap < $10B → High-Beta)
+    "FLKR":   {"sma": 30, "rsi": 35},   # Franklin FTSE South Korea ETF
+    "HUMN":   {"sma": 30, "rsi": 35},   # ROBO Global Humanoid Robotics ETF
 }
 
 # 🏢 DIVIDEND / Established (SMA-50, RSI≤40) – Core & income holdings
@@ -71,41 +69,121 @@ ESTABLISHED_RULES = {
     "ASML":   {"sma": 50, "rsi": 40},
     "BNP":    {"sma": 50, "rsi": 40},
     "CEG":    {"sma": 50, "rsi": 40},
-    "D":      {"sma": 50, "rsi": 40},
     "ENGI":   {"sma": 50, "rsi": 40},
     "LSEG":   {"sma": 50, "rsi": 40},   # London Stock Exchange Group
-    "GTT":    {"sma": 50, "rsi": 40},
     "FGR":    {"sma": 50, "rsi": 40},
     "700":    {"sma": 50, "rsi": 40},   # Tencent Holdings – SEHK 0700.HK
     "9880":   {"sma": 50, "rsi": 40},   # UBTECH Robotics – SEHK 9880.HK
     "BIDU":   {"sma": 50, "rsi": 40},   # Baidu Inc. – ADR
     "NKE":    {"sma": 50, "rsi": 40},   # Nike Inc. – NYSE
     "BABA":   {"sma": 50, "rsi": 40},   # Alibaba Group – NYSE
-    "BARN":   {"sma": 50, "rsi": 40},   # Barry Callebaut – SIX Swiss
     "CO6":    {"sma": 50, "rsi": 40},   # Copart Inc. – Frankfurt (CO6.F)
-    "6324":  {"sma": 50, "rsi": 40},   # Harmonic Drive Systems – TSE
-    "JNJ":    {"sma": 50, "rsi": 40},   # Johnson & Johnson – NYSE
     "TMUS":   {"sma": 50, "rsi": 40},   # T-Mobile US – NASDAQ
     "IBE":    {"sma": 50, "rsi": 40},
     "INTC":   {"sma": 50, "rsi": 40},
-    "KOMB":   {"sma": 50, "rsi": 40},
     "NEE":    {"sma": 50, "rsi": 40},
     "NTDOY":  {"sma": 50, "rsi": 40},
     "PGR":    {"sma": 50, "rsi": 40},
     "RACE.MI":   {"sma": 50, "rsi": 40},
     "SBUX":   {"sma": 50, "rsi": 40},
     "TJX":    {"sma": 50, "rsi": 40},
-    
-    # Added from Team Hidden Gems and Team Rule Breakers
-    "DASH":   {"sma": 50, "rsi": 40},
-    "TSLA":   {"sma": 50, "rsi": 40},
     "AMZN":   {"sma": 50, "rsi": 40},
     "MSFT":   {"sma": 50, "rsi": 40},
-    "NVDA":   {"sma": 50, "rsi": 40},
-    "VRTX":   {"sma": 50, "rsi": 40},
-    "DIS":    {"sma": 50, "rsi": 40},
-    "BRYN":   {"sma": 50, "rsi": 40},
     "AAPL":   {"sma": 50, "rsi": 40},
+    "ONON":   {"sma": 50, "rsi": 40},   # On Holding – ~$15B mcap
+    # Finimize single-stock picks (market cap ≥ $10B → Established)
+    "COST":   {"sma": 50, "rsi": 40},   # Costco Wholesale – NASDAQ
+    "GOOGL":  {"sma": 50, "rsi": 40},   # Alphabet Inc. – NASDAQ
+    "NU":     {"sma": 50, "rsi": 40},   # Nu Holdings (Nubank) – NYSE
+    "RYCEY":  {"sma": 50, "rsi": 40},   # Rolls-Royce Holdings – US OTC ADR
+    "XLU":    {"sma": 50, "rsi": 40},   # Utilities Select Sector SPDR ETF
+}
+
+# ── FINIMIZE THEMATIC BASKETS ───────────────────────────────────────────────
+# Each basket maps to a separate HTML table in the report.
+# Tickers already in the main tiers keep their main-tier SMA/RSI rule;
+# new (basket-only) tickers use SMA-100 / RSI≤45.
+
+NUCLEAR_BASKET = {
+    "URNM.L": {"sma": 100, "rsi": 45},   # Sprott Uranium Miners ETF – LSE
+    "SMR":    {"sma": 100, "rsi": 45},    # NuScale Power
+    "OKLO":   {"sma": 100, "rsi": 45},    # Oklo Inc.
+    "LEU":    {"sma": 100, "rsi": 45},    # Centrus Energy
+    "UU":     {"sma": 100, "rsi": 45},    # United Utilities – LSE
+}
+
+UTILITIES_BASKET = {
+    "VST":  {"sma": 100, "rsi": 45},      # Vistra Corp
+    "CEG":  {"sma": 100, "rsi": 45},      # Constellation Energy
+    "NEE":  {"sma": 100, "rsi": 45},      # NextEra Energy
+}
+
+DATA_CENTER_BASKET = {
+    "PWR":   {"sma": 100, "rsi": 45},     # Quanta Services
+    "EME":   {"sma": 100, "rsi": 45},     # EMCOR Group
+    "CAT":   {"sma": 100, "rsi": 45},     # Caterpillar
+    "CMI":   {"sma": 100, "rsi": 45},     # Cummins
+    "ETN":   {"sma": 100, "rsi": 45},     # Eaton
+    "POWL":  {"sma": 100, "rsi": 45},     # Powell Industries
+    "JCI":   {"sma": 100, "rsi": 45},     # Johnson Controls
+    "URI":   {"sma": 100, "rsi": 45},     # United Rentals
+    "STRL":  {"sma": 100, "rsi": 45},     # Sterling Infrastructure
+    "VRT":   {"sma": 100, "rsi": 45},     # Vertiv Holdings
+}
+
+WATER_BASKET = {
+    "6370.T":   {"sma": 100, "rsi": 45},  # Kurita Water Industries
+    "6254.T":   {"sma": 100, "rsi": 45},  # Nomura Micro Science
+    "VATW.NS":  {"sma": 100, "rsi": 45},  # Va Tech Wabag
+    "6368.T":   {"sma": 100, "rsi": 45},  # Organo Corp
+    "LIN":      {"sma": 100, "rsi": 45},  # Linde
+    "FLS":      {"sma": 100, "rsi": 45},  # Flowserve
+    "MWA":      {"sma": 100, "rsi": 45},  # Mueller Water Products
+    "NWPX":     {"sma": 100, "rsi": 45},  # Northwest Pipe
+    "WMS":      {"sma": 100, "rsi": 45},  # Advanced Drainage Systems
+    "BMI":      {"sma": 100, "rsi": 45},  # Badger Meter
+    "ITRI":     {"sma": 100, "rsi": 45},  # Itron
+    "VLTO":     {"sma": 100, "rsi": 45},  # Veralto
+    "ALFA.ST":  {"sma": 100, "rsi": 45},  # Alfa Laval
+    "SPXC":     {"sma": 100, "rsi": 45},  # SPX Technologies
+    "VRT":      {"sma": 100, "rsi": 45},  # Vertiv Holdings
+    "ARIS":     {"sma": 100, "rsi": 45},  # Aris Water Solutions
+    "TTEK":     {"sma": 100, "rsi": 45},  # Tetra Tech
+    "ARCAD.AS": {"sma": 100, "rsi": 45},  # Arcadis NV
+    "J":        {"sma": 100, "rsi": 45},  # Jacobs Solutions
+    "STN":      {"sma": 100, "rsi": 45},  # Stantec
+    "FLR":      {"sma": 100, "rsi": 45},  # Fluor Corp
+    "ECL":      {"sma": 100, "rsi": 45},  # Ecolab
+    "XYL":      {"sma": 100, "rsi": 45},  # Xylem
+    "CECO":     {"sma": 100, "rsi": 45},  # CECO Environmental
+    "VIE":      {"sma": 100, "rsi": 45},  # Veolia Environnement
+}
+
+CHINA_AI_BASKET = {
+    "9698":  {"sma": 100, "rsi": 45},     # GDS Holdings – HKEX
+    "700":   {"sma": 100, "rsi": 45},     # Tencent Holdings – HKEX
+    "BABA":  {"sma": 100, "rsi": 45},     # Alibaba Group – NYSE
+    "BIDU":  {"sma": 100, "rsi": 45},     # Baidu Inc. – NASDAQ
+    "3690":  {"sma": 100, "rsi": 45},     # Meituan – HKEX
+    "1810":  {"sma": 100, "rsi": 45},     # Xiaomi Corp – HKEX
+    "XPEV":  {"sma": 100, "rsi": 45},     # Xpeng Inc. – NYSE
+    "LI":    {"sma": 100, "rsi": 45},     # Li Auto Inc. – NASDAQ
+    "9880":  {"sma": 100, "rsi": 45},     # UBTECH Robotics – HKEX
+    "9660":  {"sma": 100, "rsi": 45},     # Horizon Robotics – HKEX
+}
+
+NEBIUS_BASKET = {
+    "NBIS":  {"sma": 100, "rsi": 45},     # Nebius Group – NASDAQ
+    "IREN":  {"sma": 100, "rsi": 45},     # IREN Ltd – NASDAQ
+}
+
+ALL_BASKETS = {
+    "Nuclear Portfolio 2.0":   NUCLEAR_BASKET,
+    "Utilities Portfolio":     UTILITIES_BASKET,
+    "Data Center Portfolio":   DATA_CENTER_BASKET,
+    "Water Portfolio":         WATER_BASKET,
+    "China AI Portfolio":      CHINA_AI_BASKET,
+    "Nebius / IREN":           NEBIUS_BASKET,
 }
 
 # Map display tickers to Yahoo symbols
@@ -118,33 +196,42 @@ ALIAS = {
     "LSEG": "LSEG.L",    # London Stock Exchange Group – LSE (GBp)
     "700":  "0700.HK",   # Tencent Holdings – Hong Kong
     "9880": "9880.HK",   # UBTECH Robotics – Hong Kong
-    "BARN": "BARN.SW",   # Barry Callebaut AG – SIX Swiss
     "CO6":  "CO6.F",     # Copart Inc. – Frankfurt (FWB)
     "6324": "6324.T",    # Harmonic Drive Systems – Tokyo
-    "KOMB": "KOMB.PR",   # Komercni banka – Prague exchange
     "FGR":  "FGR.PA",    # Eiffage S.A. – Euronext Paris
     "AI":   "AI.PA",     # Air Liquide – Euronext Paris
     "GTT":  "GTT.PA",    # Gaztransport & Technigaz – Euronext Paris
     "9660": "9660.HK",   # Horizon Robotics – Hong Kong (Yahoo symbol)
     "ALFA.ST": "ALFA.ST", # Alfa Laval – Stockholm
+    "ARCAD.AS": "ARCAD.AS", # Arcadis NV – Euronext Amsterdam
+    "UU":   "UU.L",      # United Utilities – London
+    "VIE":  "VIE.PA",    # Veolia Environnement – Euronext Paris
+    "9698": "9698.HK",   # GDS Holdings – Hong Kong
+    "3690": "3690.HK",   # Meituan – Hong Kong
+    "1810": "1810.HK",   # Xiaomi Corp – Hong Kong
 
     "ASML": "ASML",      # ASML Holding
     "NTDOY": "NTDOY",    # Nintendo
     "PGR":  "PGR",       # Progressive Corporation
     "SBUX": "SBUX",      # Starbucks
     "TJX":  "TJX",       # TJX Companies
-    "BRYN": "BRK-B",     # Berkshire Hathaway Inc. Class B
 }
 
 # ETFs / trusts with no earnings → auto-pass valuation
 ETF_SET = set()
 # Established stocks that should bypass valuation filter
-ESTABLISHED_BYPASS_VAL = {"BRYN", "AAPL", "LSEG"}
+ESTABLISHED_BYPASS_VAL = {"AAPL", "LSEG"}
 
 # Ticker categorization sets
 HIGH_BETA = set(HIGH_BETA_RULES.keys())
 THEMATIC = set(THEMATIC_RULES.keys())
 ESTABLISHED = set(ESTABLISHED_RULES.keys())
+
+# Basket-only tickers (not in any main tier) get THEMATIC bucket treatment
+_all_basket_tickers = set()
+for _b in ALL_BASKETS.values():
+    _all_basket_tickers |= set(_b.keys())
+THEMATIC = THEMATIC | (_all_basket_tickers - HIGH_BETA - ESTABLISHED)
 
 def valuation_pass(ticker: str, info: dict) -> bool:
     pe = info.get("forwardPE") or info.get("trailingPE")
@@ -197,8 +284,11 @@ def normalize_row(row):
     return row
 
 records = []
-# Combine all rule dictionaries
-ALL_RULES = {**THEMATIC_RULES, **HIGH_BETA_RULES, **ESTABLISHED_RULES}
+# Combine all rule dictionaries (baskets first, main tiers last to override shared tickers)
+_basket_rules = {}
+for _b in ALL_BASKETS.values():
+    _basket_rules.update(_b)
+ALL_RULES = {**_basket_rules, **THEMATIC_RULES, **HIGH_BETA_RULES, **ESTABLISHED_RULES}
 for ticker, rule in ALL_RULES.items():
     # -------------------------------------------------
     #  Price history (adjusted)  +  company name
@@ -463,12 +553,18 @@ def build_table_html(tier_name, ticker_list, caption):
     html_parts.append('</tbody></table>')
     return '\n'.join(html_parts)
 
-# Build the three tier tables
-thematic_table = build_table_html("Thematic", list(THEMATIC_RULES.keys()), 
-                                 f"Thematic Momentum (SMA-100, RSI≤45) • {date.today()}")
-high_beta_table = build_table_html("High-Beta", list(HIGH_BETA_RULES.keys()), 
+# Tickers that live in a Finimize basket should only appear there, not in main tiers
+_basket_ticker_set = set()
+for _b in ALL_BASKETS.values():
+    _basket_ticker_set |= set(_b.keys())
+
+# Build the two remaining tier tables (excluding basket tickers to avoid duplicates)
+high_beta_only = [t for t in HIGH_BETA_RULES if t not in _basket_ticker_set]
+established_only = [t for t in ESTABLISHED_RULES if t not in _basket_ticker_set]
+
+high_beta_table = build_table_html("High-Beta", high_beta_only,
                                    f"High-Beta / Tactical (SMA-30, RSI≤35) • {date.today()}")
-established_table = build_table_html("Established", list(ESTABLISHED_RULES.keys()), 
+established_table = build_table_html("Established", established_only,
                                      f"Dividend / Established (SMA-50, RSI≤40) • {date.today()}")
 
 # Add tactical exit legend
@@ -499,11 +595,31 @@ legend_html = """
     </div>
     """
 
+# Build Finimize basket tables
+basket_tables = []
+for basket_name, basket_dict in ALL_BASKETS.items():
+    bt = build_table_html(
+        basket_name,
+        list(basket_dict.keys()),
+        f"Finimize: {basket_name} (SMA-100, RSI≤45) • {date.today()}"
+    )
+    if bt:
+        basket_tables.append(bt)
+
+finimize_header = """
+<div style="margin: 40px auto 0 auto; max-width: 1100px; padding: 24px 20px 0 20px;">
+  <h2 style="color:#333; margin:0; font-size:1.6em; letter-spacing:0.5px;">Finimize Research Baskets</h2>
+  <p style="color:#666; font-size:0.95em; margin-top:6px;">Thematic baskets from Finimize analyst recommendations.</p>
+</div>
+"""
+
 # Combine all tables and legend
 html = [f"<!DOCTYPE html><html><head>{extra_css}</head><body>"]
-html.append(thematic_table)
 html.append(high_beta_table)
 html.append(established_table)
+if basket_tables:
+    html.append(finimize_header)
+    html.extend(basket_tables)
 html.append(legend_html)
 html.append('</body></html>')
 
