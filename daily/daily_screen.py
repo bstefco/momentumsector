@@ -57,7 +57,7 @@ HIGH_BETA_RULES = {
     "GTT":    {"sma": 30, "rsi": 35},   # Gaztransport & Technigaz – ~$4B mcap
     "6324":   {"sma": 30, "rsi": 35},   # Harmonic Drive Systems – ~$2B mcap
     # Finimize single-stock picks (market cap < $10B → High-Beta)
-    "FLKR":   {"sma": 30, "rsi": 35},   # Franklin FTSE South Korea ETF
+    "FLXK":   {"sma": 30, "rsi": 35},   # Franklin FTSE Korea UCITS ETF – Xetra
     "HUMN":   {"sma": 30, "rsi": 35},   # ROBO Global Humanoid Robotics ETF
 }
 
@@ -212,6 +212,7 @@ ALIAS = {
     "1810": "1810.HK",   # Xiaomi Corp – Hong Kong
 
     "7KY":  "7KY.F",     # Robinhood Markets – Frankfurt
+    "FLXK": "FLXK.DE",   # Franklin FTSE Korea UCITS ETF – Xetra
     "ASML": "ASML",      # ASML Holding
     "NTDOY": "NTDOY",    # Nintendo
     "PGR":  "PGR",       # Progressive Corporation
