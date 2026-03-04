@@ -69,7 +69,7 @@ def check_exit_signals():
             elif row['Ticker'] in [
                 # High-Beta sleeve (SMA-30)
                 'ATLX', 'BMI', 'EOSE', 'FLS', 'GWH', 'H4N.F', 'KD', 'SANA', 'TMDX',
-                'NBIS', 'IDR.MC', 'IREN', '9660', 'CORZ', 'GTT', '6324', 'FLKR', 'HUMN'
+                'NBIS', 'IDR.MC', 'IREN', '9660', 'CORZ', 'GTT', '6324', 'FLXK', 'HUMN'
             ]:
                 sma_period = "30"   # High-Beta
             
