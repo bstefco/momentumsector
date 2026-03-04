@@ -60,7 +60,7 @@ def check_exit_signals():
                 # Utilities basket
                 'VST',
                 # Water basket
-                '6370.T', '6254.T', 'VATW.NS', '6368.T', 'LIN', 'MWA', 'NWPX', 'WMS', 'ITRI', 'VLTO',
+                '6370.T', '6254.T', 'WABAG.NS', '6368.T', 'LIN', 'MWA', 'NWPX', 'WMS', 'ITRI', 'VLTO',
                 'ALFA.ST', 'SPXC', 'ARIS', 'TTEK', 'ARCAD.AS', 'J', 'STN', 'FLR', 'ECL', 'CECO', 'VIE',
                 # China AI basket
                 '9698', '3690', '1810', 'XPEV', 'LI',

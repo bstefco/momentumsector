@@ -134,7 +134,7 @@ DATA_CENTER_BASKET = {
 WATER_BASKET = {
     "6370.T":   {"sma": 100, "rsi": 45},  # Kurita Water Industries
     "6254.T":   {"sma": 100, "rsi": 45},  # Nomura Micro Science
-    "VATW.NS":  {"sma": 100, "rsi": 45},  # Va Tech Wabag
+    "WABAG.NS": {"sma": 100, "rsi": 45},  # Va Tech Wabag
     "6368.T":   {"sma": 100, "rsi": 45},  # Organo Corp
     "LIN":      {"sma": 100, "rsi": 45},  # Linde
     "FLS":      {"sma": 100, "rsi": 45},  # Flowserve
