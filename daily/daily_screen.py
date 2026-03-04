@@ -97,6 +97,7 @@ ESTABLISHED_RULES = {
     "NU":     {"sma": 50, "rsi": 40},   # Nu Holdings (Nubank) – NYSE
     "RYCEY":  {"sma": 50, "rsi": 40},   # Rolls-Royce Holdings – US OTC ADR
     "XLU":    {"sma": 50, "rsi": 40},   # Utilities Select Sector SPDR ETF
+    "7KY":    {"sma": 50, "rsi": 40},   # Robinhood Markets – Frankfurt (7KY.F)
 }
 
 # ── FINIMIZE THEMATIC BASKETS ───────────────────────────────────────────────
@@ -210,6 +211,7 @@ ALIAS = {
     "3690": "3690.HK",   # Meituan – Hong Kong
     "1810": "1810.HK",   # Xiaomi Corp – Hong Kong
 
+    "7KY":  "7KY.F",     # Robinhood Markets – Frankfurt
     "ASML": "ASML",      # ASML Holding
     "NTDOY": "NTDOY",    # Nintendo
     "PGR":  "PGR",       # Progressive Corporation
