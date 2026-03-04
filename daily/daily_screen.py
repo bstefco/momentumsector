@@ -80,12 +80,10 @@ ESTABLISHED_RULES = {
     "CO6":    {"sma": 50, "rsi": 40},   # Copart Inc. – Frankfurt (CO6.F)
     "TMUS":   {"sma": 50, "rsi": 40},   # T-Mobile US – NASDAQ
     "IBE":    {"sma": 50, "rsi": 40},
-    "INTC":   {"sma": 50, "rsi": 40},
     "NEE":    {"sma": 50, "rsi": 40},
     "NTDOY":  {"sma": 50, "rsi": 40},
     "PGR":    {"sma": 50, "rsi": 40},
     "RACE.MI":   {"sma": 50, "rsi": 40},
-    "SBUX":   {"sma": 50, "rsi": 40},
     "TJX":    {"sma": 50, "rsi": 40},
     "AMZN":   {"sma": 50, "rsi": 40},
     "MSFT":   {"sma": 50, "rsi": 40},
@@ -216,7 +214,6 @@ ALIAS = {
     "ASML": "ASML",      # ASML Holding
     "NTDOY": "NTDOY",    # Nintendo
     "PGR":  "PGR",       # Progressive Corporation
-    "SBUX": "SBUX",      # Starbucks
     "TJX":  "TJX",       # TJX Companies
 }
 

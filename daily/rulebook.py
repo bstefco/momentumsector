@@ -38,13 +38,11 @@ RULES = {
     "LSEG":   {"sma": 50, "rsi": 40},   # London Stock Exchange Group
     "FGR":    {"sma": 50, "rsi": 40},   # Eiffage S.A.
     "IBE":    {"sma": 50, "rsi": 40},   # Iberdrola
-    "INTC":   {"sma": 50, "rsi": 40},   # Intel Corporation
     "KOMB":   {"sma": 50, "rsi": 40},   # Komercni banka
     "NEE":    {"sma": 50, "rsi": 40},   # NextEra Energy
     "NTDOY":  {"sma": 50, "rsi": 40},   # Nintendo
     "PGR":    {"sma": 50, "rsi": 40},   # Progressive Corporation
     "RACE":   {"sma": 50, "rsi": 40},   # Ferrari
-    "SBUX":   {"sma": 50, "rsi": 40},   # Starbucks
     "TJX":    {"sma": 50, "rsi": 40},   # TJX Companies
     "BRYN":   {"sma": 50, "rsi": 40},
     "AAPL":   {"sma": 50, "rsi": 40},
