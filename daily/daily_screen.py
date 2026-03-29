@@ -301,13 +301,22 @@ for ticker, rule in ALL_RULES.items():
     # -------------------------------------------------
     yahoo_symbol = ALIAS.get(ticker, ticker)
     data = yf.download(yahoo_symbol, period="1000d", auto_adjust=True, progress=False)
+    # Fallback: if yf.download() returns empty, try Ticker.history()
+    if data.empty:
+        fallback = yf.Ticker(yahoo_symbol).history(period="max", auto_adjust=True)
+        if not fallback.empty:
+            data = fallback
     if data.empty:
         records.append([ticker, "—", "—", "—", "NoPrice", "SKIP"])
         continue
-    
+
+    # Handle MultiIndex columns from yf.download (newer yfinance versions)
+    if isinstance(data.columns, pd.MultiIndex):
+        data.columns = data.columns.get_level_values(0)
+
     hist = data["Close"].dropna()  # <-- Series
     volume = data["Volume"].dropna()  # <-- Volume Series
-    
+
     if hist.empty:
         records.append([ticker, "—", "—", "—", "NoPrice", "SKIP"])
         continue
