@@ -8,7 +8,6 @@ RULES = {
     "LEU":   {"sma": 100, "rsi": 45},   # Centrus
     "SMR":   {"sma": 100, "rsi": 45},   # NuScale Power
     "TSLA":  {"sma": 100, "rsi": 45},   # Tesla
-    "G2X":   {"sma": 100, "rsi": 45},   # VanEck Gold Miners UCITS ETF – Xetra
 
     # 🔥 HIGH-BETA / Tactical (SMA-30, RSI≤35) – Short-term tactical trades
     "ATLX":   {"sma": 30, "rsi": 35},   # Atlas Lithium
@@ -49,4 +48,5 @@ RULES = {
     "TJX":    {"sma": 50, "rsi": 40},   # TJX Companies
     "BRYN":   {"sma": 50, "rsi": 40},
     "AAPL":   {"sma": 50, "rsi": 40},
+    "G2X":    {"sma": 50, "rsi": 40},   # VanEck Gold Miners UCITS ETF – Xetra
 } 

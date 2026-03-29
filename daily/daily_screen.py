@@ -35,7 +35,6 @@ THEMATIC_RULES = {
     "POWL":  {"sma": 100, "rsi": 45},   # Powell Industries
     "PWR":   {"sma": 100, "rsi": 45},   # Quanta Services
     "JCI":   {"sma": 100, "rsi": 45},   # Johnson Controls
-    "G2X":   {"sma": 100, "rsi": 45},   # VanEck Gold Miners UCITS ETF – Xetra
 }
 
 # 🔥 HIGH-BETA / Tactical (SMA-30, RSI≤35) – Short-term tactical trades
@@ -95,6 +94,7 @@ ESTABLISHED_RULES = {
     # Finimize single-stock picks (market cap ≥ $10B → Established)
     "COST":   {"sma": 50, "rsi": 40},   # Costco Wholesale – NASDAQ
     "GOOGL":  {"sma": 50, "rsi": 40},   # Alphabet Inc. – NASDAQ
+    "G2X":    {"sma": 50, "rsi": 40},   # VanEck Gold Miners UCITS ETF – Xetra
     "NU":     {"sma": 50, "rsi": 40},   # Nu Holdings (Nubank) – NYSE
     "RYCEY":  {"sma": 50, "rsi": 40},   # Rolls-Royce Holdings – US OTC ADR
     "XLU":    {"sma": 50, "rsi": 40},   # Utilities Select Sector SPDR ETF
