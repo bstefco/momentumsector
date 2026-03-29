@@ -205,6 +205,7 @@ ALIAS = {
     "GTT":  "GTT.PA",    # Gaztransport & Technigaz – Euronext Paris
     "9660": "9660.HK",   # Horizon Robotics – Hong Kong (Yahoo symbol)
     "ALFA.ST": "ALFA.ST", # Alfa Laval – Stockholm
+    "FLXK":  "FLXK.L",   # Franklin FTSE Korea UCITS ETF – London
     "ARCAD.AS": "ARCAD.AS", # Arcadis NV – Euronext Amsterdam
     "UU":   "UU.L",      # United Utilities – London
     "VIE":  "VIE.PA",    # Veolia Environnement – Euronext Paris
