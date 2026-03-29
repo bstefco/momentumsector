@@ -25,6 +25,8 @@ RULES = {
     "VRT":    {"sma": 30, "rsi": 35},   # Vertiv Holdings
     "WIX":    {"sma": 30, "rsi": 35},   # Wix.com
     "NBIS":   {"sma": 30, "rsi": 35},   # Nebius – added 30 Jul 2025
+    "HROW":   {"sma": 30, "rsi": 35},   # Harrow Health
+    "THEON":  {"sma": 30, "rsi": 35},   # Theon International – Athens
 
     # 🏢 DIVIDEND / Established (SMA-50, RSI≤40) – Core & income holdings
     "BYDDY": {"sma": 50, "rsi": 40},  # BYD COMPANY
