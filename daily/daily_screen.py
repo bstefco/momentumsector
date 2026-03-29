@@ -35,6 +35,7 @@ THEMATIC_RULES = {
     "POWL":  {"sma": 100, "rsi": 45},   # Powell Industries
     "PWR":   {"sma": 100, "rsi": 45},   # Quanta Services
     "JCI":   {"sma": 100, "rsi": 45},   # Johnson Controls
+    "G2X":   {"sma": 100, "rsi": 45},   # VanEck Gold Miners UCITS ETF – Xetra
 }
 
 # 🔥 HIGH-BETA / Tactical (SMA-30, RSI≤35) – Short-term tactical trades
@@ -214,6 +215,7 @@ ALIAS = {
     "7KY":  "7KY.F",     # Robinhood Markets – Frankfurt
     "FLXK": "FLXK.DE",   # Franklin FTSE Korea UCITS ETF – Xetra
     "THEON": "THEON.AT",  # Theon International – Athens
+    "G2X":  "G2X.DE",    # VanEck Gold Miners UCITS ETF – Xetra
     "ASML": "ASML",      # ASML Holding
     "NTDOY": "NTDOY",    # Nintendo
     "PGR":  "PGR",       # Progressive Corporation
@@ -221,7 +223,7 @@ ALIAS = {
 }
 
 # ETFs / trusts with no earnings → auto-pass valuation
-ETF_SET = set()
+ETF_SET = {"G2X"}
 # Established stocks that should bypass valuation filter
 ESTABLISHED_BYPASS_VAL = {"AAPL", "LSEG"}
 
