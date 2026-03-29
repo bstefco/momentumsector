@@ -59,6 +59,8 @@ HIGH_BETA_RULES = {
     # Finimize single-stock picks (market cap < $10B → High-Beta)
     "FLXK":   {"sma": 30, "rsi": 35},   # Franklin FTSE Korea UCITS ETF – Xetra
     "HUMN":   {"sma": 30, "rsi": 35},   # ROBO Global Humanoid Robotics ETF
+    "HROW":   {"sma": 30, "rsi": 35},   # Harrow Health – NASDAQ
+    "THEON":  {"sma": 30, "rsi": 35},   # Theon International – Athens
 }
 
 # 🏢 DIVIDEND / Established (SMA-50, RSI≤40) – Core & income holdings
@@ -211,6 +213,7 @@ ALIAS = {
 
     "7KY":  "7KY.F",     # Robinhood Markets – Frankfurt
     "FLXK": "FLXK.DE",   # Franklin FTSE Korea UCITS ETF – Xetra
+    "THEON": "THEON.AT",  # Theon International – Athens
     "ASML": "ASML",      # ASML Holding
     "NTDOY": "NTDOY",    # Nintendo
     "PGR":  "PGR",       # Progressive Corporation
