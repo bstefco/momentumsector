@@ -215,7 +215,7 @@ ALIAS = {
 
     "7KY":  "7KY.F",     # Robinhood Markets – Frankfurt
     "FLXK": "FLXK.DE",   # Franklin FTSE Korea UCITS ETF – Xetra
-    "THEON": "THEON.AT",  # Theon International – Athens
+    "THEON": "THEON.AS",  # Theon International – Euronext Amsterdam
     "G2X":  "G2X.DE",    # VanEck Gold Miners UCITS ETF – Xetra
     "ASML": "ASML",      # ASML Holding
     "NTDOY": "NTDOY",    # Nintendo
