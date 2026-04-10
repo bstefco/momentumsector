@@ -31,6 +31,10 @@ THEMATIC_RULES = {
     "EME":   {"sma": 100, "rsi": 45},   # EMCOR Group
     "POWL":  {"sma": 100, "rsi": 45},   # Powell Industries
     "PWR":   {"sma": 100, "rsi": 45},   # Quanta Services
+    "ECJ":   {"sma": 100, "rsi": 45},   # Ecolab
+    "FIX":   {"sma": 100, "rsi": 45},   # Comfort Systems USA
+    "PRY":   {"sma": 100, "rsi": 45},   # Prysmian
+    "SU":    {"sma": 100, "rsi": 45},   # Schneider Electric
 }
 
 # 🔥 HIGH-BETA / Tactical (SMA-30, RSI≤35) – Short-term tactical trades
@@ -123,6 +127,10 @@ DATA_CENTER_BASKET = {
     "POWL":  {"sma": 100, "rsi": 45},     # Powell Industries
     "STRL":  {"sma": 100, "rsi": 45},     # Sterling Infrastructure
     "VRT":   {"sma": 100, "rsi": 45},     # Vertiv Holdings
+    "ECJ":   {"sma": 100, "rsi": 45},     # Ecolab
+    "FIX":   {"sma": 100, "rsi": 45},     # Comfort Systems USA
+    "PRY":   {"sma": 100, "rsi": 45},     # Prysmian
+    "SU":    {"sma": 100, "rsi": 45},     # Schneider Electric
 }
 
 WATER_BASKET = {

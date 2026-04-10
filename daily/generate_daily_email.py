@@ -54,7 +54,7 @@ def check_exit_signals():
             sma_period = "50"  # Default
             if row['Ticker'] in [
                 # Thematic sleeve (SMA-100) + Finimize basket tickers
-                'URNM.L', 'XYL', 'LEU', 'SMR', 'STRL', 'VRT', 'ETN', 'EME', 'POWL', 'PWR',
+                'URNM.L', 'XYL', 'LEU', 'SMR', 'STRL', 'VRT', 'ETN', 'EME', 'POWL', 'PWR', 'ECJ', 'FIX', 'PRY', 'SU',
                 # Nuclear basket
                 'OKLO', 'UU',
                 # Utilities basket
