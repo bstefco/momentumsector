@@ -26,15 +26,11 @@ THEMATIC_RULES = {
     "LEU":   {"sma": 100, "rsi": 45},
     "SMR":   {"sma": 100, "rsi": 45},
     "STRL":  {"sma": 100, "rsi": 45},   # Sterling Infrastructure
-    "URI":   {"sma": 100, "rsi": 45},   # United Rentals
-    "CAT":   {"sma": 100, "rsi": 45},   # Caterpillar
     "VRT":   {"sma": 100, "rsi": 45},   # Vertiv
     "ETN":   {"sma": 100, "rsi": 45},   # Eaton
-    "CMI":   {"sma": 100, "rsi": 45},   # Cummins
     "EME":   {"sma": 100, "rsi": 45},   # EMCOR Group
     "POWL":  {"sma": 100, "rsi": 45},   # Powell Industries
     "PWR":   {"sma": 100, "rsi": 45},   # Quanta Services
-    "JCI":   {"sma": 100, "rsi": 45},   # Johnson Controls
 }
 
 # 🔥 HIGH-BETA / Tactical (SMA-30, RSI≤35) – Short-term tactical trades
@@ -123,12 +119,8 @@ UTILITIES_BASKET = {
 DATA_CENTER_BASKET = {
     "PWR":   {"sma": 100, "rsi": 45},     # Quanta Services
     "EME":   {"sma": 100, "rsi": 45},     # EMCOR Group
-    "CAT":   {"sma": 100, "rsi": 45},     # Caterpillar
-    "CMI":   {"sma": 100, "rsi": 45},     # Cummins
     "ETN":   {"sma": 100, "rsi": 45},     # Eaton
     "POWL":  {"sma": 100, "rsi": 45},     # Powell Industries
-    "JCI":   {"sma": 100, "rsi": 45},     # Johnson Controls
-    "URI":   {"sma": 100, "rsi": 45},     # United Rentals
     "STRL":  {"sma": 100, "rsi": 45},     # Sterling Infrastructure
     "VRT":   {"sma": 100, "rsi": 45},     # Vertiv Holdings
 }
