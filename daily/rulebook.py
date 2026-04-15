@@ -49,4 +49,7 @@ RULES = {
     "BRYN":   {"sma": 50, "rsi": 40},
     "AAPL":   {"sma": 50, "rsi": 40},
     "G2X":    {"sma": 50, "rsi": 40},   # VanEck Gold Miners UCITS ETF – Xetra
-} 
+    "IXUA":   {"sma": 50, "rsi": 40},   # iShares MSCI World ex-USA UCITS ETF – LSE
+    "WSML":   {"sma": 50, "rsi": 40},   # iShares MSCI World Small Cap UCITS ETF – LSE
+    "VJPA":   {"sma": 50, "rsi": 40},   # Vanguard FTSE Japan UCITS ETF – LSE
+}
