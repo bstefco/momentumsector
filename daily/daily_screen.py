@@ -95,7 +95,7 @@ ESTABLISHED_RULES = {
     "COST":   {"sma": 50, "rsi": 40},   # Costco Wholesale – NASDAQ
     "GOOGL":  {"sma": 50, "rsi": 40},   # Alphabet Inc. – NASDAQ
     "G2X":    {"sma": 50, "rsi": 40},   # VanEck Gold Miners UCITS ETF – Xetra
-    "IXUA":   {"sma": 50, "rsi": 40},   # iShares MSCI World ex-USA UCITS ETF – LSE
+    "XUSE":   {"sma": 50, "rsi": 40},   # iShares MSCI World ex-USA UCITS ETF – LSE
     "WSML":   {"sma": 50, "rsi": 40},   # iShares MSCI World Small Cap UCITS ETF – LSE
     "VJPA":   {"sma": 50, "rsi": 40},   # Vanguard FTSE Japan UCITS ETF – LSE
     "NU":     {"sma": 50, "rsi": 40},   # Nu Holdings (Nubank) – NYSE
@@ -220,7 +220,7 @@ ALIAS = {
     "FLXK": "FLXK.DE",   # Franklin FTSE Korea UCITS ETF – Xetra
     "THEON": "THEON.AS",  # Theon International – Euronext Amsterdam
     "G2X":  "G2X.DE",    # VanEck Gold Miners UCITS ETF – Xetra
-    "IXUA": "IXUA.L",   # iShares MSCI World ex-USA UCITS ETF – LSE (GBp)
+    "XUSE": "XUSE.L",   # iShares MSCI World ex-USA UCITS ETF – LSE (GBp)
     "WSML": "WSML.L",   # iShares MSCI World Small Cap UCITS ETF – LSE (GBp)
     "VJPA": "VJPA.L",   # Vanguard FTSE Japan UCITS ETF – LSE (GBp)
     "ASML": "ASML",      # ASML Holding
@@ -230,7 +230,7 @@ ALIAS = {
 }
 
 # ETFs / trusts with no earnings → auto-pass valuation
-ETF_SET = {"G2X", "IXUA", "WSML", "VJPA"}
+ETF_SET = {"G2X", "XUSE", "WSML", "VJPA"}
 # Established stocks that should bypass valuation filter
 ESTABLISHED_BYPASS_VAL = {"AAPL", "LSEG"}
 
