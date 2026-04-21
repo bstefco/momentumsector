@@ -182,6 +182,18 @@ NEBIUS_BASKET = {
     "IREN":  {"sma": 100, "rsi": 45},     # IREN Ltd – NASDAQ
 }
 
+GRID_MODERNIZATION_BASKET = {
+    "PRY.MI":  {"sma": 100, "rsi": 45},   # Prysmian – Milan
+    "NKT.CO":  {"sma": 100, "rsi": 45},   # NKT – Copenhagen
+    "MYRG":    {"sma": 100, "rsi": 45},   # MYR Group – NASDAQ
+    "ENR.DE":  {"sma": 100, "rsi": 45},   # Siemens Energy – Xetra
+    "SU.PA":   {"sma": 100, "rsi": 45},   # Schneider Electric – Paris
+    "HUBB":    {"sma": 100, "rsi": 45},   # Hubbell – NYSE
+    "GEV":     {"sma": 100, "rsi": 45},   # GE Vernova – NYSE
+    "BE":      {"sma": 100, "rsi": 45},   # Bloom Energy – NYSE
+    "ABBN.SW": {"sma": 100, "rsi": 45},   # ABB – SIX Swiss Exchange
+}
+
 ALL_BASKETS = {
     "Nuclear Portfolio 2.0":   NUCLEAR_BASKET,
     "Utilities Portfolio":     UTILITIES_BASKET,
@@ -189,6 +201,7 @@ ALL_BASKETS = {
     "Water Portfolio":         WATER_BASKET,
     "China AI Portfolio":      CHINA_AI_BASKET,
     "Nebius / IREN":           NEBIUS_BASKET,
+    "Grid Modernization":      GRID_MODERNIZATION_BASKET,
 }
 
 # Map display tickers to Yahoo symbols
@@ -619,10 +632,12 @@ legend_html = """
 # Build Finimize basket tables
 basket_tables = []
 for basket_name, basket_dict in ALL_BASKETS.items():
+    first_rule = next(iter(basket_dict.values()))
+    sma_n, rsi_n = first_rule["sma"], first_rule["rsi"]
     bt = build_table_html(
         basket_name,
         list(basket_dict.keys()),
-        f"Finimize: {basket_name} (SMA-100, RSI≤45) • {date.today()}"
+        f"Finimize: {basket_name} (SMA-{sma_n}, RSI≤{rsi_n}) • {date.today()}"
     )
     if bt:
         basket_tables.append(bt)
