@@ -183,15 +183,15 @@ NEBIUS_BASKET = {
 }
 
 GRID_MODERNIZATION_BASKET = {
-    "PRY.MI":  {"sma": 50, "rsi": 40},    # Prysmian – Milan
-    "NKT.CO":  {"sma": 50, "rsi": 40},    # NKT – Copenhagen
-    "MYRG":    {"sma": 50, "rsi": 40},    # MYR Group – NASDAQ
-    "ENR.DE":  {"sma": 50, "rsi": 40},    # Siemens Energy – Xetra
-    "SU.PA":   {"sma": 50, "rsi": 40},    # Schneider Electric – Paris
-    "HUBB":    {"sma": 50, "rsi": 40},    # Hubbell – NYSE
-    "GEV":     {"sma": 50, "rsi": 40},    # GE Vernova – NYSE
-    "BE":      {"sma": 50, "rsi": 40},    # Bloom Energy – NYSE
-    "ABBN.SW": {"sma": 50, "rsi": 40},    # ABB – SIX Swiss Exchange
+    "PRY.MI":  {"sma": 100, "rsi": 45},   # Prysmian – Milan
+    "NKT.CO":  {"sma": 100, "rsi": 45},   # NKT – Copenhagen
+    "MYRG":    {"sma": 100, "rsi": 45},   # MYR Group – NASDAQ
+    "ENR.DE":  {"sma": 100, "rsi": 45},   # Siemens Energy – Xetra
+    "SU.PA":   {"sma": 100, "rsi": 45},   # Schneider Electric – Paris
+    "HUBB":    {"sma": 100, "rsi": 45},   # Hubbell – NYSE
+    "GEV":     {"sma": 100, "rsi": 45},   # GE Vernova – NYSE
+    "BE":      {"sma": 100, "rsi": 45},   # Bloom Energy – NYSE
+    "ABBN.SW": {"sma": 100, "rsi": 45},   # ABB – SIX Swiss Exchange
 }
 
 ALL_BASKETS = {
