@@ -51,9 +51,7 @@ HIGH_BETA_RULES = {
     "TMDX":   {"sma": 30, "rsi": 35},   # TransMedics Group Inc. – US exchange
     "NBIS":   {"sma": 30, "rsi": 35},   # Nebius – added 30 Jul 2025
     "IDR.MC": {"sma": 30, "rsi": 35},   # Indra Sistemas – Madrid exchange
-    "IREN":   {"sma": 30, "rsi": 35},   # IREN Ltd – NASDAQ
     "9660":   {"sma": 30, "rsi": 35},   # Horizon Robotics – HKEX code 9660
-    "CORZ":   {"sma": 30, "rsi": 35},   # Core Scientific – NASDAQ
     "GTT":    {"sma": 30, "rsi": 35},   # Gaztransport & Technigaz – ~$4B mcap
     "6324":   {"sma": 30, "rsi": 35},   # Harmonic Drive Systems – ~$2B mcap
     # Finimize single-stock picks (market cap < $10B → High-Beta)
@@ -80,14 +78,12 @@ ESTABLISHED_RULES = {
     "NKE":    {"sma": 50, "rsi": 40},   # Nike Inc. – NYSE
     "BABA":   {"sma": 50, "rsi": 40},   # Alibaba Group – NYSE
     "CO6":    {"sma": 50, "rsi": 40},   # Copart Inc. – Frankfurt (CO6.F)
-    "TMUS":   {"sma": 50, "rsi": 40},   # T-Mobile US – NASDAQ
     "IBE":    {"sma": 50, "rsi": 40},
     "NEE":    {"sma": 50, "rsi": 40},
     "NTDOY":  {"sma": 50, "rsi": 40},
     "PGR":    {"sma": 50, "rsi": 40},
     "RACE.MI":   {"sma": 50, "rsi": 40},
     "TJX":    {"sma": 50, "rsi": 40},
-    "AMZN":   {"sma": 50, "rsi": 40},
     "MSFT":   {"sma": 50, "rsi": 40},
     "AAPL":   {"sma": 50, "rsi": 40},
     "ONON":   {"sma": 50, "rsi": 40},   # On Holding – ~$15B mcap
@@ -136,34 +132,6 @@ DATA_CENTER_BASKET = {
     "SU.PA":  {"sma": 100, "rsi": 45},     # Schneider Electric (Paris)
 }
 
-WATER_BASKET = {
-    "6370.T":   {"sma": 100, "rsi": 45},  # Kurita Water Industries
-    "6254.T":   {"sma": 100, "rsi": 45},  # Nomura Micro Science
-    "WABAG.NS": {"sma": 100, "rsi": 45},  # Va Tech Wabag
-    "6368.T":   {"sma": 100, "rsi": 45},  # Organo Corp
-    "LIN":      {"sma": 100, "rsi": 45},  # Linde
-    "FLS":      {"sma": 100, "rsi": 45},  # Flowserve
-    "MWA":      {"sma": 100, "rsi": 45},  # Mueller Water Products
-    "NWPX":     {"sma": 100, "rsi": 45},  # Northwest Pipe
-    "WMS":      {"sma": 100, "rsi": 45},  # Advanced Drainage Systems
-    "BMI":      {"sma": 100, "rsi": 45},  # Badger Meter
-    "ITRI":     {"sma": 100, "rsi": 45},  # Itron
-    "VLTO":     {"sma": 100, "rsi": 45},  # Veralto
-    "ALFA.ST":  {"sma": 100, "rsi": 45},  # Alfa Laval
-    "SPXC":     {"sma": 100, "rsi": 45},  # SPX Technologies
-    "VRT":      {"sma": 100, "rsi": 45},  # Vertiv Holdings
-    "ARIS":     {"sma": 100, "rsi": 45},  # Aris Water Solutions
-    "TTEK":     {"sma": 100, "rsi": 45},  # Tetra Tech
-    "ARCAD.AS": {"sma": 100, "rsi": 45},  # Arcadis NV
-    "J":        {"sma": 100, "rsi": 45},  # Jacobs Solutions
-    "STN":      {"sma": 100, "rsi": 45},  # Stantec
-    "FLR":      {"sma": 100, "rsi": 45},  # Fluor Corp
-    "ECL":      {"sma": 100, "rsi": 45},  # Ecolab
-    "XYL":      {"sma": 100, "rsi": 45},  # Xylem
-    "CECO":     {"sma": 100, "rsi": 45},  # CECO Environmental
-    "VIE":      {"sma": 100, "rsi": 45},  # Veolia Environnement
-}
-
 CHINA_AI_BASKET = {
     "9698":  {"sma": 100, "rsi": 45},     # GDS Holdings – HKEX
     "700":   {"sma": 100, "rsi": 45},     # Tencent Holdings – HKEX
@@ -179,7 +147,6 @@ CHINA_AI_BASKET = {
 
 NEBIUS_BASKET = {
     "NBIS":  {"sma": 100, "rsi": 45},     # Nebius Group – NASDAQ
-    "IREN":  {"sma": 100, "rsi": 45},     # IREN Ltd – NASDAQ
 }
 
 GRID_MODERNIZATION_BASKET = {
@@ -198,9 +165,8 @@ ALL_BASKETS = {
     "Nuclear Portfolio 2.0":   NUCLEAR_BASKET,
     "Utilities Portfolio":     UTILITIES_BASKET,
     "Data Center Portfolio":   DATA_CENTER_BASKET,
-    "Water Portfolio":         WATER_BASKET,
     "China AI Portfolio":      CHINA_AI_BASKET,
-    "Nebius / IREN":           NEBIUS_BASKET,
+    "Nebius":                  NEBIUS_BASKET,
     "Grid Modernization":      GRID_MODERNIZATION_BASKET,
 }
 
