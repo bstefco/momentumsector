@@ -59,17 +59,16 @@ def check_exit_signals():
                 'OKLO', 'UU',
                 # Utilities basket
                 'VST',
-                # Water basket
-                '6370.T', '6254.T', 'WABAG.NS', '6368.T', 'LIN', 'MWA', 'NWPX', 'WMS', 'ITRI', 'VLTO',
-                'ALFA.ST', 'SPXC', 'ARIS', 'TTEK', 'ARCAD.AS', 'J', 'STN', 'FLR', 'ECL', 'CECO', 'VIE',
                 # China AI basket
                 '9698', '3690', '1810', 'XPEV', 'LI',
+                # Grid Modernization basket
+                'NKT.CO', 'MYRG', 'ENR.DE', 'HUBB', 'GEV', 'BE', 'ABBN.SW',
             ]:
                 sma_period = "100"  # Thematic
             elif row['Ticker'] in [
                 # High-Beta sleeve (SMA-30)
-                'ATLX', 'BMI', 'EOSE', 'FLS', 'GWH', 'H4N.F', 'KD', 'SANA', 'TMDX',
-                'NBIS', 'IDR.MC', 'IREN', '9660', 'CORZ', 'GTT', '6324', 'FLXK', 'HUMN'
+                'ATLX', 'BMI', 'EOSE', 'GWH', 'H4N.F', 'KD', 'SANA', 'TMDX',
+                'NBIS', 'IDR.MC', '9660', 'GTT', '6324', 'FLXK', 'HUMN'
             ]:
                 sma_period = "30"   # High-Beta
             
