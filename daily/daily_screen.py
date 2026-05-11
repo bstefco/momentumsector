@@ -43,7 +43,6 @@ HIGH_BETA_RULES = {
     "BMI":    {"sma": 30, "rsi": 35},
     "EOSE":   {"sma": 30, "rsi": 35},
 
-    "FLS":    {"sma": 30, "rsi": 35},
     "GWH":    {"sma": 30, "rsi": 35},
     "H4N.F":  {"sma": 30, "rsi": 35},   # Solar Foods Oyj – Frankfurt exchange
     "KD":     {"sma": 30, "rsi": 35},
@@ -98,6 +97,8 @@ ESTABLISHED_RULES = {
     "RYCEY":  {"sma": 50, "rsi": 40},   # Rolls-Royce Holdings – US OTC ADR
     "XLU":    {"sma": 50, "rsi": 40},   # Utilities Select Sector SPDR ETF
     "7KY":    {"sma": 50, "rsi": 40},   # Robinhood Markets – Frankfurt (7KY.F)
+    "FLS":      {"sma": 50, "rsi": 40},   # Flowserve – NYSE
+    "ARCAD.AS": {"sma": 50, "rsi": 40},   # Arcadis NV – Euronext Amsterdam
 }
 
 # ── FINIMIZE THEMATIC BASKETS ───────────────────────────────────────────────
