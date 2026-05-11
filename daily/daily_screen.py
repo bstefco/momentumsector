@@ -83,7 +83,6 @@ ESTABLISHED_RULES = {
     "PGR":    {"sma": 50, "rsi": 40},
     "RACE.MI":   {"sma": 50, "rsi": 40},
     "TJX":    {"sma": 50, "rsi": 40},
-    "MSFT":   {"sma": 50, "rsi": 40},
     "AAPL":   {"sma": 50, "rsi": 40},
     "ONON":   {"sma": 50, "rsi": 40},   # On Holding – ~$15B mcap
     # Finimize single-stock picks (market cap ≥ $10B → Established)
@@ -93,7 +92,6 @@ ESTABLISHED_RULES = {
     "XUSE":   {"sma": 50, "rsi": 40},   # iShares MSCI World ex-USA UCITS ETF – LSE
     "WSML":   {"sma": 50, "rsi": 40},   # iShares MSCI World Small Cap UCITS ETF – LSE
     "VJPA":   {"sma": 50, "rsi": 40},   # Vanguard FTSE Japan UCITS ETF – LSE
-    "NU":     {"sma": 50, "rsi": 40},   # Nu Holdings (Nubank) – NYSE
     "RYCEY":  {"sma": 50, "rsi": 40},   # Rolls-Royce Holdings – US OTC ADR
     "XLU":    {"sma": 50, "rsi": 40},   # Utilities Select Sector SPDR ETF
     "7KY":    {"sma": 50, "rsi": 40},   # Robinhood Markets – Frankfurt (7KY.F)
