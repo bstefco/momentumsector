@@ -82,18 +82,15 @@ ESTABLISHED_RULES = {
     "NTDOY":  {"sma": 50, "rsi": 40},
     "PGR":    {"sma": 50, "rsi": 40},
     "RACE.MI":   {"sma": 50, "rsi": 40},
-    "TJX":    {"sma": 50, "rsi": 40},
     "AAPL":   {"sma": 50, "rsi": 40},
     "ONON":   {"sma": 50, "rsi": 40},   # On Holding – ~$15B mcap
     # Finimize single-stock picks (market cap ≥ $10B → Established)
-    "COST":   {"sma": 50, "rsi": 40},   # Costco Wholesale – NASDAQ
     "GOOGL":  {"sma": 50, "rsi": 40},   # Alphabet Inc. – NASDAQ
     "G2X":    {"sma": 50, "rsi": 40},   # VanEck Gold Miners UCITS ETF – Xetra
     "XUSE":   {"sma": 50, "rsi": 40},   # iShares MSCI World ex-USA UCITS ETF – LSE
     "WSML":   {"sma": 50, "rsi": 40},   # iShares MSCI World Small Cap UCITS ETF – LSE
     "VJPA":   {"sma": 50, "rsi": 40},   # Vanguard FTSE Japan UCITS ETF – LSE
     "RYCEY":  {"sma": 50, "rsi": 40},   # Rolls-Royce Holdings – US OTC ADR
-    "XLU":    {"sma": 50, "rsi": 40},   # Utilities Select Sector SPDR ETF
     "7KY":    {"sma": 50, "rsi": 40},   # Robinhood Markets – Frankfurt (7KY.F)
     "FLS":      {"sma": 50, "rsi": 40},   # Flowserve – NYSE
     "ARCAD.AS": {"sma": 50, "rsi": 40},   # Arcadis NV – Euronext Amsterdam
@@ -204,7 +201,6 @@ ALIAS = {
     "ASML": "ASML",      # ASML Holding
     "NTDOY": "NTDOY",    # Nintendo
     "PGR":  "PGR",       # Progressive Corporation
-    "TJX":  "TJX",       # TJX Companies
 }
 
 # ETFs / trusts with no earnings → auto-pass valuation
