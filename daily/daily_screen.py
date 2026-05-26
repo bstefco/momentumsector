@@ -252,7 +252,10 @@ def gbx_gbp_eur(price: float, currency: str) -> float:
     """
     if currency not in ("GBX", "GBp", "GBP"):
         return price                        # already native
-    gbp_eur = yf.Ticker("GBPEUR=X").fast_info["last_price"]
+    try:
+        gbp_eur = yf.Ticker("GBPEUR=X").fast_info["last_price"]
+    except Exception:
+        return price                        # FX lookup failed; leave unchanged
     if currency in ("GBX", "GBp"):
         price = price / 100                # to pounds first
     return price * gbp_eur
@@ -264,7 +267,15 @@ def normalize_row(row):
     """
     ticker = row["Ticker"]
     yahoo_symbol = ALIAS.get(ticker, ticker)
-    currency = yf.Ticker(yahoo_symbol).info.get("currency", "EUR")
+    # Only LSE-listed names may quote in GBX/GBP; skip the network call otherwise.
+    if not yahoo_symbol.endswith(".L"):
+        return row
+    try:
+        currency = yf.Ticker(yahoo_symbol).info.get("currency", "EUR")
+    except Exception:
+        return row                          # Yahoo info failed; leave row unchanged
+    if not isinstance(row["Close"], (int, float)):
+        return row
     row["Close"] = gbx_gbp_eur(row["Close"], currency)
     row["SMA"]   = gbx_gbp_eur(row["SMA"],   currency)
     return row
