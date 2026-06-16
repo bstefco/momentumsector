@@ -51,7 +51,6 @@ HIGH_BETA_RULES = {
     "NBIS":   {"sma": 30, "rsi": 35},   # Nebius – added 30 Jul 2025
     "IDR.MC": {"sma": 30, "rsi": 35},   # Indra Sistemas – Madrid exchange
     "9660":   {"sma": 30, "rsi": 35},   # Horizon Robotics – HKEX code 9660
-    "GTT":    {"sma": 30, "rsi": 35},   # Gaztransport & Technigaz – ~$4B mcap
     "6324":   {"sma": 30, "rsi": 35},   # Harmonic Drive Systems – ~$2B mcap
     # Finimize single-stock picks (market cap < $10B → High-Beta)
     "FLXK":   {"sma": 30, "rsi": 35},   # Franklin FTSE Korea UCITS ETF – Xetra
@@ -110,7 +109,6 @@ NUCLEAR_BASKET = {
 }
 
 UTILITIES_BASKET = {
-    "VST":  {"sma": 100, "rsi": 45},      # Vistra Corp
     "CEG":  {"sma": 100, "rsi": 45},      # Constellation Energy
     "NEE":  {"sma": 100, "rsi": 45},      # NextEra Energy
 }
@@ -180,7 +178,6 @@ ALIAS = {
     "6324": "6324.T",    # Harmonic Drive Systems – Tokyo
     "FGR":  "FGR.PA",    # Eiffage S.A. – Euronext Paris
     "AI":   "AI.PA",     # Air Liquide – Euronext Paris
-    "GTT":  "GTT.PA",    # Gaztransport & Technigaz – Euronext Paris
     "9660": "9660.HK",   # Horizon Robotics – Hong Kong (Yahoo symbol)
     "ALFA.ST": "ALFA.ST", # Alfa Laval – Stockholm
     "FLXK":  "FLXK.L",   # Franklin FTSE Korea UCITS ETF – London
