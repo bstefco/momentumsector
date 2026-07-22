@@ -310,13 +310,22 @@ for ticker, rule in ALL_RULES.items():
         continue
 
     close = float(hist.iloc[-1].item())  # scalar
-    name  = yf.Ticker(yahoo_symbol).info.get("shortName", "—")
+    tk = yf.Ticker(yahoo_symbol)
+    try:
+        slow = tk.info or {}
+    except Exception as exc:
+        print(f"WARN {ticker} .info fetch failed: {type(exc).__name__}: {exc}")
+        slow = {}
+    try:
+        fast = tk.fast_info or {}
+    except Exception as exc:
+        print(f"WARN {ticker} .fast_info fetch failed: {type(exc).__name__}: {exc}")
+        fast = {}
+    name = slow.get("shortName") or slow.get("longName") or ticker
 
     # -------------------------------------------------
     #  Valuation filter  (PE ≤ 25  OR  EV/EBITDA ≤ 12)
     # -------------------------------------------------
-    fast = yf.Ticker(yahoo_symbol).fast_info or {}
-    slow = yf.Ticker(yahoo_symbol).info
     # Debug: print valuation metrics for CEG and LEU
     if ticker in {"CEG", "LEU"}:
         print(f"DEBUG {ticker} fast_info: PE={fast.get('forwardPE') or fast.get('trailingPE')}, EV/EBITDA={fast.get('enterpriseToEbitda')}")
